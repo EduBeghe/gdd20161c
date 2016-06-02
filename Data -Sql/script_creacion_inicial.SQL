@@ -160,6 +160,17 @@ IF OBJECT_ID('TODO_X2_LUCAS.Modificar_Cliente') IS NOT NULL
 DROP PROCEDURE TODO_X2_LUCAS.Modificar_Cliente;
 IF OBJECT_ID('TODO_X2_LUCAS.Modificar_Empresa') IS NOT NULL
 DROP PROCEDURE TODO_X2_LUCAS.Modificar_Empresa;
+IF OBJECT_ID('TODO_X2_LUCAS.Alta_Publicidad') IS NOT NULL
+DROP PROCEDURE TODO_X2_LUCAS.Alta_Publicidad;
+IF OBJECT_ID('TODO_X2_LUCAS.Baja_Visibilidad') IS NOT NULL
+DROP PROCEDURE TODO_X2_LUCAS.Baja_Visibilidad;
+IF OBJECT_ID('TODO_X2_LUCAS.Modificacion_Visibilidad') IS NOT NULL
+DROP PROCEDURE TODO_X2_LUCAS.Modificacion_Visibilidad;
+IF OBJECT_ID('TODO_X2_LUCAS.Alta_Visibilidad') IS NOT NULL
+DROP PROCEDURE TODO_X2_LUCAS.Alta_Visibilidad;
+
+
+
 
 IF OBJECT_ID('TODO_X2_LUCAS.ObtenerUsuario') IS NOT NULL
 DROP FUNCTION TODO_X2_LUCAS.ObtenerUsuario;
@@ -171,6 +182,14 @@ IF OBJECT_ID('TODO_X2_LUCAS.ObtenerRol') IS NOT NULL
 DROP FUNCTION TODO_X2_LUCAS.ObtenerRol;
 IF OBJECT_ID('TODO_X2_LUCAS.Obtener_Calificacion') IS NOT NULL
 DROP FUNCTION TODO_X2_LUCAS.Obtener_Calificacion;
+IF OBJECT_ID('TODO_X2_LUCAS.Obtener_Estado') IS NOT NULL
+DROP FUNCTION TODO_X2_LUCAS.Obtener_Estado;
+IF OBJECT_ID('TODO_X2_LUCAS.Obtener_Visibilidad') IS NOT NULL
+DROP FUNCTION TODO_X2_LUCAS.Obtener_Visibilidad;
+IF OBJECT_ID('TODO_X2_LUCAS.Obtener_Rubro') IS NOT NULL
+DROP FUNCTION TODO_X2_LUCAS.Obtener_Rubro;
+IF OBJECT_ID('TODO_X2_LUCAS.Obtener_Tipo_De_Publicacion') IS NOT NULL
+DROP FUNCTION TODO_X2_LUCAS.Obtener_Tipo_De_Publicacion;
 
 /**************************************************  CREACION DE TABLAS ***************************************************/
 -- CREACION TABLA TIPOS DE PUBLICACIONES -- 
@@ -302,7 +321,8 @@ CREATE TABLE TODO_X2_LUCAS.Visibilidades_Publicaciones (
 	Descripcion_Visibilidad nvarchar(255) NOT NULL,
 	Precio_Visibilidad numeric(18,2) NOT NULL,
 	Porcentaje numeric(18,2) NOT NULL,
-	Comision_Entregas numeric(18,2)
+	Comision_Entregas numeric(18,2),
+	Estado_Visibilidad bit DEFAULT 1
 )
 ;
 -- CREACION TABLA ESTADOS PUBLICACIONES --
@@ -310,7 +330,7 @@ CREATE TABLE TODO_X2_LUCAS.Estados_Publicaciones(
 	Cod_Estado int IDENTITY PRIMARY KEY,
 	Descripcion_Estado nvarchar(255)
 )
-;
+; 
 -- CREACION TABLA PUBLICACIONES --
 CREATE TABLE TODO_X2_LUCAS.Publicaciones ( 
 	Cod_Publicacion int IDENTITY PRIMARY KEY CLUSTERED,
@@ -329,7 +349,7 @@ CREATE TABLE TODO_X2_LUCAS.Publicaciones (
 	Permiso_Preguntas bit,
 	Entregas bit
 ) 
-;
+; 
 --CREACION TABLA OFERTAS--
 CREATE TABLE TODO_X2_LUCAS.Ofertas (
 	Cod_Oferta int IDENTITY PRIMARY KEY CLUSTERED,
@@ -733,6 +753,64 @@ BEGIN
 	RETURN @codigoCalificacion
 END
 GO
+-- FUNCION PARA OBTENER EL CODIGO DE TIPO DE PUBLICACION SEGUN UNA DESCRIPCION--
+CREATE FUNCTION TODO_X2_LUCAS.Obtener_Tipo_De_Publicacion(@descripcionTipo nvarchar(255))
+RETURNS INT
+AS
+BEGIN
+	DECLARE @codTipo int;
+
+	SELECT @codTipo = Cod_Tipos_Publicaciones 
+	FROM TODO_X2_LUCAS.Tipos_Publicaciones
+	WHERE Descripcion_Tipo = @descripcionTipo
+
+	RETURN @codTipo;
+END
+GO
+
+-- FUNCION PARA OBTENER EL CODIGO DE UN RUBRO SEGUN UNA DESCRIPCION --
+CREATE FUNCTION TODO_X2_LUCAS.Obtener_Rubro(@rubro nvarchar(255))
+RETURNS INT
+AS
+BEGIN
+	DECLARE @codRubro int;
+
+	SELECT @codRubro = Cod_Rubro
+	FROM TODO_X2_LUCAS.Rubros
+	WHERE Descripcion_Rubro = @rubro
+
+	RETURN @codRubro;
+END
+GO
+-- FUNCION PARA OBTENER EL CODIGO DE UNA VISIBILIDAD SEGUN UNA DESCRIPCION --
+CREATE FUNCTION TODO_X2_LUCAS.Obtener_Visibilidad(@visibilidad nvarchar(255))
+RETURNS NUMERIC
+AS
+BEGIN
+	DECLARE @codVisibilidad numeric(18);
+
+	SELECT @codVisibilidad = Cod_Visibilidad
+	FROM TODO_X2_LUCAS.Visibilidades_Publicaciones
+	WHERE Descripcion_Visibilidad = @visibilidad
+
+	RETURN @codVisibilidad;
+END
+GO
+-- FUNCION PARA OBTENER EL CODIGO DE UN ESTAD SEGUN UNA DESCRIPCION --
+CREATE FUNCTION TODO_X2_LUCAS.Obtener_Estado(@estado nvarchar(255))
+RETURNS INT
+AS
+BEGIN
+	DECLARE @codEstado int;
+
+	SELECT @codEstado = Cod_Estado
+	FROM TODO_X2_LUCAS.Estados_Publicaciones
+	WHERE Descripcion_Estado = @estado
+
+	RETURN @codEstado;
+END
+GO
+
 /************************************************** PROCEDIMIENTOS ALMACENADOS ***************************************************/
 
 /* ------------ PROCEDIMIENTO PARA AGREGAR FUNCIONALIDADES ------------ */
@@ -1098,6 +1176,7 @@ BEGIN
 
 END
 GO
+
 /* ------------ PROCEDIMIENTO PARA ALTA DE LAS VISIBILIDADES DE LAS PUBLICACIONES ------------ */
 CREATE PROCEDURE TODO_X2_LUCAS.Alta_Visibilidad(@descripcion nvarchar(255),@precio numeric(18,2),
 											@porcentaje numeric(18,2), @entregas numeric(18,2))
@@ -1115,6 +1194,51 @@ BEGIN
 	END
 END
 GO
+
+/* ------------ PROCEDIMIENTO PARA LA MODIFICACION DE LAS VISIBILIDADES DE LAS PUBLICACIONES ------------ */
+CREATE PROCEDURE TODO_X2_LUCAS.Modificacion_Visibilidad(@codVisibilidad numeric(18),@descripcion nvarchar(255),@precio numeric(18,2),
+											@porcentaje numeric(18,2), @entregas numeric(18,2) )
+AS
+BEGIN
+	UPDATE TODO_X2_LUCAS.Visibilidades_Publicaciones
+	SET Descripcion_Visibilidad = @descripcion, Precio_Visibilidad = @precio, Porcentaje = @porcentaje, Comision_Entregas = @entregas
+	WHERE Cod_Visibilidad = @codVisibilidad
+END
+GO
+
+/* ------------ PROCEDIMIENTO PARA LA BAJA DE UNA VISIBILIDAD DE LAS PUBLICACIONES ------------ */
+CREATE PROCEDURE TODO_X2_LUCAS.Baja_Visibilidad(@codVisibilidad numeric(18))
+AS
+BEGIN
+	UPDATE TODO_X2_LUCAS.Visibilidades_Publicaciones
+	SET Estado_Visibilidad = 0
+	WHERE Cod_Visibilidad = @codVisibilidad
+END
+GO
+
+/* ------------ PROCEDIMIENTO PARA EL ALTA DE UNA PUBLICACION ------------ */
+CREATE PROCEDURE TODO_X2_LUCAS.Alta_Publicidad(@descripcion nvarchar(255),@stock numeric(18),@fecha datetime,
+												@fechaVenc datetime,@precio numeric(18,2),@tipoPublic nvarchar(255),
+												@rubro nvarchar(255),@visibilidad nvarchar(255),@costo numeric(18,2),
+												@dni numeric(18),@CUIT nvarchar(50),@estado nvarchar(255),
+												@permisoPreguntas bit, @entregas bit)
+AS
+BEGIN
+	DECLARE @cod_Tipo_Publ int, @codRubro int, @codVisibilidad numeric(18),@codEstado int,@codUsuario int;
+	SELECT @cod_Tipo_Publ = TODO_X2_LUCAS.Obtener_Tipo_De_Publicacion( @tipoPublic ), 
+			@codEstado = TODO_X2_LUCAS.Obtener_Estado(@estado),
+			@codRubro = TODO_X2_LUCAS.Obtener_Rubro(@rubro),
+			@codVisibilidad = TODO_X2_LUCAS.Obtener_Visibilidad(@visibilidad),
+			@codUsuario = TODO_X2_LUCAS.ObtenerUsuario(@dni,@CUIT)
+
+	INSERT INTO TODO_X2_LUCAS.Publicaciones(Cod_Estado_Publicacion,Cod_Rubro,Cod_Tipos_Publicacion,Cod_Usuario_Responsable,
+											Cod_Visibilidad,Costo_Publicacion,Descripcion_Publicacion,Entregas,Fecha_Publicacion,
+											Fecha_Vencimiento_Publicacion,Permiso_Preguntas,Precio_Publicacion,Stock_Publicacion)
+	VALUES (@codEstado,@codRubro,@cod_Tipo_Publ,@codUsuario,@codVisibilidad,@costo,@descripcion,@entregas,
+			@fecha,@fechaVenc,@permisoPreguntas,@precio,@stock)
+END
+GO
+
 /************************************************ PROCEDIMIENTOS PARA MIGRACIONES ************************************************/
 -- PROCEDIMIENTO PARA LA MIGRACION DE LOS CLIENTES --
 CREATE PROCEDURE TODO_X2_LUCAS.MigrarClientes
