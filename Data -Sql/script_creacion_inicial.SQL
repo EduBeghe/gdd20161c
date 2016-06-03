@@ -168,9 +168,12 @@ IF OBJECT_ID('TODO_X2_LUCAS.Modificacion_Visibilidad') IS NOT NULL
 DROP PROCEDURE TODO_X2_LUCAS.Modificacion_Visibilidad;
 IF OBJECT_ID('TODO_X2_LUCAS.Alta_Visibilidad') IS NOT NULL
 DROP PROCEDURE TODO_X2_LUCAS.Alta_Visibilidad;
-
-
-
+IF OBJECT_ID('TODO_X2_LUCAS.Comprar_Publicacion') IS NOT NULL
+DROP PROCEDURE TODO_X2_LUCAS.Comprar_Publicacion;
+IF OBJECT_ID('TODO_X2_LUCAS.Generar_Factura') IS NOT NULL
+DROP PROCEDURE TODO_X2_LUCAS.Generar_Factura;
+IF OBJECT_ID('TODO_X2_LUCAS.Cambiar_Estado') IS NOT NULL
+DROP PROCEDURE TODO_X2_LUCAS.Cambiar_Estado;
 
 IF OBJECT_ID('TODO_X2_LUCAS.ObtenerUsuario') IS NOT NULL
 DROP FUNCTION TODO_X2_LUCAS.ObtenerUsuario;
@@ -190,6 +193,8 @@ IF OBJECT_ID('TODO_X2_LUCAS.Obtener_Rubro') IS NOT NULL
 DROP FUNCTION TODO_X2_LUCAS.Obtener_Rubro;
 IF OBJECT_ID('TODO_X2_LUCAS.Obtener_Tipo_De_Publicacion') IS NOT NULL
 DROP FUNCTION TODO_X2_LUCAS.Obtener_Tipo_De_Publicacion;
+IF OBJECT_ID('TODO_X2_LUCAS.Obtener_Forma_De_Pago') IS NOT NULL
+DROP FUNCTION TODO_X2_LUCAS.Obtener_Forma_De_Pago;
 
 /**************************************************  CREACION DE TABLAS ***************************************************/
 -- CREACION TABLA TIPOS DE PUBLICACIONES -- 
@@ -290,24 +295,6 @@ CREATE TABLE TODO_X2_LUCAS.Formas_De_Pago (
 	Descripcion_Forma nvarchar(255)
 )
 ;
--- CREACION TABLA FACTURAS --
-CREATE TABLE TODO_X2_LUCAS.Facturas ( 
-	Cod_Factura int IDENTITY PRIMARY KEY CLUSTERED,
-	Nro_Factura numeric(18) ,
-	Fecha_Factura datetime NOT NULL,
-	Total_Factura numeric(18,2) NOT NULL,
-	Vendedor_Correspondiente int REFERENCES TODO_X2_LUCAS.Usuarios(Cod_Usuario),
-	Cod_Forma_De_Pago int REFERENCES TODO_X2_LUCAS.Formas_De_Pago(Cod_Formas_De_Pago)
-)
-;
--- CREACION TALBA ITEMS DE UNA FACTURA--
-CREATE TABLE TODO_X2_LUCAS.Items_Facturas ( 
-	Cod_Item int IDENTITY PRIMARY KEY CLUSTERED,
-	Cod_Factura int REFERENCES TODO_X2_LUCAS.Facturas (Cod_Factura),
-	Item_Factura_Cantidad numeric(18),
-	Item_Factura_Monto numeric(18,2)
-)
-;
 -- CREACION TABLAS RUBROS --
 CREATE TABLE TODO_X2_LUCAS.Rubros ( 
 	Cod_Rubro int IDENTITY PRIMARY KEY CLUSTERED,
@@ -380,6 +367,27 @@ CREATE TABLE TODO_X2_LUCAS.Inconsistencias_Calificaciones (
 	Descripcion nvarchar(255)
 )
 ;
+-- CREACION TABLA FACTURAS --
+CREATE TABLE TODO_X2_LUCAS.Facturas ( 
+	Cod_Factura int IDENTITY PRIMARY KEY CLUSTERED,
+	Nro_Factura numeric(18) ,
+	Fecha_Factura datetime NOT NULL,
+	Total_Factura numeric(18,2) NOT NULL,
+	Vendedor_Correspondiente int REFERENCES TODO_X2_LUCAS.Usuarios(Cod_Usuario),
+	Cod_Forma_De_Pago int REFERENCES TODO_X2_LUCAS.Formas_De_Pago(Cod_Formas_De_Pago),
+	Cod_Publicacion int REFERENCES TODO_X2_LUCAS.Publicaciones (Cod_Publicacion)
+)
+;
+
+-- CREACION TALBA ITEMS DE UNA FACTURA--
+CREATE TABLE TODO_X2_LUCAS.Items_Facturas ( 
+	Cod_Item int IDENTITY PRIMARY KEY CLUSTERED,
+	Cod_Factura int REFERENCES TODO_X2_LUCAS.Facturas (Cod_Factura),
+	Item_Factura_Cantidad numeric(18),
+	Item_Factura_Monto numeric(18,2)
+)
+;
+
 GO
 /************************************************** PROCEDIMIENTOS ALMACENADOS ***************************************************/
 /* ------------------------------------ GETTERS ------------------------------------ */
@@ -796,6 +804,7 @@ BEGIN
 	RETURN @codVisibilidad;
 END
 GO
+
 -- FUNCION PARA OBTENER EL CODIGO DE UN ESTAD SEGUN UNA DESCRIPCION --
 CREATE FUNCTION TODO_X2_LUCAS.Obtener_Estado(@estado nvarchar(255))
 RETURNS INT
@@ -808,6 +817,21 @@ BEGIN
 	WHERE Descripcion_Estado = @estado
 
 	RETURN @codEstado;
+END
+GO
+
+-- FUNCION PARA OBTENER EL CODIGO DE UN ESTAD SEGUN UNA DESCRIPCION --
+CREATE FUNCTION TODO_X2_LUCAS.Obtener_Forma_De_Pago(@formaDePago nvarchar(255))
+RETURNS INT
+AS
+BEGIN
+	DECLARE @codFormaDePago int;
+
+	SELECT @codFormaDePago = Cod_Formas_De_Pago
+	FROM TODO_X2_LUCAS.Formas_De_Pago
+	WHERE Descripcion_Forma = @formaDePago
+
+	RETURN @codFormaDePago;
 END
 GO
 
@@ -1239,6 +1263,57 @@ BEGIN
 END
 GO
 
+/* ------------ PROCEDIMIENTO PARA EL CAMBIO DE ESTADO DE UNA PUBLICACION ------------ */
+CREATE PROCEDURE TODO_X2_LUCAS.Cambiar_Estado(@codPublicacion int,@estado nvarchar(255))
+AS
+BEGIN
+	DECLARE @codEstadoNuevo int;
+	SET @codEstadoNuevo = TODO_X2_LUCAS.Obtener_Estado(@estado);
+
+	UPDATE TODO_X2_LUCAS.Publicaciones
+	SET Cod_Estado_Publicacion = @codEstadoNuevo
+	WHERE Cod_Publicacion = @codPublicacion
+
+END
+GO
+
+/* ------------ PROCEDIMIENTO PARA GENERAR UNA FACTURA ------------ */
+CREATE PROCEDURE TODO_X2_LUCAS.Generar_Factura(@codPublicacion int,@cantidad numeric(18),@formaDePago nvarchar(255),
+												@dni numeric(18),@cuit nvarchar(50))
+AS
+BEGIN
+	DECLARE @codFormaDePago int,@totalFactura numeric(18,2),@codUsuario int;
+
+	SELECT @codFormaDePago = TODO_X2_LUCAS.Obtener_Forma_De_Pago(@formaDePago),
+			@codUsuario = TODO_X2_LUCAS.ObtenerUsuario(@dni,@cuit),
+			@totalFactura = ((Precio_Publicacion * V.Porcentaje) * @cantidad) + V.Precio_Visibilidad + V.Comision_Entregas
+	FROM TODO_X2_LUCAS.Publicaciones P JOIN TODO_X2_LUCAS.Visibilidades_Publicaciones V ON (P.Cod_Visibilidad = V.Cod_Visibilidad)
+	WHERE Cod_Publicacion = @codPublicacion
+
+	INSERT INTO TODO_X2_LUCAS.Facturas(Cod_Forma_De_Pago,Fecha_Factura,Total_Factura,Vendedor_Correspondiente,Cod_Publicacion)
+	VALUES (@codFormaDePago,GETDATE(),@totalFactura,@codUsuario,@codPublicacion)
+
+END
+GO
+
+/* ------------ PROCEDIMIENTO PARA LA COMPRA DE UNA PUBLICACION ------------ */
+CREATE PROCEDURE TODO_X2_LUCAS.Comprar_Publicacion(@dni numeric(18),@CUIT nvarchar(50),@codPublicacion int,
+													@cantidad numeric(18),@formaDePago nvarchar(255))
+AS
+BEGIN
+	DECLARE @codCalificacion int, @codUsuario int;
+	SELECT @codCalificacion = TODO_X2_LUCAS.Obtener_Calificacion(0),
+			@codUsuario = TODO_X2_LUCAS.ObtenerUsuario(@dni,NULL)
+
+	INSERT INTO TODO_X2_LUCAS.Compras(Cod_Calificacion,Cod_Publicacion,Cod_Usuario,Compra_Cantidad,Compra_Fecha)
+	VALUES(@codCalificacion,@codPublicacion,@codUsuario,@cantidad,GETDATE())
+	
+	EXEC TODO_X2_LUCAS.Generar_Factura @codPublicacion,@cantidad,@formaDePago,@dni,@CUIT;
+	
+	EXEC TODO_X2_LUCAS.Cambiar_Estado @codPublicacion,'Finalizado'
+END
+GO
+
 /************************************************ PROCEDIMIENTOS PARA MIGRACIONES ************************************************/
 -- PROCEDIMIENTO PARA LA MIGRACION DE LOS CLIENTES --
 CREATE PROCEDURE TODO_X2_LUCAS.MigrarClientes
@@ -1433,6 +1508,10 @@ EXEC TODO_X2_LUCAS.Agregar_Calificacion_Posible 2
 EXEC TODO_X2_LUCAS.Agregar_Calificacion_Posible 3
 EXEC TODO_X2_LUCAS.Agregar_Calificacion_Posible 4
 EXEC TODO_X2_LUCAS.Agregar_Calificacion_Posible 5
+SET IDENTITY_INSERT TODO_X2_LUCAS.Calificaciones ON
+	INSERT INTO TODO_X2_LUCAS.Calificaciones(Cod_Calificacion,Cantidad_Estrella,Peso)
+	VALUES(99,0,0)
+SET IDENTITY_INSERT TODO_X2_LUCAS.Calificaciones OFF
 
 -- MIGRACION TABLA DOMICILIOS --
 INSERT INTO TODO_X2_LUCAS.Domicilios(Calle,Nro_Calle,Piso,Depto)
@@ -1468,11 +1547,12 @@ FROM gd_esquema.Maestra m JOIN TODO_X2_LUCAS.Detalles_Clientes c  ON (m.Publ_Cli
 							JOIN TODO_X2_LUCAS.Formas_De_Pago f ON (m.Forma_Pago_Desc = f.Descripcion_Forma)
 WHERE Factura_Nro IS NOT NULL
 	
-INSERT INTO TODO_X2_LUCAS.Facturas(Nro_Factura,Fecha_Factura,Total_Factura,Vendedor_Correspondiente,Cod_Forma_De_Pago)
-SELECT DISTINCT Factura_Nro,Factura_Fecha,Factura_Total,u.Cod_Usuario,f.Cod_Formas_De_Pago
+INSERT INTO TODO_X2_LUCAS.Facturas(Nro_Factura,Fecha_Factura,Total_Factura,Vendedor_Correspondiente,Cod_Forma_De_Pago,Cod_Publicacion)
+SELECT DISTINCT Factura_Nro,Factura_Fecha,Factura_Total,u.Cod_Usuario,f.Cod_Formas_De_Pago,p.Cod_Publicacion
 FROM gd_esquema.Maestra m JOIN TODO_X2_LUCAS.Detalles_Empresas e  ON (m.Publ_Empresa_Cuit = e.CUIT)
 							JOIN TODO_X2_LUCAS.Usuarios u ON (u.Cod_Usuario = e.Cod_Usuario)
 							JOIN TODO_X2_LUCAS.Formas_De_Pago f ON (m.Forma_Pago_Desc = f.Descripcion_Forma)
+							JOIN TODO_X2_LUCAS.Publicaciones P ON (m.Publicacion_Cod = p.Cod_Publicacion_Anterior)
 WHERE Factura_Nro IS NOT NULL
 
 --MIGRACION TABLA ITEMS FACTURA --
@@ -1499,6 +1579,14 @@ INSERT INTO TODO_X2_LUCAS.Estados_Publicaciones
 SELECT DISTINCT Publicacion_Estado
 FROM gd_esquema.Maestra
 
+INSERT INTO TODO_X2_LUCAS.Estados_Publicaciones(Descripcion_Estado)
+VALUES ('Borrador')
+INSERT INTO TODO_X2_LUCAS.Estados_Publicaciones(Descripcion_Estado)
+VALUES ('Pausada')
+INSERT INTO TODO_X2_LUCAS.Estados_Publicaciones(Descripcion_Estado)
+VALUES ('Activa')
+INSERT INTO TODO_X2_LUCAS.Estados_Publicaciones(Descripcion_Estado)
+VALUES ('Finalizado')
 
 -- MIGRACION TABLA PUBLICACIONES --
 INSERT INTO TODO_X2_LUCAS.Publicaciones(Cod_Publicacion_Anterior,Descripcion_Publicacion,
