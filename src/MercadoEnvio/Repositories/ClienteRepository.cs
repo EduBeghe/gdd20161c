@@ -17,14 +17,14 @@ using System.Data;
 namespace MercadoEnvio.Repositories
 {
 
-    class ClienteRepository
+    class UsuariosRepository
     {
 
 
-        internal void darDeBaja(Cliente cliente)
+        internal void darDeBaja(Usuario usuario)
         {
 
-            DBAdapter.executeProcedure("darDeBajaCliente", cliente.ID);
+            DBAdapter.executeProcedure("darDeBajaUsuario", usuario.Id);
 
         }
 

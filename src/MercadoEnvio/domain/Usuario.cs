@@ -9,6 +9,7 @@ namespace MercadoEnvio.Domain
         
     public class Usuario
     {
+        public int id { get; set; }
         public string userName { get; set; }
         public string password { get; set; }
         public Rol rol { get; set; }
@@ -19,10 +20,11 @@ namespace MercadoEnvio.Domain
         public int codigoPostal { get; set; }
         public int intentosLogin { get; set; }
 
-        public Usuario( string userName, string password, Rol rol, 
+        public Usuario( int id, string userName, string password, Rol rol, 
             int telefono, string mail, int codigo_postal, Direccion direccion, int intentosLogin
             bool estadoUsuario )
         {
+            this.id = id;
             this.userName = userName;
             this.password = password;
             this.rol = rol;     
