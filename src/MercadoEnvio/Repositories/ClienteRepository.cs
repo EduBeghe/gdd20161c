@@ -17,7 +17,7 @@ using System.Data;
 namespace MercadoEnvio.Repositories
 {
 
-    class UsuariosRepository
+    class CLientesRepository
     {
 
 
@@ -27,28 +27,6 @@ namespace MercadoEnvio.Repositories
             DBAdapter.executeProcedure("darDeBajaUsuario", usuario.Id);
 
         }
-
-
-        public List<TipoDocumento> getTipoDocumentosPosta()
-        {
-
-            List<TipoDocumento> resultado = DBAdapter.retrieveDataTable("getTipoDoc", DBNull.Value).AsEnumerable().Select(dr => new TipoDocumento(Convert.ToInt32(dr["ID"]), dr["Descripcion"] as string)).ToList();
-            
-            return resultado;
-
-        }
-
-        public List<TipoDocumento> getTipoDocumentos()
-        {
-
-            List<TipoDocumento> resultado = DBAdapter.retrieveDataTable("getTipoDoc", DBNull.Value).AsEnumerable().Select(dr => new TipoDocumento(Convert.ToInt32(dr["ID"]), dr["Descripcion"] as string)).ToList();
-
-            resultado.Add(new TipoDocumento(-1, "Todos los tipos"));
-
-            return resultado;
-
-        }
-
 
 
         public List<Cliente> findClientes(string nombre, string apellido, TipoDocumento tipo_doc, string mail, int? nro_doc)
@@ -95,7 +73,8 @@ namespace MercadoEnvio.Repositories
         private Cliente parse(DataRow dr)
         {
 
-            return new Cliente(Convert.ToInt32(dr["ID"]),
+            return new Cliente(Convert.ToInt32(dr["Cod_Cliente"]),
+
 
                                dr["Nombre"] as string,
 
@@ -113,6 +92,8 @@ namespace MercadoEnvio.Repositories
 
 
         }
+
+
 
 
 

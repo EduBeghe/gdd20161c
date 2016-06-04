@@ -10,20 +10,21 @@ namespace MercadoEnvio.Domain
         
     public class Domicilio
     {
-        codigo { get; set} 
-        string calle { get; set} 
-        int piso { get; set}
-        string departamento { get; set}
-        int numero_calle { get; set} 
-        string localidad { get; set}
+        int Cod_Domicilio { get; set} 
+        string Calle { get; set} 
+        int Piso { get; set}
+        string Depto { get; set}
+        int Nro_Calle { get; set} 
+        string Localidad { get; set}
 
-        public Domicilio( string calle, int piso, string departamento, int numero_calle, string localidad )
+        public Domicilio( int Cod_Domicilio, string Calle, int Piso, string Depto, int Nro_Calle, string Localidad )
         {
-            this.calle = calle;
-            this.piso = piso;
-            this.departamento = departamento;
-            this.numero_calle = numero_calle;
-            this.localidad = localidad 
+            this.Cod_Domicilio = Cod_Domicilio;
+            this.Calle = Calle;
+            this.Piso = Piso;
+            this.Depto = Depto;
+            this.Nro_Calle = Nro_Calle;
+            this.Localidad = Localidad 
         }
 
     }

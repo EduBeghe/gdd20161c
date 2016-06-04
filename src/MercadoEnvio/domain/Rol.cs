@@ -10,15 +10,15 @@ namespace MercadoEnvio.Domain
         
     public class Rol
     {
-        int codigo { get; set; }
-        string nombre { get; set; }
-        bool estado { get; set; }
+        int Cod_Rol { get; set; }
+        string Nombre { get; set; }
+        bool Estado_Rol { get; set; }
 
-        public Rol( int codigo, string nombre, bool estado )
+        public Rol( int Cod_Rol, string Nombre, bool Estado_Rol )
         {
-            this.codigo = codigo;
-            this.nombre = nombre;
-            this.estado = estado;
+            this.Cod_Rol = Cod_Rol;
+            this.Nombre = Nombre;
+            this.Estado_Rol = Estado_Rol;
         } 
     }
 }

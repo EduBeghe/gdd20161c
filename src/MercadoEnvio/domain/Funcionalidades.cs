@@ -10,13 +10,13 @@ namespace MercadoEnvio.Domain
         
     public class Funcionalidades
     {
-        int codigo { get; set; }
-        string descripcion { get; set; }
+        int Cod_Funcionalidad { get; set; }
+        string Descripcion_Funcionalidad { get; set; }
 
-        public Funcionalidades( int codigo, string descripcion )
+        public Funcionalidades( int Cod_Funcionalidad, string Descripcion_Funcionalidad )
         {
-            this.codigo = codigo;
-            this.descripcion = descripcion;
+            this.Cod_Funcionalidad = Cod_Funcionalidad;
+            this.Descripcion_Funcionalidad = Descripcion_Funcionalidad;
         } 
     }
 }
