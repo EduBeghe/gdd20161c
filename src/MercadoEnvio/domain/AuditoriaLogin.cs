@@ -10,19 +10,19 @@ namespace MercadoEnvio.Domain
         
     public class AuditoriaLogin
     {
-        int codigo { get; set; }
+        int Cod_Auditoria { get; set; }
         Usuario usuario { get; set; }
-        DateTime fecha { get; set; }
-        bool estado { get; set; }
-        int numeroIntento { get; set; }
+        DateTime Fecha { get; set; }
+        bool Estado { get; set; }
+        int Numero_De_Intento { get; set; }
 
-        public AuditoriaLogin( int codigo, Usuario usuario, DateTime fecha, bool estado, int numeroIntento )
+        public AuditoriaLogin( int Cod_Auditoria, Usuario usuario, DateTime Fecha, bool Estado, int Numero_De_Intento )
         {
-            this.codigo = codigo;
+            this.Cod_Auditoria = Cod_Auditoria;
             this.usuario = usuario;
-            this.fecha = fecha;
-            this.estado = estado;
-            this.numeroIntento = numeroIntento;
+            this.Fecha = Fecha;
+            this.Estado = Estado;
+            this.Numero_De_Intento = Numero_De_Intento;
         } 
     }
 }

@@ -7,4 +7,6 @@ Cambios
 		en detalle_Usuario y detalle_Empresa, mejor tenerlas en Usuario que 
 		comun a los dos.
 
+	- Agregar nombre a Funcionalidades ?
+
 			
