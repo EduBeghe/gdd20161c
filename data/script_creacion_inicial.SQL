@@ -178,6 +178,12 @@ IF OBJECT_ID('TODO_X2_LUCAS.Ofertar_Publicacion') IS NOT NULL
 DROP PROCEDURE TODO_X2_LUCAS.Ofertar_Publicacion;
 IF OBJECT_ID('TODO_X2_LUCAS.Migrar_Reputacion_Usuarios') IS NOT NULL
 DROP PROCEDURE TODO_X2_LUCAS.Migrar_Reputacion_Usuarios;
+IF OBJECT_ID('TODO_X2_LUCAS.Historial_Cliente') IS NOT NULL
+DROP PROCEDURE TODO_X2_LUCAS.Historial_Cliente;
+IF OBJECT_ID('TODO_X2_LUCAS.Calificar_Compra') IS NOT NULL
+DROP PROCEDURE TODO_X2_LUCAS.Calificar_Compra;
+IF OBJECT_ID('TODO_X2_LUCAS.Consulta_Facturas') IS NOT NULL
+DROP PROCEDURE TODO_X2_LUCAS.Consulta_Facturas;
 
 IF OBJECT_ID('TODO_X2_LUCAS.ObtenerUsuario') IS NOT NULL
 DROP FUNCTION TODO_X2_LUCAS.ObtenerUsuario;
@@ -254,7 +260,8 @@ CREATE TABLE TODO_X2_LUCAS.Auditoria_Login (
 CREATE TABLE TODO_X2_LUCAS.Calificaciones ( 
 	Cod_Calificacion int PRIMARY KEY CLUSTERED IDENTITY,
 	Cantidad_Estrella numeric(18) UNIQUE,
-	Peso numeric(18)
+	Peso numeric(18),
+	Descripcion nvarchar(255)
 )
 ;
 -- CREACION TABLA DOMICILIOS --
@@ -971,8 +978,16 @@ GO
 CREATE PROCEDURE TODO_X2_LUCAS.Agregar_Calificacion_Posible(@cantidadEstrellas int)
 AS
 BEGIN
-	INSERT INTO TODO_X2_LUCAS.Calificaciones(Cantidad_Estrella,Peso)
-	VALUES(@cantidadEstrellas, @cantidadEstrellas * 10)
+	DECLARE @descripcion nvarchar(255);
+	SELECT @descripcion =  CASE WHEN @cantidadEstrellas = 5 THEN '5 estrellas'
+				WHEN @cantidadEstrellas = 4 THEN '4 estrellas'
+				WHEN @cantidadEstrellas = 3 THEN '3 estrellas'
+				WHEN @cantidadEstrellas = 2 THEN '2 estrellas'
+				WHEN @cantidadEstrellas = 1 THEN '1 estrella'
+				WHEN @cantidadEstrellas = 0 THEN 'No calificada' END
+
+	INSERT INTO TODO_X2_LUCAS.Calificaciones(Cantidad_Estrella,Peso,Descripcion)
+	VALUES(@cantidadEstrellas, @cantidadEstrellas * 10,@descripcion)
 END
 GO
 
@@ -1313,20 +1328,30 @@ BEGIN
 	DECLARE @codCalificacion int, @codUsuario int;
 	SELECT @codCalificacion = TODO_X2_LUCAS.Obtener_Calificacion(0),
 			@codUsuario = TODO_X2_LUCAS.ObtenerUsuario(@dni,NULL)
-
-	IF ((SELECT Stock_Publicacion FROM TODO_X2_LUCAS.Publicaciones WHERE Cod_Publicacion = @codPublicacion) < @cantidad)
+	
+	IF ((SELECT COUNT(*) 
+		FROM TODO_X2_LUCAS.Compras C JOIN TODO_X2_LUCAS.Calificaciones CA ON(C.Cod_Calificacion=CA.Cod_Calificacion)
+		WHERE CA.Cod_Calificacion = 99 AND C.Cod_Usuario=@codUsuario) <=3 )
 	BEGIN
-		PRINT 'NO HAY SUFICIENTE STOCK'
-		RETURN -1;
+		IF ((SELECT Stock_Publicacion FROM TODO_X2_LUCAS.Publicaciones WHERE Cod_Publicacion = @codPublicacion) < @cantidad)
+		BEGIN
+			PRINT 'NO HAY SUFICIENTE STOCK'
+			RETURN -2;
+		END
+		ELSE
+		BEGIN
+			INSERT INTO TODO_X2_LUCAS.Compras(Cod_Calificacion,Cod_Publicacion,Cod_Usuario,Compra_Cantidad,Compra_Fecha)
+			VALUES(@codCalificacion,@codPublicacion,@codUsuario,@cantidad,GETDATE())
+		
+			EXEC TODO_X2_LUCAS.Generar_Factura @codPublicacion,@cantidad,@formaDePago,@dni,@CUIT;
+		
+			EXEC TODO_X2_LUCAS.Cambiar_Estado @codPublicacion,'Finalizado'
+		END
 	END
-	ELSE
+	ELSE 
 	BEGIN
-		INSERT INTO TODO_X2_LUCAS.Compras(Cod_Calificacion,Cod_Publicacion,Cod_Usuario,Compra_Cantidad,Compra_Fecha)
-		VALUES(@codCalificacion,@codPublicacion,@codUsuario,@cantidad,GETDATE())
-	
-		EXEC TODO_X2_LUCAS.Generar_Factura @codPublicacion,@cantidad,@formaDePago,@dni,@CUIT;
-	
-		EXEC TODO_X2_LUCAS.Cambiar_Estado @codPublicacion,'Finalizado'
+		PRINT 'TIENE QUE CALIFICAR LAS COMPRAS QUE NO CALIFICO AUN'
+		RETURN -1;
 	END
 END
 GO
@@ -1337,26 +1362,106 @@ AS
 BEGIN
 	DECLARE @codUsuario int;
 	SET @codUsuario = TODO_X2_LUCAS.ObtenerUsuario(@dni,@cuit);
-
-	IF ((SELECT Precio_Publicacion FROM TODO_X2_LUCAS.Publicaciones WHERE Cod_Publicacion = @codPublicacion) < @oferta)
+	
+	IF ((SELECT COUNT(*) 
+		FROM TODO_X2_LUCAS.Compras C JOIN TODO_X2_LUCAS.Calificaciones CA ON(C.Cod_Calificacion=CA.Cod_Calificacion)
+		WHERE CA.Cod_Calificacion = 99 AND C.Cod_Usuario=@codUsuario) <=3 )
 	BEGIN
-		INSERT INTO TODO_X2_LUCAS.Ofertas(Cod_Publicacion,Cod_Usuario,Oferta_Fecha,Oferta_Monto)
-		VALUES(@codPublicacion,@codUsuario,GETDATE(),@oferta)
+		IF ((SELECT Precio_Publicacion FROM TODO_X2_LUCAS.Publicaciones WHERE Cod_Publicacion = @codPublicacion) < @oferta)
+		BEGIN
+			INSERT INTO TODO_X2_LUCAS.Ofertas(Cod_Publicacion,Cod_Usuario,Oferta_Fecha,Oferta_Monto)
+			VALUES(@codPublicacion,@codUsuario,GETDATE(),@oferta)
 
-		UPDATE TODO_X2_LUCAS.Publicaciones
-		SET Precio_Publicacion = @oferta
-		WHERE Cod_Publicacion = @codPublicacion
-
+			UPDATE TODO_X2_LUCAS.Publicaciones
+			SET Precio_Publicacion = @oferta
+			WHERE Cod_Publicacion = @codPublicacion
+	
+		END
+		ELSE
+		BEGIN
+			PRINT 'LA OFERTA ES MENOR AL PRECIO INICIAL DE LA SUBASTA'
+			RETURN -2
+		END	
 	END
 	ELSE
 	BEGIN
-		PRINT 'LA OFERTA ES MENOR AL PRECIO INICIAL DE LA SUBASTA'
-	END	
+		PRINT 'TIENE QUE CALIFICAR LAS COMPRAS QUE NO CALIFICO AUN'
+		RETURN -1
+	END
 END
 GO
 
+/* ------------ PROCEDIMIENTO PARA LA COMPRA DE UNA PUBLICACION ------------ */
+CREATE PROCEDURE TODO_X2_LUCAS.Historial_Cliente(@dni numeric(18))
+AS
+BEGIN
+	DECLARE @usuario int;
+	SET @usuario = TODO_X2_LUCAS.ObtenerUsuario(@dni,null);
 
+	SELECT DISTINCT pC.Descripcion_Publicacion AS 'Publicacion Comprada', c.Compra_Fecha as 'Fecha de la Compra', c.Compra_Cantidad as 'Cantidad Comprada'
+	FROM TODO_X2_LUCAS.Usuarios U JOIN TODO_X2_LUCAS.Compras C ON (C.Cod_Usuario=U.Cod_Usuario)
+									JOIN TODO_X2_LUCAS.Publicaciones PC ON (C.Cod_Publicacion=PC.Cod_Publicacion)
+	WHERE U.Cod_Usuario = @usuario
+	
+	SELECT DISTINCT PO.Descripcion_Publicacion, Oferta_Fecha,Oferta_Monto
+	FROM TODO_X2_LUCAS.Usuarios U JOIN TODO_X2_LUCAS.Ofertas O ON (O.Cod_Usuario=U.Cod_Usuario)
+									JOIN TODO_X2_LUCAS.Publicaciones PO ON (O.Cod_Publicacion=PO.Cod_Publicacion)
+	WHERE U.Cod_Usuario = @usuario
+	
+	SELECT count (*) as 'Cantidad de compras sin calificar'
+	FROM TODO_X2_LUCAS.Usuarios U JOIN TODO_X2_LUCAS.Compras C ON (C.Cod_Usuario=U.Cod_Usuario)
+								JOIN TODO_X2_LUCAS.Calificaciones CA ON (C.Cod_Calificacion=CA.Cod_Calificacion)
+	WHERE U.Cod_Usuario = @usuario AND ca.Cantidad_Estrella = 0
+	GROUP BY CA.Cod_Calificacion
 
+	SELECT CA.Cantidad_Estrella,CA.Descripcion,COUNT(*)
+	FROM TODO_X2_LUCAS.Usuarios U JOIN TODO_X2_LUCAS.Compras C ON (C.Cod_Usuario=U.Cod_Usuario)
+								JOIN TODO_X2_LUCAS.Calificaciones CA ON (C.Cod_Calificacion=CA.Cod_Calificacion)
+	WHERE U.Cod_Usuario = @usuario 
+	GROUP BY CA.Cantidad_Estrella,CA.Descripcion
+	ORDER BY Cantidad_Estrella
+	
+END
+GO
+/* ------------ PROCEDIMIENTO PARA CALIFICAR UNA COMPRA ------------ */
+CREATE PROCEDURE TODO_X2_LUCAS.Calificar_Compra(@estrellas numeric(18),@codCompra int,@descripcion nvarchar(255))
+AS
+BEGIN
+	DECLARE @codCalificacion int;
+	SELECT @codCalificacion = TODO_X2_LUCAS.Obtener_Calificacion(@estrellas)
+
+	IF ((SELECT Cod_Calificacion FROM TODO_X2_LUCAS.Compras WHERE Cod_Compra = @codCompra) != 99)
+	BEGIN
+		UPDATE TODO_X2_LUCAS.Compras
+		SET Cod_Calificacion = @codCalificacion,Descripcion = @descripcion
+		WHERE Cod_Compra = @codCompra
+	END
+	ELSE
+	BEGIN 
+		PRINT 'LA COMPRA YA ESTA CALIFICADA'
+	END
+
+END
+GO
+
+/* ------------ PROCEDIMIENTO PARA LA CONSULTA DE LAS FACTURAS DE UN VENDEDOR ------------ */
+CREATE PROCEDURE TODO_X2_LUCAS.Consulta_Facturas(@dni numeric(18),@cuit nvarchar(50),
+												@fechaInicio datetime,@fechaFinal datetime,
+												@precioInicio numeric(18,2),@precioFinal numeric(18,2))
+AS
+BEGIN
+	DECLARE @usuario int;
+	SELECT @usuario = TODO_X2_LUCAS.ObtenerUsuario(@dni,@cuit)
+	-- buscador por contenido  de detalles de factura... a que se refiere con eso?
+	SELECT F.Cod_Factura,F.Fecha_Factura,P.Descripcion_Publicacion,I.Item_Factura_Cantidad,I.Item_Factura_Monto
+	FROM TODO_X2_LUCAS.Facturas F JOIN TODO_X2_LUCAS.Items_Facturas I ON (F.Cod_Factura = I.Cod_Factura)
+									JOIN TODO_X2_LUCAS.Formas_De_Pago FO ON (FO.Cod_Formas_De_Pago=F.Cod_Forma_De_Pago)
+									JOIN TODO_X2_LUCAS.Publicaciones P ON (F.Cod_Publicacion = P.Cod_Publicacion)
+	WHERE Vendedor_Correspondiente = @usuario AND
+			((Fecha_Factura BETWEEN (@fechaInicio) AND @fechaFinal) OR (@fechaInicio IS NULL AND @fechaFinal IS NULL)) AND
+			(Total_Factura BETWEEN (@precioInicio) AND @precioFinal OR (@precioInicio IS NULL AND @precioFinal IS NULL))
+END
+GO
 /************************************************ PROCEDIMIENTOS PARA MIGRACIONES ************************************************/
 -- PROCEDIMIENTO PARA LA MIGRACION DE LOS CLIENTES --
 CREATE PROCEDURE TODO_X2_LUCAS.MigrarClientes
@@ -1588,8 +1693,8 @@ EXEC TODO_X2_LUCAS.Agregar_Calificacion_Posible 3
 EXEC TODO_X2_LUCAS.Agregar_Calificacion_Posible 4
 EXEC TODO_X2_LUCAS.Agregar_Calificacion_Posible 5
 SET IDENTITY_INSERT TODO_X2_LUCAS.Calificaciones ON
-	INSERT INTO TODO_X2_LUCAS.Calificaciones(Cod_Calificacion,Cantidad_Estrella,Peso)
-	VALUES(99,0,0)
+	INSERT INTO TODO_X2_LUCAS.Calificaciones(Cod_Calificacion,Cantidad_Estrella,Peso,Descripcion)
+	VALUES(99,0,0,'No Calificada')
 SET IDENTITY_INSERT TODO_X2_LUCAS.Calificaciones OFF
 
 -- MIGRACION TABLA DOMICILIOS --
@@ -1720,7 +1825,7 @@ GO
 /* ------------ TRIGGER PARA LA REPUTACION DEL VENDEDOR ------------ */
 CREATE TRIGGER TODO_X2_LUCAS.Reputacion
 ON TODO_X2_LUCAS.Compras
-AFTER INSERT
+AFTER UPDATE
 AS
 BEGIN
 	DECLARE @reputacion int,@codCalificacion int, @codUsuarioPubl int,@codPublicacion int,@sumaPesos int,@cantidadCompras int;
