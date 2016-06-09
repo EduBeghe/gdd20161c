@@ -10,13 +10,13 @@ namespace MercadoEnvio.Domain
         
     public class FormasDePago
     {
-        int codigo { get; set; }
-        string descripcion { get; set; }
+        int Cod_Formas_De_Pago { get; set; }
+        string Descripcion_Forma { get; set; }
 
         public FormasDePago( int codigo, string descripcion )
         {
-            this.codigo = codigo;
-            this.descripcion = descripcion;
+            this.Cod_Formas_De_Pago = Cod_Formas_De_Pago;
+            this.Descripcion_Forma = descripcion;
         } 
     }
 }

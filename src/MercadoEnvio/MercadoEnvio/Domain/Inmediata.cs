@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace MercadoEnvio.Domain
 {
         
-    public class Inmediata : Publicacion
+    public class Inmediata : Publicaciones
     {
 
     }

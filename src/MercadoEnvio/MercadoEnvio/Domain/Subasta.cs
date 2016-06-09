@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace MercadoEnvio.Domain
 {
         
-    public class Subasta : Publicacion
+    public class Subasta : Publicaciones
     {
 
     }
