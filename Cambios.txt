@@ -10,4 +10,8 @@ Cambios
 	- Agregar nombre a Funcionalidades ?
 	
 
+Convenciones Backed
+	- Nombres de clase iguales a sql sin _ - 
+	- Nombres de variables iguales al sql ( a menos que sea un codigo referencial pk )
+
 			

@@ -29,7 +29,7 @@ namespace MercadoEnvio.Repositories
         }
 
 
-        public List<Cliente> findClientes(string nombre, string apellido, TipoDocumento tipo_doc, string mail, int? nro_doc)
+        public List<DetallesClientes> findClientes(string nombre, string apellido, TipoDocumento tipo_doc, string mail, int? nro_doc)
         {
 
             return parseClientes(DBAdapter.retrieveDataTable("find_clientes", nombre, apellido, tipo_doc.ID, mail, nro_doc));
@@ -38,7 +38,7 @@ namespace MercadoEnvio.Repositories
 
 
 
-        public List<Cliente> getClientes()
+        public List<DetallesClientes> getClientes()
         {
 
             return parseClientes(DBAdapter.retrieveDataTable("getCliente", DBNull.Value));
@@ -47,21 +47,21 @@ namespace MercadoEnvio.Repositories
 
 
 
-        public Cliente getCliente(int ID)
+        public DetallesClientes getCliente(int ID)
         {
 
             return parse(DBAdapter.retrieveDataTable("getCliente", ID).Rows[0]);
 
         }
 
-        public Cliente getClienteByUserId(int uID)
+        public DetallesClientes getClienteByUserId(int uID)
         {
             return parse(DBAdapter.retrieveDataTable("getClienteByUserId", uID).Rows[0]);
         }
 
 
 
-        private List<Cliente> parseClientes(DataTable dataTable)
+        private List<DetallesClientes> parseClientes(DataTable dataTable)
         {
 
             return dataTable.AsEnumerable().Select(dr => parse(dr)).ToList();
@@ -70,10 +70,10 @@ namespace MercadoEnvio.Repositories
 
 
 
-        private Cliente parse(DataRow dr)
+        private DetallesClientes parse(DataRow dr)
         {
 
-            return new Cliente(Convert.ToInt32(dr["Cod_Cliente"]),
+            return new DetallesClientes(Convert.ToInt32(dr["Cod_Cliente"]),
 
 
                                dr["Nombre"] as string,
@@ -115,14 +115,14 @@ namespace MercadoEnvio.Repositories
 
 
 
-        internal int darDeAlta(Cliente cliente, Usuario usuario)
+        internal int darDeAlta(DetallesClientes cliente, Usuario usuario)
         {
 
             return DBAdapter.executeProcedureWithReturnValue("darDeAltaCliente",
 
-            cliente.nombre,
+            cliente.Nombre,
 
-            cliente.apellido,
+            cliente.Apellido,
 
             cliente.fechaNacimimento,
 
@@ -163,15 +163,15 @@ namespace MercadoEnvio.Repositories
         }
 
 
-        internal void modificar(Cliente cliente)
+        internal void modificar(DetallesClientes cliente)
         {
             DBAdapter.executeProcedureWithReturnValue("modificarCliente",
 
             cliente.ID,
 
-            cliente.nombre,
+            cliente.Nombre,
 
-            cliente.apellido,
+            cliente.Apellido,
 
             cliente.fechaNacimimento,
 

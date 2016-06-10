@@ -24,7 +24,7 @@ namespace MercadoEnvio.Domain
             this.Piso = Piso;
             this.Depto = Depto;
             this.Nro_Calle = Nro_Calle;
-            this.Localidad = Localidad 
+            this.Localidad = Localidad; 
         }
 
     }

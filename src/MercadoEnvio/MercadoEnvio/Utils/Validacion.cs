@@ -9,6 +9,16 @@ namespace MercadoEnvio.Utils
 {
     class Validacion
     {
+        public static Boolean validarInputs(Control.ControlCollection controlCollection)
+        {
+            Boolean resultado = true;
+            foreach (Control control in controlCollection)
+            {
+                if (control is TextBox) resultado = resultado && !estaVacio(control, control.Name);
+                if (control is ComboBox) resultado = resultado && !noTieneSeleccion(control as ComboBox, control.Name);
+            }
+            return resultado;
+        }
 
         public static bool estaVacio(Control Box, string nombre)
         {
