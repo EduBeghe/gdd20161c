@@ -77,17 +77,29 @@
     <Compile Include="UI\ABM Rol\AltaRol.Designer.cs">
       <DependentUpon>AltaRol.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\ABM Rubro\Form1.cs">
+    <Compile Include="UI\ABM Rubro\AltaRubro.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\ABM Rubro\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="UI\ABM Rubro\AltaRubro.Designer.cs">
+      <DependentUpon>AltaRubro.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\ABM Usuario\Form1.cs">
+    <Compile Include="UI\ABM Usuario\AltaEmpresa.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\ABM Usuario\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="UI\ABM Usuario\AltaEmpresa.Designer.cs">
+      <DependentUpon>AltaEmpresa.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\ABM Usuario\AltaUsuario.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\ABM Usuario\AltaUsuario.Designer.cs">
+      <DependentUpon>AltaUsuario.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\ABM Usuario\AltaCliente.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\ABM Usuario\AltaCliente.Designer.cs">
+      <DependentUpon>AltaCliente.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\ABM Visibilidad\Form1.cs">
       <SubType>Form</SubType>
@@ -154,6 +166,15 @@
     </Compile>
     <EmbeddedResource Include="UI\ABM Rol\AltaRol.resx">
       <DependentUpon>AltaRol.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\ABM Usuario\AltaCliente.resx">
+      <DependentUpon>AltaCliente.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\ABM Usuario\AltaEmpresa.resx">
+      <DependentUpon>AltaEmpresa.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\ABM Usuario\AltaUsuario.resx">
+      <DependentUpon>AltaUsuario.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
