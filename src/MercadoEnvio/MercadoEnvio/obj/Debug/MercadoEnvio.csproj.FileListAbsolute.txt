@@ -1,1 +1,2 @@
 C:\Users\mujic\git\gdd20161c\src\MercadoEnvio\MercadoEnvio\bin\Debug\MercadoEnvio.exe.config
+E:\Edu\Facu\UTN\Gestion de Datos\TP GDD\1 C 2016\gdd20161c\src\MercadoEnvio\MercadoEnvio\bin\Debug\MercadoEnvio.exe.config
