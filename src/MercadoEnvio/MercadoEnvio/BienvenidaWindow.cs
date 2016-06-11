@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using MercadoEnvio.UI;
 
 namespace MercadoEnvio
 {
@@ -15,6 +16,12 @@ namespace MercadoEnvio
         public BienvenidaWindow()
         {
             InitializeComponent();
+        }
+
+        private void loginButton_Click(object sender, EventArgs e)
+        {
+            new LoginScreen().ShowDialog(this);
+            this.Close();
         }
     }
 }

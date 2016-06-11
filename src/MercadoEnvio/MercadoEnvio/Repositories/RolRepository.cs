@@ -11,36 +11,36 @@ namespace MercadoEnvio.Repositories {
 
   class RolesRepository {
 
-    public int agregarRol( string rol )
+    public int agregarRol( string rol_name )
     {
-      var retorno = DBAdapter.executeProcedureWithReturnValue("Agregar_Rol", rol );
-            return retorno;
+        var retorno = DBAdapter.executeProcedureWithReturnValue("Agregar_Rol", rol_name);
+        return retorno;
     }
 
-    public void relacionRolFuncionabilidad(String nombreRol,Funcionalidades funcionalidad)
-    {
-      DBAdapter.executeProcedure("Agregar_Rol_Por_Funcionalidad", nombreRol,funcionalidad.Descripcion_Funcionalidad);        
-    }
+    //public void relacionRolFuncionabilidad(String nombreRol,Funcionalidades funcionalidad)
+    //{
+    //  DBAdapter.executeProcedure("Agregar_Rol_Por_Funcionalidad", nombreRol,funcionalidad.Descripcion_Funcionalidad);        
+    //}
 
-        public void quitarFuncionabilidad( int codRol, Funcionalidades funcionalidad)
-        {
-            DBAdapter.executeProcedure("Quitar_Funcionalidad_A_Rol", funcionalidad.Descripcion_Funcionalidad, codRol) ;
-        }
+    //public void quitarFuncionabilidad( int codRol, Funcionalidades funcionalidad)
+    //{
+        //DBAdapter.executeProcedure("Quitar_Funcionalidad_A_Rol", funcionalidad.Descripcion_Funcionalidad, codRol) ;
+    //}
 
-    public int modificarNombre( Rol rol, string nombre )
-    {
-      var retorno = DBAdapter.executeProcedureWithReturnValue("Modificar_Nombre_Rol", rol.Nombre, nombre );
-            return retorno;
-    }
+    //public int modificarNombre( Rol rol, string nombre )
+    //{
+        //var retorno = DBAdapter.executeProcedureWithReturnValue("Modificar_Nombre_Rol", rol.Nombre, nombre );
+        //return retorno;
+    //}
 
-    public List<Rol> findRol(  string nombre  )
-    {
-      return parseRoles( DBAdapter.retrieveDataTable("Filtrar_Roles", nombre ));  
-    }
+    //public List<Rol> findRol(  string nombre  )
+    //{
+        //return parseRoles( DBAdapter.retrieveDataTable("Filtrar_Roles", nombre ));  
+    //}
 
     public Rol getRol( int idRol )
     {
-      return parse ( DBAdapter.retrieveDataTable("GetRol", idRol ).Rows[0]);
+      return parse( DBAdapter.retrieveDataTable("GetRol", idRol ).Rows[0]);
     }
 
     public List<Rol> getRoles()

@@ -19,18 +19,14 @@ namespace MercadoEnvio.Repositories
 
         public List<Funcionalidades> getFuncionalidades()
         {
-            return parseFuncionalidad(DBAdapter.retrieveDataTable("Get_Funcionalidades"));
+            return parseFuncionalidades(DBAdapter.retrieveDataTable("Get_Funcionalidades"));
         }
 
         public List<Funcionalidades> getFuncionalidadesByRol(int codRol )
         {
-            return parseFuncionalidades(DBAdapter.retrieveDataTable("Get_Funcionalidades_De_Rol", codRol));
+            return parseFuncionalidades(DBAdapter.retrieveDataTable("Get_Funcionalidades_Por_Rol", codRol));
         }
 
-        public List<Funcionalidades> parseFuncionalidad(DataTable dataTable)
-        {
-            return dataTable.AsEnumerable().Select(dr => parse(dr)).ToList();
-        }
         
         public List<Funcionalidades> parseFuncionalidades(DataTable dataTable)
         {

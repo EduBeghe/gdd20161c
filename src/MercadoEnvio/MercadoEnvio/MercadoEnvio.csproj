@@ -44,6 +44,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BienvenidaWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BienvenidaWindow.Designer.cs">
+      <DependentUpon>BienvenidaWindow.cs</DependentUpon>
+    </Compile>
     <Compile Include="Domain\AuditoriaLogin.cs" />
     <Compile Include="Domain\Calificaciones.cs" />
     <Compile Include="Domain\Compras.cs" />
@@ -76,6 +82,12 @@
     </Compile>
     <Compile Include="UI\ABM Rol\AltaRol.Designer.cs">
       <DependentUpon>AltaRol.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\ABM Rol\Listado.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\ABM Rol\Listado.Designer.cs">
+      <DependentUpon>Listado.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\ABM Rubro\AltaRubro.cs">
       <SubType>Form</SubType>
@@ -125,12 +137,6 @@
     <Compile Include="UI\Facturas\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\Form1.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="UI\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
-    </Compile>
     <Compile Include="UI\Generar Publicación\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -151,10 +157,19 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UI\Login\LoginScreen.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Login\LoginScreen.Designer.cs">
+      <DependentUpon>LoginScreen.cs</DependentUpon>
+    </Compile>
     <Compile Include="Utils\CLC_SessionManager.cs" />
     <Compile Include="Utils\DBAdapter.cs" />
     <Compile Include="Utils\Encription.cs" />
     <Compile Include="Utils\Validacion.cs" />
+    <EmbeddedResource Include="BienvenidaWindow.resx">
+      <DependentUpon>BienvenidaWindow.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -167,6 +182,9 @@
     <EmbeddedResource Include="UI\ABM Rol\AltaRol.resx">
       <DependentUpon>AltaRol.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UI\ABM Rol\Listado.resx">
+      <DependentUpon>Listado.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\ABM Usuario\AltaCliente.resx">
       <DependentUpon>AltaCliente.cs</DependentUpon>
     </EmbeddedResource>
@@ -175,6 +193,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\ABM Usuario\AltaUsuario.resx">
       <DependentUpon>AltaUsuario.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Login\LoginScreen.resx">
+      <DependentUpon>LoginScreen.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

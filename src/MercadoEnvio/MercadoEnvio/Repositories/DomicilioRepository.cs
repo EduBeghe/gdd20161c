@@ -19,29 +19,40 @@ namespace MercadoEnvio.Repositories
 
     class DomicilioRepository
     {
+        public Domicilio getDomicilio(int idDomicilio)
+        {
+            return parse(DBAdapter.retrieveDataTable("Get_Domicilio", idDomicilio).Rows[0]);
+        }
+
+        public List<Domicilio> getDomicilios()
+        {
+            return parseDomicilios(DBAdapter.retrieveDataTable("Get_Domicilios"));
+        }
+
+        public List<Domicilio> parseDomicilios(DataTable dataTable)
+        {
+            return dataTable.AsEnumerable().Select(dr => parse(dr)).ToList();
+        }
 
         private Domicilio parse(DataRow dr)
         {
+            return new Domicilio(
 
-        return new Domicilio(
+              Convert.ToInt32(dr["Cod_Domicilio"]),
 
-          Convert.ToInt32(dr["Cod_Domicilio"]),
+              dr["Calle"] as string,
 
-          dr["Calle"] as string,
+              Convert.ToInt32(dr["Piso"]),
 
-          Convert.ToInt32( dr["Piso"]),
+              dr["Depto"] as string,
 
-          dr["Depto"] as string,
+              Convert.ToInt32(dr["Nro_Calle"]),
 
-          dr["Nro_Calle"] as string,
+              dr["Localidad"] as string
 
-          dr["Localidad"] as string;
-
-           );
+            );
 
         }
 
-
-
     }
-
+}
