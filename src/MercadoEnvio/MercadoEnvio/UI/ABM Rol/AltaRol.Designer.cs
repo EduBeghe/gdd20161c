@@ -1,6 +1,6 @@
 ﻿namespace MercadoEnvio.ABM_Rol
 {
-    partial class Form1
+    partial class AltaRol
     {
         /// <summary>
         /// Required designer variable.

@@ -163,6 +163,12 @@
     <Compile Include="UI\Login\LoginScreen.Designer.cs">
       <DependentUpon>LoginScreen.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\Menu\Menu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Menu\Menu.Designer.cs">
+      <DependentUpon>Menu.cs</DependentUpon>
+    </Compile>
     <Compile Include="Utils\CLC_SessionManager.cs" />
     <Compile Include="Utils\DBAdapter.cs" />
     <Compile Include="Utils\Encription.cs" />
@@ -196,6 +202,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Login\LoginScreen.resx">
       <DependentUpon>LoginScreen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Menu\Menu.resx">
+      <DependentUpon>Menu.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

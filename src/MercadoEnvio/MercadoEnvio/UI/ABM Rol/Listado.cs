@@ -16,5 +16,10 @@ namespace MercadoEnvio.UI.ABM_Rol
         {
             InitializeComponent();
         }
+
+        internal void ShowDialog()
+        {
+            this.ShowDialog();
+        }
     }
 }

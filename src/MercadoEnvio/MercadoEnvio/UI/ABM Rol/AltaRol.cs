@@ -13,11 +13,16 @@ using MercadoEnvio.Domain;
 
 namespace MercadoEnvio.ABM_Rol
 {
-    public partial class Form1 : Form
+    public partial class AltaRol : Form
     {
-        public Form1()
+        public AltaRol()
         {
             InitializeComponent();
+        }
+
+        internal void ShowDialog()
+        {
+            this.ShowDialog();
         }
 
         private void AltaButton_Click(object sender, EventArgs e)

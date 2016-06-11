@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using MercadoEnvio.Utils;
 using MercadoEnvio.Repositories;
+using MercadoEnvio.UI.Menu;
 
 namespace MercadoEnvio.UI.Login
 {
@@ -21,7 +22,7 @@ namespace MercadoEnvio.UI.Login
 
         private void button1_Click(object sender, EventArgs e)
         {
-            var repo = new UsuarioRepository();
+            var repo = new UsuariosRepository();
             if (Validacion.validarInputs(this.Controls))
             {
 
@@ -30,7 +31,7 @@ namespace MercadoEnvio.UI.Login
                 {
                     repo.iniciarSesion(usuarioTextbox.Text);
                     MessageBox.Show("Bienvenido " + CLC_SessionManager.currentUser.Nombre_Usuario, "Login exitoso");
-                    new FuncionesAdmin().ShowDialog(true);
+                    new FunctionsMenu().ShowDialog();
                     this.Close();
                 }
                 else if (valido == -1)
