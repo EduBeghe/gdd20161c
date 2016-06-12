@@ -17,26 +17,33 @@ namespace MercadoEnvio.Repositories {
         return retorno;
     }
 
-    //public void relacionRolFuncionabilidad(String nombreRol,Funcionalidades funcionalidad)
-    //{
-    //  DBAdapter.executeProcedure("Agregar_Rol_Por_Funcionalidad", nombreRol,funcionalidad.Descripcion_Funcionalidad);        
-    //}
+    public int agregarRelacionRolFuncionabilidad(int codRol,int codFuncionalidad)
+    {
+        var retorno = DBAdapter.executeProcedureWithReturnValue("Agregar_Rol_Por_Funcionalidad", codRol, codFuncionalidad);
+        return retorno;
+    }
 
-    //public void quitarFuncionabilidad( int codRol, Funcionalidades funcionalidad)
-    //{
-        //DBAdapter.executeProcedure("Quitar_Funcionalidad_A_Rol", funcionalidad.Descripcion_Funcionalidad, codRol) ;
-    //}
+    public void quitarFuncionabilidad( int codRol, string descripcionFuncionabilidad )
+    {
+        DBAdapter.executeProcedure("Quitar_Funcionalidad_A_Rol", descripcionFuncionabilidad, codRol);
+    }
 
-    //public int modificarNombre( Rol rol, string nombre )
-    //{
-        //var retorno = DBAdapter.executeProcedureWithReturnValue("Modificar_Nombre_Rol", rol.Nombre, nombre );
-        //return retorno;
-    //}
+    public int modificarNombre( Rol rol, string nombre )
+    {
+        var retorno = DBAdapter.executeProcedureWithReturnValue("Modificar_Nombre_Rol", rol.Nombre, nombre );
+        return retorno;
+    }
 
     //public List<Rol> findRol(  string nombre  )
     //{
         //return parseRoles( DBAdapter.retrieveDataTable("Filtrar_Roles", nombre ));  
     //}
+
+    public int ObtenerRolIDPorDescripcion(String descripcion)
+    {
+        var retorno = DBAdapter.executeProcedureWithReturnValue("ObtenerRol", descripcion );
+        return retorno;
+    }
 
     public Rol getRol( int idRol )
     {

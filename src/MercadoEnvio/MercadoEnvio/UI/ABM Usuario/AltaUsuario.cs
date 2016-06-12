@@ -10,14 +10,24 @@ using System.Windows.Forms;
 
 namespace MercadoEnvio.ABM_Usuario
 {
-    public partial class Form1 : Form
+    public partial class AltaUsuario : Form
     {
-        public Form1()
+        public AltaUsuario()
         {
             InitializeComponent();
         }
 
+        internal void ShowDialog()
+        {
+            this.ShowDialog();
+        }
+
         private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
         {
 
         }

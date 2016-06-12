@@ -24,9 +24,21 @@ namespace MercadoEnvio.Repositories
             return parse(DBAdapter.retrieveDataTable("Get_Domicilio", idDomicilio).Rows[0]);
         }
 
+        public int altaDomicilio(string calle, int numeroCalle, int piso, string depto, string localidad)
+        {
+            var retorno = DBAdapter.executeProcedureWithReturnValue("Alta_Domicilio", calle, numeroCalle, piso, depto, localidad);
+            return retorno;
+        }
+
         public List<Domicilio> getDomicilios()
         {
             return parseDomicilios(DBAdapter.retrieveDataTable("Get_Domicilios"));
+        }
+
+        public int getDomicilioIDPorDatos( string calle, int numero, int piso, string depto )
+        {
+            var retorno = DBAdapter.executeProcedureWithReturnValue("Obtener_Cod_Domicilio", calle, numero, piso, depto );
+            return retorno;
         }
 
         public List<Domicilio> parseDomicilios(DataTable dataTable)

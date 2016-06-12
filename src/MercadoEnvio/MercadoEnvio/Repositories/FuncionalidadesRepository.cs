@@ -11,7 +11,13 @@ namespace MercadoEnvio.Repositories
 {
     class FuncionalidadRepository
     {
-       
+
+        public int AgregarFuncionalidad(string descripcion)
+        {
+            var retorno = DBAdapter.executeProcedureWithReturnValue("Agregar_Funcionalidad", descripcion);
+            return retorno;
+        }
+
         public Funcionalidades getFuncionalidad(int codigo)
         {
             return parse(DBAdapter.retrieveDataTable("Get_Funcionalidad", codigo).Rows[0]);
@@ -25,6 +31,12 @@ namespace MercadoEnvio.Repositories
         public List<Funcionalidades> getFuncionalidadesByRol(int codRol )
         {
             return parseFuncionalidades(DBAdapter.retrieveDataTable("Get_Funcionalidades_Por_Rol", codRol));
+        }
+
+        public int getFuncionalidadIDPorDescripcion(string descripcion)
+        {
+            var retorno = DBAdapter.executeProcedureWithReturnValue("ObtenerFuncionalidad", descripcion);
+            return retorno;
         }
 
         

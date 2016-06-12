@@ -13,8 +13,23 @@ namespace MercadoEnvio.Repositories
     class UsuariosRepository
     {
 
+        public int altaUsuario( string usuario, string pass, int codRol )
+		{
+			var retorno = DBAdapter.executeProcedureWithReturnValue("Alta_Usuario", usuario, new Encription().encryptToSHA256( pass ) );
+            return retorno;
+		}
 
-        public int ValidarLogin( string usuario, string pass )
+        public void bajaUsuario( string nombreUsuario )
+        {
+            DBAdapter.executeProcedure("Baja_Usuario", nombreUsuario );
+        }
+
+        public void modificarUsuario( string nombreUsuario, string passwordVieja, string passwordNueva )
+        {
+            DBAdapter.executeProcedure("Modificar_Usuario", nombreUsuario, passwordVieja, passwordNueva );
+        }
+
+        public int validarLogin( string usuario, string pass )
 		{
 			var cantUsuarios = DBAdapter.executeProcedureWithReturnValue("Validar_Login", usuario, new Encription().encryptToSHA256( pass ) );
             return cantUsuarios;
@@ -32,10 +47,23 @@ namespace MercadoEnvio.Repositories
             return parse(DBAdapter.retrieveDataTable("GetUsuario", username).Rows[0]);
         }
 
+        public int getUsuarioIDPorIdentificadores( int dni, string cuit ) 
+        {
+            var retorno = DBAdapter.executeProcedureWithReturnValue("ObtenerUsuario", dni, cuit );
+            return retorno;
+        }
+
+        public void actualizarIntentosLogin( string userName, int cantidad )
+        {
+            DBAdapter.executeProcedure("ActualizarIntentos", userName, cantidad );
+        }
+
+
         private Usuario parse(DataRow dr)
         {
 
-            return new Usuario(Convert.ToInt32(dr["Cod_Usuario"]),
+            return new Usuario(
+               Convert.ToInt32(dr["Cod_Usuario"]),
 
                dr["Nombre_Usuario"] as string,
 
@@ -43,7 +71,7 @@ namespace MercadoEnvio.Repositories
 
                Convert.ToInt32(dr["Intentos_Login"]), 
 
-               (Boolean) dr["Estado_Usuario"];
+               (Boolean) dr["Estado_Usuario"]
 
                );
 

@@ -26,7 +26,7 @@ namespace MercadoEnvio.UI.Login
             if (Validacion.validarInputs(this.Controls))
             {
 
-                var valido = repo.ValidarLogin(usuarioTextbox.Text, passwordTextbox.Text);
+                var valido = repo.validarLogin(usuarioTextbox.Text, passwordTextbox.Text);
                 if (valido == 1)
                 {
                     repo.iniciarSesion(usuarioTextbox.Text);

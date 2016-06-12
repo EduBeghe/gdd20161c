@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using MercadoEnvio.UI.ABM_Rol;
 using MercadoEnvio.ABM_Rol;
+using MercadoEnvio.ABM_Usuario;
 
 namespace MercadoEnvio.UI.Menu
 {
@@ -33,6 +34,11 @@ namespace MercadoEnvio.UI.Menu
         {
             new AltaRol().ShowDialog();
 
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            new AltaUsuario().ShowDialog();
         }
     }
 }
