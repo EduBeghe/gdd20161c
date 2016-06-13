@@ -113,17 +113,23 @@
     <Compile Include="UI\ABM Usuario\AltaCliente.Designer.cs">
       <DependentUpon>AltaCliente.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\ABM Usuario\BuscadorUsuarios.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\ABM Usuario\BuscadorUsuarios.Designer.cs">
+      <DependentUpon>BuscadorUsuarios.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\ABM Visibilidad\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="UI\ABM Visibilidad\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\Calificar\Form1.cs">
+    <Compile Include="UI\Calificar\CalificarVendedor.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\Calificar\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="UI\Calificar\CalificarVendedor.Designer.cs">
+      <DependentUpon>CalificarVendedor.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\ComprarOfertar\Form1.cs">
       <SubType>Form</SubType>
@@ -131,11 +137,11 @@
     <Compile Include="UI\ComprarOfertar\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\Facturas\Form1.cs">
+    <Compile Include="UI\Facturas\ConsultaFacturas.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\Facturas\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="UI\Facturas\ConsultaFacturas.Designer.cs">
+      <DependentUpon>ConsultaFacturas.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\Generar Publicación\Form1.cs">
       <SubType>Form</SubType>
@@ -149,11 +155,11 @@
     <Compile Include="UI\Historial Cliente\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\Listado Estadistico\Form1.cs">
+    <Compile Include="UI\Listado Estadistico\ListadoEstadistico.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\Listado Estadistico\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="UI\Listado Estadistico\ListadoEstadistico.Designer.cs">
+      <DependentUpon>ListadoEstadistico.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -162,6 +168,12 @@
     </Compile>
     <Compile Include="UI\Login\LoginScreen.Designer.cs">
       <DependentUpon>LoginScreen.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Login\SeleccionRol.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Login\SeleccionRol.Designer.cs">
+      <DependentUpon>SeleccionRol.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\Menu\Menu.cs">
       <SubType>Form</SubType>
@@ -200,8 +212,23 @@
     <EmbeddedResource Include="UI\ABM Usuario\AltaUsuario.resx">
       <DependentUpon>AltaUsuario.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UI\ABM Usuario\BuscadorUsuarios.resx">
+      <DependentUpon>BuscadorUsuarios.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Calificar\CalificarVendedor.resx">
+      <DependentUpon>CalificarVendedor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Facturas\ConsultaFacturas.resx">
+      <DependentUpon>ConsultaFacturas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Listado Estadistico\ListadoEstadistico.resx">
+      <DependentUpon>ListadoEstadistico.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\Login\LoginScreen.resx">
       <DependentUpon>LoginScreen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Login\SeleccionRol.resx">
+      <DependentUpon>SeleccionRol.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Menu\Menu.resx">
       <DependentUpon>Menu.cs</DependentUpon>
