@@ -1833,29 +1833,6 @@ SELECT DISTINCT Forma_Pago_Desc
 FROM gd_esquema.Maestra
 WHERE Forma_Pago_Desc IS NOT NULL
 
---MIGRACION TABLA FACTURAS -- (58726)
-INSERT INTO TODO_X2_LUCAS.Facturas(Nro_Factura,Fecha_Factura,Total_Factura,Vendedor_Correspondiente,Cod_Forma_De_Pago,Cod_Publicacion)
-SELECT DISTINCT Factura_Nro,Factura_Fecha,Factura_Total,u.Cod_Usuario,f.Cod_Formas_De_Pago,p.Cod_Publicacion
-FROM gd_esquema.Maestra m JOIN TODO_X2_LUCAS.Detalles_Clientes c  ON (m.Publ_Cli_Dni = c.DNI)
-							JOIN TODO_X2_LUCAS.Usuarios u ON (u.Cod_Usuario = c.Cod_Usuario)
-							JOIN TODO_X2_LUCAS.Formas_De_Pago f ON (m.Forma_Pago_Desc = f.Descripcion_Forma)
-							JOIN TODO_X2_LUCAS.Publicaciones P ON (m.Publicacion_Cod = p.Cod_Publicacion_Anterior)
-WHERE Factura_Nro IS NOT NULL
-UNION	
-SELECT DISTINCT Factura_Nro,Factura_Fecha,Factura_Total,u.Cod_Usuario,f.Cod_Formas_De_Pago,p.Cod_Publicacion
-FROM gd_esquema.Maestra m JOIN TODO_X2_LUCAS.Detalles_Empresas e  ON (m.Publ_Empresa_Cuit = e.CUIT)
-							JOIN TODO_X2_LUCAS.Usuarios u ON (u.Cod_Usuario = e.Cod_Usuario)
-							JOIN TODO_X2_LUCAS.Formas_De_Pago f ON (m.Forma_Pago_Desc = f.Descripcion_Forma)
-							JOIN TODO_X2_LUCAS.Publicaciones P ON (m.Publicacion_Cod = p.Cod_Publicacion_Anterior)
-WHERE Factura_Nro IS NOT NULL
-
-
---MIGRACION TABLA ITEMS FACTURA --
-INSERT INTO TODO_X2_LUCAS.Items_Facturas(Cod_Factura,Item_Factura_Cantidad,Item_Factura_Monto)
-SELECT f.Cod_Factura,m.Item_Factura_Cantidad,m.Item_Factura_Monto
-FROM gd_esquema.Maestra m JOIN TODO_X2_LUCAS.Facturas f ON (m.Factura_Nro = f.Nro_Factura)
-WHERE f.Nro_Factura IS NOT NULL
-
 -- MIGRACION TABLA RUBROS --
 INSERT INTO TODO_X2_LUCAS.Rubros (Descripcion_Rubro)
 SELECT DISTINCT  Publicacion_Rubro_Descripcion
@@ -1863,8 +1840,8 @@ FROM gd_esquema.Maestra
 
 -- MIGRACION TABLA VISIBILIDADES DE PUBLICACIONES --
 SET IDENTITY_INSERT TODO_X2_LUCAS.Visibilidades_Publicaciones ON
-	INSERT INTO TODO_X2_LUCAS.Visibilidades_Publicaciones(Cod_Visibilidad,Descripcion_Visibilidad,Porcentaje,Precio_Visibilidad)
-	SELECT DISTINCT Publicacion_Visibilidad_Cod,Publicacion_Visibilidad_Desc,Publicacion_Visibilidad_Porcentaje,Publicacion_Visibilidad_Precio
+	INSERT INTO TODO_X2_LUCAS.Visibilidades_Publicaciones(Cod_Visibilidad,Descripcion_Visibilidad,Porcentaje,Precio_Visibilidad,Comision_Entregas)
+	SELECT DISTINCT Publicacion_Visibilidad_Cod,Publicacion_Visibilidad_Desc,Publicacion_Visibilidad_Porcentaje,Publicacion_Visibilidad_Precio,(Publicacion_Visibilidad_Precio * 0.5)
 	FROM gd_esquema.Maestra
 	WHERE Publicacion_Visibilidad_Cod IS NOT NULL
 SET IDENTITY_INSERT TODO_X2_LUCAS.Visibilidades_Publicaciones OFF
@@ -1929,9 +1906,33 @@ FROM gd_esquema.Maestra M JOIN TODO_X2_LUCAS.Publicaciones P ON (M.Publicacion_C
 WHERE Oferta_Fecha IS NOT NULL AND Oferta_Monto IS NOT NULL
 go
 
+--MIGRACION TABLA FACTURAS -- (58726)
+INSERT INTO TODO_X2_LUCAS.Facturas(Nro_Factura,Fecha_Factura,Total_Factura,Vendedor_Correspondiente,Cod_Forma_De_Pago,Cod_Publicacion)
+SELECT DISTINCT Factura_Nro,Factura_Fecha,Factura_Total,u.Cod_Usuario,f.Cod_Formas_De_Pago,p.Cod_Publicacion
+FROM gd_esquema.Maestra m JOIN TODO_X2_LUCAS.Detalles_Clientes c  ON (m.Publ_Cli_Dni = c.DNI)
+							JOIN TODO_X2_LUCAS.Usuarios u ON (u.Cod_Usuario = c.Cod_Usuario)
+							JOIN TODO_X2_LUCAS.Formas_De_Pago f ON (m.Forma_Pago_Desc = f.Descripcion_Forma)
+							JOIN TODO_X2_LUCAS.Publicaciones P ON (m.Publicacion_Cod = p.Cod_Publicacion_Anterior)
+WHERE Factura_Nro IS NOT NULL
+UNION	
+SELECT DISTINCT Factura_Nro,Factura_Fecha,Factura_Total,u.Cod_Usuario,f.Cod_Formas_De_Pago,p.Cod_Publicacion
+FROM gd_esquema.Maestra m JOIN TODO_X2_LUCAS.Detalles_Empresas e  ON (m.Publ_Empresa_Cuit = e.CUIT)
+							JOIN TODO_X2_LUCAS.Usuarios u ON (u.Cod_Usuario = e.Cod_Usuario)
+							JOIN TODO_X2_LUCAS.Formas_De_Pago f ON (m.Forma_Pago_Desc = f.Descripcion_Forma)
+							JOIN TODO_X2_LUCAS.Publicaciones P ON (m.Publicacion_Cod = p.Cod_Publicacion_Anterior)
+WHERE Factura_Nro IS NOT NULL
+
+
+--MIGRACION TABLA ITEMS FACTURA --
+INSERT INTO TODO_X2_LUCAS.Items_Facturas(Cod_Factura,Item_Factura_Cantidad,Item_Factura_Monto)
+SELECT f.Cod_Factura,m.Item_Factura_Cantidad,m.Item_Factura_Monto
+FROM gd_esquema.Maestra m JOIN TODO_X2_LUCAS.Facturas f ON (m.Factura_Nro = f.Nro_Factura)
+WHERE f.Nro_Factura IS NOT NULL
+
 -- MIGRACION TABLA USUARIOS--
 exec TODO_X2_LUCAS.Migrar_Reputacion_Usuarios
 GO
+
 /************************************************** TRIGGERS ***************************************************/
 /* ------------ TRIGGER PARA LA REPUTACION DEL VENDEDOR ------------ */
 CREATE TRIGGER TODO_X2_LUCAS.Reputacion
