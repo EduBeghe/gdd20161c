@@ -10,8 +10,8 @@ namespace MercadoEnvio.Domain
         
     public class EstadosPublicaciones
     {
-        int Cod_Estado { get; set; }
-        string Descripcion_Estado { get; set; }
+        public int Cod_Estado { get; set; }
+        public string Descripcion_Estado { get; set; }
 
         public EstadosPublicaciones( int Cod_Estado, string Descripcion_Estado )
         {

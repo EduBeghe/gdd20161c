@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
@@ -35,12 +36,26 @@
             this.label2 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.button3 = new System.Windows.Forms.Button();
+            this.gD1C2016DataSet = new MercadoEnvio.GD1C2016DataSet();
+            this.rolesBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.rolesTableAdapter = new MercadoEnvio.GD1C2016DataSetTableAdapters.RolesTableAdapter();
+            this.codRolDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.nombreDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.estadoRolDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gD1C2016DataSet)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.rolesBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // dataGridView1
             // 
+            this.dataGridView1.AutoGenerateColumns = false;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.codRolDataGridViewTextBoxColumn,
+            this.nombreDataGridViewTextBoxColumn,
+            this.estadoRolDataGridViewCheckBoxColumn});
+            this.dataGridView1.DataSource = this.rolesBindingSource;
             this.dataGridView1.Location = new System.Drawing.Point(12, 135);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 28;
@@ -99,6 +114,39 @@
             this.button3.Text = "Buscar";
             this.button3.UseVisualStyleBackColor = true;
             // 
+            // gD1C2016DataSet
+            // 
+            this.gD1C2016DataSet.DataSetName = "GD1C2016DataSet";
+            this.gD1C2016DataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // rolesBindingSource
+            // 
+            this.rolesBindingSource.DataMember = "Roles";
+            this.rolesBindingSource.DataSource = this.gD1C2016DataSet;
+            // 
+            // rolesTableAdapter
+            // 
+            this.rolesTableAdapter.ClearBeforeFill = true;
+            // 
+            // codRolDataGridViewTextBoxColumn
+            // 
+            this.codRolDataGridViewTextBoxColumn.DataPropertyName = "Cod_Rol";
+            this.codRolDataGridViewTextBoxColumn.HeaderText = "Cod_Rol";
+            this.codRolDataGridViewTextBoxColumn.Name = "codRolDataGridViewTextBoxColumn";
+            this.codRolDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // nombreDataGridViewTextBoxColumn
+            // 
+            this.nombreDataGridViewTextBoxColumn.DataPropertyName = "Nombre";
+            this.nombreDataGridViewTextBoxColumn.HeaderText = "Nombre";
+            this.nombreDataGridViewTextBoxColumn.Name = "nombreDataGridViewTextBoxColumn";
+            // 
+            // estadoRolDataGridViewCheckBoxColumn
+            // 
+            this.estadoRolDataGridViewCheckBoxColumn.DataPropertyName = "Estado_Rol";
+            this.estadoRolDataGridViewCheckBoxColumn.HeaderText = "Estado_Rol";
+            this.estadoRolDataGridViewCheckBoxColumn.Name = "estadoRolDataGridViewCheckBoxColumn";
+            // 
             // Listado
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -113,7 +161,10 @@
             this.Controls.Add(this.dataGridView1);
             this.Name = "Listado";
             this.Text = "Listado";
+            this.Load += new System.EventHandler(this.Listado_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gD1C2016DataSet)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.rolesBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -128,5 +179,11 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Button button3;
+        private GD1C2016DataSet gD1C2016DataSet;
+        private System.Windows.Forms.BindingSource rolesBindingSource;
+        private GD1C2016DataSetTableAdapters.RolesTableAdapter rolesTableAdapter;
+        private System.Windows.Forms.DataGridViewTextBoxColumn codRolDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn nombreDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn estadoRolDataGridViewCheckBoxColumn;
     }
 }

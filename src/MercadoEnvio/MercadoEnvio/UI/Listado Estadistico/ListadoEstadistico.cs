@@ -16,5 +16,11 @@ namespace MercadoEnvio.Listado_Estadistico
         {
             InitializeComponent();
         }
+
+        internal void ShowDialog()
+        {
+            this.ShowDialog();
+        }
+
     }
 }

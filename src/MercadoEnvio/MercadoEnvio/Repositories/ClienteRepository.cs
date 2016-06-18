@@ -21,11 +21,26 @@ namespace MercadoEnvio.Repositories
     {
 
 
-        internal void darDeBaja(Usuario usuario)
+        public void darDeBaja(Usuario usuario)
         {
+            DBAdapter.executeProcedure("Baja_Usuario", usuario.Nombre_Usuario);
+        }
 
-            DBAdapter.executeProcedure("darDeBajaUsuario", usuario.Id);
+        public void calificarCompra(Compras compra, int estrellas, string descripcion )
+        {
+            DBAdapter.executeProcedure("Calificar_Compra",
+                estrellas,
+                compra.Cod_Compra,
+                descripcion
+                );
+        }
 
+        public int altaCliente(string nombreUsuario, string password, int dni, string mail,
+            int telefono, string calle, int numeroCalle, int piso, string depto, string localidad,
+            string codPostal, DateTime fechaNacimiento)
+        {
+            var retorno = DBAdapter.executeProcedureWithReturnValue("Alta_Cliente", nombreUsuario, password, dni, mail, telefono, calle, numeroCalle, piso, depto, localidad, codPostal, fechaNacimiento);
+            return retorno;
         }
 
 
@@ -36,22 +51,22 @@ namespace MercadoEnvio.Repositories
 
         }
 
-
+        public int modificarCliente( int dniViejo, string nombreUsuario, string password, int dni, string mail,
+            int telefono, string calle, int numeroCalle, int piso, string depto, string localidad,
+            string codPostal, DateTime fechaNacimiento)
+        {
+            var retorno = DBAdapter.executeProcedureWithReturnValue("Modificar_Cliente", dniViejo, nombreUsuario, password, dni, mail, telefono, calle, numeroCalle, piso, depto, localidad, codPostal, fechaNacimiento);
+            return retorno;
+        }
 
         public List<DetallesClientes> getClientes()
         {
-
             return parseClientes(DBAdapter.retrieveDataTable("getCliente", DBNull.Value));
-
         }
-
-
 
         public DetallesClientes getCliente(int ID)
         {
-
             return parse(DBAdapter.retrieveDataTable("getCliente", ID).Rows[0]);
-
         }
 
         public DetallesClientes getClienteByUserId(int uID)
@@ -75,7 +90,7 @@ namespace MercadoEnvio.Repositories
 
             return new DetallesClientes(Convert.ToInt32(dr["Cod_Cliente"]),
 
-
+                // Viejo, CAMBIAR!
                                dr["Nombre"] as string,
 
                                dr["Apellido"] as string,

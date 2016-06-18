@@ -22,5 +22,15 @@ namespace MercadoEnvio.Properties {
                 return defaultInstance;
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=localhost\\SQLSERVER2012;Initial Catalog=GD1C2016;User ID=gd")]
+        public string GD1C2016ConnectionString {
+            get {
+                return ((string)(this["GD1C2016ConnectionString"]));
+            }
+        }
     }
 }

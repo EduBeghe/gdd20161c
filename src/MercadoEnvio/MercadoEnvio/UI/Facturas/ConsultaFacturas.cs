@@ -16,5 +16,11 @@ namespace MercadoEnvio.Facturas
         {
             InitializeComponent();
         }
+
+        internal void ShowDialog()
+        {
+            this.ShowDialog();
+        }
+
     }
 }

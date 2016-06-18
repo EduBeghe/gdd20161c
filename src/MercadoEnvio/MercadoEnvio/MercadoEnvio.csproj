@@ -71,9 +71,18 @@
     <Compile Include="Domain\Tipos_Publicaciones.cs" />
     <Compile Include="Domain\Usuario.cs" />
     <Compile Include="Domain\VisibilidadPublicaciones.cs" />
+    <Compile Include="GD1C2016DataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GD1C2016DataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Repositories\FacturaRepository.cs" />
+    <Compile Include="Repositories\PublicacionRepository.cs" />
+    <Compile Include="Repositories\VisibilidadRepository.cs" />
     <Compile Include="Repositories\AuditoriaLoginRepository.cs" />
     <Compile Include="Repositories\ClienteRepository.cs" />
     <Compile Include="Repositories\DomicilioRepository.cs" />
+    <Compile Include="Repositories\EmpresaRepository.cs" />
     <Compile Include="Repositories\FuncionalidadesRepository.cs" />
     <Compile Include="Repositories\RolRepository.cs" />
     <Compile Include="Repositories\UsuariosRepository.cs" />
@@ -233,6 +242,17 @@
     <EmbeddedResource Include="UI\Menu\Menu.resx">
       <DependentUpon>Menu.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="GD1C2016DataSet.xsc">
+      <DependentUpon>GD1C2016DataSet.xsd</DependentUpon>
+    </None>
+    <None Include="GD1C2016DataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>GD1C2016DataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="GD1C2016DataSet.xss">
+      <DependentUpon>GD1C2016DataSet.xsd</DependentUpon>
+    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

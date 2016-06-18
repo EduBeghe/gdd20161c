@@ -40,6 +40,7 @@
             this.button5 = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
             this.button6 = new System.Windows.Forms.Button();
+            this.button7 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -54,7 +55,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(157, 60);
+            this.label2.Location = new System.Drawing.Point(165, 60);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(64, 20);
             this.label2.TabIndex = 1;
@@ -63,7 +64,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(273, 59);
+            this.label3.Location = new System.Drawing.Point(317, 59);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(51, 20);
             this.label3.TabIndex = 2;
@@ -72,7 +73,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(390, 60);
+            this.label4.Location = new System.Drawing.Point(459, 60);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(51, 20);
             this.label4.TabIndex = 3;
@@ -81,11 +82,11 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(516, 60);
+            this.label5.Location = new System.Drawing.Point(566, 59);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(51, 20);
+            this.label5.Size = new System.Drawing.Size(143, 20);
             this.label5.TabIndex = 4;
-            this.label5.Text = "label5";
+            this.label5.Text = "Listado Estadistico";
             // 
             // button1
             // 
@@ -101,7 +102,7 @@
             // 
             this.button2.Location = new System.Drawing.Point(126, 115);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(117, 33);
+            this.button2.Size = new System.Drawing.Size(141, 33);
             this.button2.TabIndex = 6;
             this.button2.Text = "Alta Usuario";
             this.button2.UseVisualStyleBackColor = true;
@@ -109,16 +110,16 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(249, 115);
+            this.button3.Location = new System.Drawing.Point(273, 115);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(105, 33);
+            this.button3.Size = new System.Drawing.Size(120, 33);
             this.button3.TabIndex = 7;
             this.button3.Text = "button3";
             this.button3.UseVisualStyleBackColor = true;
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(360, 115);
+            this.button4.Location = new System.Drawing.Point(429, 115);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(119, 33);
             this.button4.TabIndex = 8;
@@ -127,11 +128,11 @@
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(485, 115);
+            this.button5.Location = new System.Drawing.Point(554, 115);
             this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(119, 33);
+            this.button5.Size = new System.Drawing.Size(155, 33);
             this.button5.TabIndex = 9;
-            this.button5.Text = "button5";
+            this.button5.Text = "Listado Estadistico";
             this.button5.UseVisualStyleBackColor = true;
             // 
             // label6
@@ -153,11 +154,22 @@
             this.button6.UseVisualStyleBackColor = true;
             this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
+            // button7
+            // 
+            this.button7.Location = new System.Drawing.Point(126, 167);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(141, 29);
+            this.button7.TabIndex = 12;
+            this.button7.Text = "Buscar Usuarios";
+            this.button7.UseVisualStyleBackColor = true;
+            this.button7.Click += new System.EventHandler(this.button7_Click);
+            // 
             // FunctionsMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(626, 223);
+            this.ClientSize = new System.Drawing.Size(721, 223);
+            this.Controls.Add(this.button7);
             this.Controls.Add(this.button6);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.button5);
@@ -191,5 +203,6 @@
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.Button button7;
     }
 }

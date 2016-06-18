@@ -16,5 +16,11 @@ namespace MercadoEnvio.Calificar
         {
             InitializeComponent();
         }
+
+        internal void ShowDialog()
+        {
+            this.ShowDialog();
+        }
+
     }
 }

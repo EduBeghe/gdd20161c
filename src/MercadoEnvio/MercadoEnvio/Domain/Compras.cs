@@ -8,14 +8,14 @@ namespace MercadoEnvio.Domain
 {
     class Compras
     {
-        int Cod_Compra { get; set; }
-        DateTime Compra_Fecha { get; set; }
-        int Compra_Cantidad { get; set; }
-        Publicaciones publicacion { get; set; }
-        Usuario usuario { get; set; }
-        Calificaciones calificacion { get; set; }
-        int Cod_Calificacion_Anterior { get; set; }
-        string Descripcion { get; set; }
+        public int Cod_Compra { get; set; }
+        public DateTime Compra_Fecha { get; set; }
+        public int Compra_Cantidad { get; set; }
+        public Publicaciones publicacion { get; set; }
+        public Usuario usuario { get; set; }
+        public Calificaciones calificacion { get; set; }
+        public int Cod_Calificacion_Anterior { get; set; }
+        public string Descripcion { get; set; }
 
         public Compras(
             int Cod_Compra,

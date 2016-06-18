@@ -20,7 +20,9 @@ namespace MercadoEnvio.Domain
         public string Ciudad { get; set; }
         public string CUIT { get; set; }
         public bool Estado_Empresa { get; set; }
-        
+        public Rubros rubro { get; set; }
+
+
         public DetalleEmpresa( 
             int Cod_Empresa,
             Usuario usuario,
