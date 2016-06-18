@@ -178,12 +178,30 @@ IF OBJECT_ID('TODO_X2_LUCAS.Ofertar_Publicacion') IS NOT NULL
 DROP PROCEDURE TODO_X2_LUCAS.Ofertar_Publicacion;
 IF OBJECT_ID('TODO_X2_LUCAS.Migrar_Reputacion_Usuarios') IS NOT NULL
 DROP PROCEDURE TODO_X2_LUCAS.Migrar_Reputacion_Usuarios;
-IF OBJECT_ID('TODO_X2_LUCAS.Historial_Cliente') IS NOT NULL
-DROP PROCEDURE TODO_X2_LUCAS.Historial_Cliente;
+IF OBJECT_ID('TODO_X2_LUCAS.Historial_Cliente_Compras_Y_Ofertas') IS NOT NULL
+DROP PROCEDURE TODO_X2_LUCAS.Historial_Cliente_Compras_Y_Ofertas;
+IF OBJECT_ID('TODO_X2_LUCAS.Historial_Cliente_Calficaciones') IS NOT NULL
+DROP PROCEDURE TODO_X2_LUCAS.Historial_Cliente_Calficaciones;
 IF OBJECT_ID('TODO_X2_LUCAS.Calificar_Compra') IS NOT NULL
 DROP PROCEDURE TODO_X2_LUCAS.Calificar_Compra;
 IF OBJECT_ID('TODO_X2_LUCAS.Consulta_Facturas') IS NOT NULL
 DROP PROCEDURE TODO_X2_LUCAS.Consulta_Facturas;
+IF OBJECT_ID('TODO_X2_LUCAS.Vendedores_Con_Mayoria_De_Monto_Facturado') IS NOT NULL
+DROP PROCEDURE TODO_X2_LUCAS.Vendedores_Con_Mayoria_De_Monto_Facturado;
+IF OBJECT_ID('TODO_X2_LUCAS.Vendedores_Con_Mayoria_De_Facturas') IS NOT NULL
+DROP PROCEDURE TODO_X2_LUCAS.Vendedores_Con_Mayoria_De_Facturas;
+IF OBJECT_ID('TODO_X2_LUCAS.Clientes_Con_Mayoria_De_Compras') IS NOT NULL
+DROP PROCEDURE TODO_X2_LUCAS.Clientes_Con_Mayoria_De_Compras;
+IF OBJECT_ID('TODO_X2_LUCAS.Vendeddores_Mas_Perros') IS NOT NULL
+DROP PROCEDURE TODO_X2_LUCAS.Vendeddores_Mas_Perros;
+IF OBJECT_ID('TODO_X2_LUCAS.Filtrar_Publicaciones') IS NOT NULL
+DROP PROCEDURE TODO_X2_LUCAS.Filtrar_Publicaciones;
+IF OBJECT_ID('TODO_X2_LUCAS.Filtrar_Usuarios_Empresa') IS NOT NULL
+DROP PROCEDURE TODO_X2_LUCAS.Filtrar_Usuarios_Empresa;
+IF OBJECT_ID('TODO_X2_LUCAS.Filtrar_Usuarios_Cliente') IS NOT NULL
+DROP PROCEDURE TODO_X2_LUCAS.Filtrar_Usuarios_Cliente;
+IF OBJECT_ID('TODO_X2_LUCAS.Filtrar_Publicaciones') IS NOT NULL
+DROP PROCEDURE TODO_X2_LUCAS.Filtrar_Publicaciones;
 
 IF OBJECT_ID('TODO_X2_LUCAS.ObtenerUsuario') IS NOT NULL
 DROP FUNCTION TODO_X2_LUCAS.ObtenerUsuario;
@@ -290,6 +308,13 @@ CREATE TABLE TODO_X2_LUCAS.Detalles_Clientes (
 	Estado_Cliente bit NOT NULL
 )
 ;
+-- CREACION TABLAS RUBROS --
+CREATE TABLE TODO_X2_LUCAS.Rubros ( 
+	Cod_Rubro int IDENTITY PRIMARY KEY CLUSTERED,
+	Descripcion_Breve nvarchar(50),
+	Descripcion_Rubro nvarchar(255) NOT NULL
+)
+;
 --CREACION TABLA DETALLES DE UNA EMPRESA --
 CREATE TABLE TODO_X2_LUCAS.Detalles_Empresas ( 
 	Cod_Empresa int IDENTITY PRIMARY KEY CLUSTERED,
@@ -301,7 +326,7 @@ CREATE TABLE TODO_X2_LUCAS.Detalles_Empresas (
 	Cod_Postal nvarchar(50) NOT NULL,
 	Ciudad nvarchar(255) ,
 	CUIT nvarchar(50) NOT NULL UNIQUE,
-	Rubro nvarchar(255) ,
+	Cod_Rubro int REFERENCES TODO_X2_LUCAS.Rubros(Cod_Rubro) ,
 	Estado_Empresa bit NOT NULL
 )
 ;
@@ -311,13 +336,7 @@ CREATE TABLE TODO_X2_LUCAS.Formas_De_Pago (
 	Descripcion_Forma nvarchar(255)
 )
 ;
--- CREACION TABLAS RUBROS --
-CREATE TABLE TODO_X2_LUCAS.Rubros ( 
-	Cod_Rubro int IDENTITY PRIMARY KEY CLUSTERED,
-	Descripcion_Breve nvarchar(50),
-	Descripcion_Rubro nvarchar(255) NOT NULL
-)
-;
+
 -- CREACION TABLA VISIBILIDADES DE UNA PUBLICACION --
 CREATE TABLE TODO_X2_LUCAS.Visibilidades_Publicaciones ( 
 	Cod_Visibilidad numeric(18) IDENTITY PRIMARY KEY CLUSTERED,
@@ -1089,6 +1108,27 @@ BEGIN
 	WHERE Nombre_Usuario = @usuario
 END
 GO
+/* ------------ PROCEDIMIENTO PARA FILTRAR LOS USUARIOS EMPRESAS SEGUN RAZON SOCIAL CUIT Y EMAIL ------------ */
+CREATE PROCEDURE TODO_X2_LUCAS.Filtrar_Usuarios_Empresa(@razonSocial nvarchar(255),@cuit nvarchar(50),@email nvarchar(255))
+AS
+BEGIN
+	SELECT *
+	FROM TODO_X2_LUCAS.Detalles_Empresas
+	WHERE (Razon_Social = @razonSocial OR @razonSocial IS NULL) AND 
+			(CUIT = @cuit OR @cuit IS NULL) AND (Mail = @email OR @email IS NULL)
+END
+GO
+/* ------------ PROCEDIMIENTO PARA FILTRAR LOS USUARIOS CLIENTES SEGUN NOMBRE APELLIDO DNI Y EMAIL ------------ */
+CREATE PROCEDURE TODO_X2_LUCAS.Filtrar_Usuarios_Cliente(@nombre nvarchar(255),@apellido nvarchar(255),@dni numeric(18),@email nvarchar(255))
+AS
+BEGIN
+	SELECT *
+	FROM TODO_X2_LUCAS.Detalles_Clientes
+	WHERE (Nombre = @nombre OR @nombre IS NULL) AND (Apellido = @apellido OR @apellido IS NULL) 
+			AND (Mail = @email OR @email IS NULL) AND (DNI = @dni OR @dni IS NULL)
+END
+GO
+
 /* ------------ PROCEDIMIENTO PARA ALTA DE UN DOMICILIO ------------ */
 CREATE PROCEDURE TODO_X2_LUCAS.Alta_Domicilio(@calle nvarchar(255),@nro_Calle numeric(18),@piso numeric(18),
 												@depto nvarchar(50),@localidad nvarchar(50))
@@ -1174,14 +1214,15 @@ AS
 BEGIN
 	IF NOT EXISTS (SELECT * FROM TODO_X2_LUCAS.Detalles_Empresas WHERE CUIT = @CUIT OR Razon_Social = @razon_Social)
 	BEGIN
-		DECLARE @codDomicilio int,@codUsuario int;
+		DECLARE @codDomicilio int,@codUsuario int,@codRubro int;
 		SET @codUsuario = TODO_X2_LUCAS.ObtenerUsuario(NULL,@CUIT);
+		SET @codRubro = TODO_X2_LUCAS.Obtener_Rubro(@rubro);
 
 		EXEC @codDomicilio = TODO_X2_LUCAS.Alta_Domicilio @calle,@nro_Calle,@piso,@depto,@localidad;
 
 		INSERT INTO TODO_X2_LUCAS.Detalles_Empresas(Ciudad,Cod_Domicilio,Cod_Postal,Cod_Usuario,CUIT,Estado_Empresa,
-													Mail,Razon_Social,Rubro)
-		VALUES (@ciudad,@codDomicilio,@cod_Postal,@codUsuario,@CUIT,@estado_Empresa,@mail,@razon_Social,@rubro)
+													Mail,Razon_Social,Cod_Rubro)
+		VALUES (@ciudad,@codDomicilio,@cod_Postal,@codUsuario,@CUIT,@estado_Empresa,@mail,@razon_Social,@codRubro)
 
 	END
 	ELSE
@@ -1205,7 +1246,7 @@ BEGIN
 
 		UPDATE TODO_X2_LUCAS.Detalles_Empresas
 		SET Razon_Social = @razon_Social, Mail = @mail, Telefono = @telefono,Cod_Postal = @cod_Postal, Ciudad = @ciudad,
-			CUIT = @CUIT, Rubro = @rubro, Estado_Empresa = @estado_Empresa
+			CUIT = @CUIT, Cod_Rubro = TODO_X2_LUCAS.Obtener_Rubro(@rubro), Estado_Empresa = @estado_Empresa
 		WHERE CUIT = @cuitViejo
 
 		UPDATE TODO_X2_LUCAS.Domicilios
@@ -1300,7 +1341,16 @@ BEGIN
 
 END
 GO
-
+/* ------------ PROCEDIMIENTO PARA FILTRAR PUBLICACIONES ------------ */
+CREATE PROCEDURE TODO_X2_LUCAS.Filtrar_Publicaciones(@rubro nvarchar(255),@descripcion nvarchar(255))
+AS
+BEGIN
+	SELECT * 
+	FROM TODO_X2_LUCAS.Publicaciones
+	WHERE (Cod_Rubro = TODO_X2_LUCAS.Obtener_Rubro(@rubro) OR @rubro IS NULL) AND
+			(Descripcion_Publicacion = @descripcion OR @descripcion IS NULL)
+END
+GO
 /* ------------ PROCEDIMIENTO PARA GENERAR UNA FACTURA ------------ */
 CREATE PROCEDURE TODO_X2_LUCAS.Generar_Factura(@codPublicacion int,@cantidad numeric(18),@formaDePago nvarchar(255),
 												@dni numeric(18),@cuit nvarchar(50))
@@ -1391,36 +1441,38 @@ BEGIN
 END
 GO
 
-/* ------------ PROCEDIMIENTO PARA LA COMPRA DE UNA PUBLICACION ------------ */
-CREATE PROCEDURE TODO_X2_LUCAS.Historial_Cliente(@dni numeric(18))
+/* ------------ PROCEDIMIENTO PARA OBTENER UN HISTORIAL DE COMPRAS Y OFERTAS DE UN CLIENTE ------------ */
+CREATE PROCEDURE TODO_X2_LUCAS.Historial_Cliente_Compras_Y_Ofertas(@dni numeric(18))
 AS
 BEGIN
 	DECLARE @usuario int;
 	SET @usuario = TODO_X2_LUCAS.ObtenerUsuario(@dni,null);
 
-	SELECT DISTINCT pC.Descripcion_Publicacion AS 'Publicacion Comprada', c.Compra_Fecha as 'Fecha de la Compra', c.Compra_Cantidad as 'Cantidad Comprada'
+	SELECT DISTINCT pC.Descripcion_Publicacion AS 'Publicacion Comprada/Ofertada', c.Compra_Fecha as 'Fecha de la Compra/Oferta', c.Compra_Cantidad as 'Cantidad Comprada/Ofertada'
 	FROM TODO_X2_LUCAS.Usuarios U JOIN TODO_X2_LUCAS.Compras C ON (C.Cod_Usuario=U.Cod_Usuario)
 									JOIN TODO_X2_LUCAS.Publicaciones PC ON (C.Cod_Publicacion=PC.Cod_Publicacion)
 	WHERE U.Cod_Usuario = @usuario
-	
+	UNION
 	SELECT DISTINCT PO.Descripcion_Publicacion, Oferta_Fecha,Oferta_Monto
 	FROM TODO_X2_LUCAS.Usuarios U JOIN TODO_X2_LUCAS.Ofertas O ON (O.Cod_Usuario=U.Cod_Usuario)
 									JOIN TODO_X2_LUCAS.Publicaciones PO ON (O.Cod_Publicacion=PO.Cod_Publicacion)
 	WHERE U.Cod_Usuario = @usuario
-	
-	SELECT count (*) as 'Cantidad de compras sin calificar'
-	FROM TODO_X2_LUCAS.Usuarios U JOIN TODO_X2_LUCAS.Compras C ON (C.Cod_Usuario=U.Cod_Usuario)
-								JOIN TODO_X2_LUCAS.Calificaciones CA ON (C.Cod_Calificacion=CA.Cod_Calificacion)
-	WHERE U.Cod_Usuario = @usuario AND ca.Cantidad_Estrella = 0
-	GROUP BY CA.Cod_Calificacion
+END
+GO
+/* ------------ PROCEDIMIENTO PARA OBTENER UN HISTORIAL DE CALIFICACIONES DE UN CLIENTE ------------ */
+CREATE PROCEDURE TODO_X2_LUCAS.Historial_Cliente_Calficaciones(@dni numeric(18))	
+AS
+BEGIN
+	DECLARE @usuario int;
+	SET @usuario = TODO_X2_LUCAS.ObtenerUsuario(@dni,null);
 
-	SELECT CA.Cantidad_Estrella,CA.Descripcion,COUNT(*)
+	SELECT CA.Cantidad_Estrella,CA.Descripcion,COUNT(*) as 'Cantidad Segun Calificacion'
 	FROM TODO_X2_LUCAS.Usuarios U JOIN TODO_X2_LUCAS.Compras C ON (C.Cod_Usuario=U.Cod_Usuario)
 								JOIN TODO_X2_LUCAS.Calificaciones CA ON (C.Cod_Calificacion=CA.Cod_Calificacion)
 	WHERE U.Cod_Usuario = @usuario 
-	GROUP BY CA.Cantidad_Estrella,CA.Descripcion
+	GROUP BY Nombre_Usuario,CA.Cantidad_Estrella,CA.Descripcion
 	ORDER BY Cantidad_Estrella
-	
+
 END
 GO
 /* ------------ PROCEDIMIENTO PARA CALIFICAR UNA COMPRA ------------ */
@@ -1452,7 +1504,9 @@ AS
 BEGIN
 	DECLARE @usuario int;
 	SELECT @usuario = TODO_X2_LUCAS.ObtenerUsuario(@dni,@cuit)
+
 	-- buscador por contenido  de detalles de factura... a que se refiere con eso?
+	
 	SELECT F.Cod_Factura,F.Fecha_Factura,P.Descripcion_Publicacion,I.Item_Factura_Cantidad,I.Item_Factura_Monto
 	FROM TODO_X2_LUCAS.Facturas F JOIN TODO_X2_LUCAS.Items_Facturas I ON (F.Cod_Factura = I.Cod_Factura)
 									JOIN TODO_X2_LUCAS.Formas_De_Pago FO ON (FO.Cod_Formas_De_Pago=F.Cod_Forma_De_Pago)
@@ -1462,6 +1516,77 @@ BEGIN
 			(Total_Factura BETWEEN (@precioInicio) AND @precioFinal OR (@precioInicio IS NULL AND @precioFinal IS NULL))
 END
 GO
+
+/* ------------ PROCEDIMIENTOS PARA EL LISTADO ESTADISTICO ------------ */
+/* ------------ PROCEDIMIENTO 1 PARA EL LISTADO ESTADISTICO ------------ */
+--Vendedores con mayor cantidad de productos no vendidos, dicho listado debe
+--filtrarse por grado de visibilidad de la publicación y por mes-año. Primero se deberá
+--ordenar por fecha y luego por visibilidad.
+CREATE PROCEDURE TODO_X2_LUCAS.Vendeddores_Mas_Perros(@visibilidad nvarchar(255),@mesInicio datetime,@mesFinal datetime,@año datetime)
+AS
+BEGIN
+	
+	SELECT TOP 5 U.Cod_Usuario,SUM(p.Stock_Publicacion)
+	FROM TODO_X2_LUCAS.Usuarios U  JOIN TODO_X2_LUCAS.Publicaciones P ON (P.Cod_Usuario_Responsable=U.Cod_Usuario)
+									JOIN TODO_X2_LUCAS.Facturas F ON (p.Cod_Usuario_Responsable != F.Vendedor_Correspondiente)
+									JOIN TODO_X2_LUCAS.Items_Facturas I ON (I.Cod_Factura=F.Cod_Factura)
+	WHERE P.Cod_Visibilidad = TODO_X2_LUCAS.Obtener_Visibilidad(@visibilidad) AND
+			(MONTH(F.Fecha_Factura) BETWEEN @mesInicio AND @mesFinal) AND YEAR(F.Fecha_Factura) = @año
+	GROUP BY U.Cod_Usuario
+	ORDER BY 2 DESC
+
+END
+GO
+/* ------------ PROCEDIMIENTO 2 PARA EL LISTADO ESTADISTICO ------------ */
+--Clientes con mayor cantidad de productos comprados, por mes y por año, dentro de
+--un rubro particular
+CREATE PROCEDURE TODO_X2_LUCAS.Clientes_Con_Mayoria_De_Compras(@año datetime,@mesInicio datetime,@mesFinal datetime,@rubro nvarchar(255))
+AS
+BEGIN
+	DECLARE @codRubro int;
+	SET @codRubro = TODO_X2_LUCAS.Obtener_Rubro(@rubro);
+
+	SELECT TOP 5 C.Apellido,C.DNI, COUNT (CO.Cod_Compra) AS 'Cantidad de Productos Comprados'
+	FROM TODO_X2_LUCAS.Usuarios U JOIN TODO_X2_LUCAS.Detalles_Clientes C ON (u.Cod_Usuario = c.Cod_Usuario)
+									JOIN TODO_X2_LUCAS.Compras CO ON (CO.Cod_Usuario = U.Cod_Usuario)
+									JOIN TODO_X2_LUCAS.Publicaciones P ON (CO.Cod_Publicacion = P.Cod_Publicacion)
+	WHERE P.Cod_Rubro = @codRubro AND YEAR(Compra_Fecha) = @año AND (MONTH (Compra_Fecha) BETWEEN @mesInicio AND @mesFinal)
+	GROUP BY C.Apellido,C.DNI
+	ORDER BY 3
+	
+END
+GO
+
+/* ------------ PROCEDIMIENTO 3 PARA EL LISTADO ESTADISTICO ------------ */
+--Vendedores con mayor cantidad de facturas dentro de un mes y año particular
+CREATE PROCEDURE TODO_X2_LUCAS.Vendedores_Con_Mayoria_De_Facturas(@año datetime,@mesInicio datetime,@mesFinal datetime)
+AS
+BEGIN
+	SELECT TOP 5 C.Apellido,C.DNI,COUNT(F.Cod_Factura) AS 'Cantidad de facturas'
+	FROM TODO_X2_LUCAS.Usuarios U JOIN TODO_X2_LUCAS.Detalles_Clientes C ON (U.Cod_Usuario = C.Cod_Usuario)
+									JOIN TODO_X2_LUCAS.Facturas F ON (f.Vendedor_Correspondiente = u.Cod_Usuario)
+	WHERE YEAR(f.Fecha_Factura) = @año AND (MONTH(F.Fecha_Factura) BETWEEN @mesInicio AND @mesFinal)
+	GROUP BY C.Apellido,C.DNI
+	ORDER BY 3 DESC
+
+END
+GO
+/* ------------ PROCEDIMIENTO 4 PARA EL LISTADO ESTADISTICO ------------ */
+--Vendedores con mayor monto facturado dentro de un mes y año particular.
+CREATE PROCEDURE TODO_X2_LUCAS.Vendedores_Con_Mayoria_De_Monto_Facturado(@año datetime,@mesInicio datetime,@mesFinal datetime)
+AS
+BEGIN
+	SELECT TOP 5 C.Apellido,C.DNI,SUM(F.Total_Factura) AS 'Monto total facturado'
+	FROM TODO_X2_LUCAS.Usuarios U JOIN TODO_X2_LUCAS.Detalles_Clientes C ON (U.Cod_Usuario = C.Cod_Usuario)
+									JOIN TODO_X2_LUCAS.Facturas F ON (f.Vendedor_Correspondiente = u.Cod_Usuario)
+	WHERE YEAR(f.Fecha_Factura) = @año AND (MONTH(F.Fecha_Factura) BETWEEN @mesInicio AND @mesFinal)
+	GROUP BY C.Apellido,C.DNI
+	ORDER BY 3 DESC
+	
+END
+GO
+
+
 /************************************************ PROCEDIMIENTOS PARA MIGRACIONES ************************************************/
 -- PROCEDIMIENTO PARA LA MIGRACION DE LOS CLIENTES --
 CREATE PROCEDURE TODO_X2_LUCAS.MigrarClientes
@@ -1482,7 +1607,7 @@ BEGIN
 	OPEN cursorCliente
     FETCH NEXT FROM cursorCliente INTO @apellido,@codPostal,@dni,@fechaNac,@mail,@nombre,@calle,@nroCalle,@piso,@depto
 		
-	SET @contraseña = CONVERT(nvarchar(255),HASHBYTES('SHA2_256','clave temporal'));
+	SET @contraseña = 'e6b87050bfcb8143fcb8db0170a4dc9ed00d904ddd3e2a4ad1b1e8dc0fdc9be7';
 	SET @codRol = TODO_X2_LUCAS.ObtenerRol('Cliente');
 	
 	WHILE @@FETCH_STATUS = 0
@@ -1525,7 +1650,7 @@ BEGIN
 	OPEN cursorEmpresas
     FETCH NEXT FROM cursorEmpresas INTO @codPostal,@cuit,@depto,@calle,@fechaCreacion,@mail,@nroCalle,@piso,@razonSocial
 		
-	SET @contraseña = CONVERT(nvarchar(255),HASHBYTES('SHA2_256','clave temporal'));
+	SET @contraseña = 'e6b87050bfcb8143fcb8db0170a4dc9ed00d904ddd3e2a4ad1b1e8dc0fdc9be7';
 	SET @codRol = TODO_X2_LUCAS.ObtenerRol('Empresa');
 	
 	WHILE @@FETCH_STATUS = 0
@@ -1723,28 +1848,6 @@ SELECT DISTINCT Forma_Pago_Desc
 FROM gd_esquema.Maestra
 WHERE Forma_Pago_Desc IS NOT NULL
 
---MIGRACION TABLA FACTURAS -- (58726)
-INSERT INTO TODO_X2_LUCAS.Facturas(Nro_Factura,Fecha_Factura,Total_Factura,Vendedor_Correspondiente,Cod_Forma_De_Pago)
-SELECT DISTINCT Factura_Nro,Factura_Fecha,Factura_Total,u.Cod_Usuario,f.Cod_Formas_De_Pago
-FROM gd_esquema.Maestra m JOIN TODO_X2_LUCAS.Detalles_Clientes c  ON (m.Publ_Cli_Dni = c.DNI)
-							JOIN TODO_X2_LUCAS.Usuarios u ON (u.Cod_Usuario = c.Cod_Usuario)
-							JOIN TODO_X2_LUCAS.Formas_De_Pago f ON (m.Forma_Pago_Desc = f.Descripcion_Forma)
-WHERE Factura_Nro IS NOT NULL
-	
-INSERT INTO TODO_X2_LUCAS.Facturas(Nro_Factura,Fecha_Factura,Total_Factura,Vendedor_Correspondiente,Cod_Forma_De_Pago,Cod_Publicacion)
-SELECT DISTINCT Factura_Nro,Factura_Fecha,Factura_Total,u.Cod_Usuario,f.Cod_Formas_De_Pago,p.Cod_Publicacion
-FROM gd_esquema.Maestra m JOIN TODO_X2_LUCAS.Detalles_Empresas e  ON (m.Publ_Empresa_Cuit = e.CUIT)
-							JOIN TODO_X2_LUCAS.Usuarios u ON (u.Cod_Usuario = e.Cod_Usuario)
-							JOIN TODO_X2_LUCAS.Formas_De_Pago f ON (m.Forma_Pago_Desc = f.Descripcion_Forma)
-							JOIN TODO_X2_LUCAS.Publicaciones P ON (m.Publicacion_Cod = p.Cod_Publicacion_Anterior)
-WHERE Factura_Nro IS NOT NULL
-
---MIGRACION TABLA ITEMS FACTURA --
-INSERT INTO TODO_X2_LUCAS.Items_Facturas(Cod_Factura,Item_Factura_Cantidad,Item_Factura_Monto)
-SELECT f.Cod_Factura,m.Item_Factura_Cantidad,m.Item_Factura_Monto
-FROM gd_esquema.Maestra m JOIN TODO_X2_LUCAS.Facturas f ON (m.Factura_Nro = f.Nro_Factura)
-WHERE f.Nro_Factura IS NOT NULL
-
 -- MIGRACION TABLA RUBROS --
 INSERT INTO TODO_X2_LUCAS.Rubros (Descripcion_Rubro)
 SELECT DISTINCT  Publicacion_Rubro_Descripcion
@@ -1752,8 +1855,8 @@ FROM gd_esquema.Maestra
 
 -- MIGRACION TABLA VISIBILIDADES DE PUBLICACIONES --
 SET IDENTITY_INSERT TODO_X2_LUCAS.Visibilidades_Publicaciones ON
-	INSERT INTO TODO_X2_LUCAS.Visibilidades_Publicaciones(Cod_Visibilidad,Descripcion_Visibilidad,Porcentaje,Precio_Visibilidad)
-	SELECT DISTINCT Publicacion_Visibilidad_Cod,Publicacion_Visibilidad_Desc,Publicacion_Visibilidad_Porcentaje,Publicacion_Visibilidad_Precio
+	INSERT INTO TODO_X2_LUCAS.Visibilidades_Publicaciones(Cod_Visibilidad,Descripcion_Visibilidad,Porcentaje,Precio_Visibilidad,Comision_Entregas)
+	SELECT DISTINCT Publicacion_Visibilidad_Cod,Publicacion_Visibilidad_Desc,Publicacion_Visibilidad_Porcentaje,Publicacion_Visibilidad_Precio,(Publicacion_Visibilidad_Precio * 0.5)
 	FROM gd_esquema.Maestra
 	WHERE Publicacion_Visibilidad_Cod IS NOT NULL
 SET IDENTITY_INSERT TODO_X2_LUCAS.Visibilidades_Publicaciones OFF
@@ -1818,9 +1921,33 @@ FROM gd_esquema.Maestra M JOIN TODO_X2_LUCAS.Publicaciones P ON (M.Publicacion_C
 WHERE Oferta_Fecha IS NOT NULL AND Oferta_Monto IS NOT NULL
 go
 
+--MIGRACION TABLA FACTURAS -- (58726)
+INSERT INTO TODO_X2_LUCAS.Facturas(Nro_Factura,Fecha_Factura,Total_Factura,Vendedor_Correspondiente,Cod_Forma_De_Pago,Cod_Publicacion)
+SELECT DISTINCT Factura_Nro,Factura_Fecha,Factura_Total,u.Cod_Usuario,f.Cod_Formas_De_Pago,p.Cod_Publicacion
+FROM gd_esquema.Maestra m JOIN TODO_X2_LUCAS.Detalles_Clientes c  ON (m.Publ_Cli_Dni = c.DNI)
+							JOIN TODO_X2_LUCAS.Usuarios u ON (u.Cod_Usuario = c.Cod_Usuario)
+							JOIN TODO_X2_LUCAS.Formas_De_Pago f ON (m.Forma_Pago_Desc = f.Descripcion_Forma)
+							JOIN TODO_X2_LUCAS.Publicaciones P ON (m.Publicacion_Cod = p.Cod_Publicacion_Anterior)
+WHERE Factura_Nro IS NOT NULL
+UNION	
+SELECT DISTINCT Factura_Nro,Factura_Fecha,Factura_Total,u.Cod_Usuario,f.Cod_Formas_De_Pago,p.Cod_Publicacion
+FROM gd_esquema.Maestra m JOIN TODO_X2_LUCAS.Detalles_Empresas e  ON (m.Publ_Empresa_Cuit = e.CUIT)
+							JOIN TODO_X2_LUCAS.Usuarios u ON (u.Cod_Usuario = e.Cod_Usuario)
+							JOIN TODO_X2_LUCAS.Formas_De_Pago f ON (m.Forma_Pago_Desc = f.Descripcion_Forma)
+							JOIN TODO_X2_LUCAS.Publicaciones P ON (m.Publicacion_Cod = p.Cod_Publicacion_Anterior)
+WHERE Factura_Nro IS NOT NULL
+
+
+--MIGRACION TABLA ITEMS FACTURA --
+INSERT INTO TODO_X2_LUCAS.Items_Facturas(Cod_Factura,Item_Factura_Cantidad,Item_Factura_Monto)
+SELECT f.Cod_Factura,m.Item_Factura_Cantidad,m.Item_Factura_Monto
+FROM gd_esquema.Maestra m JOIN TODO_X2_LUCAS.Facturas f ON (m.Factura_Nro = f.Nro_Factura)
+WHERE f.Nro_Factura IS NOT NULL
+
 -- MIGRACION TABLA USUARIOS--
 exec TODO_X2_LUCAS.Migrar_Reputacion_Usuarios
 GO
+
 /************************************************** TRIGGERS ***************************************************/
 /* ------------ TRIGGER PARA LA REPUTACION DEL VENDEDOR ------------ */
 CREATE TRIGGER TODO_X2_LUCAS.Reputacion

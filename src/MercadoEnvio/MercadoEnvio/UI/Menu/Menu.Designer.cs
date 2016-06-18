@@ -40,6 +40,7 @@
             this.button5 = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
             this.button6 = new System.Windows.Forms.Button();
+            this.button7 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -90,7 +91,7 @@
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(35, 13);
             this.label5.TabIndex = 4;
-            this.label5.Text = "label5";
+            this.label5.Text = "Listado Estadistico";
             // 
             // button1
             // 
@@ -141,7 +142,7 @@
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(79, 21);
             this.button5.TabIndex = 9;
-            this.button5.Text = "button5";
+            this.button5.Text = "Listado Estadistico";
             this.button5.UseVisualStyleBackColor = true;
             // 
             // label6
@@ -164,6 +165,16 @@
             this.button6.Text = "Buscar Rol";
             this.button6.UseVisualStyleBackColor = true;
             this.button6.Click += new System.EventHandler(this.button6_Click);
+            // 
+            // button7
+            // 
+            this.button7.Location = new System.Drawing.Point(126, 167);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(141, 29);
+            this.button7.TabIndex = 12;
+            this.button7.Text = "Buscar Usuarios";
+            this.button7.UseVisualStyleBackColor = true;
+            this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
             // FunctionsMenu
             // 
@@ -204,5 +215,6 @@
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.Button button7;
     }
 }

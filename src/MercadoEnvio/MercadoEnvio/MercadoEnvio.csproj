@@ -76,9 +76,13 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>GD1C2016DataSet.xsd</DependentUpon>
     </Compile>
+    <Compile Include="Repositories\FacturaRepository.cs" />
+    <Compile Include="Repositories\PublicacionRepository.cs" />
+    <Compile Include="Repositories\VisibilidadRepository.cs" />
     <Compile Include="Repositories\AuditoriaLoginRepository.cs" />
     <Compile Include="Repositories\ClienteRepository.cs" />
     <Compile Include="Repositories\DomicilioRepository.cs" />
+    <Compile Include="Repositories\EmpresaRepository.cs" />
     <Compile Include="Repositories\FuncionalidadesRepository.cs" />
     <Compile Include="Repositories\RolRepository.cs" />
     <Compile Include="Repositories\UsuariosRepository.cs" />

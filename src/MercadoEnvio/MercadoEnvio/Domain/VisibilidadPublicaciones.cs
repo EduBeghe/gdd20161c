@@ -10,12 +10,12 @@ namespace MercadoEnvio.Domain
         
     public class VisibilidadPublicaciones
     {
-        int Cod_Visibilidad { get; set; }
-        string Descripcion_Visibilidad { get; set; }
-        int Precio_Visibilidad { get; set; }
-        int Porcentaje { get; set; }
-        int Comision_Entregas { get; set; }
-        bool Estado_Visibilidad { get; set; }
+        public int Cod_Visibilidad { get; set; }
+        public string Descripcion_Visibilidad { get; set; }
+        public int Precio_Visibilidad { get; set; }
+        public int Porcentaje { get; set; }
+        public int Comision_Entregas { get; set; }
+        public bool Estado_Visibilidad { get; set; }
 
         public VisibilidadPublicaciones(
             int Cod_Visibilidad,

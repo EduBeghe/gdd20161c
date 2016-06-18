@@ -9,21 +9,21 @@ namespace MercadoEnvio.Domain
         
     public class Publicaciones
     {
-        int Cod_Publicacion { get; set; }
-        int Cod_Publicacion_Anterior { get; set; }
-        int Descripcion_Publicacion { get; set; }
-        int Stock_Publicacion { get; set; }
-        DateTime Fecha_Publicacion { get; set; }
-        DateTime Fecha_Vencimiento_Publicacion { get; set; }
-        int Precio_Publicacion { get; set; }
-        int Cod_Tipos_Publicacion { get; set; }
-        Rubros rubro { get; set; }
-        VisibilidadPublicaciones visibilidadPublicaciones { get; set; }
-        int Costo_Publicacion { get; set; }
-        Usuario usuarioResponsable { get; set; }
-        EstadosPublicaciones Cod_Estado_Publicacion { get; set; }
-        bool Permiso_Preguntas { get; set; }
-        bool Entregas { get; set; }
+        public int Cod_Publicacion { get; set; }
+        public int Cod_Publicacion_Anterior { get; set; }
+        public int Descripcion_Publicacion { get; set; }
+        public int Stock_Publicacion { get; set; }
+        public DateTime Fecha_Publicacion { get; set; }
+        public DateTime Fecha_Vencimiento_Publicacion { get; set; }
+        public int Precio_Publicacion { get; set; }
+        public Tipos_Publicaciones tipoPublicacion { get; set; }
+        public Rubros rubro { get; set; }
+        public VisibilidadPublicaciones visibilidadPublicaciones { get; set; }
+        public int Costo_Publicacion { get; set; }
+        public Usuario usuarioResponsable { get; set; }
+        public EstadosPublicaciones estado { get; set; }
+        public bool Permiso_Preguntas { get; set; }
+        public bool Entregas { get; set; }
 
         public Publicaciones( 
             int Cod_Publicacion,
@@ -33,12 +33,12 @@ namespace MercadoEnvio.Domain
             DateTime Fecha_Publicacion,
             DateTime Fecha_Vencimiento_Publicacion,
             int Precio_Publicacion,
-            int Cod_Tipos_Publicacion,
+            Tipos_Publicaciones tipoPublicacion,
             Rubros rubro,
             VisibilidadPublicaciones visibilidadPublicaciones,
             int Costo_Publicacion,
             Usuario usuarioResponsable,
-            EstadosPublicaciones Cod_Estado_Publicacion,
+            EstadosPublicaciones estado,
             bool Permiso_Preguntas, 
             bool Entregas )
         {
@@ -49,12 +49,12 @@ namespace MercadoEnvio.Domain
             this.Fecha_Publicacion = Fecha_Publicacion;
             this.Fecha_Vencimiento_Publicacion = Fecha_Vencimiento_Publicacion;
             this.Precio_Publicacion = Precio_Publicacion;
-            this.Cod_Tipos_Publicacion = Cod_Tipos_Publicacion;
+            this.tipoPublicacion = tipoPublicacion;
             this.rubro = rubro;
             this.visibilidadPublicaciones = visibilidadPublicaciones;
             this.Costo_Publicacion = Costo_Publicacion;
             this.usuarioResponsable = usuarioResponsable;
-            this.Cod_Estado_Publicacion = Cod_Estado_Publicacion;
+            this.estado = estado;
             this.Permiso_Preguntas = Permiso_Preguntas;
             this.Entregas = Entregas;
         }
