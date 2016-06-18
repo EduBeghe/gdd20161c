@@ -10,8 +10,8 @@ namespace MercadoEnvio.Domain
         
     public class Funcionalidades
     {
-        int Cod_Funcionalidad { get; set; }
-        string Descripcion_Funcionalidad { get; set; }
+        public int Cod_Funcionalidad { get; set; }
+        public string Descripcion_Funcionalidad { get; set; }
 
         public Funcionalidades( int Cod_Funcionalidad, string Descripcion_Funcionalidad )
         {

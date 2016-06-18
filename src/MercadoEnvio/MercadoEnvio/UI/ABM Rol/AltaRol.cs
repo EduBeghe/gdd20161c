@@ -29,18 +29,21 @@ namespace MercadoEnvio.ABM_Rol
         {
             if (Validacion.validarInputs(this.Controls))
             {
-                var retorno = new RolesRepository().agregarRol(NombreRolTextBox.Text);
-                foreach (Funcionalidades itemChecked in ListaRolesCheckedListBox.CheckedItems)
+                var retornoAlta = new RolesRepository().agregarRol(NombreRolTextBox.Text);
+                if (retornoAlta == 0)
                 {
-                    new RolesRepository().relacionRolFuncionabilidad(NombreRolTextBox.Text, itemChecked );
+                    foreach (Funcionalidades itemChecked in ListaFuncionalidadesCheckedListBox.CheckedItems)
+                    {
+                        var retornoAgregarFuncionabilidad = new RolesRepository().agregarRelacionRolFuncionabilidad(NombreRolTextBox.Text, itemChecked);
+                        if (retornoAgregarFuncionabilidad != 0)
+                        {
+                            MessageBox.Show("El rol ya posee la funcionalidad " + itemChecked.Descripcion_Funcionalidad );
+                        }
+                        MessageBox.Show("Rol dato de alta exitosamente");
+                        this.Close();
+                    }
                 }
-                if (retorno == 0)
-                {
-                    MessageBox.Show("Rol dato de alta exitosamente");
-                    this.Close();
-                }
-                else
-                {
+                else {
                     MessageBox.Show("El rol que quiere dar de alta ya existe");
                 }
             }
@@ -49,6 +52,11 @@ namespace MercadoEnvio.ABM_Rol
         private void ListaRolesCheckedListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void AltaRol_Load(object sender, EventArgs e)
+        {
+            this.ListaFuncionalidadesCheckedListBox.DataSource = new BindingSource(new BindingList<Funcionalidades>(new FuncionalidadRepository().getFuncionalidades()), null);
         }
     }
 }
