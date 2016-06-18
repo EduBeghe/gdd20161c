@@ -21,6 +21,11 @@ namespace MercadoEnvio.Domain
             this.Nombre = Nombre;
             this.Estado_Rol = Estado_Rol;
             this.funcionalidad = funcionalidad;
-        } 
+        }
+
+        public static Rol Copy(Rol r)
+        {
+            return new Rol(r.Cod_Rol, r.Nombre, r.Estado_Rol, r.funcionalidad);
+        }
     }
 }

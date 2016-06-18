@@ -23,9 +23,9 @@ namespace MercadoEnvio.Repositories {
         return retorno;
     }
 
-    public void quitarFuncionabilidad( int codRol, string descripcionFuncionabilidad )
+    public void quitarFuncionabilidad( int codRol, Funcionalidades funcionabilidad )
     {
-        DBAdapter.executeProcedure("Quitar_Funcionalidad_A_Rol", descripcionFuncionabilidad, codRol);
+        DBAdapter.executeProcedure("Quitar_Funcionalidad_A_Rol", funcionabilidad.Descripcion_Funcionalidad, codRol);
     }
 
     public int modificarNombre( Rol rol, string nombre )
