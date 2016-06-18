@@ -1,2 +1,22 @@
 C:\Users\mujic\git\gdd20161c\src\MercadoEnvio\MercadoEnvio\bin\Debug\MercadoEnvio.exe.config
 E:\Edu\Facu\UTN\Gestion de Datos\TP GDD\1 C 2016\gdd20161c\src\MercadoEnvio\MercadoEnvio\bin\Debug\MercadoEnvio.exe.config
+E:\Edu\Facu\UTN\Gestion de Datos\TP GDD\1 C 2016\gdd20161c\src\MercadoEnvio\MercadoEnvio\obj\Debug\MercadoEnvio.csprojResolveAssemblyReference.cache
+E:\Edu\Facu\UTN\Gestion de Datos\TP GDD\1 C 2016\gdd20161c\src\MercadoEnvio\MercadoEnvio\obj\Debug\MercadoEnvio.BienvenidaWindow.resources
+E:\Edu\Facu\UTN\Gestion de Datos\TP GDD\1 C 2016\gdd20161c\src\MercadoEnvio\MercadoEnvio\obj\Debug\MercadoEnvio.Properties.Resources.resources
+E:\Edu\Facu\UTN\Gestion de Datos\TP GDD\1 C 2016\gdd20161c\src\MercadoEnvio\MercadoEnvio\obj\Debug\MercadoEnvio.ABM_Rol.AltaRol.resources
+E:\Edu\Facu\UTN\Gestion de Datos\TP GDD\1 C 2016\gdd20161c\src\MercadoEnvio\MercadoEnvio\obj\Debug\MercadoEnvio.UI.ABM_Rol.Listado.resources
+E:\Edu\Facu\UTN\Gestion de Datos\TP GDD\1 C 2016\gdd20161c\src\MercadoEnvio\MercadoEnvio\obj\Debug\MercadoEnvio.UI.ABM_Usuario.AltaCliente.resources
+E:\Edu\Facu\UTN\Gestion de Datos\TP GDD\1 C 2016\gdd20161c\src\MercadoEnvio\MercadoEnvio\obj\Debug\MercadoEnvio.UI.ABM_Usuario.AltaEmpresa.resources
+E:\Edu\Facu\UTN\Gestion de Datos\TP GDD\1 C 2016\gdd20161c\src\MercadoEnvio\MercadoEnvio\obj\Debug\MercadoEnvio.ABM_Usuario.AltaUsuario.resources
+E:\Edu\Facu\UTN\Gestion de Datos\TP GDD\1 C 2016\gdd20161c\src\MercadoEnvio\MercadoEnvio\obj\Debug\MercadoEnvio.UI.ABM_Usuario.BuscadorUsuarios.resources
+E:\Edu\Facu\UTN\Gestion de Datos\TP GDD\1 C 2016\gdd20161c\src\MercadoEnvio\MercadoEnvio\obj\Debug\MercadoEnvio.UI.ABM_Visibilidad.AltaVisibilidad.resources
+E:\Edu\Facu\UTN\Gestion de Datos\TP GDD\1 C 2016\gdd20161c\src\MercadoEnvio\MercadoEnvio\obj\Debug\MercadoEnvio.ABM_Visibilidad.Form1.resources
+E:\Edu\Facu\UTN\Gestion de Datos\TP GDD\1 C 2016\gdd20161c\src\MercadoEnvio\MercadoEnvio\obj\Debug\MercadoEnvio.Calificar.Form1.resources
+E:\Edu\Facu\UTN\Gestion de Datos\TP GDD\1 C 2016\gdd20161c\src\MercadoEnvio\MercadoEnvio\obj\Debug\MercadoEnvio.Facturas.Form1.resources
+E:\Edu\Facu\UTN\Gestion de Datos\TP GDD\1 C 2016\gdd20161c\src\MercadoEnvio\MercadoEnvio\obj\Debug\MercadoEnvio.Generar_Publicación.Form1.resources
+E:\Edu\Facu\UTN\Gestion de Datos\TP GDD\1 C 2016\gdd20161c\src\MercadoEnvio\MercadoEnvio\obj\Debug\MercadoEnvio.Historial_Cliente.Form1.resources
+E:\Edu\Facu\UTN\Gestion de Datos\TP GDD\1 C 2016\gdd20161c\src\MercadoEnvio\MercadoEnvio\obj\Debug\MercadoEnvio.Listado_Estadistico.Form1.resources
+E:\Edu\Facu\UTN\Gestion de Datos\TP GDD\1 C 2016\gdd20161c\src\MercadoEnvio\MercadoEnvio\obj\Debug\MercadoEnvio.UI.Login.LoginScreen.resources
+E:\Edu\Facu\UTN\Gestion de Datos\TP GDD\1 C 2016\gdd20161c\src\MercadoEnvio\MercadoEnvio\obj\Debug\MercadoEnvio.UI.Login.SeleccionRol.resources
+E:\Edu\Facu\UTN\Gestion de Datos\TP GDD\1 C 2016\gdd20161c\src\MercadoEnvio\MercadoEnvio\obj\Debug\MercadoEnvio.UI.Menu.FunctionsMenu.resources
+E:\Edu\Facu\UTN\Gestion de Datos\TP GDD\1 C 2016\gdd20161c\src\MercadoEnvio\MercadoEnvio\obj\Debug\MercadoEnvio.csproj.GenerateResource.Cache

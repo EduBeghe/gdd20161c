@@ -38,57 +38,64 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(159, 19);
+            this.label1.Location = new System.Drawing.Point(106, 12);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(104, 20);
+            this.label1.Size = new System.Drawing.Size(70, 13);
             this.label1.TabIndex = 0;
             this.label1.Text = "Alta de Roles";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(33, 82);
+            this.label2.Location = new System.Drawing.Point(22, 53);
+            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(118, 20);
+            this.label2.Size = new System.Drawing.Size(80, 13);
             this.label2.TabIndex = 1;
             this.label2.Text = "Nombre del Rol";
             // 
             // NombreRolTextBox
             // 
-            this.NombreRolTextBox.Location = new System.Drawing.Point(197, 76);
+            this.NombreRolTextBox.Location = new System.Drawing.Point(131, 49);
+            this.NombreRolTextBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.NombreRolTextBox.Name = "NombreRolTextBox";
-            this.NombreRolTextBox.Size = new System.Drawing.Size(234, 26);
+            this.NombreRolTextBox.Size = new System.Drawing.Size(157, 20);
             this.NombreRolTextBox.TabIndex = 2;
             // 
             // ListaRolesCheckedListBox
             // 
             this.ListaRolesCheckedListBox.FormattingEnabled = true;
-            this.ListaRolesCheckedListBox.Location = new System.Drawing.Point(31, 119);
+            this.ListaRolesCheckedListBox.Location = new System.Drawing.Point(21, 77);
+            this.ListaRolesCheckedListBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.ListaRolesCheckedListBox.Name = "ListaRolesCheckedListBox";
-            this.ListaRolesCheckedListBox.Size = new System.Drawing.Size(400, 403);
+            this.ListaRolesCheckedListBox.Size = new System.Drawing.Size(268, 259);
             this.ListaRolesCheckedListBox.TabIndex = 3;
+            this.ListaRolesCheckedListBox.SelectedIndexChanged += new System.EventHandler(this.ListaRolesCheckedListBox_SelectedIndexChanged);
             // 
             // AltaButton
             // 
-            this.AltaButton.Location = new System.Drawing.Point(31, 542);
+            this.AltaButton.Location = new System.Drawing.Point(21, 352);
+            this.AltaButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.AltaButton.Name = "AltaButton";
-            this.AltaButton.Size = new System.Drawing.Size(400, 39);
+            this.AltaButton.Size = new System.Drawing.Size(267, 25);
             this.AltaButton.TabIndex = 4;
             this.AltaButton.Text = "Dar de Alta";
             this.AltaButton.UseVisualStyleBackColor = true;
             this.AltaButton.Click += new System.EventHandler(this.AltaButton_Click);
             // 
-            // Form1
+            // AltaRol
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(469, 594);
+            this.ClientSize = new System.Drawing.Size(313, 386);
             this.Controls.Add(this.AltaButton);
             this.Controls.Add(this.ListaRolesCheckedListBox);
             this.Controls.Add(this.NombreRolTextBox);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Name = "Form1";
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Name = "AltaRol";
             this.Text = "Form1";
             this.ResumeLayout(false);
             this.PerformLayout();

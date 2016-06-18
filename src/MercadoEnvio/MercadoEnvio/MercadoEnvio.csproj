@@ -71,6 +71,11 @@
     <Compile Include="Domain\Tipos_Publicaciones.cs" />
     <Compile Include="Domain\Usuario.cs" />
     <Compile Include="Domain\VisibilidadPublicaciones.cs" />
+    <Compile Include="GD1C2016DataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GD1C2016DataSet.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Repositories\AuditoriaLoginRepository.cs" />
     <Compile Include="Repositories\ClienteRepository.cs" />
     <Compile Include="Repositories\DomicilioRepository.cs" />
@@ -119,11 +124,17 @@
     <Compile Include="UI\ABM Usuario\BuscadorUsuarios.Designer.cs">
       <DependentUpon>BuscadorUsuarios.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\ABM Visibilidad\Form1.cs">
+    <Compile Include="UI\ABM Visibilidad\AltaVisibilidad.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\ABM Visibilidad\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="UI\ABM Visibilidad\AltaVisibilidad.Designer.cs">
+      <DependentUpon>AltaVisibilidad.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\ABM Visibilidad\Listado.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\ABM Visibilidad\Listado.Designer.cs">
+      <DependentUpon>Listado.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\Calificar\CalificarVendedor.cs">
       <SubType>Form</SubType>
@@ -143,17 +154,17 @@
     <Compile Include="UI\Facturas\ConsultaFacturas.Designer.cs">
       <DependentUpon>ConsultaFacturas.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\Generar Publicación\Form1.cs">
+    <Compile Include="UI\Generar Publicación\Generar.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\Generar Publicación\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="UI\Generar Publicación\Generar.Designer.cs">
+      <DependentUpon>Generar.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\Historial Cliente\Form1.cs">
+    <Compile Include="UI\Historial Cliente\Historial.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\Historial Cliente\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="UI\Historial Cliente\Historial.Designer.cs">
+      <DependentUpon>Historial.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\Listado Estadistico\ListadoEstadistico.cs">
       <SubType>Form</SubType>
@@ -215,11 +226,26 @@
     <EmbeddedResource Include="UI\ABM Usuario\BuscadorUsuarios.resx">
       <DependentUpon>BuscadorUsuarios.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UI\ABM Visibilidad\AltaVisibilidad.resx">
+      <DependentUpon>AltaVisibilidad.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\ABM Visibilidad\Listado.resx">
+      <DependentUpon>Listado.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\Calificar\CalificarVendedor.resx">
       <DependentUpon>CalificarVendedor.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UI\ComprarOfertar\Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\Facturas\ConsultaFacturas.resx">
       <DependentUpon>ConsultaFacturas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Generar Publicación\Generar.resx">
+      <DependentUpon>Generar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Historial Cliente\Historial.resx">
+      <DependentUpon>Historial.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Listado Estadistico\ListadoEstadistico.resx">
       <DependentUpon>ListadoEstadistico.cs</DependentUpon>
@@ -233,6 +259,17 @@
     <EmbeddedResource Include="UI\Menu\Menu.resx">
       <DependentUpon>Menu.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="GD1C2016DataSet.xsc">
+      <DependentUpon>GD1C2016DataSet.xsd</DependentUpon>
+    </None>
+    <None Include="GD1C2016DataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>GD1C2016DataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="GD1C2016DataSet.xss">
+      <DependentUpon>GD1C2016DataSet.xsd</DependentUpon>
+    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

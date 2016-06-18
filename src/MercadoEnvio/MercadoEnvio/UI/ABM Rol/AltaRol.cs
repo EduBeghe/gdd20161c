@@ -45,5 +45,10 @@ namespace MercadoEnvio.ABM_Rol
                 }
             }
         }
+
+        private void ListaRolesCheckedListBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
