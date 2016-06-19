@@ -72,10 +72,6 @@ IF OBJECT_ID('TODO_X2_LUCAS.Agregar_Rol') IS NOT NULL
 DROP PROCEDURE TODO_X2_LUCAS.Agregar_Rol;
 IF OBJECT_ID('TODO_X2_LUCAS.Agregar_Funcionalidad') IS NOT NULL
 DROP PROCEDURE TODO_X2_LUCAS.Agregar_Funcionalidad;
-IF OBJECT_ID('TODO_X2_LUCAS.Get_Calificacion_Por_Publicacion') IS NOT NULL
-DROP PROCEDURE TODO_X2_LUCAS.Get_Calificacion_Por_Publicacion;
-IF OBJECT_ID('TODO_X2_LUCAS.Get_Calificaciones_Por_Publicaciones') IS NOT NULL
-DROP PROCEDURE TODO_X2_LUCAS.Get_Calificaciones_Por_Publicaciones;
 IF OBJECT_ID('TODO_X2_LUCAS.Get_Publicacion') IS NOT NULL
 DROP PROCEDURE TODO_X2_LUCAS.Get_Publicacion;
 IF OBJECT_ID('TODO_X2_LUCAS.Get_Publicaciones') IS NOT NULL
@@ -958,22 +954,6 @@ BEGIN
 END
 GO
 
-/* ------------ PROCEDIMIENTO PARA MODIFICAR EL ESTADO DE UN ROL ------------ */
-CREATE PROCEDURE TODO_X2_LUCAS.Modificar_Estado_Rol(@rol nvarchar(255),@estado bit)
-AS
-BEGIN
-	IF EXISTS (SELECT Cod_Rol FROM TODO_X2_LUCAS.Roles WHERE Nombre = @rol)
-	BEGIN
-		UPDATE TODO_X2_LUCAS.Roles
-		SET Estado_Rol = @estado
-		WHERE Nombre = @rol
-	END
-	ELSE
-	BEGIN
-		print 'El rol a modificar no existe'
-	END
-END
-GO
 
 /* ------------ PROCEDIMIENTO PARA DAR DE BAJA UN ROL ------------ */
 CREATE PROCEDURE TODO_X2_LUCAS.Baja_Rol(@rol nvarchar(255))
@@ -1155,13 +1135,13 @@ GO
 CREATE PROCEDURE TODO_X2_LUCAS.Alta_Cliente(@nombre nvarchar(255),@apellido nvarchar(255),@dni numeric(18),
 											@mail nvarchar(255),@telefono numeric(10),@calle nvarchar(255),
 											@nro_Calle numeric(18),@piso numeric(18),@depto nvarchar(50),
-											@localidad nvarchar(50),@codPostal nvarchar(50),@fechaNacimiento datetime)
+											@localidad nvarchar(50),@codPostal nvarchar(50),@fechaNacimiento datetime,@username nvarchar(255))
 AS
 BEGIN
 	IF NOT EXISTS (SELECT * FROM TODO_X2_LUCAS.Detalles_Clientes WHERE DNI = @dni)
 	BEGIN
 		DECLARE @codDomicilio int,@codUsuario int;
-		SET @codUsuario = TODO_X2_LUCAS.ObtenerUsuario(@dni,NULL);
+		SET @codUsuario = (SELECT Cod_Usuario FROM TODO_X2_LUCAS.Usuarios WHERE Nombre_Usuario = @username);
 
 		EXEC @codDomicilio = TODO_X2_LUCAS.Alta_Domicilio @calle,@nro_Calle,@piso,@depto,@localidad;
 
@@ -1209,13 +1189,13 @@ GO
 CREATE PROCEDURE TODO_X2_LUCAS.Alta_Empresa(@razon_Social nvarchar(255),@mail nvarchar(50),@telefono numeric(10),
 											@calle nvarchar(255),@nro_Calle numeric(18),@piso numeric(18),@depto nvarchar(50),
 											@localidad nvarchar(50),@cod_Postal nvarchar(50),@ciudad nvarchar(255),
-											@CUIT nvarchar(50),@rubro nvarchar(255),@estado_Empresa bit)
+											@CUIT nvarchar(50),@rubro nvarchar(255),@estado_Empresa bit,@username nvarchar(255))
 AS
 BEGIN
 	IF NOT EXISTS (SELECT * FROM TODO_X2_LUCAS.Detalles_Empresas WHERE CUIT = @CUIT OR Razon_Social = @razon_Social)
 	BEGIN
 		DECLARE @codDomicilio int,@codUsuario int,@codRubro int;
-		SET @codUsuario = TODO_X2_LUCAS.ObtenerUsuario(NULL,@CUIT);
+		SET @codUsuario = (SELECT Cod_Usuario FROM TODO_X2_LUCAS.Usuarios WHERE Nombre_Usuario = @username);
 		SET @codRubro = TODO_X2_LUCAS.Obtener_Rubro(@rubro);
 
 		EXEC @codDomicilio = TODO_X2_LUCAS.Alta_Domicilio @calle,@nro_Calle,@piso,@depto,@localidad;
