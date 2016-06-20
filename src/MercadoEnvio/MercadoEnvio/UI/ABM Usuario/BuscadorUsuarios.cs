@@ -37,5 +37,10 @@ namespace MercadoEnvio.UI.ABM_Usuario
         {
 
         }
+
+        private void textBox4_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

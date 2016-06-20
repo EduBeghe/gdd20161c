@@ -33,10 +33,10 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.nombreTextBox = new System.Windows.Forms.TextBox();
+            this.apellidoTextBox = new System.Windows.Forms.TextBox();
+            this.dniTextBox = new System.Windows.Forms.TextBox();
+            this.mailTextBox = new System.Windows.Forms.TextBox();
             this.checkedListBox1 = new System.Windows.Forms.CheckedListBox();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
@@ -89,33 +89,34 @@
             this.label5.TabIndex = 4;
             this.label5.Text = "Email";
             // 
-            // textBox1
+            // nombreTextBox
             // 
-            this.textBox1.Location = new System.Drawing.Point(107, 54);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(243, 20);
-            this.textBox1.TabIndex = 5;
+            this.nombreTextBox.Location = new System.Drawing.Point(107, 54);
+            this.nombreTextBox.Name = "nombreTextBox";
+            this.nombreTextBox.Size = new System.Drawing.Size(243, 20);
+            this.nombreTextBox.TabIndex = 5;
             // 
-            // textBox2
+            // apellidoTextBox
             // 
-            this.textBox2.Location = new System.Drawing.Point(107, 85);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(243, 20);
-            this.textBox2.TabIndex = 6;
+            this.apellidoTextBox.Location = new System.Drawing.Point(107, 85);
+            this.apellidoTextBox.Name = "apellidoTextBox";
+            this.apellidoTextBox.Size = new System.Drawing.Size(243, 20);
+            this.apellidoTextBox.TabIndex = 6;
             // 
-            // textBox3
+            // dniTextBox
             // 
-            this.textBox3.Location = new System.Drawing.Point(107, 116);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(243, 20);
-            this.textBox3.TabIndex = 7;
+            this.dniTextBox.Location = new System.Drawing.Point(107, 116);
+            this.dniTextBox.Name = "dniTextBox";
+            this.dniTextBox.Size = new System.Drawing.Size(243, 20);
+            this.dniTextBox.TabIndex = 7;
             // 
-            // textBox4
+            // mailTextBox
             // 
-            this.textBox4.Location = new System.Drawing.Point(107, 144);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(243, 20);
-            this.textBox4.TabIndex = 8;
+            this.mailTextBox.Location = new System.Drawing.Point(107, 144);
+            this.mailTextBox.Name = "mailTextBox";
+            this.mailTextBox.Size = new System.Drawing.Size(243, 20);
+            this.mailTextBox.TabIndex = 8;
+            this.mailTextBox.TextChanged += new System.EventHandler(this.textBox4_TextChanged);
             // 
             // checkedListBox1
             // 
@@ -162,10 +163,10 @@
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.checkedListBox1);
-            this.Controls.Add(this.textBox4);
-            this.Controls.Add(this.textBox3);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.mailTextBox);
+            this.Controls.Add(this.dniTextBox);
+            this.Controls.Add(this.apellidoTextBox);
+            this.Controls.Add(this.nombreTextBox);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
@@ -186,10 +187,10 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.TextBox textBox4;
+        private System.Windows.Forms.TextBox nombreTextBox;
+        private System.Windows.Forms.TextBox apellidoTextBox;
+        private System.Windows.Forms.TextBox dniTextBox;
+        private System.Windows.Forms.TextBox mailTextBox;
         private System.Windows.Forms.CheckedListBox checkedListBox1;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
