@@ -42,5 +42,14 @@ namespace MercadoEnvio.ComprarOfertar
             }
             else MessageBox.Show("Debe seleccionar una publicacion para poder comprar");
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            if (publicacionesGrid.SelectedRows.Count != 0)
+            {
+                new OfertarPublicacion().ShowDialog((Publicaciones)publicacionesGrid.SelectedRows[0].DataBoundItem);
+            }
+            else MessageBox.Show("Debe seleccionar una publicacion para poder ofertar");
+        }
     }
 }
