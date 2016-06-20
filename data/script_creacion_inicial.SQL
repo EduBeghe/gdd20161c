@@ -156,8 +156,8 @@ IF OBJECT_ID('TODO_X2_LUCAS.Modificar_Cliente') IS NOT NULL
 DROP PROCEDURE TODO_X2_LUCAS.Modificar_Cliente;
 IF OBJECT_ID('TODO_X2_LUCAS.Modificar_Empresa') IS NOT NULL
 DROP PROCEDURE TODO_X2_LUCAS.Modificar_Empresa;
-IF OBJECT_ID('TODO_X2_LUCAS.Alta_Publicidad') IS NOT NULL
-DROP PROCEDURE TODO_X2_LUCAS.Alta_Publicidad;
+IF OBJECT_ID('TODO_X2_LUCAS.Alta_Publicacion') IS NOT NULL
+DROP PROCEDURE TODO_X2_LUCAS.Alta_Publicacion;
 IF OBJECT_ID('TODO_X2_LUCAS.Baja_Visibilidad') IS NOT NULL
 DROP PROCEDURE TODO_X2_LUCAS.Baja_Visibilidad;
 IF OBJECT_ID('TODO_X2_LUCAS.Modificacion_Visibilidad') IS NOT NULL
@@ -1312,7 +1312,7 @@ END
 GO
 
 /* ------------ PROCEDIMIENTO PARA EL ALTA DE UNA PUBLICACION ------------ */
-CREATE PROCEDURE TODO_X2_LUCAS.Alta_Publicidad(@descripcion nvarchar(255),@stock numeric(18),@fecha datetime,
+CREATE PROCEDURE TODO_X2_LUCAS.Alta_Publicacion(@descripcion nvarchar(255),@stock numeric(18),@fecha datetime,
 												@fechaVenc datetime,@precio numeric(18,2),@tipoPublic nvarchar(255),
 												@rubro nvarchar(255),@visibilidad nvarchar(255),@costo numeric(18,2),
 												@dni numeric(18),@CUIT nvarchar(50),@estado nvarchar(255),
