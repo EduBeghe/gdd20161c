@@ -35,17 +35,17 @@ namespace MercadoEnvio.ABM_Usuario
         {
             if (Validacion.validarInputs(this.Controls))
             {
-                var rolId = new RolesRepository.ObtenerRolIDPorDescripcion(rolComboBox.Text);
-                var retornoAlta = new UsuariosRepository.altaUsuario(usernameTextBox.Text, passwordTextBox.Text, rolId);
+                var rolId = new RolesRepository().ObtenerRolIDPorDescripcion(rolComboBox.Text);
+                var retornoAlta = new UsuariosRepository().altaUsuario(usernameTextBox.Text, passwordTextBox.Text, rolId);
                 if (retornoAlta == 0)
                 {
                     MessageBox.Show("El Usuario ha sido creado exitosamente. Por favor complete los siguientes datos");
                     if(rolComboBox.Text.Equals("")){
-                        new AltaCliente.ShowDialog(usernameTextBox.Text);
+                        new AltaCliente().ShowDialog(usernameTextBox.Text);
                     }
                     else
                     {
-                        new AltaEmpresa.ShowDialog(usernameTextBox.Text);
+                        new AltaEmpresa().ShowDialog(usernameTextBox.Text);
                     }
                 }
                 else

@@ -43,7 +43,7 @@ namespace MercadoEnvio.UI.ABM_Usuario
             if (Validacion.validarInputs(this.Controls))
             {
                 var domicilio = new Domicilio(calleTextBox.Text, Convert.ToInt32(nroPisoTextBox.Text), dptoTextBox.Text, Convert.ToInt32(numeroCalleTextBox.Text), localidadTextBox.Text);
-                var retornoAlta = new CLientesRepository.altaCliente(nombreTextBox.Text, apellidoTextBox.Text, Convert.ToInt32(dniTextBox.Text), mailTextBox.Text, Convert.ToInt32(telefonoTextBox.Text), domicilio, Convert.ToInt32(cpTextBox.Text), Convert.ToDateTime(fechaNacTextBox.Text), this.username);
+                var retornoAlta = new ClientesRepository().altaCliente(nombreTextBox.Text, apellidoTextBox.Text, Convert.ToInt32(dniTextBox.Text), mailTextBox.Text, Convert.ToInt32(telefonoTextBox.Text), domicilio, cpTextBox.Text, Convert.ToDateTime(fechaNacTextBox.Text), this.username);
                 if (retornoAlta == 0)
                 {
                     MessageBox.Show("El cliente ha sido creado exitosamente.");

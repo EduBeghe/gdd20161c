@@ -34,7 +34,7 @@ namespace MercadoEnvio.UI.ABM_Usuario
             {
                 var domicilio = new Domicilio(calleTextBox.Text,Convert.ToInt32(numeroPisoTextBox.Text), dptoTextBox.Text, Convert.ToInt32(numeroCalleTextBox.Text), localidadTextBox.Text);
                 var detalle = new DetalleEmpresa(razonTextBox.Text,mailTextBox.Text,Convert.ToInt32(telefonoTextBox.Text), domicilio, cpTextBox.Text, ciudadTextBox.Text, cuitTextBox.Text, true, this.username);
-                var retornoAlta = new EmpresaRepository.altaEmpresa(detalle);
+                var retornoAlta = new EmpresaRepository().altaEmpresa(detalle);
                 if (retornoAlta == 0)
                 {
                     MessageBox.Show("La empresa ha sido creada exitosamente.");

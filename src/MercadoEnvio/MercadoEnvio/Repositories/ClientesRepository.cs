@@ -17,7 +17,7 @@ using System.Data;
 namespace MercadoEnvio.Repositories
 {
 
-    class CLientesRepository
+    class ClientesRepository
     {
 
 
