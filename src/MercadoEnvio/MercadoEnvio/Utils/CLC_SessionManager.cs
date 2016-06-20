@@ -5,7 +5,6 @@ using System.Text;
 using System.Configuration;
 using System.Data;
 using MercadoEnvio.Domain;
-using MercadoEnvio.Domain.Exceptions;
 using MercadoEnvio.UI;
 using System.Windows.Forms;
 

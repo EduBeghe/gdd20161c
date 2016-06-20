@@ -76,11 +76,22 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>GD1C2016DataSet.xsd</DependentUpon>
     </Compile>
-    <Compile Include="Repositories\FacturaRepository.cs" />
+    <Compile Include="GD1C2016DataSet1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GD1C2016DataSet1.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="GD1C2016DataSet2.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GD1C2016DataSet2.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Repositories\CalificarRepository.cs" />
+    <Compile Include="Repositories\FacturasRepository.cs" />
     <Compile Include="Repositories\PublicacionRepository.cs" />
     <Compile Include="Repositories\VisibilidadRepository.cs" />
     <Compile Include="Repositories\AuditoriaLoginRepository.cs" />
-    <Compile Include="Repositories\ClienteRepository.cs" />
+    <Compile Include="Repositories\ClientesRepository.cs" />
     <Compile Include="Repositories\DomicilioRepository.cs" />
     <Compile Include="Repositories\EmpresaRepository.cs" />
     <Compile Include="Repositories\FuncionalidadesRepository.cs" />
@@ -146,11 +157,23 @@
     <Compile Include="UI\Calificar\CalificarVendedor.Designer.cs">
       <DependentUpon>CalificarVendedor.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\ComprarOfertar\Form1.cs">
+    <Compile Include="UI\ComprarOfertar\ComprarOfertar.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\ComprarOfertar\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="UI\ComprarOfertar\ComprarOfertar.Designer.cs">
+      <DependentUpon>ComprarOfertar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\ComprarOfertar\ComprarPublicacion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\ComprarOfertar\ComprarPublicacion.Designer.cs">
+      <DependentUpon>ComprarPublicacion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\ComprarOfertar\OfertarPublicacion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\ComprarOfertar\OfertarPublicacion.Designer.cs">
+      <DependentUpon>OfertarPublicacion.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\Facturas\ConsultaFacturas.cs">
       <SubType>Form</SubType>
@@ -239,8 +262,14 @@
     <EmbeddedResource Include="UI\Calificar\CalificarVendedor.resx">
       <DependentUpon>CalificarVendedor.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\ComprarOfertar\Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <EmbeddedResource Include="UI\ComprarOfertar\ComprarOfertar.resx">
+      <DependentUpon>ComprarOfertar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\ComprarOfertar\ComprarPublicacion.resx">
+      <DependentUpon>ComprarPublicacion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\ComprarOfertar\OfertarPublicacion.resx">
+      <DependentUpon>OfertarPublicacion.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Facturas\ConsultaFacturas.resx">
       <DependentUpon>ConsultaFacturas.cs</DependentUpon>
@@ -273,6 +302,28 @@
     </None>
     <None Include="GD1C2016DataSet.xss">
       <DependentUpon>GD1C2016DataSet.xsd</DependentUpon>
+    </None>
+    <None Include="GD1C2016DataSet1.xsc">
+      <DependentUpon>GD1C2016DataSet1.xsd</DependentUpon>
+    </None>
+    <None Include="GD1C2016DataSet1.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>GD1C2016DataSet1.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="GD1C2016DataSet1.xss">
+      <DependentUpon>GD1C2016DataSet1.xsd</DependentUpon>
+    </None>
+    <None Include="GD1C2016DataSet2.xsc">
+      <DependentUpon>GD1C2016DataSet2.xsd</DependentUpon>
+    </None>
+    <None Include="GD1C2016DataSet2.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>GD1C2016DataSet2.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="GD1C2016DataSet2.xss">
+      <DependentUpon>GD1C2016DataSet2.xsd</DependentUpon>
     </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

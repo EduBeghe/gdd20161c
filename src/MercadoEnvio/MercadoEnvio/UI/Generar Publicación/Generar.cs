@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using MercadoEnvio.Repositories;
+using MercadoEnvio.Domain;
 
 namespace MercadoEnvio.Generar_Publicación
 {
@@ -25,6 +27,13 @@ namespace MercadoEnvio.Generar_Publicación
         private void Form1_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            
+            new PublicacionRepository().altaPublicaciones(
+                );
         }
     }
 }
