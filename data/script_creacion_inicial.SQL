@@ -1491,7 +1491,7 @@ BEGIN
 
 	-- buscador por contenido  de detalles de factura... a que se refiere con eso?
 	
-	SELECT F.Cod_Factura,F.Fecha_Factura,P.Descripcion_Publicacion,I.Item_Factura_Cantidad,I.Item_Factura_Monto
+	SELECT F.Cod_Factura,F.Cod_Forma_De_Pago,F.Cod_Publicacion,F.Fecha_Factura,F.Nro_Factura,F.Total_Factura,F.Vendedor_Correspondiente
 	FROM TODO_X2_LUCAS.Facturas F JOIN TODO_X2_LUCAS.Items_Facturas I ON (F.Cod_Factura = I.Cod_Factura)
 									JOIN TODO_X2_LUCAS.Formas_De_Pago FO ON (FO.Cod_Formas_De_Pago=F.Cod_Forma_De_Pago)
 									JOIN TODO_X2_LUCAS.Publicaciones P ON (F.Cod_Publicacion = P.Cod_Publicacion)
