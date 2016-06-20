@@ -17,6 +17,11 @@ namespace MercadoEnvio.UI.ABM_Visibilidad
             InitializeComponent();
         }
 
+        internal void ShowDialog()
+        {
+            this.ShowDialog();
+        }
+
         private void AltaVisibilidad_Load(object sender, EventArgs e)
         {
 

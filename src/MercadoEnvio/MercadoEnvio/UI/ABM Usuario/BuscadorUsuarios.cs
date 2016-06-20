@@ -32,5 +32,10 @@ namespace MercadoEnvio.UI.ABM_Usuario
         {
 
         }
+
+        private void BuscadorUsuarios_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

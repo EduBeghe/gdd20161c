@@ -35,11 +35,11 @@ namespace MercadoEnvio.Repositories
                 );
         }
 
-        public int altaCliente(string nombreUsuario, string password, int dni, string mail,
-            int telefono, string calle, int numeroCalle, int piso, string depto, string localidad,
-            string codPostal, DateTime fechaNacimiento)
+        public int altaCliente(string nombre, string apellido, int dni, string mail,
+            int telefono, Domicilio domicilio,
+            string codPostal, DateTime fechaNacimiento, string username)
         {
-            var retorno = DBAdapter.executeProcedureWithReturnValue("Alta_Cliente", nombreUsuario, password, dni, mail, telefono, calle, numeroCalle, piso, depto, localidad, codPostal, fechaNacimiento);
+            var retorno = DBAdapter.executeProcedureWithReturnValue("Alta_Cliente", nombre, apellido, dni, mail, telefono, domicilio.Calle, domicilio.Nro_Calle, domicilio.Piso, domicilio.Depto, domicilio.Localidad, codPostal, fechaNacimiento, username);
             return retorno;
         }
 

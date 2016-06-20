@@ -69,7 +69,7 @@
             // usuarioTextbox
             // 
             this.usuarioTextbox.Location = new System.Drawing.Point(95, 49);
-            this.usuarioTextbox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.usuarioTextbox.Margin = new System.Windows.Forms.Padding(2);
             this.usuarioTextbox.Name = "usuarioTextbox";
             this.usuarioTextbox.Size = new System.Drawing.Size(185, 20);
             this.usuarioTextbox.TabIndex = 3;
@@ -77,7 +77,7 @@
             // passwordTextbox
             // 
             this.passwordTextbox.Location = new System.Drawing.Point(95, 97);
-            this.passwordTextbox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.passwordTextbox.Margin = new System.Windows.Forms.Padding(2);
             this.passwordTextbox.Name = "passwordTextbox";
             this.passwordTextbox.Size = new System.Drawing.Size(185, 20);
             this.passwordTextbox.TabIndex = 4;
@@ -85,7 +85,7 @@
             // button1
             // 
             this.button1.Location = new System.Drawing.Point(84, 136);
-            this.button1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button1.Margin = new System.Windows.Forms.Padding(2);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(125, 25);
             this.button1.TabIndex = 5;
@@ -104,9 +104,10 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "LoginScreen";
             this.Text = "LoginScreen";
+            this.Load += new System.EventHandler(this.LoginScreen_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -20,6 +20,11 @@ namespace MercadoEnvio.UI.Login
             InitializeComponent();
         }
 
+        internal void ShowDialog()
+        {
+            this.ShowDialog();
+        }
+
         private void button1_Click(object sender, EventArgs e)
         {
             var repo = new UsuariosRepository();
@@ -40,6 +45,11 @@ namespace MercadoEnvio.UI.Login
                 }
                 else MessageBox.Show("Datos Incorrectos");
             }
+        }
+
+        private void LoginScreen_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

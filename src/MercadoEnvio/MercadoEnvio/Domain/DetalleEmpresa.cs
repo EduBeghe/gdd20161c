@@ -10,8 +10,6 @@ namespace MercadoEnvio.Domain
         
     public class DetalleEmpresa
     {
-        public int Cod_Empresa { get; set; }
-        public Usuario usuario { get; set; }
         public string Razon_Social { get; set; }
         public string Mail { get; set; }
         public int Telefono { get; set; }
@@ -21,11 +19,10 @@ namespace MercadoEnvio.Domain
         public string CUIT { get; set; }
         public bool Estado_Empresa { get; set; }
         public Rubros rubro { get; set; }
+        public string username { get; set; }
 
 
         public DetalleEmpresa( 
-            int Cod_Empresa,
-            Usuario usuario,
             string Razon_Social,
             string Mail,
             int Telefono,
@@ -33,11 +30,10 @@ namespace MercadoEnvio.Domain
             string Cod_Postal,
             string Ciudad,
             string CUIT ,
-            bool Estado_Empresa
+            bool Estado_Empresa,
+            string username
             )
         {
-            this.Cod_Empresa = Cod_Empresa;
-            this.usuario = usuario;
             this.Razon_Social = Razon_Social;
             this.Mail = Mail;
             this.Telefono = Telefono;
@@ -46,6 +42,7 @@ namespace MercadoEnvio.Domain
             this.Ciudad = Ciudad;
             this.CUIT = CUIT;
             this.Estado_Empresa = Estado_Empresa;
+            this.username = username;
         }
 
     }

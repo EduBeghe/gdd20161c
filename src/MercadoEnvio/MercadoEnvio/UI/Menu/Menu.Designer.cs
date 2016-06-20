@@ -89,14 +89,14 @@
             this.label5.Location = new System.Drawing.Point(344, 39);
             this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(35, 13);
+            this.label5.Size = new System.Drawing.Size(95, 13);
             this.label5.TabIndex = 4;
             this.label5.Text = "Listado Estadistico";
             // 
             // button1
             // 
             this.button1.Location = new System.Drawing.Point(11, 75);
-            this.button1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button1.Margin = new System.Windows.Forms.Padding(2);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(69, 21);
             this.button1.TabIndex = 5;
@@ -107,7 +107,7 @@
             // button2
             // 
             this.button2.Location = new System.Drawing.Point(84, 75);
-            this.button2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button2.Margin = new System.Windows.Forms.Padding(2);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(78, 21);
             this.button2.TabIndex = 6;
@@ -118,7 +118,7 @@
             // button3
             // 
             this.button3.Location = new System.Drawing.Point(166, 75);
-            this.button3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button3.Margin = new System.Windows.Forms.Padding(2);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(70, 21);
             this.button3.TabIndex = 7;
@@ -128,7 +128,7 @@
             // button4
             // 
             this.button4.Location = new System.Drawing.Point(240, 75);
-            this.button4.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button4.Margin = new System.Windows.Forms.Padding(2);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(79, 21);
             this.button4.TabIndex = 8;
@@ -138,7 +138,7 @@
             // button5
             // 
             this.button5.Location = new System.Drawing.Point(323, 75);
-            this.button5.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button5.Margin = new System.Windows.Forms.Padding(2);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(79, 21);
             this.button5.TabIndex = 9;
@@ -158,7 +158,7 @@
             // button6
             // 
             this.button6.Location = new System.Drawing.Point(11, 109);
-            this.button6.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button6.Margin = new System.Windows.Forms.Padding(2);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(69, 19);
             this.button6.TabIndex = 11;
@@ -193,9 +193,10 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "FunctionsMenu";
             this.Text = "Menu";
+            this.Load += new System.EventHandler(this.FunctionsMenu_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

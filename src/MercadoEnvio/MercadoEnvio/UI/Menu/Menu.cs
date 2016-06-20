@@ -45,5 +45,10 @@ namespace MercadoEnvio.UI.Menu
         {
             new BuscadorUsuarios().ShowDialog();
         }
+
+        private void FunctionsMenu_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

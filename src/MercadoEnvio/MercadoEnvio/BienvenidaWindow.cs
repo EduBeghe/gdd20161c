@@ -18,10 +18,20 @@ namespace MercadoEnvio
             InitializeComponent();
         }
 
+        internal void ShowDialog()
+        {
+            this.ShowDialog();
+        }
+
         private void loginButton_Click(object sender, EventArgs e)
         {
             new LoginScreen().ShowDialog(this);
             this.Close();
+        }
+
+        private void BienvenidaWindow_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

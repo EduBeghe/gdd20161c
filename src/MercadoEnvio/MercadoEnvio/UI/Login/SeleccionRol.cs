@@ -16,5 +16,15 @@ namespace MercadoEnvio.UI.Login
         {
             InitializeComponent();
         }
+
+        internal void ShowDialog()
+        {
+            this.ShowDialog();
+        }
+
+        private void SeleccionRol_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
