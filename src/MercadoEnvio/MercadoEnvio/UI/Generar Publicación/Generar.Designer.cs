@@ -30,26 +30,26 @@
         {
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.tipoPublicacionComboBox = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.descripcionTextBox = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.stockTextBox = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.inicioDateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.label6 = new System.Windows.Forms.Label();
-            this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
+            this.vencimientoDateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.label7 = new System.Windows.Forms.Label();
-            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.precioTextBox = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.rubroComboBox = new System.Windows.Forms.ComboBox();
             this.label9 = new System.Windows.Forms.Label();
-            this.comboBox3 = new System.Windows.Forms.ComboBox();
+            this.visibilidadComboBox = new System.Windows.Forms.ComboBox();
             this.label10 = new System.Windows.Forms.Label();
-            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.responsableTextBox = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
-            this.comboBox4 = new System.Windows.Forms.ComboBox();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.estadoComboBox = new System.Windows.Forms.ComboBox();
+            this.permitirPreguntasCheckBox = new System.Windows.Forms.CheckBox();
             this.button1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
@@ -73,14 +73,14 @@
             this.label2.TabIndex = 1;
             this.label2.Text = "Tipo de Publicación";
             // 
-            // comboBox1
+            // tipoPublicacionComboBox
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(276, 125);
-            this.comboBox1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(288, 28);
-            this.comboBox1.TabIndex = 2;
+            this.tipoPublicacionComboBox.FormattingEnabled = true;
+            this.tipoPublicacionComboBox.Location = new System.Drawing.Point(276, 125);
+            this.tipoPublicacionComboBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.tipoPublicacionComboBox.Name = "tipoPublicacionComboBox";
+            this.tipoPublicacionComboBox.Size = new System.Drawing.Size(288, 28);
+            this.tipoPublicacionComboBox.TabIndex = 2;
             // 
             // label3
             // 
@@ -110,13 +110,13 @@
             this.label4.TabIndex = 5;
             this.label4.Text = "Stock";
             // 
-            // textBox2
+            // stockTextBox
             // 
-            this.textBox2.Location = new System.Drawing.Point(276, 175);
-            this.textBox2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(288, 26);
-            this.textBox2.TabIndex = 6;
+            this.stockTextBox.Location = new System.Drawing.Point(276, 175);
+            this.stockTextBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.stockTextBox.Name = "stockTextBox";
+            this.stockTextBox.Size = new System.Drawing.Size(288, 26);
+            this.stockTextBox.TabIndex = 6;
             // 
             // label5
             // 
@@ -128,13 +128,13 @@
             this.label5.TabIndex = 7;
             this.label5.Text = "Fecha de Publicación";
             // 
-            // dateTimePicker1
+            // inicioDateTimePicker
             // 
-            this.dateTimePicker1.Location = new System.Drawing.Point(276, 229);
-            this.dateTimePicker1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(288, 26);
-            this.dateTimePicker1.TabIndex = 8;
+            this.inicioDateTimePicker.Location = new System.Drawing.Point(276, 229);
+            this.inicioDateTimePicker.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.inicioDateTimePicker.Name = "inicioDateTimePicker";
+            this.inicioDateTimePicker.Size = new System.Drawing.Size(288, 26);
+            this.inicioDateTimePicker.TabIndex = 8;
             // 
             // label6
             // 
@@ -146,13 +146,13 @@
             this.label6.TabIndex = 9;
             this.label6.Text = "Vencimiento de Publicación";
             // 
-            // dateTimePicker2
+            // vencimientoDateTimePicker
             // 
-            this.dateTimePicker2.Location = new System.Drawing.Point(276, 280);
-            this.dateTimePicker2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.dateTimePicker2.Name = "dateTimePicker2";
-            this.dateTimePicker2.Size = new System.Drawing.Size(286, 26);
-            this.dateTimePicker2.TabIndex = 10;
+            this.vencimientoDateTimePicker.Location = new System.Drawing.Point(276, 280);
+            this.vencimientoDateTimePicker.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.vencimientoDateTimePicker.Name = "vencimientoDateTimePicker";
+            this.vencimientoDateTimePicker.Size = new System.Drawing.Size(286, 26);
+            this.vencimientoDateTimePicker.TabIndex = 10;
             // 
             // label7
             // 
@@ -164,13 +164,13 @@
             this.label7.TabIndex = 11;
             this.label7.Text = "Precio";
             // 
-            // textBox3
+            // precioTextBox
             // 
-            this.textBox3.Location = new System.Drawing.Point(276, 329);
-            this.textBox3.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(288, 26);
-            this.textBox3.TabIndex = 12;
+            this.precioTextBox.Location = new System.Drawing.Point(276, 329);
+            this.precioTextBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.precioTextBox.Name = "precioTextBox";
+            this.precioTextBox.Size = new System.Drawing.Size(288, 26);
+            this.precioTextBox.TabIndex = 12;
             // 
             // label8
             // 
@@ -182,14 +182,14 @@
             this.label8.TabIndex = 13;
             this.label8.Text = "Rubro";
             // 
-            // comboBox2
+            // rubroComboBox
             // 
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(276, 374);
-            this.comboBox2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(286, 28);
-            this.comboBox2.TabIndex = 14;
+            this.rubroComboBox.FormattingEnabled = true;
+            this.rubroComboBox.Location = new System.Drawing.Point(276, 374);
+            this.rubroComboBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.rubroComboBox.Name = "rubroComboBox";
+            this.rubroComboBox.Size = new System.Drawing.Size(286, 28);
+            this.rubroComboBox.TabIndex = 14;
             // 
             // label9
             // 
@@ -201,14 +201,14 @@
             this.label9.TabIndex = 15;
             this.label9.Text = "Visibilidad";
             // 
-            // comboBox3
+            // visibilidadComboBox
             // 
-            this.comboBox3.FormattingEnabled = true;
-            this.comboBox3.Location = new System.Drawing.Point(276, 422);
-            this.comboBox3.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.comboBox3.Name = "comboBox3";
-            this.comboBox3.Size = new System.Drawing.Size(284, 28);
-            this.comboBox3.TabIndex = 16;
+            this.visibilidadComboBox.FormattingEnabled = true;
+            this.visibilidadComboBox.Location = new System.Drawing.Point(276, 422);
+            this.visibilidadComboBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.visibilidadComboBox.Name = "visibilidadComboBox";
+            this.visibilidadComboBox.Size = new System.Drawing.Size(284, 28);
+            this.visibilidadComboBox.TabIndex = 16;
             // 
             // label10
             // 
@@ -220,13 +220,13 @@
             this.label10.TabIndex = 17;
             this.label10.Text = "Responsable";
             // 
-            // textBox4
+            // responsableTextBox
             // 
-            this.textBox4.Location = new System.Drawing.Point(276, 469);
-            this.textBox4.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(284, 26);
-            this.textBox4.TabIndex = 18;
+            this.responsableTextBox.Location = new System.Drawing.Point(276, 469);
+            this.responsableTextBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.responsableTextBox.Name = "responsableTextBox";
+            this.responsableTextBox.Size = new System.Drawing.Size(284, 26);
+            this.responsableTextBox.TabIndex = 18;
             // 
             // label11
             // 
@@ -238,25 +238,25 @@
             this.label11.TabIndex = 19;
             this.label11.Text = "Estado";
             // 
-            // comboBox4
+            // estadoComboBox
             // 
-            this.comboBox4.FormattingEnabled = true;
-            this.comboBox4.Location = new System.Drawing.Point(273, 512);
-            this.comboBox4.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.comboBox4.Name = "comboBox4";
-            this.comboBox4.Size = new System.Drawing.Size(288, 28);
-            this.comboBox4.TabIndex = 20;
+            this.estadoComboBox.FormattingEnabled = true;
+            this.estadoComboBox.Location = new System.Drawing.Point(273, 512);
+            this.estadoComboBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.estadoComboBox.Name = "estadoComboBox";
+            this.estadoComboBox.Size = new System.Drawing.Size(288, 28);
+            this.estadoComboBox.TabIndex = 20;
             // 
-            // checkBox1
+            // permitirPreguntasCheckBox
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(44, 569);
-            this.checkBox1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(165, 24);
-            this.checkBox1.TabIndex = 22;
-            this.checkBox1.Text = "Permitir Preguntas";
-            this.checkBox1.UseVisualStyleBackColor = true;
+            this.permitirPreguntasCheckBox.AutoSize = true;
+            this.permitirPreguntasCheckBox.Location = new System.Drawing.Point(44, 569);
+            this.permitirPreguntasCheckBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.permitirPreguntasCheckBox.Name = "permitirPreguntasCheckBox";
+            this.permitirPreguntasCheckBox.Size = new System.Drawing.Size(165, 24);
+            this.permitirPreguntasCheckBox.TabIndex = 22;
+            this.permitirPreguntasCheckBox.Text = "Permitir Preguntas";
+            this.permitirPreguntasCheckBox.UseVisualStyleBackColor = true;
             // 
             // button1
             // 
@@ -275,26 +275,26 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(618, 662);
             this.Controls.Add(this.button1);
-            this.Controls.Add(this.checkBox1);
-            this.Controls.Add(this.comboBox4);
+            this.Controls.Add(this.permitirPreguntasCheckBox);
+            this.Controls.Add(this.estadoComboBox);
             this.Controls.Add(this.label11);
-            this.Controls.Add(this.textBox4);
+            this.Controls.Add(this.responsableTextBox);
             this.Controls.Add(this.label10);
-            this.Controls.Add(this.comboBox3);
+            this.Controls.Add(this.visibilidadComboBox);
             this.Controls.Add(this.label9);
-            this.Controls.Add(this.comboBox2);
+            this.Controls.Add(this.rubroComboBox);
             this.Controls.Add(this.label8);
-            this.Controls.Add(this.textBox3);
+            this.Controls.Add(this.precioTextBox);
             this.Controls.Add(this.label7);
-            this.Controls.Add(this.dateTimePicker2);
+            this.Controls.Add(this.vencimientoDateTimePicker);
             this.Controls.Add(this.label6);
-            this.Controls.Add(this.dateTimePicker1);
+            this.Controls.Add(this.inicioDateTimePicker);
             this.Controls.Add(this.label5);
-            this.Controls.Add(this.textBox2);
+            this.Controls.Add(this.stockTextBox);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.descripcionTextBox);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.tipoPublicacionComboBox);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
@@ -310,26 +310,26 @@
 
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox tipoPublicacionComboBox;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox descripcionTextBox;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox stockTextBox;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private System.Windows.Forms.DateTimePicker inicioDateTimePicker;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.DateTimePicker dateTimePicker2;
+        private System.Windows.Forms.DateTimePicker vencimientoDateTimePicker;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.TextBox precioTextBox;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.ComboBox comboBox2;
+        private System.Windows.Forms.ComboBox rubroComboBox;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.ComboBox comboBox3;
+        private System.Windows.Forms.ComboBox visibilidadComboBox;
         private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.TextBox textBox4;
+        private System.Windows.Forms.TextBox responsableTextBox;
         private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.ComboBox comboBox4;
-        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.ComboBox estadoComboBox;
+        private System.Windows.Forms.CheckBox permitirPreguntasCheckBox;
         private System.Windows.Forms.Button button1;
     }
 }

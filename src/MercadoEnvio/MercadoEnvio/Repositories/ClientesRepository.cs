@@ -20,7 +20,6 @@ namespace MercadoEnvio.Repositories
     class ClientesRepository
     {
 
-
         public void darDeBaja(Usuario usuario)
         {
             DBAdapter.executeProcedure("Baja_Usuario", usuario.Nombre_Usuario);
@@ -61,17 +60,17 @@ namespace MercadoEnvio.Repositories
 
         public List<DetallesClientes> getClientes()
         {
-            return parseClientes(DBAdapter.retrieveDataTable("getCliente", DBNull.Value));
+            return parseClientes(DBAdapter.retrieveDataTable("Get_Clientes", DBNull.Value));
         }
 
         public DetallesClientes getCliente(int ID)
         {
-            return parse(DBAdapter.retrieveDataTable("getCliente", ID).Rows[0]);
+            return parse(DBAdapter.retrieveDataTable("Get_Cliente", ID).Rows[0]);
         }
 
         public DetallesClientes getClienteByUserId(int uID)
         {
-            return parse(DBAdapter.retrieveDataTable("getClienteByUserId", uID).Rows[0]);
+            return parse(DBAdapter.retrieveDataTable("obtenerClientePorCodigoUsuario", uID).Rows[0]);
         }
 
 
