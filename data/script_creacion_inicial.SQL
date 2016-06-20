@@ -202,6 +202,10 @@ IF OBJECT_ID('TODO_X2_LUCAS.Filtrar_Rol') IS NOT NULL
 DROP PROCEDURE TODO_X2_LUCAS.Filtrar_Rol;
 IF OBJECT_ID('TODO_X2_LUCAS.Filtrar_Visibilidad') IS NOT NULL
 DROP PROCEDURE TODO_X2_LUCAS.Filtrar_Visibilidad;
+IF OBJECT_ID('TODO_X2_LUCAS.obtenerEmpresaPorCodigoUsuario') IS NOT NULL
+DROP PROCEDURE TODO_X2_LUCAS.obtenerEmpresaPorCodigoUsuario;
+IF OBJECT_ID('TODO_X2_LUCAS.obtenerClientePorCodigoUsuario') IS NOT NULL
+DROP PROCEDURE TODO_X2_LUCAS.obtenerClientePorCodigoUsuario;
 
 IF OBJECT_ID('TODO_X2_LUCAS.ObtenerUsuario') IS NOT NULL
 DROP FUNCTION TODO_X2_LUCAS.ObtenerUsuario;
@@ -714,6 +718,24 @@ GO
 		WHERE Cod_Publicacion = @codigo
 	END
 	GO
+-------------------------- GETTER USUARIOS CLIENTE Y EMPRESA POR CODIGO DE USUARIO -----------------------
+CREATE PROCEDURE TODO_X2_LUCAS.obtenerEmpresaPorCodigoUsuario(@codUsuario int)
+AS
+BEGIN
+	SELECT * 
+	FROM TODO_X2_LUCAS.Detalles_Empresas
+	WHERE Cod_Usuario = @codUsuario
+END
+GO
+
+CREATE PROCEDURE TODO_X2_LUCAS.obtenerClientePorCodigoUsuario(@codUsuario int)
+AS
+BEGIN
+	SELECT * 
+	FROM TODO_X2_LUCAS.Detalles_Clientes
+	WHERE Cod_Usuario = @codUsuario
+END
+GO
 
 /************************************************** FUNCTIONS ***************************************************/
 -- FUNCION PARA OBTENER EL CODIGO DEL ROL DADA SU DESCRIPCION --
