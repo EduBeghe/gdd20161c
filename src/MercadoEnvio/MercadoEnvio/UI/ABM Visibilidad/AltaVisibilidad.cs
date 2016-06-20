@@ -7,6 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using MercadoEnvio.Domain;
+using MercadoEnvio.Repositories;
+using MercadoEnvio.Utils;
 
 namespace MercadoEnvio.UI.ABM_Visibilidad
 {
@@ -25,6 +28,20 @@ namespace MercadoEnvio.UI.ABM_Visibilidad
         private void AltaVisibilidad_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if ( Validacion.validarInputs( this.Controls ) ) 
+            {
+
+                var retorno = new VisibilidadRepository().altaVisibilidad(
+                    this.descripcionTextBox.Text,
+                    Convert.ToInt32(this.precioTextBox), 
+                    Convert.ToInt32(this.PorcentajeTextBox),
+                    Convert.ToInt32(this.comisionTextBox)
+                    );
+            }
         }
     }
 }
