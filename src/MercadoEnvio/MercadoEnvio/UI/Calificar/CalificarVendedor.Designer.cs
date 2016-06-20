@@ -35,7 +35,7 @@
             this.radioButton4 = new System.Windows.Forms.RadioButton();
             this.radioButton5 = new System.Windows.Forms.RadioButton();
             this.label2 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.descripcionTextBox = new System.Windows.Forms.TextBox();
             this.calificarButton = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel1.SuspendLayout();
@@ -60,6 +60,7 @@
             this.radioButton1.Size = new System.Drawing.Size(108, 24);
             this.radioButton1.TabIndex = 1;
             this.radioButton1.TabStop = true;
+            this.radioButton1.Tag = "1";
             this.radioButton1.Text = "1 Estrellas";
             this.radioButton1.UseVisualStyleBackColor = true;
             // 
@@ -72,6 +73,7 @@
             this.radioButton2.Size = new System.Drawing.Size(108, 24);
             this.radioButton2.TabIndex = 2;
             this.radioButton2.TabStop = true;
+            this.radioButton2.Tag = "2";
             this.radioButton2.Text = "2 Estrellas";
             this.radioButton2.UseVisualStyleBackColor = true;
             // 
@@ -84,6 +86,7 @@
             this.radioButton3.Size = new System.Drawing.Size(108, 24);
             this.radioButton3.TabIndex = 3;
             this.radioButton3.TabStop = true;
+            this.radioButton3.Tag = "3";
             this.radioButton3.Text = "3 Estrellas";
             this.radioButton3.UseVisualStyleBackColor = true;
             // 
@@ -96,6 +99,7 @@
             this.radioButton4.Size = new System.Drawing.Size(108, 24);
             this.radioButton4.TabIndex = 4;
             this.radioButton4.TabStop = true;
+            this.radioButton4.Tag = "4";
             this.radioButton4.Text = "4 Estrellas";
             this.radioButton4.UseVisualStyleBackColor = true;
             // 
@@ -108,6 +112,7 @@
             this.radioButton5.Size = new System.Drawing.Size(108, 24);
             this.radioButton5.TabIndex = 5;
             this.radioButton5.TabStop = true;
+            this.radioButton5.Tag = "5";
             this.radioButton5.Text = "5 Estrellas";
             this.radioButton5.UseVisualStyleBackColor = true;
             // 
@@ -121,14 +126,14 @@
             this.label2.TabIndex = 6;
             this.label2.Text = "Comentario (Opcional)";
             // 
-            // textBox1
+            // descripcionTextBox
             // 
-            this.textBox1.Location = new System.Drawing.Point(68, 369);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(536, 121);
-            this.textBox1.TabIndex = 7;
+            this.descripcionTextBox.Location = new System.Drawing.Point(68, 369);
+            this.descripcionTextBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.descripcionTextBox.Multiline = true;
+            this.descripcionTextBox.Name = "descripcionTextBox";
+            this.descripcionTextBox.Size = new System.Drawing.Size(536, 121);
+            this.descripcionTextBox.TabIndex = 7;
             // 
             // calificarButton
             // 
@@ -158,7 +163,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(657, 546);
             this.Controls.Add(this.calificarButton);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.descripcionTextBox);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.panel1);
@@ -182,7 +187,7 @@
         private System.Windows.Forms.RadioButton radioButton4;
         private System.Windows.Forms.RadioButton radioButton5;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox descripcionTextBox;
         private System.Windows.Forms.Button calificarButton;
         private System.Windows.Forms.Panel panel1;
     }
