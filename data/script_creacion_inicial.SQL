@@ -1316,7 +1316,7 @@ GO
 /* ------------ PROCEDIMIENTO PARA EL ALTA DE UNA PUBLICACION ------------ */
 CREATE PROCEDURE TODO_X2_LUCAS.Alta_Publicacion(@descripcion nvarchar(255),@stock numeric(18),@fecha datetime,
 												@fechaVenc datetime,@precio numeric(18,2),@tipoPublic nvarchar(255),
-												@rubro nvarchar(255),@visibilidad nvarchar(255),@costo numeric(18,2),
+												@rubro nvarchar(255),@visibilidad nvarchar(255),
 												@dni numeric(18),@CUIT nvarchar(50),@estado nvarchar(255),
 												@permisoPreguntas bit, @entregas bit)
 AS
@@ -1331,7 +1331,7 @@ BEGIN
 	INSERT INTO TODO_X2_LUCAS.Publicaciones(Cod_Estado_Publicacion,Cod_Rubro,Cod_Tipos_Publicacion,Cod_Usuario_Responsable,
 											Cod_Visibilidad,Costo_Publicacion,Descripcion_Publicacion,Entregas,Fecha_Publicacion,
 											Fecha_Vencimiento_Publicacion,Permiso_Preguntas,Precio_Publicacion,Stock_Publicacion)
-	VALUES (@codEstado,@codRubro,@cod_Tipo_Publ,@codUsuario,@codVisibilidad,@costo,@descripcion,@entregas,
+	VALUES (@codEstado,@codRubro,@cod_Tipo_Publ,@codUsuario,@codVisibilidad,@descripcion,@entregas,
 			@fecha,@fechaVenc,@permisoPreguntas,@precio,@stock)
 END
 GO
