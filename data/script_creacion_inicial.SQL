@@ -198,6 +198,10 @@ IF OBJECT_ID('TODO_X2_LUCAS.Filtrar_Usuarios_Cliente') IS NOT NULL
 DROP PROCEDURE TODO_X2_LUCAS.Filtrar_Usuarios_Cliente;
 IF OBJECT_ID('TODO_X2_LUCAS.Filtrar_Publicaciones') IS NOT NULL
 DROP PROCEDURE TODO_X2_LUCAS.Filtrar_Publicaciones;
+IF OBJECT_ID('TODO_X2_LUCAS.Filtrar_Rol') IS NOT NULL
+DROP PROCEDURE TODO_X2_LUCAS.Filtrar_Rol;
+IF OBJECT_ID('TODO_X2_LUCAS.Filtrar_Visibilidad') IS NOT NULL
+DROP PROCEDURE TODO_X2_LUCAS.Filtrar_Visibilidad;
 
 IF OBJECT_ID('TODO_X2_LUCAS.ObtenerUsuario') IS NOT NULL
 DROP FUNCTION TODO_X2_LUCAS.ObtenerUsuario;
@@ -1496,7 +1500,29 @@ BEGIN
 			(Total_Factura BETWEEN (@precioInicio) AND @precioFinal OR (@precioInicio IS NULL AND @precioFinal IS NULL))
 END
 GO
+/* ------------ PROCEDIMIENTO PARA FILTRAR UN ROL POR NOMBRE ------------ */
+CREATE PROCEDURE TODO_X2_LUCAS.Filtrar_Rol(@nombre nvarchar(255))
+AS
+BEGIN
 
+	SELECT * 
+	FROM TODO_X2_LUCAS.Roles
+	WHERE Nombre = @nombre
+
+END
+GO
+
+/* ------------ PROCEDIMIENTO PARA FILTRAR VISIBILIDAD POR NOMBRE ------------ */
+CREATE PROCEDURE TODO_X2_LUCAS.Filtrar_Visibilidad(@nombre nvarchar(255))
+AS
+BEGIN
+	
+	SELECT * 
+	FROM TODO_X2_LUCAS.Visibilidades_Publicaciones
+	WHERE Descripcion_Visibilidad = @nombre	
+
+END
+GO
 /* ------------ PROCEDIMIENTOS PARA EL LISTADO ESTADISTICO ------------ */
 /* ------------ PROCEDIMIENTO 1 PARA EL LISTADO ESTADISTICO ------------ */
 --Vendedores con mayor cantidad de productos no vendidos, dicho listado debe
