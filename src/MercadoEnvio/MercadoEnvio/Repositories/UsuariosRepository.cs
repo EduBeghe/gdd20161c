@@ -44,7 +44,7 @@ namespace MercadoEnvio.Repositories
 
         public Usuario getUsuario( string username )
         {
-            return parse(DBAdapter.retrieveDataTable("GetUsuario", username).Rows[0]);
+            return parse(DBAdapter.retrieveDataTable("Get_Usuario", username).Rows[0]);
         }
 
         public int getUsuarioIDPorIdentificadores( int dni, string cuit ) 

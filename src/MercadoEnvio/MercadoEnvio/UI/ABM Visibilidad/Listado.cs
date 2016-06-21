@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using MercadoEnvio.Domain;
 using MercadoEnvio.Repositories;
+using MercadoEnvio.UI.ABM_Visibilidad;
 
 namespace MercadoEnvio.ABM_Visibilidad
 {
@@ -33,14 +34,29 @@ namespace MercadoEnvio.ABM_Visibilidad
 
         private void button3_Click(object sender, EventArgs e)
         {
-            if (visibilidadesGrid.SelectedRows.Count != 0)
+            var count = visibilidadesGrid.SelectedRows.Count;
+            if (count != 0)
             {
-                var visibilidad = (VisibilidadPublicaciones)visibilidadesGrid.SelectedRows[0].DataBoundItem;
-                new VisibilidadRepository().bajaVisibilidad(visibilidad);
-                MessageBox.Show("Visibilidad eliminada con exito");
+                for (int i = 0; i < count; i++)
+                {
+                    var visibilidad = (VisibilidadPublicaciones)visibilidadesGrid.SelectedRows[i].DataBoundItem;
+                    new VisibilidadRepository().bajaVisibilidad(visibilidad);   
+                }
+                MessageBox.Show("Visibilidades eliminadas con exito");
                 this.Close();
             }
             else MessageBox.Show("Debe seleccionar una visibilidad para dar de baja");
+        }
+
+        private void visibilidadesGrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            var cells = visibilidadesGrid.SelectedRows[0].DataBoundItem;
+            new AltaVisibilidad().ShowDialog();
         }
     }
 }

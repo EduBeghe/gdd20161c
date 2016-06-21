@@ -5,7 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 using MercadoEnvio.Domain;
 using MercadoEnvio.Utils;
-using MercadoEnvio.Domain.VisibilidadPublicaciones; 
+using MercadoEnvio.Domain.VisibilidadPublicaciones;
+using MercadoEnvio.Utils;
+using MercadoEnvio.Domain;
+using System.Data;
 
 namespace MercadoEnvio.Repositories
 {
@@ -37,6 +40,23 @@ namespace MercadoEnvio.Repositories
         {
             DBAdapter.executeProcedure("Baja_Visibilidad",
                 visibilidad.Cod_Visibilidad );
+        }
+
+        public VisibilidadPublicaciones getVisibilidad(int codigo)
+        {
+            var retorno = parse(DBAdapter.retrieveDataTable("Get_Visibilidad", codigo).Rows[0]);
+            return retorno;
+        }
+
+        private VisibilidadPublicaciones parse(DataRow dr)
+        {
+            return new VisibilidadPublicaciones(Convert.ToInt32(dr["Cod_Visibilidad"]),
+                                                dr["Descripcion_Visibilidad"] as string,
+                                                Convert.ToInt32(dr["Precio_Visibilidad"]),
+                                                Convert.ToInt32(dr["Porcentaje"]),
+                                                Convert.ToInt32(dr["Comision_Entregas"]),
+                                                Convert.ToBoolean(dr["Estado_Visibilidad"])
+                                                );
         }
 
     }

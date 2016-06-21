@@ -15,6 +15,10 @@ namespace MercadoEnvio.UI.ABM_Visibilidad
 {
     public partial class AltaVisibilidad : Form
     {
+
+        bool isEditing = false;
+        int codigo;
+
         public AltaVisibilidad()
         {
             InitializeComponent();
@@ -22,7 +26,20 @@ namespace MercadoEnvio.UI.ABM_Visibilidad
 
         internal void ShowDialog()
         {
+            this.isEditing = false;
             this.ShowDialog();
+        }
+
+        internal void ShowDialog(int id)
+        {
+            this.codigo = id;
+            this.isEditing = true;
+            var visibilidad = new VisibilidadRepository().getVisibilidad(id);
+            this.ShowDialog();
+            descripcionTextBox.Text = visibilidad.Descripcion_Visibilidad;
+            precioTextBox.Text = Convert.ToString(visibilidad.Precio_Visibilidad);
+            PorcentajeTextBox.Text = Convert.ToString(visibilidad.Porcentaje);
+            comisionTextBox.Text = Convert.ToString(visibilidad.Comision_Entregas);
         }
 
         private void AltaVisibilidad_Load(object sender, EventArgs e)
@@ -34,13 +51,26 @@ namespace MercadoEnvio.UI.ABM_Visibilidad
         {
             if ( Validacion.validarInputs( this.Controls ) ) 
             {
-
-                var retorno = new VisibilidadRepository().altaVisibilidad(
+                if(this.isEditing)
+                {
+                    var visibilidad = new VisibilidadPublicaciones(this.codigo,
+                        this.descripcionTextBox.Text,
+                    Convert.ToInt32(this.precioTextBox),
+                    Convert.ToInt32(this.PorcentajeTextBox),
+                    Convert.ToInt32(this.comisionTextBox), true
+                    );
+                    new VisibilidadRepository().modificarVisibilidad(visibilidad);
+                } 
+                else 
+                {
+                    var retorno = new VisibilidadRepository().altaVisibilidad(
                     this.descripcionTextBox.Text,
-                    Convert.ToInt32(this.precioTextBox), 
+                    Convert.ToInt32(this.precioTextBox),
                     Convert.ToInt32(this.PorcentajeTextBox),
                     Convert.ToInt32(this.comisionTextBox)
                     );
+                }
+                
             }
         }
     }

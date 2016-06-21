@@ -47,7 +47,7 @@ namespace MercadoEnvio.Repositories {
 
     public Rol getRol( int idRol )
     {
-      return parse( DBAdapter.retrieveDataTable("GetRol", idRol ).Rows[0]);
+      return parse( DBAdapter.retrieveDataTable("Get_Rol", idRol ).Rows[0]);
     }
 
     public List<Rol> getRoles()
