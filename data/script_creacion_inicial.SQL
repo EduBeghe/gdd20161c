@@ -156,8 +156,8 @@ IF OBJECT_ID('TODO_X2_LUCAS.Modificar_Cliente') IS NOT NULL
 DROP PROCEDURE TODO_X2_LUCAS.Modificar_Cliente;
 IF OBJECT_ID('TODO_X2_LUCAS.Modificar_Empresa') IS NOT NULL
 DROP PROCEDURE TODO_X2_LUCAS.Modificar_Empresa;
-IF OBJECT_ID('TODO_X2_LUCAS.Alta_Publicidad') IS NOT NULL
-DROP PROCEDURE TODO_X2_LUCAS.Alta_Publicidad;
+IF OBJECT_ID('TODO_X2_LUCAS.Alta_Publicacion') IS NOT NULL
+DROP PROCEDURE TODO_X2_LUCAS.Alta_Publicacion;
 IF OBJECT_ID('TODO_X2_LUCAS.Baja_Visibilidad') IS NOT NULL
 DROP PROCEDURE TODO_X2_LUCAS.Baja_Visibilidad;
 IF OBJECT_ID('TODO_X2_LUCAS.Modificacion_Visibilidad') IS NOT NULL
@@ -230,6 +230,8 @@ DROP FUNCTION TODO_X2_LUCAS.Obtener_Forma_De_Pago;
 
 IF OBJECT_ID('TODO_X2_LUCAS.Reputacion') IS NOT NULL
 DROP TRIGGER TODO_X2_LUCAS.Reputacion;
+IF OBJECT_ID('TODO_X2_LUCAS.Costo_Publicacion') IS NOT NULL
+DROP TRIGGER TODO_X2_LUCAS.Costo_Publicacion;
 
 
 /**************************************************  CREACION DE TABLAS ***************************************************/
@@ -1312,9 +1314,9 @@ END
 GO
 
 /* ------------ PROCEDIMIENTO PARA EL ALTA DE UNA PUBLICACION ------------ */
-CREATE PROCEDURE TODO_X2_LUCAS.Alta_Publicidad(@descripcion nvarchar(255),@stock numeric(18),@fecha datetime,
+CREATE PROCEDURE TODO_X2_LUCAS.Alta_Publicacion(@descripcion nvarchar(255),@stock numeric(18),@fecha datetime,
 												@fechaVenc datetime,@precio numeric(18,2),@tipoPublic nvarchar(255),
-												@rubro nvarchar(255),@visibilidad nvarchar(255),@costo numeric(18,2),
+												@rubro nvarchar(255),@visibilidad nvarchar(255),
 												@dni numeric(18),@CUIT nvarchar(50),@estado nvarchar(255),
 												@permisoPreguntas bit, @entregas bit)
 AS
@@ -1329,7 +1331,7 @@ BEGIN
 	INSERT INTO TODO_X2_LUCAS.Publicaciones(Cod_Estado_Publicacion,Cod_Rubro,Cod_Tipos_Publicacion,Cod_Usuario_Responsable,
 											Cod_Visibilidad,Costo_Publicacion,Descripcion_Publicacion,Entregas,Fecha_Publicacion,
 											Fecha_Vencimiento_Publicacion,Permiso_Preguntas,Precio_Publicacion,Stock_Publicacion)
-	VALUES (@codEstado,@codRubro,@cod_Tipo_Publ,@codUsuario,@codVisibilidad,@costo,@descripcion,@entregas,
+	VALUES (@codEstado,@codRubro,@cod_Tipo_Publ,@codUsuario,@codVisibilidad,@descripcion,@entregas,
 			@fecha,@fechaVenc,@permisoPreguntas,@precio,@stock)
 END
 GO
@@ -1366,7 +1368,7 @@ BEGIN
 
 	SELECT @codFormaDePago = TODO_X2_LUCAS.Obtener_Forma_De_Pago(@formaDePago),
 			@codUsuario = TODO_X2_LUCAS.ObtenerUsuario(@dni,@cuit),
-			@totalFactura = ((Precio_Publicacion * V.Porcentaje) * @cantidad) + V.Precio_Visibilidad + V.Comision_Entregas
+			@totalFactura = Costo_Publicacion * @cantidad
 	FROM TODO_X2_LUCAS.Publicaciones P JOIN TODO_X2_LUCAS.Visibilidades_Publicaciones V ON (P.Cod_Visibilidad = V.Cod_Visibilidad)
 	WHERE Cod_Publicacion = @codPublicacion
 
@@ -1702,43 +1704,7 @@ BEGIN
     DEALLOCATE cursorEmpresas
 END
 GO
-
--- PROCEDIMIENTO PARA LA MIGRACION DE LAS PUBLICACIONES --
-CREATE PROCEDURE TODO_X2_LUCAS.MigrarPublicaciones
-AS
-BEGIN
-	DECLARE @codPublicacion numeric(18),@descripcion nvarchar(255),@codEstado numeric(18),@fechaPublicacion datetime,@fechaVenc datetime,@precio numeric(18,2),
-			@codRubro int,@stock numeric(18),@codTipo int,@codVisib numeric(18),@dni numeric(18),@cuit nvarchar(50),@codUsuario int;
-	
-	DECLARE publicaciones CURSOR FOR
-	SELECT DISTINCT Publicacion_Cod,Publicacion_Descripcion,e.Cod_Estado,Publicacion_Fecha,Publicacion_Fecha_Venc,Publicacion_Precio,
-			r.Cod_Rubro,Publicacion_Stock,t.Cod_Tipos_Publicaciones,v.Cod_Visibilidad,Publ_Cli_Dni,Publ_Empresa_Cuit
-	FROM gd_esquema.Maestra m JOIN TODO_X2_LUCAS.Estados_Publicaciones e ON (m.Publicacion_Estado = e.Descripcion_Estado)
-							JOIN TODO_X2_LUCAS.Rubros r ON (m.Publicacion_Rubro_Descripcion = r.Descripcion_Rubro)
-							JOIN TODO_X2_LUCAS.Tipos_Publicaciones t ON (m.Publicacion_Tipo = t.Descripcion_Tipo)
-							JOIN TODO_X2_LUCAS.Visibilidades_Publicaciones v ON (m.Publicacion_Visibilidad_Cod = v.Cod_Visibilidad)
-	WHERE Publicacion_Cod IS NOT NULL
-
-	OPEN publicaciones
-	FETCH NEXT FROM publicaciones INTO @codPublicacion,@descripcion,@codEstado,@fechaPublicacion,@fechaVenc,@precio,@codRubro,@stock,@codTipo,@codVisib,@dni,@cuit
-	
-	WHILE @@FETCH_STATUS = 0
-	BEGIN
-		SET @codUsuario = TODO_X2_LUCAS.ObtenerUsuario(@dni,@cuit);
-		
-		INSERT INTO TODO_X2_LUCAS.Publicaciones(Cod_Publicacion_Anterior,Descripcion_Publicacion,Stock_Publicacion,Fecha_Publicacion,
-						Fecha_Vencimiento_Publicacion,Precio_Publicacion,Cod_Tipos_Publicacion,Cod_Rubro,Cod_Visibilidad,Cod_Usuario_Responsable,
-						Cod_Estado_Publicacion)
-		VALUES(@codPublicacion,@descripcion,@stock,@fechaPublicacion,@fechaVenc,@precio,@codTipo,@codRubro,@codVisib,@codUsuario,@codEstado)
-	
-		FETCH NEXT FROM publicaciones INTO @codPublicacion,@descripcion,@codEstado,@fechaPublicacion,@fechaVenc,@precio,@codRubro,@stock,@codTipo,@codVisib,@dni,@cuit
-	END
-
-	CLOSE publicaciones
-	DEALLOCATE publicaciones
-END
-GO
-
+--PROCEDIMIENTO PARA REPUTACION USUARIOS--
 CREATE PROCEDURE TODO_X2_LUCAS.Migrar_Reputacion_Usuarios
 AS
 BEGIN
@@ -1908,13 +1874,13 @@ INSERT INTO TODO_X2_LUCAS.Publicaciones(Cod_Publicacion_Anterior,Descripcion_Pub
 										Stock_Publicacion,Fecha_Publicacion,Fecha_Vencimiento_Publicacion,
 										Precio_Publicacion,Cod_Tipos_Publicacion,Cod_Rubro,
 										Cod_Visibilidad,Cod_Usuario_Responsable,
-										Cod_Estado_Publicacion)
+										Cod_Estado_Publicacion,Costo_Publicacion)
 SELECT DISTINCT Publicacion_Cod,Publicacion_Descripcion,
 				Publicacion_Stock,Publicacion_Fecha,Publicacion_Fecha_Venc,
 				Publicacion_Precio,t.Cod_Tipos_Publicaciones,r.Cod_Rubro,
 				v.Cod_Visibilidad,Usuario = CASE WHEN Publ_Cli_Dni IS NULL THEN (SELECT Cod_Empresa FROM TODO_X2_LUCAS.Detalles_Empresas WHERE CUIT = Publ_Empresa_Cuit)
 												ELSE (SELECT Cod_Cliente FROM TODO_X2_LUCAS.Detalles_Clientes WHERE DNI = Publ_Cli_Dni) END,
-				e.Cod_Estado
+				e.Cod_Estado,((Publicacion_Precio * Porcentaje) + Precio_Visibilidad )
 FROM gd_esquema.Maestra m JOIN TODO_X2_LUCAS.Estados_Publicaciones e ON (m.Publicacion_Estado = e.Descripcion_Estado)
 						JOIN TODO_X2_LUCAS.Rubros r ON (m.Publicacion_Rubro_Descripcion = r.Descripcion_Rubro)
 						JOIN TODO_X2_LUCAS.Tipos_Publicaciones t ON (m.Publicacion_Tipo = t.Descripcion_Tipo)
@@ -2018,6 +1984,27 @@ BEGIN
 
 	CLOSE reputaciones
 	DEALLOCATE reputaciones
+
+END
+GO
+
+CREATE TRIGGER TODO_X2_LUCAS.Costo_Publicacion
+ON TODO_X2_LUCAS.Publicaciones
+AFTER INSERT
+AS
+BEGIN
+	DECLARE @codVisibilidad  numeric(18),@costo numeric(18,2),@codPublicacion int;
+	
+	SELECT @codVisibilidad = i.Cod_Visibilidad, @codPublicacion = I.Cod_Publicacion
+	FROM inserted I
+
+	SET @costo = (SELECT (P.Precio_Publicacion * V.Porcentaje) + V.Precio_Visibilidad + V.Comision_Entregas
+					FROM TODO_X2_LUCAS.Visibilidades_Publicaciones V JOIN TODO_X2_LUCAS.Publicaciones P ON (V.Cod_Visibilidad = P.Cod_Visibilidad)
+					WHERE P.Cod_Publicacion = @codPublicacion)
+
+	UPDATE TODO_X2_LUCAS.Publicaciones
+	SET Costo_Publicacion = @costo
+	WHERE Cod_Publicacion = @codPublicacion
 
 END
 GO
