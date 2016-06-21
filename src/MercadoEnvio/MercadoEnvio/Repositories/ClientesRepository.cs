@@ -20,7 +20,6 @@ namespace MercadoEnvio.Repositories
     class ClientesRepository
     {
 
-
         public void darDeBaja(Usuario usuario)
         {
             DBAdapter.executeProcedure("Baja_Usuario", usuario.Nombre_Usuario);
@@ -43,14 +42,6 @@ namespace MercadoEnvio.Repositories
             return retorno;
         }
 
-
-        public List<DetallesClientes> findClientes(string nombre, string apellido, TipoDocumento tipo_doc, string mail, int? nro_doc)
-        {
-
-            return parseClientes(DBAdapter.retrieveDataTable("find_clientes", nombre, apellido, tipo_doc.ID, mail, nro_doc));
-
-        }
-
         public int modificarCliente( int dniViejo, string nombreUsuario, string password, int dni, string mail,
             int telefono, string calle, int numeroCalle, int piso, string depto, string localidad,
             string codPostal, DateTime fechaNacimiento)
@@ -61,51 +52,40 @@ namespace MercadoEnvio.Repositories
 
         public List<DetallesClientes> getClientes()
         {
-            return parseClientes(DBAdapter.retrieveDataTable("getCliente", DBNull.Value));
+            return parseClientes(DBAdapter.retrieveDataTable("Get_Clientes", DBNull.Value));
         }
 
         public DetallesClientes getCliente(int ID)
         {
-            return parse(DBAdapter.retrieveDataTable("getCliente", ID).Rows[0]);
+            return parse(DBAdapter.retrieveDataTable("Get_Cliente", ID).Rows[0]);
         }
 
         public DetallesClientes getClienteByUserId(int uID)
         {
-            return parse(DBAdapter.retrieveDataTable("getClienteByUserId", uID).Rows[0]);
+            return parse(DBAdapter.retrieveDataTable("obtenerClientePorCodigoUsuario", uID).Rows[0]);
         }
-
-
 
         private List<DetallesClientes> parseClientes(DataTable dataTable)
         {
-
             return dataTable.AsEnumerable().Select(dr => parse(dr)).ToList();
-
         }
-
-
 
         private DetallesClientes parse(DataRow dr)
         {
-
-            return new DetallesClientes(Convert.ToInt32(dr["Cod_Cliente"]),
-
-                // Viejo, CAMBIAR!
-                               dr["Nombre"] as string,
-
-                               dr["Apellido"] as string,
-
-                               new Documento(getTipoDoc(Convert.ToInt32(dr["Tipo_Documento"])), Convert.ToInt64(dr["Nro_Doc"])),
-
-                               dr["Mail"] as string,
-                               new Domicilio(dr["Dom_Calle"] as string, Convert.ToInt32(dr["Dom_Nro"]), dr["Dom_Depto"] as string, Convert.ToInt32(dr["Dom_Piso"]), dr["Localidad"] as string, new PaisRepository().getPais(Convert.ToInt32(dr["Pais"]))),
-                               new PaisRepository().getPais(Convert.ToInt32(dr["Nacionalidad"])),
-                               Convert.ToDateTime(dr["Fecha_nac"]),
-
-                               (Boolean)dr["Estado"]);
-
-
-
+            return new DetallesClientes(
+                Convert.ToInt32(dr["Cod_Cliente"]),
+                new UsuariosRepository().getUsuario( Convert.ToInt32(dr["Cod_Usuario"]) ),
+                dr["Nombre"] as string,
+                dr["Apellido"] as string,
+                Convert.ToInt32(dr["DNI"]),
+                dr["Mail"] as string,
+                Convert.ToInt32(dr["Telefono"]),
+                new DomicilioRepository().getDomicilio(Convert.ToInt32(dr["Cod_Domicilio"])),
+                dr["Cod_Postal"] as string,
+                Convert.ToDateTime(dr["Fecha_Nacimiento"]),
+                Convert.ToDateTime(dr["Fecha_Creacion"]),
+                (Boolean)dr["Estado_Cliente"]
+                );
         }
 
 

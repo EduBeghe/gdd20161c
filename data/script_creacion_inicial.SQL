@@ -206,6 +206,8 @@ IF OBJECT_ID('TODO_X2_LUCAS.obtenerEmpresaPorCodigoUsuario') IS NOT NULL
 DROP PROCEDURE TODO_X2_LUCAS.obtenerEmpresaPorCodigoUsuario;
 IF OBJECT_ID('TODO_X2_LUCAS.obtenerClientePorCodigoUsuario') IS NOT NULL
 DROP PROCEDURE TODO_X2_LUCAS.obtenerClientePorCodigoUsuario;
+IF OBJECT_ID('TODO_X2_LUCAS.obtenerUsuarioPorUsername') IS NOT NULL
+DROP PROCEDURE TODO_X2_LUCAS.obtenerUsuarioPorUsername;
 
 IF OBJECT_ID('TODO_X2_LUCAS.ObtenerUsuario') IS NOT NULL
 DROP FUNCTION TODO_X2_LUCAS.ObtenerUsuario;
@@ -739,6 +741,14 @@ BEGIN
 END
 GO
 
+CREATE PROCEDURE TODO_X2_LUCAS.obtenerUsuarioPorUsername(@username nvarchar(255))
+AS
+BEGIN
+	SELECT *
+	FROM TODO_X2_LUCAS.Usuarios
+	WHERE Nombre_Usuario = @username
+END
+GO
 /************************************************** FUNCTIONS ***************************************************/
 -- FUNCION PARA OBTENER EL CODIGO DEL ROL DADA SU DESCRIPCION --
 CREATE FUNCTION TODO_X2_LUCAS.ObtenerRol(@nombreRol nvarchar(255))
@@ -1329,7 +1339,7 @@ BEGIN
 			@codUsuario = TODO_X2_LUCAS.ObtenerUsuario(@dni,@CUIT)
 
 	INSERT INTO TODO_X2_LUCAS.Publicaciones(Cod_Estado_Publicacion,Cod_Rubro,Cod_Tipos_Publicacion,Cod_Usuario_Responsable,
-											Cod_Visibilidad,Costo_Publicacion,Descripcion_Publicacion,Entregas,Fecha_Publicacion,
+											Cod_Visibilidad,Descripcion_Publicacion,Entregas,Fecha_Publicacion,
 											Fecha_Vencimiento_Publicacion,Permiso_Preguntas,Precio_Publicacion,Stock_Publicacion)
 	VALUES (@codEstado,@codRubro,@cod_Tipo_Publ,@codUsuario,@codVisibilidad,@descripcion,@entregas,
 			@fecha,@fechaVenc,@permisoPreguntas,@precio,@stock)
