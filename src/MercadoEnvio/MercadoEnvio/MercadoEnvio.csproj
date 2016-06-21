@@ -89,6 +89,7 @@
     <Compile Include="Repositories\CalificarRepository.cs" />
     <Compile Include="Repositories\FacturasRepository.cs" />
     <Compile Include="Repositories\PublicacionRepository.cs" />
+    <Compile Include="Repositories\RubroRepository.cs" />
     <Compile Include="Repositories\VisibilidadRepository.cs" />
     <Compile Include="Repositories\AuditoriaLoginRepository.cs" />
     <Compile Include="Repositories\ClientesRepository.cs" />

@@ -22,19 +22,9 @@ namespace MercadoEnvio.Repositories
 
         private AuditoriaLogin parse(DataRow dr)
         {
-
-        return new Domicilio(
-
-          Convert.ToInt32(dr["Cod_Auditoria"]),
-
-          new UsuarioRepository().getUsuario( Convert.ToInt32(dr["Cod_Usuario"]) ),
-
-          Convert.ToDateTime(dr["Fecha"]),
-
-          (bool) dr["Estado"]),
-
-          Convert.ToInt32(dr["Numero_De_Intento"])
-          
+            return new AuditoriaLogin(
+                Convert.ToInt32(dr["Cod_Auditoria"]),
+                new UsuariosRepository().( Convert.ToInt32(dr["Cod_Usuario"]) )
           );
 
         }

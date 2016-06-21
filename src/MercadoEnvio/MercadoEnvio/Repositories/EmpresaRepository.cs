@@ -59,7 +59,6 @@ namespace MercadoEnvio.Repositories
 
         private DetalleEmpresa parse(DataRow dr)
         {
-
             return new DetalleEmpresa(
                 Convert.ToInt32(dr["Cod_Empresa"]),
                 Convert.ToInt32(dr["Cod_Usuario"]),
@@ -70,10 +69,9 @@ namespace MercadoEnvio.Repositories
                 dr["Cod_Postal"] as String,
                 dr["Ciudad"] as String,
                 dr["CUIT"] as String,
-                // Rubro
-                (Boolean)dr["Estado_Empresa"]
+                (Boolean)dr["Estado_Empresa"],
+                new RubroRepository().getRubro(Convert.ToInt32(dr["Cod_Rubro"]))
             );
-
 
         }
 

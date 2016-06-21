@@ -13,49 +13,55 @@ namespace MercadoEnvio.Repositories
     class UsuariosRepository
     {
 
-        public int altaUsuario( string usuario, string pass, int codRol )
-		{
-			var retorno = DBAdapter.executeProcedureWithReturnValue("Alta_Usuario", usuario, new Encription().encryptToSHA256( pass ) );
+        public int altaUsuario(string usuario, string pass, int codRol)
+        {
+            var retorno = DBAdapter.executeProcedureWithReturnValue("Alta_Usuario", usuario, new Encription().encryptToSHA256(pass));
             return retorno;
-		}
-
-        public void bajaUsuario( string nombreUsuario )
-        {
-            DBAdapter.executeProcedure("Baja_Usuario", nombreUsuario );
         }
 
-        public void modificarUsuario( string nombreUsuario, string passwordVieja, string passwordNueva )
+        public void bajaUsuario(string nombreUsuario)
         {
-            DBAdapter.executeProcedure("Modificar_Usuario", nombreUsuario, passwordVieja, passwordNueva );
+            DBAdapter.executeProcedure("Baja_Usuario", nombreUsuario);
         }
 
-        public int validarLogin( string usuario, string pass )
-		{
-			var cantUsuarios = DBAdapter.executeProcedureWithReturnValue("Validar_Login", usuario, new Encription().encryptToSHA256( pass ) );
+        public void modificarUsuario(string nombreUsuario, string passwordVieja, string passwordNueva)
+        {
+            DBAdapter.executeProcedure("Modificar_Usuario", nombreUsuario, passwordVieja, passwordNueva);
+        }
+
+        public int validarLogin(string usuario, string pass)
+        {
+            var cantUsuarios = DBAdapter.executeProcedureWithReturnValue("Validar_Login", usuario, new Encription().encryptToSHA256(pass));
             return cantUsuarios;
-		}
+        }
 
-        public void iniciarSesion(string userName) {
-            CLC_SessionManager.currentUser = getUsuario( userName ) ;
+        public void iniciarSesion(string userName)
+        {
+            CLC_SessionManager.currentUser = getUsuario(userName);
             var usr = getUsuario(userName);
-            if ( usr != null ) CLC_SessionManager.setCurrentUser( usr );
+            if (usr != null) CLC_SessionManager.setCurrentUser(usr);
             else MessageBox.Show("usr es null");
         }
 
-        public Usuario getUsuario( string username )
+        public Usuario getUsuario(int codigoUsuario)
         {
-            return parse(DBAdapter.retrieveDataTable("GetUsuario", username).Rows[0]);
+            return parse(DBAdapter.retrieveDataTable("Get_Usuario", codigoUsuario).Rows[0]);
         }
 
-        public int getUsuarioIDPorIdentificadores( int dni, string cuit ) 
+        public Usuario getUsuarioByUsername(string username)
         {
-            var retorno = DBAdapter.executeProcedureWithReturnValue("ObtenerUsuario", dni, cuit );
+            return parse(DBAdapter.retrieveDataTable("Get_Usuario_Por_Username", username).Rows[0]);
+        }
+
+        public int getUsuarioIDPorIdentificadores(int dni, string cuit)
+        {
+            var retorno = DBAdapter.executeProcedureWithReturnValue("ObtenerUsuario", dni, cuit);
             return retorno;
         }
 
-        public void actualizarIntentosLogin( string userName, int cantidad )
+        public void actualizarIntentosLogin(string userName, int cantidad)
         {
-            DBAdapter.executeProcedure("ActualizarIntentos", userName, cantidad );
+            DBAdapter.executeProcedure("ActualizarIntentos", userName, cantidad);
         }
 
 
@@ -64,15 +70,12 @@ namespace MercadoEnvio.Repositories
 
             return new Usuario(
                Convert.ToInt32(dr["Cod_Usuario"]),
-
                dr["Nombre_Usuario"] as string,
-
                dr["password"] as string,
-
-               Convert.ToInt32(dr["Intentos_Login"]), 
-
-               (Boolean) dr["Estado_Usuario"]
-
+               new RolesRepository().getRol(Convert.ToInt32(dr["Cod_Rol"])),
+               Convert.ToInt32(dr["Intentos_Login"]),
+               Convert.ToInt32(dr["Reputacion"]),
+               (Boolean)dr["Estado_Usuario"]
                );
 
         }
@@ -81,3 +84,4 @@ namespace MercadoEnvio.Repositories
 
     }
 
+}

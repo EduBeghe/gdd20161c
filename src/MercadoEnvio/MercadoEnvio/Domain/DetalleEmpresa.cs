@@ -32,7 +32,8 @@ namespace MercadoEnvio.Domain
             string Cod_Postal,
             string Ciudad,
             string CUIT ,
-            bool Estado_Empresa
+            bool Estado_Empresa,
+            Rubros rubro
             )
         {
             this.Cod_Empresa = Cod_Empresa;
@@ -45,6 +46,7 @@ namespace MercadoEnvio.Domain
             this.Ciudad = Ciudad;
             this.CUIT = CUIT;
             this.Estado_Empresa = Estado_Empresa;
+            this.rubro = rubro;
         }
 
     }

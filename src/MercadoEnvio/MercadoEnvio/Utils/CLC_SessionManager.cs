@@ -14,9 +14,8 @@ namespace MercadoEnvio.Utils
     class CLC_SessionManager
     {
         private static Usuario _usuario;
-        public static Usuario currentUser { get { if (_usuario == null) throw new NoSessionIsOpenException(); else  return _usuario;  } set { _usuario = value; } }
-        public static string connectionString = ConfigurationManager.ConnectionStrings["GD1C2016"].ConnectionString;      
-        public static bool esAdministrador = false;
+        public static Usuario currentUser { get { if (_usuario == null) throw new NoSessionIsOpenException(); else  return _usuario; } set { _usuario = value; } }
+        public static string connectionString = System.Configuration.ConfigurationManager.ConnectionStrings["GD1C2016"].ConnectionString;      
         
         public static DateTime getFecha() {
             return DateTime.Parse(System.Configuration.ConfigurationManager.AppSettings["fechaSistema"]);
@@ -30,7 +29,7 @@ namespace MercadoEnvio.Utils
         public static string getCUIT()
         {
             var empresa = new EmpresaRepository().getClienteByUserId(currentUser.Cod_Usuario);
-            return empresa.CUIT;
+            return empresa.CUIT;    
         }
 
         public static void setCurrentUser(Usuario u) {
