@@ -20,14 +20,13 @@ namespace MercadoEnvio.Repositories
     class AuditoriaLoginRepository
     {
 
-        private AuditoriaLogin parse(DataRow dr)
-        {
-            return new AuditoriaLogin(
-                Convert.ToInt32(dr["Cod_Auditoria"]),
-                new UsuariosRepository().( Convert.ToInt32(dr["Cod_Usuario"]) )
-          );
-
-        }
+        //private AuditoriaLogin parse(DataRow dr)
+        //{
+        //    return new AuditoriaLogin(
+        //        Convert.ToInt32(dr["Cod_Auditoria"]),
+        //        new UsuariosRepository().( Convert.ToInt32(dr["Cod_Usuario"]) )
+        //  );
+        //}
 
 
 
