@@ -10,22 +10,28 @@ namespace MercadoEnvio.Repositories
 {
     class FacturasRepository
     {
-        public void generarFactura(Domain.Facturas factura)
+        public void generarFactura(
+            int Cod_Publicacion,
+            int cantidad,
+            string descripcion_formaDePago,
+            int dni,
+            string cuit
+            )
         {
             DBAdapter.executeProcedure( "Generar_Factura",
-            factura.publicacion.Cod_Publicacion,
-            factura.Total_Factura,
-            factura.Forma_De_Pago
-            // dni 
-            // cuit
+                Cod_Publicacion,
+                cantidad,
+                descripcion_formaDePago,
+                dni,
+                cuit
             );
         }
 
-        public void consultaFacturas(DateTime fechaInicio, DateTime fechaFinal, double precioInicio, double precioFinal )
+        public void consultaFacturas(DateTime fechaInicio, DateTime fechaFinal, double precioInicio, double precioFinal, int dni, string cuit )
         {
             DBAdapter.executeProcedure("Consulta_Facturas",
-                // dni
-                // cuit
+                dni,
+                cuit,
                 fechaInicio,
                 fechaFinal,
                 precioInicio,
