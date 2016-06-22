@@ -37,12 +37,9 @@ namespace MercadoEnvio.ABM_Visibilidad
             var count = visibilidadesGrid.SelectedRows.Count;
             if (count != 0)
             {
-                for (int i = 0; i < count; i++)
-                {
-                    var visibilidad = (VisibilidadPublicaciones)visibilidadesGrid.SelectedRows[i].DataBoundItem;
-                    new VisibilidadRepository().bajaVisibilidad(visibilidad);   
-                }
-                MessageBox.Show("Visibilidades eliminadas con exito");
+                var visibilidad = (VisibilidadPublicaciones)visibilidadesGrid.SelectedRows[i].DataBoundItem;
+                new VisibilidadRepository().bajaVisibilidad(visibilidad);   
+                MessageBox.Show("visibilidad eliminada con exito");
                 this.Close();
             }
             else MessageBox.Show("Debe seleccionar una visibilidad para dar de baja");
@@ -55,8 +52,8 @@ namespace MercadoEnvio.ABM_Visibilidad
 
         private void button2_Click(object sender, EventArgs e)
         {
-            var cells = visibilidadesGrid.SelectedRows[0].DataBoundItem;
-            new AltaVisibilidad().ShowDialog();
+            var visibilidad = (VisibilidadPublicaciones)visibilidadesGrid.SelectedRows[0].DataBoundItem;
+            new AltaVisibilidad().ShowDialog(visibilidad.Cod_Visibilidad);
         }
     }
 }

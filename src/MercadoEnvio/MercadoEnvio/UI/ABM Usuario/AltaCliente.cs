@@ -28,6 +28,11 @@ namespace MercadoEnvio.UI.ABM_Usuario
             this.ShowDialog();
         }
 
+        internal void ShowDialog()
+        {
+            this.ShowDialog();
+        }
+
         private void label1_Click(object sender, EventArgs e)
         {
 
@@ -42,8 +47,7 @@ namespace MercadoEnvio.UI.ABM_Usuario
         {
             if (Validacion.validarInputs(this.Controls))
             {
-                var domicilio = new Domicilio(calleTextBox.Text, Convert.ToInt32(nroPisoTextBox.Text), dptoTextBox.Text, Convert.ToInt32(numeroCalleTextBox.Text), localidadTextBox.Text);
-                var retornoAlta = new ClientesRepository().altaCliente(nombreTextBox.Text, apellidoTextBox.Text, Convert.ToInt32(dniTextBox.Text), mailTextBox.Text, Convert.ToInt32(telefonoTextBox.Text), domicilio, cpTextBox.Text, Convert.ToDateTime(fechaNacTextBox.Text), this.username);
+                var retornoAlta = new ClientesRepository().altaCliente(nombreTextBox.Text, apellidoTextBox.Text, Convert.ToInt32(dniTextBox.Text), mailTextBox.Text, Convert.ToInt32(telefonoTextBox.Text), calleTextBox.Text,Convert.ToInt32(nroPisoTextBox.Text),dptoTextBox.Text,Convert.ToInt32(numeroCalleTextBox.Text),localidadTextBox.Text , cpTextBox.Text, Convert.ToDateTime(fechaNacTextBox.Text), this.username);
                 if (retornoAlta == 0)
                 {
                     MessageBox.Show("El cliente ha sido creado exitosamente.");
