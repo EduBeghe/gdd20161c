@@ -15,44 +15,74 @@ namespace MercadoEnvio.Repositories
             return parse(DBAdapter.retrieveDataTable("obtenerEmpresaPorCodigoUsuario", uID).Rows[0]);
         }
 
-        public int altaEmpresa(DetalleEmpresa detalleEmpresa)
+        public int altaEmpresa(
+                string Razon_Social,
+                string Mail,
+                int Telefono,
+                string Calle,
+                int Nro_Calle,
+                int Piso,
+                string Depto,
+                string Localidad,
+                string Cod_Postal,
+                string Ciudad,
+                string CUIT,
+                string descripcion_rubro,
+                bool Estado_Empresa
+            )
         {
             var retorno = DBAdapter.executeProcedureWithReturnValue("Alta_Empresa", 
-                detalleEmpresa.Razon_Social,
-                detalleEmpresa.Mail,
-                detalleEmpresa.Telefono,
-                detalleEmpresa.domicilio.Calle,
-                detalleEmpresa.domicilio.Nro_Calle,
-                detalleEmpresa.domicilio.Piso,
-                detalleEmpresa.domicilio.Depto,
-                detalleEmpresa.domicilio.Localidad,
-                detalleEmpresa.Cod_Postal,
-                detalleEmpresa.Ciudad,
-                detalleEmpresa.CUIT,
-                detalleEmpresa.rubro,
-                detalleEmpresa.Estado_Empresa
+                Razon_Social,
+                Mail,
+                Telefono,
+                Calle,
+                Nro_Calle,
+                Piso,
+                Depto,
+                Localidad,
+                Cod_Postal,
+                Ciudad,
+                CUIT,
+                descripcion_rubro,
+                Estado_Empresa
                 );
             return retorno;
         }
 
-        public int modificarEmpresa( string cuitViejo, string razonSocialVieja, DetalleEmpresa detalleEmpresa)
+        public int modificarEmpresa( 
+            string cuitViejo, 
+            string razonSocialVieja,
+            string Razon_Social,
+            string Mail,
+            int Telefono,
+            string Calle,
+            int Nro_Calle,
+            int Piso,
+            string Depto,
+            string Localidad,
+            string Cod_Postal,
+            string Ciudad,
+            string CUIT,
+            string descripcion_rubro,
+            bool Estado_Empresa
+            )
         {
             var retorno = DBAdapter.executeProcedureWithReturnValue("Modificar_Empresa",
                 cuitViejo, 
                 razonSocialVieja,
-                detalleEmpresa.Razon_Social,
-                detalleEmpresa.Mail,
-                detalleEmpresa.Telefono,
-                detalleEmpresa.domicilio.Calle,
-                detalleEmpresa.domicilio.Nro_Calle,
-                detalleEmpresa.domicilio.Piso,
-                detalleEmpresa.domicilio.Depto,
-                detalleEmpresa.domicilio.Localidad,
-                detalleEmpresa.Cod_Postal,
-                detalleEmpresa.Ciudad,
-                detalleEmpresa.CUIT,
-                detalleEmpresa.rubro,
-                detalleEmpresa.Estado_Empresa
+                Razon_Social,
+                Mail,
+                Telefono,
+                Calle,
+                Nro_Calle,
+                Piso,
+                Depto,
+                Localidad,
+                Cod_Postal,
+                Ciudad,
+                CUIT,
+                descripcion_rubro,
+                Estado_Empresa
                 );
             return retorno;
         }

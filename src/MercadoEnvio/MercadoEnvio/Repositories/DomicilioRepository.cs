@@ -50,6 +50,8 @@ namespace MercadoEnvio.Repositories
         {
             return new Domicilio(
 
+              Convert.ToInt32( dr["Cod_Domicilio"] ),
+
               dr["Calle"] as string,
 
               Convert.ToInt32(dr["Piso"]),
