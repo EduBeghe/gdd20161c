@@ -208,6 +208,10 @@ IF OBJECT_ID('TODO_X2_LUCAS.obtenerClientePorCodigoUsuario') IS NOT NULL
 DROP PROCEDURE TODO_X2_LUCAS.obtenerClientePorCodigoUsuario;
 IF OBJECT_ID('TODO_X2_LUCAS.obtenerUsuarioPorUsername') IS NOT NULL
 DROP PROCEDURE TODO_X2_LUCAS.obtenerUsuarioPorUsername;
+IF OBJECT_ID('TODO_X2_LUCAS.Baja_Cliente') IS NOT NULL
+DROP PROCEDURE TODO_X2_LUCAS.Baja_Cliente;
+IF OBJECT_ID('TODO_X2_LUCAS.Baja_Empresa') IS NOT NULL
+DROP PROCEDURE TODO_X2_LUCAS.Baja_Empresa;
 
 IF OBJECT_ID('TODO_X2_LUCAS.ObtenerUsuario') IS NOT NULL
 DROP FUNCTION TODO_X2_LUCAS.ObtenerUsuario;
@@ -1036,6 +1040,7 @@ BEGIN
 	IF (@Cantidad = 0 )
 	BEGIN
 		DECLARE @IntentosActuales int;
+		
 		UPDATE TODO_X2_LUCAS.Usuarios 
 		SET Intentos_Login = Intentos_Login + 1 
 		WHERE Nombre_Usuario = @username
@@ -1046,7 +1051,7 @@ BEGIN
 
 		INSERT INTO TODO_X2_LUCAS.Auditoria_Login(Usuario_Nombre,Estado,Numero_De_Intento)
 		VALUES((SELECT Nombre_Usuario FROM TODO_X2_LUCAS.Usuarios WHERE Nombre_Usuario = @username),0,@IntentosActuales)
-
+		
 		IF (@IntentosActuales >= 3)
 		BEGIN	
 			UPDATE TODO_X2_LUCAS.Usuarios 
@@ -1065,8 +1070,9 @@ BEGIN
 	END
 END
 GO
+
 /* ------------ PROCEDIMIENTO PARA VALIDAR EL LOGIN ------------ */
-CREATE PROCEDURE TODO_X2_LUCAS.Validar_Login(@username varchar(255),@password varchar(255)) 
+CREATE PROCEDURE TODO_X2_LUCAS.Validar_Login(@username nvarchar(255),@password nvarchar(255)) 
 AS
 BEGIN
 	DECLARE @Cantidad int;
@@ -1078,9 +1084,10 @@ BEGIN
 		  Contraseña = CONVERT(nvarchar(255),@password)
 	
 	EXEC TODO_X2_LUCAS.actualizarIntentos @username,@Cantidad
-	IF (SELECT Estado_Usuario FROM TODO_X2_LUCAS.Usuarios WHERE Nombre_Usuario = @username) = 1	
+
+	IF ((SELECT Estado_Usuario FROM TODO_X2_LUCAS.Usuarios WHERE Nombre_Usuario = @username) = 1)
 	BEGIN
-		RETURN @Cantidad
+		RETURN @Cantidad;
 	END
 	ELSE
 	BEGIN
@@ -1124,8 +1131,57 @@ BEGIN
 	UPDATE TODO_X2_LUCAS.Usuarios
 	SET Estado_Usuario = 0
 	WHERE Nombre_Usuario = @usuario
+
+	IF EXISTS (SELECT * FROM TODO_X2_LUCAS.Detalles_Clientes C JOIN TODO_X2_LUCAS.Usuarios U ON (C.Cod_Usuario=u.Cod_Usuario)
+						WHERE U.Cod_Usuario = @usuario)
+	BEGIN
+		UPDATE TODO_X2_LUCAS.Detalles_Clientes
+		SET Estado_Cliente = 0
+		WHERE Cod_Usuario = (SELECT C.Cod_Usuario 
+							FROM TODO_X2_LUCAS.Detalles_Clientes C JOIN TODO_X2_LUCAS.Usuarios U ON (C.Cod_Usuario=u.Cod_Usuario)
+							WHERE U.Cod_Usuario = @usuario)
+	END
+	ELSE
+	BEGIN
+		UPDATE TODO_X2_LUCAS.Detalles_Empresas
+		SET Estado_Empresa = 0
+		WHERE Cod_Usuario = (SELECT E.Cod_Usuario 
+							FROM TODO_X2_LUCAS.Detalles_Empresas E JOIN TODO_X2_LUCAS.Usuarios U ON (E.Cod_Usuario=u.Cod_Usuario)
+							WHERE U.Cod_Usuario = @usuario)
+	END
 END
 GO
+/* ------------ PROCEDIMIENTO PARA MODIFICAR UN USUARIO CLIENTE ------------ */
+CREATE PROCEDURE TODO_X2_LUCAS.Baja_Cliente(@codCliente int)
+AS
+BEGIN
+	UPDATE TODO_X2_LUCAS.Detalles_Clientes
+	SET Estado_Cliente = 0
+	WHERE Cod_Cliente = @codCliente
+
+	UPDATE TODO_X2_LUCAS.Usuarios
+	SET Estado_Usuario = 0
+	WHERE Cod_Usuario = (SELECT U.Cod_Usuario
+							FROM TODO_X2_LUCAS.Detalles_Clientes C JOIN TODO_X2_LUCAS.Usuarios U ON (C.Cod_Usuario=U.Cod_Usuario)
+							WHERE C.Cod_Cliente = @codCliente)
+END
+GO
+/* ------------ PROCEDIMIENTO PARA MODIFICAR UN USUARIO EMPRESA ------------ */
+CREATE PROCEDURE TODO_X2_LUCAS.Baja_Empresa(@codEmpresa int)
+AS
+BEGIN
+	UPDATE TODO_X2_LUCAS.Detalles_Empresas
+	SET Estado_Empresa = 0
+	WHERE Cod_Empresa = @codEmpresa
+
+	UPDATE TODO_X2_LUCAS.Usuarios
+	SET Estado_Usuario = 0
+	WHERE Cod_Usuario = (SELECT U.Cod_Usuario
+							FROM TODO_X2_LUCAS.Detalles_Empresas E JOIN TODO_X2_LUCAS.Usuarios U ON (E.Cod_Usuario=U.Cod_Usuario)
+							WHERE E.Cod_Empresa = @codEmpresa)
+END
+GO
+
 /* ------------ PROCEDIMIENTO PARA FILTRAR LOS USUARIOS EMPRESAS SEGUN RAZON SOCIAL CUIT Y EMAIL ------------ */
 CREATE PROCEDURE TODO_X2_LUCAS.Filtrar_Usuarios_Empresa(@razonSocial nvarchar(255),@cuit nvarchar(50),@email nvarchar(255))
 AS
