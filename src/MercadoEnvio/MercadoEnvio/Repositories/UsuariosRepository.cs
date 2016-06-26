@@ -44,7 +44,9 @@ namespace MercadoEnvio.Repositories
 
         public Usuario getUsuarioPorUsername(String username)
         {
-            return parse(DBAdapter.retrieveDataTable("Get_Usuario_Por_Username", username).Rows[0]);
+            var table = DBAdapter.retrieveDataTable("obtenerUsuarioPorUsername", username);
+            if (table != null && table.Rows.Count > 0) return parse(table.Rows[0]);
+            else return null;
         }
 
         public Usuario getUsuario(int userID )
@@ -72,9 +74,9 @@ namespace MercadoEnvio.Repositories
 
                dr["Nombre_Usuario"] as string,
 
-               dr["password"] as string,
-               
-               new RolesRepository().getRol(Convert.ToInt32(dr["Cod_Usuario"])),
+               dr["contrasenia"] as string,
+
+               new RolesRepository().getRol(Convert.ToInt32(dr["Cod_Rol"])),
 
                Convert.ToInt32(dr["Intentos_Login"]),
 

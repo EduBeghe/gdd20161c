@@ -22,7 +22,7 @@ namespace MercadoEnvio.UI.Menu
 
         internal void ShowDialog()
         {
-            this.ShowDialog();
+            this.FindForm().ShowDialog();
         }
 
         private void button6_Click(object sender, EventArgs e)
