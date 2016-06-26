@@ -13,9 +13,9 @@ using MercadoEnvio.Repositories;
 
 namespace MercadoEnvio.UI.ABM_Usuario
 {
-    public partial class BuscadorUsuarios : Form
+    public partial class BuscadorClientes : Form
     {
-        public BuscadorUsuarios()
+        public BuscadorClientes()
         {
             InitializeComponent();
         }
@@ -45,22 +45,20 @@ namespace MercadoEnvio.UI.ABM_Usuario
 
         private void button2_Click(object sender, EventArgs e)
         {
-            var usuario = (Usuario)usuariosGrid.SelectedRows[0].DataBoundItem;
-            if (usuario.rol.Cod_Rol.Equals(1))
-            {
-                new AltaCliente().ShowDialog(usuario.Nombre_Usuario);
-            }
-            else if (usuario.rol.Cod_Rol.Equals(2))
-            {
-                new AltaEmpresa().ShowDialog(usuario.Nombre_Usuario);
-            }
+            var usuario = (DetallesClientes)usuariosGrid.SelectedRows[0].DataBoundItem;
+            new AltaCliente().ShowDialog(DetallesClientes);
 
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            var usuario = (Usuario)usuariosGrid.SelectedRows[0].DataBoundItem;
-            new UsuariosRepository().bajaUsuario(usuario.Nombre_Usuario);
+            var usuario = (DetallesClientes)usuariosGrid.SelectedRows[0].DataBoundItem;
+            new ClientesRepository().darDeBaja(DetallesClientes);
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

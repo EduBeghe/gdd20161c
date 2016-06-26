@@ -42,11 +42,11 @@ namespace MercadoEnvio.Repositories
             return retorno;
         }
 
-        public int modificarCliente( int dniViejo, string nombreUsuario, string password, int dni, string mail,
+        public int modificarCliente( int dniViejo, string nombre, string apellido, int dni, string mail,
             int telefono, string calle, int numeroCalle, int piso, string depto, string localidad,
             string codPostal, DateTime fechaNacimiento)
         {
-            var retorno = DBAdapter.executeProcedureWithReturnValue("Modificar_Cliente", dniViejo, nombreUsuario, password, dni, mail, telefono, calle, numeroCalle, piso, depto, localidad, codPostal, fechaNacimiento);
+            var retorno = DBAdapter.executeProcedureWithReturnValue("Modificar_Cliente", dniViejo, nombre, apellido, dni, mail, telefono, calle, numeroCalle, piso, depto, localidad, codPostal, fechaNacimiento);
             return retorno;
         }
 

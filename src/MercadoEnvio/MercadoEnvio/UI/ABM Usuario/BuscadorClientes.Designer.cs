@@ -1,6 +1,6 @@
 ﻿namespace MercadoEnvio.UI.ABM_Usuario
 {
-    partial class BuscadorUsuarios
+    partial class BuscadorClientes
     {
         /// <summary>
         /// Required designer variable.
@@ -43,13 +43,6 @@
             this.button3 = new System.Windows.Forms.Button();
             this.usuariosGrid = new System.Windows.Forms.DataGridView();
             this.usuariosBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.codUsuarioDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.nombreUsuarioDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.contraseñaDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.codRolDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.intentosLoginDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.reputacionDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.estadoUsuarioDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.usuariosGrid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.usuariosBindingSource)).BeginInit();
             this.SuspendLayout();
@@ -57,11 +50,12 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(104, 21);
+            this.label1.Location = new System.Drawing.Point(122, 18);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(111, 13);
+            this.label1.Size = new System.Drawing.Size(107, 13);
             this.label1.TabIndex = 0;
-            this.label1.Text = "Buscador de Usuarios";
+            this.label1.Text = "Buscador de Clientes";
+            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // label2
             // 
@@ -163,71 +157,11 @@
             // 
             this.usuariosGrid.AutoGenerateColumns = false;
             this.usuariosGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.usuariosGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.codUsuarioDataGridViewTextBoxColumn,
-            this.nombreUsuarioDataGridViewTextBoxColumn,
-            this.contraseñaDataGridViewTextBoxColumn,
-            this.codRolDataGridViewTextBoxColumn,
-            this.intentosLoginDataGridViewTextBoxColumn,
-            this.reputacionDataGridViewTextBoxColumn,
-            this.estadoUsuarioDataGridViewCheckBoxColumn});
             this.usuariosGrid.DataSource = this.usuariosBindingSource;
             this.usuariosGrid.Location = new System.Drawing.Point(10, 230);
             this.usuariosGrid.Name = "usuariosGrid";
             this.usuariosGrid.Size = new System.Drawing.Size(352, 123);
             this.usuariosGrid.TabIndex = 13;
-            // 
-            // gD1C2016DataSet3
-            // 
-            // 
-            // usuariosBindingSource
-            // 
-            // 
-            // usuariosTableAdapter
-            // 
-            // 
-            // codUsuarioDataGridViewTextBoxColumn
-            // 
-            this.codUsuarioDataGridViewTextBoxColumn.DataPropertyName = "Cod_Usuario";
-            this.codUsuarioDataGridViewTextBoxColumn.HeaderText = "Cod_Usuario";
-            this.codUsuarioDataGridViewTextBoxColumn.Name = "codUsuarioDataGridViewTextBoxColumn";
-            this.codUsuarioDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // nombreUsuarioDataGridViewTextBoxColumn
-            // 
-            this.nombreUsuarioDataGridViewTextBoxColumn.DataPropertyName = "Nombre_Usuario";
-            this.nombreUsuarioDataGridViewTextBoxColumn.HeaderText = "Nombre_Usuario";
-            this.nombreUsuarioDataGridViewTextBoxColumn.Name = "nombreUsuarioDataGridViewTextBoxColumn";
-            // 
-            // contraseñaDataGridViewTextBoxColumn
-            // 
-            this.contraseñaDataGridViewTextBoxColumn.DataPropertyName = "Contraseña";
-            this.contraseñaDataGridViewTextBoxColumn.HeaderText = "Contraseña";
-            this.contraseñaDataGridViewTextBoxColumn.Name = "contraseñaDataGridViewTextBoxColumn";
-            // 
-            // codRolDataGridViewTextBoxColumn
-            // 
-            this.codRolDataGridViewTextBoxColumn.DataPropertyName = "Cod_Rol";
-            this.codRolDataGridViewTextBoxColumn.HeaderText = "Cod_Rol";
-            this.codRolDataGridViewTextBoxColumn.Name = "codRolDataGridViewTextBoxColumn";
-            // 
-            // intentosLoginDataGridViewTextBoxColumn
-            // 
-            this.intentosLoginDataGridViewTextBoxColumn.DataPropertyName = "Intentos_Login";
-            this.intentosLoginDataGridViewTextBoxColumn.HeaderText = "Intentos_Login";
-            this.intentosLoginDataGridViewTextBoxColumn.Name = "intentosLoginDataGridViewTextBoxColumn";
-            // 
-            // reputacionDataGridViewTextBoxColumn
-            // 
-            this.reputacionDataGridViewTextBoxColumn.DataPropertyName = "Reputacion";
-            this.reputacionDataGridViewTextBoxColumn.HeaderText = "Reputacion";
-            this.reputacionDataGridViewTextBoxColumn.Name = "reputacionDataGridViewTextBoxColumn";
-            // 
-            // estadoUsuarioDataGridViewCheckBoxColumn
-            // 
-            this.estadoUsuarioDataGridViewCheckBoxColumn.DataPropertyName = "Estado_Usuario";
-            this.estadoUsuarioDataGridViewCheckBoxColumn.HeaderText = "Estado_Usuario";
-            this.estadoUsuarioDataGridViewCheckBoxColumn.Name = "estadoUsuarioDataGridViewCheckBoxColumn";
             // 
             // BuscadorUsuarios
             // 
