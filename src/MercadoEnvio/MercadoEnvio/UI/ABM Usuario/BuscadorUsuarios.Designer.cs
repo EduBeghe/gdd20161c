@@ -249,7 +249,6 @@
             this.Controls.Add(this.label1);
             this.Name = "BuscadorUsuarios";
             this.Text = "BuscadorUsuarios";
-            this.Load += new System.EventHandler(this.BuscadorUsuarios_Load);
             ((System.ComponentModel.ISupportInitialize)(this.usuariosGrid)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.usuariosBindingSource)).EndInit();
             this.ResumeLayout(false);

@@ -36,12 +36,7 @@ namespace MercadoEnvio.UI.ABM_Usuario
 
         }
 
-        private void BuscadorUsuarios_Load(object sender, EventArgs e)
-        {
-            // TODO: esta línea de código carga datos en la tabla 'gD1C2016DataSet3.Usuarios' Puede moverla o quitarla según sea necesario.
-            this.usuariosTableAdapter.Fill(this.gD1C2016DataSet3.Usuarios);
 
-        }
 
         private void textBox4_TextChanged(object sender, EventArgs e)
         {
@@ -51,11 +46,11 @@ namespace MercadoEnvio.UI.ABM_Usuario
         private void button2_Click(object sender, EventArgs e)
         {
             var usuario = (Usuario)usuariosGrid.SelectedRows[0].DataBoundItem;
-            if (usuario.codigo_rol.Equals(1))
+            if (usuario.rol.Cod_Rol.Equals(1))
             {
                 new AltaCliente().ShowDialog(usuario.Nombre_Usuario);
             }
-            else if (usuario.codigo_rol.Equals(2))
+            else if (usuario.rol.Cod_Rol.Equals(2))
             {
                 new AltaEmpresa().ShowDialog(usuario.Nombre_Usuario);
             }

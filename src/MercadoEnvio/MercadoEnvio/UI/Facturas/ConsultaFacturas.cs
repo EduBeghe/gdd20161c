@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using MercadoEnvio.Domain;
 using MercadoEnvio.Repositories;
+using MercadoEnvio.Utils;
 
 namespace MercadoEnvio.Facturas
 {
@@ -35,7 +36,9 @@ namespace MercadoEnvio.Facturas
             Convert.ToDateTime(this.DesdeDateTimePicker.Value ),
             Convert.ToDateTime( this.hastaDateTimePicker.Value ),
             Convert.ToInt32( this.importeInicialTextBox.Text ),
-            Convert.ToInt32( this.importeFinalTextBox )
+            Convert.ToInt32( this.importeFinalTextBox ),
+            CLC_SessionManager.getDNI(),
+            CLC_SessionManager.getCUIT()            
             );
         }
 
