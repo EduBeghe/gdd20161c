@@ -274,10 +274,10 @@ CREATE TABLE TODO_X2_LUCAS.Usuarios (
 	Contraseña nvarchar(255) NOT NULL,
 	Cod_Rol int REFERENCES TODO_X2_LUCAS.Roles (Cod_Rol),
 	Intentos_Login int NOT NULL DEFAULT 0,
-	Reputacion int,
+	Reputacion int DEFAULT 0 ,
 	Estado_Usuario bit NOT NULL
 )
-;
+; 
 -- CREACION TABLA AUDITORIA LOGIN --
 CREATE TABLE TODO_X2_LUCAS.Auditoria_Login (
 	Cod_Auditoria int IDENTITY PRIMARY KEY CLUSTERED,
@@ -1793,11 +1793,20 @@ BEGIN
 								WHERE Cod_Usuario_Responsable = @usuario)
 								
 		SET @reputacion = (@sumaPesos / @cantidadCompras);
-
-		UPDATE TODO_X2_LUCAS.Usuarios
-		SET Reputacion = @reputacion
-		WHERE Cod_Usuario = @usuario
-
+		
+		IF (@sumaPesos = 0 OR @cantidadCompras = 0)
+		BEGIN
+			UPDATE TODO_X2_LUCAS.Usuarios
+			SET Reputacion = 0
+			WHERE Cod_Usuario = @usuario
+		END
+		ELSE
+		BEGIN
+			UPDATE TODO_X2_LUCAS.Usuarios
+			SET Reputacion = @reputacion
+			WHERE Cod_Usuario = @usuario
+		END
+			
 		FETCH NEXT FROM reputacion INTO @usuario
 	END
 	CLOSE reputacion
