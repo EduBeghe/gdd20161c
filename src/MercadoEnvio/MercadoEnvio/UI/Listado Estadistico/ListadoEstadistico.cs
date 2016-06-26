@@ -73,7 +73,7 @@ namespace MercadoEnvio.UI.Listado_Estadistico
                 {
                     case 0:
                         {
-                            this.estadisticaDataGridView.DataSource = DBAdapter.retrieveDataTable("Pasajes_Mas_Comprados", fechaInicial, fechaFinal);
+                            this.estadisticaDataGridView.DataSource = DBAdapter.retrieveDataTable("Vendedores_Mas_Perros", fechaInicial, fechaFinal);
                         }
                         break;
 

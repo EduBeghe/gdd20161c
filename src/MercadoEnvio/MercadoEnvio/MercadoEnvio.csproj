@@ -138,11 +138,11 @@
     <Compile Include="UI\ABM Usuario\AltaCliente.Designer.cs">
       <DependentUpon>AltaCliente.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\ABM Usuario\BuscadorUsuarios.cs">
+    <Compile Include="UI\ABM Usuario\BuscadorClientes.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\ABM Usuario\BuscadorUsuarios.Designer.cs">
-      <DependentUpon>BuscadorUsuarios.cs</DependentUpon>
+    <Compile Include="UI\ABM Usuario\BuscadorClientes.Designer.cs">
+      <DependentUpon>BuscadorClientes.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\ABM Visibilidad\AltaVisibilidad.cs">
       <SubType>Form</SubType>
@@ -256,8 +256,8 @@
     <EmbeddedResource Include="UI\ABM Usuario\AltaUsuario.resx">
       <DependentUpon>AltaUsuario.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\ABM Usuario\BuscadorUsuarios.resx">
-      <DependentUpon>BuscadorUsuarios.cs</DependentUpon>
+    <EmbeddedResource Include="UI\ABM Usuario\BuscadorClientes.resx">
+      <DependentUpon>BuscadorClientes.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\ABM Visibilidad\AltaVisibilidad.resx">
       <DependentUpon>AltaVisibilidad.cs</DependentUpon>

@@ -20,9 +20,9 @@ namespace MercadoEnvio.Repositories
     class ClientesRepository
     {
 
-        public void darDeBaja(Usuario usuario)
+        public void darDeBaja(int clienteID)
         {
-            DBAdapter.executeProcedure("Baja_Usuario", usuario.Nombre_Usuario);
+            DBAdapter.executeProcedure("Baja_Cliente", clienteID );
         }
 
         public void calificarCompra(Compras compra, int estrellas, string descripcion )

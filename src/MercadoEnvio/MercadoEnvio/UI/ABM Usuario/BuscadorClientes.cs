@@ -46,14 +46,14 @@ namespace MercadoEnvio.UI.ABM_Usuario
         private void button2_Click(object sender, EventArgs e)
         {
             var usuario = (DetallesClientes)usuariosGrid.SelectedRows[0].DataBoundItem;
-            new AltaCliente().ShowDialog(DetallesClientes);
+            new AltaCliente().ShowDialog(usuario);
 
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
             var usuario = (DetallesClientes)usuariosGrid.SelectedRows[0].DataBoundItem;
-            new ClientesRepository().darDeBaja(DetallesClientes);
+            new ClientesRepository().darDeBaja(usuario.Cod_Cliente);
         }
 
         private void label1_Click(object sender, EventArgs e)

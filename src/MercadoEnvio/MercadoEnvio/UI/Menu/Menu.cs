@@ -43,7 +43,7 @@ namespace MercadoEnvio.UI.Menu
 
         private void button7_Click(object sender, EventArgs e)
         {
-            new UI.ABM_Usuario.BuscadorClientes().ShowDialog();
+            //new UI.ABM_Usuario.BuscadorClientes().ShowDialog();
         }
 
         private void FunctionsMenu_Load(object sender, EventArgs e)
