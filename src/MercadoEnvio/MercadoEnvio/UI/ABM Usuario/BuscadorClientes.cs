@@ -22,7 +22,7 @@ namespace MercadoEnvio.UI.ABM_Usuario
 
         internal void ShowDialog()
         {
-            this.ShowDialog();
+            this.FindForm().ShowDialog();
         }
 
 

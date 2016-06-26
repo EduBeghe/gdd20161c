@@ -24,7 +24,7 @@ namespace MercadoEnvio.Calificar
         internal void ShowDialog( int codigoCompra )
         {
             this.codigoCompra = codigoCompra;
-            this.ShowDialog();
+            this.FindForm().ShowDialog();
         }
 
         private void Form1_Load(object sender, EventArgs e)

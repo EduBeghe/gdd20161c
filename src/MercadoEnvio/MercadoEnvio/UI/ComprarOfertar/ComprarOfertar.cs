@@ -24,7 +24,7 @@ namespace MercadoEnvio.ComprarOfertar
 
         internal void ShowDialog()
         {
-            this.ShowDialog();
+            this.FindForm().ShowDialog();
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -50,6 +50,11 @@ namespace MercadoEnvio.ComprarOfertar
                 new OfertarPublicacion().ShowDialog((Publicaciones)publicacionesGrid.SelectedRows[0].DataBoundItem);
             }
             else MessageBox.Show("Debe seleccionar una publicacion para poder ofertar");
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -25,7 +25,7 @@ namespace MercadoEnvio.UI.ComprarOfertar
         internal void ShowDialog(Publicaciones publicacion)
         {
             this.publicacion = publicacion;
-            this.ShowDialog();
+            this.FindForm().ShowDialog();
         }
 
         private void button1_Click(object sender, EventArgs e)

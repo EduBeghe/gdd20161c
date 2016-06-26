@@ -22,7 +22,7 @@ namespace MercadoEnvio.UI.Listado_Estadistico
 
         internal void ShowDialog()
         {
-            this.ShowDialog();
+            this.FindForm().ShowDialog();
         }
 
         private DateTime parsearFechaInicial()

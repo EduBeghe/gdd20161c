@@ -31,14 +31,6 @@
             this.components = new System.ComponentModel.Container();
             this.label1 = new System.Windows.Forms.Label();
             this.publicacionesGrid = new System.Windows.Forms.DataGridView();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.gD1C2016DataSet2 = new MercadoEnvio.GD1C2016DataSet2();
-            this.publicacionesBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.publicacionesTableAdapter = new MercadoEnvio.GD1C2016DataSet2TableAdapters.PublicacionesTableAdapter();
             this.codPublicacionDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.codPublicacionAnteriorDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.descripcionPublicacionDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -54,9 +46,17 @@
             this.codEstadoPublicacionDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.permisoPreguntasDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.entregasDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.publicacionesBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.gD1C2016DataSet2 = new MercadoEnvio.GD1C2016DataSet2();
+            this.button1 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.publicacionesTableAdapter = new MercadoEnvio.GD1C2016DataSet2TableAdapters.PublicacionesTableAdapter();
             ((System.ComponentModel.ISupportInitialize)(this.publicacionesGrid)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gD1C2016DataSet2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.publicacionesBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gD1C2016DataSet2)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -95,70 +95,6 @@
             this.publicacionesGrid.Name = "publicacionesGrid";
             this.publicacionesGrid.Size = new System.Drawing.Size(608, 354);
             this.publicacionesGrid.TabIndex = 1;
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(74, 591);
-            this.button1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(162, 35);
-            this.button1.TabIndex = 2;
-            this.button1.Text = "Comprar";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(417, 591);
-            this.button2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(166, 35);
-            this.button2.TabIndex = 3;
-            this.button2.Text = "Ofertar";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
-            // 
-            // button3
-            // 
-            this.button3.Location = new System.Drawing.Point(492, 158);
-            this.button3.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(150, 35);
-            this.button3.TabIndex = 4;
-            this.button3.Text = "Filtrar";
-            this.button3.UseVisualStyleBackColor = true;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(56, 85);
-            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(92, 20);
-            this.label2.TabIndex = 5;
-            this.label2.Text = "Descripcion";
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(222, 80);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(420, 26);
-            this.textBox1.TabIndex = 6;
-            // 
-            // gD1C2016DataSet2
-            // 
-            this.gD1C2016DataSet2.DataSetName = "GD1C2016DataSet2";
-            this.gD1C2016DataSet2.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // publicacionesBindingSource
-            // 
-            this.publicacionesBindingSource.DataMember = "Publicaciones";
-            this.publicacionesBindingSource.DataSource = this.gD1C2016DataSet2;
-            // 
-            // publicacionesTableAdapter
-            // 
-            this.publicacionesTableAdapter.ClearBeforeFill = true;
             // 
             // codPublicacionDataGridViewTextBoxColumn
             // 
@@ -251,6 +187,71 @@
             this.entregasDataGridViewCheckBoxColumn.HeaderText = "Entregas";
             this.entregasDataGridViewCheckBoxColumn.Name = "entregasDataGridViewCheckBoxColumn";
             // 
+            // publicacionesBindingSource
+            // 
+            this.publicacionesBindingSource.DataMember = "Publicaciones";
+            this.publicacionesBindingSource.DataSource = this.gD1C2016DataSet2;
+            // 
+            // gD1C2016DataSet2
+            // 
+            this.gD1C2016DataSet2.DataSetName = "GD1C2016DataSet2";
+            this.gD1C2016DataSet2.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(74, 591);
+            this.button1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(162, 35);
+            this.button1.TabIndex = 2;
+            this.button1.Text = "Comprar";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(417, 591);
+            this.button2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(166, 35);
+            this.button2.TabIndex = 3;
+            this.button2.Text = "Ofertar";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(492, 158);
+            this.button3.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(150, 35);
+            this.button3.TabIndex = 4;
+            this.button3.Text = "Filtrar";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(56, 85);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(92, 20);
+            this.label2.TabIndex = 5;
+            this.label2.Text = "Descripcion";
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(222, 80);
+            this.textBox1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(420, 26);
+            this.textBox1.TabIndex = 6;
+            // 
+            // publicacionesTableAdapter
+            // 
+            this.publicacionesTableAdapter.ClearBeforeFill = true;
+            // 
             // ComprarOfertar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -268,8 +269,8 @@
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.publicacionesGrid)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gD1C2016DataSet2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.publicacionesBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gD1C2016DataSet2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

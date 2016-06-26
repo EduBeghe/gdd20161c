@@ -28,7 +28,7 @@ namespace MercadoEnvio.UI.ABM_Usuario
         {
             this.cliente = cliente;
             this.modificando = true;
-            this.ShowDialog();
+            this.FindForm().ShowDialog();
             PopulateFields();
         }
 
@@ -36,7 +36,7 @@ namespace MercadoEnvio.UI.ABM_Usuario
         {
             this.modificando = false;
             this.username = username;
-            this.ShowDialog();
+            this.FindForm().ShowDialog();
         }
 
         private void label1_Click(object sender, EventArgs e)

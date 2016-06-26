@@ -22,7 +22,7 @@ namespace MercadoEnvio.ABM_Rol
 
         internal void ShowDialog()
         {
-            this.ShowDialog();
+            this.FindForm().ShowDialog();
         }
         
         private void AltaButton_Click(object sender, EventArgs e)

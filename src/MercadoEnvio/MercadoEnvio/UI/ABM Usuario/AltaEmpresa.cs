@@ -26,7 +26,7 @@ namespace MercadoEnvio.UI.ABM_Usuario
         internal void ShowDialog(string username)
         {
             this.username = username;
-            this.ShowDialog();
+            this.FindForm().ShowDialog();
         }
 
         private void button1_Click(object sender, EventArgs e)

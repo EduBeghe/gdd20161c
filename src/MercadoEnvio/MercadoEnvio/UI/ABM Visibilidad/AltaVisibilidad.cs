@@ -27,7 +27,7 @@ namespace MercadoEnvio.UI.ABM_Visibilidad
         internal void ShowDialog()
         {
             this.isEditing = false;
-            this.ShowDialog();
+            this.FindForm().ShowDialog();
         }
 
         internal void ShowDialog(int id)

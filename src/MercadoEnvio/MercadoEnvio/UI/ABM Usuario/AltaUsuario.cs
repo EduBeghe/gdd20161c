@@ -23,7 +23,7 @@ namespace MercadoEnvio.ABM_Usuario
 
         internal void ShowDialog()
         {
-            this.ShowDialog();
+            this.FindForm().ShowDialog();
         }
 
         private void label1_Click(object sender, EventArgs e)
