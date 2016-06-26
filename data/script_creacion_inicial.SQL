@@ -281,7 +281,7 @@ CREATE TABLE TODO_X2_LUCAS.Usuarios (
 -- CREACION TABLA AUDITORIA LOGIN --
 CREATE TABLE TODO_X2_LUCAS.Auditoria_Login (
 	Cod_Auditoria int IDENTITY PRIMARY KEY CLUSTERED,
-	Usuario_Nombre int  REFERENCES TODO_X2_LUCAS.Usuarios (Cod_Usuario),
+	Usuario_Nombre nvarchar(255) NOT NULL,
 	Fecha datetime NOT NULL DEFAULT GETDATE(),
 	Estado bit NOT NULL,
 	Numero_De_Intento int 
@@ -1081,7 +1081,7 @@ BEGIN
 	FROM TODO_X2_LUCAS.Usuarios
 	WHERE Estado_Usuario = 1 AND
 		  Nombre_Usuario = @username AND
-		  Contraseña = CONVERT(nvarchar(255),@password)
+		  Contraseña = @password
 	
 	EXEC TODO_X2_LUCAS.actualizarIntentos @username,@Cantidad
 
@@ -2026,7 +2026,7 @@ WHERE f.Nro_Factura IS NOT NULL
 exec TODO_X2_LUCAS.Migrar_Reputacion_Usuarios
 
 INSERT INTO TODO_X2_LUCAS.Usuarios(Cod_Rol,Contraseña,Estado_Usuario,Nombre_Usuario)
-VALUES (3,'e6b87050bfcb8143fcb8db0170a4dc9ed00d904ddd3e2a4ad1b1e8dc0fdc9be7',1,'admin')
+VALUES (4,'e6b87050bfcb8143fcb8db0170a4dc9ed00d904ddd3e2a4ad1b1e8dc0fdc9be7',1,'admin')
 
 GO
 
