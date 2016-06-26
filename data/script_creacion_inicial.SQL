@@ -1761,6 +1761,7 @@ WHERE Publicacion_Tipo is not null
 EXEC TODO_X2_LUCAS.Agregar_Rol 'Cliente'
 EXEC TODO_X2_LUCAS.Agregar_Rol 'Empresa'
 EXEC TODO_X2_LUCAS.Agregar_Rol 'Administrador'
+EXEC TODO_X2_LUCAS.Agregar_Rol 'Administrador General'
 
 -- MIGRACION TABLA FUNCIONALIDADES --
 EXEC TODO_X2_LUCAS.Agregar_Funcionalidad 'Alta Rol'
@@ -1812,6 +1813,25 @@ EXEC TODO_X2_LUCAS.Agregar_Rol_Por_Funcionalidad 'Empresa', 'Historial Cliente'
 EXEC TODO_X2_LUCAS.Agregar_Rol_Por_Funcionalidad 'Empresa', 'Calificar al vendedor'
 EXEC TODO_X2_LUCAS.Agregar_Rol_Por_Funcionalidad 'Empresa', 'Consulta de facturas realizadas al vendedor'
 EXEC TODO_X2_LUCAS.Agregar_Rol_Por_Funcionalidad 'Empresa', 'Listado Estadístico'
+
+EXEC TODO_X2_LUCAS.Agregar_Rol_Por_Funcionalidad 'Administrador General', 'Alta Rol'
+EXEC TODO_X2_LUCAS.Agregar_Rol_Por_Funcionalidad 'Administrador General', 'Modificación Rol'
+EXEC TODO_X2_LUCAS.Agregar_Rol_Por_Funcionalidad 'Administrador General', 'Baja Rol'
+EXEC TODO_X2_LUCAS.Agregar_Rol_Por_Funcionalidad 'Administrador General', 'Alta Usuario'
+EXEC TODO_X2_LUCAS.Agregar_Rol_Por_Funcionalidad 'Administrador General', 'Modificación Usuario'
+EXEC TODO_X2_LUCAS.Agregar_Rol_Por_Funcionalidad 'Administrador General', 'Baja Usuario'
+EXEC TODO_X2_LUCAS.Agregar_Rol_Por_Funcionalidad 'Administrador General', 'Alta Rubro'
+EXEC TODO_X2_LUCAS.Agregar_Rol_Por_Funcionalidad 'Administrador General', 'Modificación Rubro'
+EXEC TODO_X2_LUCAS.Agregar_Rol_Por_Funcionalidad 'Administrador General', 'Baja Rubro'
+EXEC TODO_X2_LUCAS.Agregar_Rol_Por_Funcionalidad 'Administrador General', 'Alta visibilidad de publicación'
+EXEC TODO_X2_LUCAS.Agregar_Rol_Por_Funcionalidad 'Administrador General', 'Modificación visibilidad de publicación'
+EXEC TODO_X2_LUCAS.Agregar_Rol_Por_Funcionalidad 'Administrador General', 'Baja visibilidad de publicación'
+EXEC TODO_X2_LUCAS.Agregar_Rol_Por_Funcionalidad 'Administrador General', 'Generar Publicación'
+EXEC TODO_X2_LUCAS.Agregar_Rol_Por_Funcionalidad 'Administrador General', 'Comprar/Ofertar'
+EXEC TODO_X2_LUCAS.Agregar_Rol_Por_Funcionalidad 'Administrador General', 'Historial Cliente'
+EXEC TODO_X2_LUCAS.Agregar_Rol_Por_Funcionalidad 'Administrador General', 'Calificar al vendedor'
+EXEC TODO_X2_LUCAS.Agregar_Rol_Por_Funcionalidad 'Administrador General', 'Consulta de facturas realizadas al vendedor'
+EXEC TODO_X2_LUCAS.Agregar_Rol_Por_Funcionalidad 'Administrador General', 'Listado Estadístico'
 
 -- MIGRACION TABLA CALIFICACIONES --
 EXEC TODO_X2_LUCAS.Agregar_Calificacion_Posible 1
@@ -1948,6 +1968,10 @@ WHERE f.Nro_Factura IS NOT NULL
 
 -- MIGRACION TABLA USUARIOS--
 exec TODO_X2_LUCAS.Migrar_Reputacion_Usuarios
+
+INSERT INTO TODO_X2_LUCAS.Usuarios(Cod_Rol,Contraseña,Estado_Usuario,Nombre_Usuario)
+VALUES (3,'e6b87050bfcb8143fcb8db0170a4dc9ed00d904ddd3e2a4ad1b1e8dc0fdc9be7',1,'admin')
+
 GO
 
 /************************************************** TRIGGERS ***************************************************/
