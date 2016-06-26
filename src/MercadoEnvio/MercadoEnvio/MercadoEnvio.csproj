@@ -33,6 +33,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -223,6 +224,7 @@
     <Compile Include="Utils\CLC_SessionManager.cs" />
     <Compile Include="Utils\DBAdapter.cs" />
     <Compile Include="Utils\Encription.cs" />
+    <Compile Include="Utils\NoSessionIsOpenException.cs" />
     <Compile Include="Utils\Validacion.cs" />
     <EmbeddedResource Include="BienvenidaWindow.resx">
       <DependentUpon>BienvenidaWindow.cs</DependentUpon>

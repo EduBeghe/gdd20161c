@@ -3,12 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using MercadoEnvio.Domain;
-using MercadoEnvio.Utils;
-using MercadoEnvio.Domain.VisibilidadPublicaciones;
-using MercadoEnvio.Utils;
-using MercadoEnvio.Domain;
 using System.Data;
+using MercadoEnvio.Utils;
+using MercadoEnvio.Domain;
 
 namespace MercadoEnvio.Repositories
 {
