@@ -497,16 +497,16 @@ GO
 	CREATE PROCEDURE TODO_X2_LUCAS.Get_Funcionalidades_Por_Roles
 	AS
 	BEGIN
-		SELECT *
-		FROM TODO_X2_LUCAS.Funcionalidades_Por_Rol
+		SELECT F.Cod_Funcionalidad,F.Descripcion_Funcionalidad
+		FROM TODO_X2_LUCAS.Funcionalidades_Por_Rol FR JOIN TODO_X2_LUCAS.Funcionalidades F ON (F.Cod_Funcionalidad=FR.Cod_Funcionalidad)
 	END
 	GO
 -- DATOS TABLA SEGUN CODIGO --
 	CREATE PROCEDURE TODO_X2_LUCAS.Get_Funcionalidades_Por_Rol(@codigoRol int)
 	AS
 	BEGIN
-		SELECT *
-		FROM TODO_X2_LUCAS.Funcionalidades_Por_Rol
+		SELECT F.Cod_Funcionalidad,F.Descripcion_Funcionalidad
+		FROM TODO_X2_LUCAS.Funcionalidades_Por_Rol FR JOIN TODO_X2_LUCAS.Funcionalidades F ON (F.Cod_Funcionalidad=FR.Cod_Funcionalidad)
 		WHERE Cod_Rol = @codigoRol 
 	END
 	GO
