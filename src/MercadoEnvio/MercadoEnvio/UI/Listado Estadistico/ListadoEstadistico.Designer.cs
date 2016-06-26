@@ -1,6 +1,6 @@
-﻿namespace MercadoEnvio.Listado_Estadistico
+﻿namespace MercadoEnvio.UI.Listado_Estadistico
 {
-    partial class Form1
+    partial class ListadoEstadistico
     {
         /// <summary>
         /// Required designer variable.
@@ -29,81 +29,104 @@
         private void InitializeComponent()
         {
             this.label1 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
+            this.estadisticaDataGridView = new System.Windows.Forms.DataGridView();
+            this.trimestreComboBox = new System.Windows.Forms.ComboBox();
+            this.anioNumericUpDown = new System.Windows.Forms.NumericUpDown();
+            this.consultarButton = new System.Windows.Forms.Button();
+            this.estadisticaComboBox = new System.Windows.Forms.ComboBox();
+            ((System.ComponentModel.ISupportInitialize)(this.estadisticaDataGridView)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.anioNumericUpDown)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(205, 20);
+            this.label1.Location = new System.Drawing.Point(155, 9);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(97, 13);
+            this.label1.Size = new System.Drawing.Size(159, 20);
             this.label1.TabIndex = 0;
-            this.label1.Text = "Listado Estadístico";
+            this.label1.Text = "Listados Estadisticos";
             // 
-            // button1
+            // estadisticaDataGridView
             // 
-            this.button1.Location = new System.Drawing.Point(73, 80);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(395, 31);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "Vendedores con mayor cantidad de Productos No vendidos";
-            this.button1.UseVisualStyleBackColor = true;
+            this.estadisticaDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.estadisticaDataGridView.Location = new System.Drawing.Point(12, 166);
+            this.estadisticaDataGridView.Name = "estadisticaDataGridView";
+            this.estadisticaDataGridView.RowTemplate.Height = 28;
+            this.estadisticaDataGridView.Size = new System.Drawing.Size(447, 243);
+            this.estadisticaDataGridView.TabIndex = 1;
             // 
-            // button2
+            // trimestreComboBox
             // 
-            this.button2.Location = new System.Drawing.Point(73, 130);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(393, 30);
-            this.button2.TabIndex = 2;
-            this.button2.Text = "Clientes con mayor cantidad de Productos Comprados";
-            this.button2.UseVisualStyleBackColor = true;
+            this.trimestreComboBox.FormattingEnabled = true;
+            this.trimestreComboBox.Items.AddRange(new object[] {
+            "1° Semestre",
+            "2° Semestre"});
+            this.trimestreComboBox.Location = new System.Drawing.Point(12, 121);
+            this.trimestreComboBox.Name = "trimestreComboBox";
+            this.trimestreComboBox.Size = new System.Drawing.Size(121, 28);
+            this.trimestreComboBox.TabIndex = 2;
             // 
-            // button3
+            // anioNumericUpDown
             // 
-            this.button3.Location = new System.Drawing.Point(72, 181);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(391, 32);
-            this.button3.TabIndex = 3;
-            this.button3.Text = "Vendedores con mayor cantidad de Facturas";
-            this.button3.UseVisualStyleBackColor = true;
+            this.anioNumericUpDown.Location = new System.Drawing.Point(169, 121);
+            this.anioNumericUpDown.Maximum = new decimal(new int[] {
+            2025,
+            0,
+            0,
+            0});
+            this.anioNumericUpDown.Minimum = new decimal(new int[] {
+            2010,
+            0,
+            0,
+            0});
+            this.anioNumericUpDown.Name = "anioNumericUpDown";
+            this.anioNumericUpDown.Size = new System.Drawing.Size(120, 26);
+            this.anioNumericUpDown.TabIndex = 3;
+            this.anioNumericUpDown.Value = new decimal(new int[] {
+            2016,
+            0,
+            0,
+            0});
             // 
-            // button4
+            // consultarButton
             // 
-            this.button4.Location = new System.Drawing.Point(73, 233);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(390, 30);
-            this.button4.TabIndex = 4;
-            this.button4.Text = "Vendedores con mayor Monto Facturado";
-            this.button4.UseVisualStyleBackColor = true;
+            this.consultarButton.Location = new System.Drawing.Point(337, 121);
+            this.consultarButton.Name = "consultarButton";
+            this.consultarButton.Size = new System.Drawing.Size(122, 28);
+            this.consultarButton.TabIndex = 4;
+            this.consultarButton.Text = "Consultar";
+            this.consultarButton.UseVisualStyleBackColor = true;
+            this.consultarButton.Click += new System.EventHandler(this.consultarButton_Click);
             // 
-            // label2
+            // estadisticaComboBox
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(35, 52);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(103, 13);
-            this.label2.TabIndex = 5;
-            this.label2.Text = "Consultar TOP 5 de:";
+            this.estadisticaComboBox.FormattingEnabled = true;
+            this.estadisticaComboBox.Items.AddRange(new object[] {
+            "Vendedores con mayor cantidad de productos no vendidos",
+            "Clientes con mayor cantidad de productos comprados",
+            "Vendedores con mayor cantidad de facturas",
+            "Vendedores con mayor monto facturado"});
+            this.estadisticaComboBox.Location = new System.Drawing.Point(12, 66);
+            this.estadisticaComboBox.Name = "estadisticaComboBox";
+            this.estadisticaComboBox.Size = new System.Drawing.Size(447, 28);
+            this.estadisticaComboBox.TabIndex = 5;
             // 
-            // Form1
+            // ListadoEstadistico
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(533, 285);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.button4);
-            this.Controls.Add(this.button3);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
+            this.ClientSize = new System.Drawing.Size(474, 421);
+            this.Controls.Add(this.estadisticaComboBox);
+            this.Controls.Add(this.consultarButton);
+            this.Controls.Add(this.anioNumericUpDown);
+            this.Controls.Add(this.trimestreComboBox);
+            this.Controls.Add(this.estadisticaDataGridView);
             this.Controls.Add(this.label1);
-            this.Name = "Form1";
-            this.Text = "Form1";
-            this.Load += new System.EventHandler(this.Form1_Load);
+            this.Name = "ListadoEstadistico";
+            this.Text = "Listado Estadistico";
+            ((System.ComponentModel.ISupportInitialize)(this.estadisticaDataGridView)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.anioNumericUpDown)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -112,10 +135,10 @@
         #endregion
 
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.DataGridView estadisticaDataGridView;
+        private System.Windows.Forms.ComboBox trimestreComboBox;
+        private System.Windows.Forms.NumericUpDown anioNumericUpDown;
+        private System.Windows.Forms.Button consultarButton;
+        private System.Windows.Forms.ComboBox estadisticaComboBox;
     }
 }

@@ -198,14 +198,14 @@
     <Compile Include="UI\Historial Cliente\Historial.Designer.cs">
       <DependentUpon>Historial.cs</DependentUpon>
     </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UI\Listado Estadistico\ListadoEstadistico.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="UI\Listado Estadistico\ListadoEstadistico.Designer.cs">
       <DependentUpon>ListadoEstadistico.cs</DependentUpon>
     </Compile>
-    <Compile Include="Program.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UI\Login\LoginScreen.cs">
       <SubType>Form</SubType>
     </Compile>
