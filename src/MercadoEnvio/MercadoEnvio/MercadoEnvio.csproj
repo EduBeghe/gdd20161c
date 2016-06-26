@@ -62,13 +62,11 @@
     <Compile Include="Domain\FormaDePago.cs" />
     <Compile Include="Domain\Funcionalidades.cs" />
     <Compile Include="Domain\InconsistenciasCalificaciones.cs" />
-    <Compile Include="Domain\Inmediata.cs" />
     <Compile Include="Domain\ItemsFacturas.cs" />
     <Compile Include="Domain\Ofertas.cs" />
     <Compile Include="Domain\Publicaciones.cs" />
     <Compile Include="Domain\Rol.cs" />
     <Compile Include="Domain\Rubros.cs" />
-    <Compile Include="Domain\Subasta.cs" />
     <Compile Include="Domain\Tipos_Publicaciones.cs" />
     <Compile Include="Domain\Usuario.cs" />
     <Compile Include="Domain\VisibilidadPublicaciones.cs" />
