@@ -206,8 +206,8 @@ IF OBJECT_ID('TODO_X2_LUCAS.obtenerEmpresaPorCodigoUsuario') IS NOT NULL
 DROP PROCEDURE TODO_X2_LUCAS.obtenerEmpresaPorCodigoUsuario;
 IF OBJECT_ID('TODO_X2_LUCAS.obtenerClientePorCodigoUsuario') IS NOT NULL
 DROP PROCEDURE TODO_X2_LUCAS.obtenerClientePorCodigoUsuario;
-IF OBJECT_ID('TODO_X2_LUCAS.obtenerUsuarioPorUsername') IS NOT NULL
-DROP PROCEDURE TODO_X2_LUCAS.obtenerUsuarioPorUsername;
+IF OBJECT_ID('TODO_X2_LUCAS.Get_Usuario_Por_Username') IS NOT NULL
+DROP PROCEDURE TODO_X2_LUCAS.Get_Usuario_Por_Username;
 IF OBJECT_ID('TODO_X2_LUCAS.Baja_Cliente') IS NOT NULL
 DROP PROCEDURE TODO_X2_LUCAS.Baja_Cliente;
 IF OBJECT_ID('TODO_X2_LUCAS.Baja_Empresa') IS NOT NULL
@@ -271,7 +271,7 @@ CREATE TABLE TODO_X2_LUCAS.Funcionalidades_Por_Rol (
 CREATE TABLE TODO_X2_LUCAS.Usuarios ( 
 	Cod_Usuario int PRIMARY KEY CLUSTERED IDENTITY,
 	Nombre_Usuario nvarchar(255) NOT NULL,
-	Contraseña nvarchar(255) NOT NULL,
+	Contrasenia nvarchar(255) NOT NULL,
 	Cod_Rol int REFERENCES TODO_X2_LUCAS.Roles (Cod_Rol),
 	Intentos_Login int NOT NULL DEFAULT 0,
 	Reputacion int DEFAULT 0 ,
@@ -745,7 +745,7 @@ BEGIN
 END
 GO
 
-CREATE PROCEDURE TODO_X2_LUCAS.obtenerUsuarioPorUsername(@username nvarchar(255))
+CREATE PROCEDURE TODO_X2_LUCAS.Get_Usuario_Por_Username(@username nvarchar(255))
 AS
 BEGIN
 	SELECT *
@@ -1081,7 +1081,7 @@ BEGIN
 	FROM TODO_X2_LUCAS.Usuarios
 	WHERE Estado_Usuario = 1 AND
 		  Nombre_Usuario = @username AND
-		  Contraseña = @password
+		  Contrasenia = @password
 	
 	EXEC TODO_X2_LUCAS.actualizarIntentos @username,@Cantidad
 
@@ -1105,7 +1105,7 @@ BEGIN
 		DECLARE @cod_rol int;
 		SET @cod_rol = TODO_X2_LUCAS.ObtenerRol(@rol);
 
-		INSERT INTO TODO_X2_LUCAS.Usuarios(Nombre_Usuario,Contraseña,Cod_Rol)
+		INSERT INTO TODO_X2_LUCAS.Usuarios(Nombre_Usuario,Contrasenia,Cod_Rol)
 		VALUES (@username,@password,@cod_rol)
 	END
 	ELSE
@@ -1120,8 +1120,8 @@ CREATE PROCEDURE TODO_X2_LUCAS.Modificar_Usuario(@Usuario nvarchar(255),@contras
 AS
 BEGIN
 	UPDATE TODO_X2_LUCAS.Usuarios
-	SET Contraseña = @contraseñaNueva
-	WHERE Nombre_Usuario = @Usuario AND Contraseña = @contraseñaVieja
+	SET Contrasenia = @contraseñaNueva
+	WHERE Nombre_Usuario = @Usuario AND Contrasenia = @contraseñaVieja
 END
 GO
 /* ------------ PROCEDIMIENTO PARA MODIFICAR UN USUARIO ------------ */
@@ -1709,7 +1709,7 @@ BEGIN
 		SET @codDom = TODO_X2_LUCAS.Obtener_Cod_Domicilio(@calle,@nroCalle,@piso,@depto);
 		SET @nombreUsuario = @apellido + CONVERT(nvarchar(255),@dni);
 	
-		INSERT INTO TODO_X2_LUCAS.Usuarios(Nombre_Usuario,Contraseña,Cod_Rol,Estado_Usuario)
+		INSERT INTO TODO_X2_LUCAS.Usuarios(Nombre_Usuario,Contrasenia,Cod_Rol,Estado_Usuario)
 		VALUES(@nombreUsuario,@contraseña,@codRol,1)
 		
 		DECLARE @codUsuario int = (SELECT DISTINCT @@IDENTITY FROM TODO_X2_LUCAS.Usuarios);
@@ -1752,7 +1752,7 @@ BEGIN
 		SET @codDom = TODO_X2_LUCAS.Obtener_Cod_Domicilio(@calle,@nroCalle,@piso,@depto);
 		SET @nombreUsuario = CONVERT(nvarchar(255),@cuit);
 	
-		INSERT INTO TODO_X2_LUCAS.Usuarios(Nombre_Usuario,Contraseña,Cod_Rol,Estado_Usuario)
+		INSERT INTO TODO_X2_LUCAS.Usuarios(Nombre_Usuario,Contrasenia,Cod_Rol,Estado_Usuario)
 		VALUES(@nombreUsuario,@contraseña,@codRol,1)
 		
 		DECLARE @codUsuario int = (SELECT DISTINCT @@IDENTITY FROM TODO_X2_LUCAS.Usuarios);
@@ -2034,7 +2034,7 @@ WHERE f.Nro_Factura IS NOT NULL
 -- MIGRACION TABLA USUARIOS--
 exec TODO_X2_LUCAS.Migrar_Reputacion_Usuarios
 
-INSERT INTO TODO_X2_LUCAS.Usuarios(Cod_Rol,Contraseña,Estado_Usuario,Nombre_Usuario)
+INSERT INTO TODO_X2_LUCAS.Usuarios(Cod_Rol,Contrasenia,Estado_Usuario,Nombre_Usuario)
 VALUES (4,'e6b87050bfcb8143fcb8db0170a4dc9ed00d904ddd3e2a4ad1b1e8dc0fdc9be7',1,'admin')
 
 GO
