@@ -188,8 +188,8 @@ IF OBJECT_ID('TODO_X2_LUCAS.Vendedores_Con_Mayoria_De_Facturas') IS NOT NULL
 DROP PROCEDURE TODO_X2_LUCAS.Vendedores_Con_Mayoria_De_Facturas;
 IF OBJECT_ID('TODO_X2_LUCAS.Clientes_Con_Mayoria_De_Compras') IS NOT NULL
 DROP PROCEDURE TODO_X2_LUCAS.Clientes_Con_Mayoria_De_Compras;
-IF OBJECT_ID('TODO_X2_LUCAS.Vendeddores_Mas_Perros') IS NOT NULL
-DROP PROCEDURE TODO_X2_LUCAS.Vendeddores_Mas_Perros;
+IF OBJECT_ID('TODO_X2_LUCAS.Vendedores_Mas_Perros') IS NOT NULL
+DROP PROCEDURE TODO_X2_LUCAS.Vendedores_Mas_Perros;
 IF OBJECT_ID('TODO_X2_LUCAS.Filtrar_Publicaciones') IS NOT NULL
 DROP PROCEDURE TODO_X2_LUCAS.Filtrar_Publicaciones;
 IF OBJECT_ID('TODO_X2_LUCAS.Filtrar_Usuarios_Empresa') IS NOT NULL
@@ -1562,17 +1562,17 @@ GO
 --Vendedores con mayor cantidad de productos no vendidos, dicho listado debe
 --filtrarse por grado de visibilidad de la publicación y por mes-año. Primero se deberá
 --ordenar por fecha y luego por visibilidad.
-CREATE PROCEDURE TODO_X2_LUCAS.Vendeddores_Mas_Perros(@visibilidad nvarchar(255),@mesInicio datetime,@mesFinal datetime,@año datetime)
+CREATE PROCEDURE TODO_X2_LUCAS.Vendedores_Mas_Perros(@visibilidad nvarchar(255),@mesInicio datetime,@mesFinal datetime,@año datetime)
 AS
 BEGIN
 	
-	SELECT TOP 5 U.Cod_Usuario,SUM(p.Stock_Publicacion)
+	SELECT TOP 5 U.Nombre_Usuario,SUM(p.Stock_Publicacion)
 	FROM TODO_X2_LUCAS.Usuarios U  JOIN TODO_X2_LUCAS.Publicaciones P ON (P.Cod_Usuario_Responsable=U.Cod_Usuario)
 									JOIN TODO_X2_LUCAS.Facturas F ON (p.Cod_Usuario_Responsable != F.Vendedor_Correspondiente)
 									JOIN TODO_X2_LUCAS.Items_Facturas I ON (I.Cod_Factura=F.Cod_Factura)
 	WHERE P.Cod_Visibilidad = TODO_X2_LUCAS.Obtener_Visibilidad(@visibilidad) AND
 			(MONTH(F.Fecha_Factura) BETWEEN @mesInicio AND @mesFinal) AND YEAR(F.Fecha_Factura) = @año
-	GROUP BY U.Cod_Usuario
+	GROUP BY U.Nombre_Usuario
 	ORDER BY 2 DESC
 
 END
@@ -1602,12 +1602,11 @@ GO
 CREATE PROCEDURE TODO_X2_LUCAS.Vendedores_Con_Mayoria_De_Facturas(@año datetime,@mesInicio datetime,@mesFinal datetime)
 AS
 BEGIN
-	SELECT TOP 5 C.Apellido,C.DNI,COUNT(F.Cod_Factura) AS 'Cantidad de facturas'
-	FROM TODO_X2_LUCAS.Usuarios U JOIN TODO_X2_LUCAS.Detalles_Clientes C ON (U.Cod_Usuario = C.Cod_Usuario)
-									JOIN TODO_X2_LUCAS.Facturas F ON (f.Vendedor_Correspondiente = u.Cod_Usuario)
-	WHERE YEAR(f.Fecha_Factura) = @año AND (MONTH(F.Fecha_Factura) BETWEEN @mesInicio AND @mesFinal)
-	GROUP BY C.Apellido,C.DNI
-	ORDER BY 3 DESC
+	SELECT TOP 5 U.Nombre_Usuario,COUNT(F.Cod_Factura) AS 'Cantidad de facturas'
+	FROM TODO_X2_LUCAS.Usuarios U JOIN TODO_X2_LUCAS.Facturas F ON (f.Vendedor_Correspondiente = u.Cod_Usuario)
+	WHERE YEAR(f.Fecha_Factura) = @año  AND (MONTH(F.Fecha_Factura) BETWEEN @mesInicio AND @mesFinal)
+	GROUP BY U.Nombre_Usuario
+	ORDER BY 2 DESC
 
 END
 GO
@@ -1616,12 +1615,11 @@ GO
 CREATE PROCEDURE TODO_X2_LUCAS.Vendedores_Con_Mayoria_De_Monto_Facturado(@año datetime,@mesInicio datetime,@mesFinal datetime)
 AS
 BEGIN
-	SELECT TOP 5 C.Apellido,C.DNI,SUM(F.Total_Factura) AS 'Monto total facturado'
-	FROM TODO_X2_LUCAS.Usuarios U JOIN TODO_X2_LUCAS.Detalles_Clientes C ON (U.Cod_Usuario = C.Cod_Usuario)
-									JOIN TODO_X2_LUCAS.Facturas F ON (f.Vendedor_Correspondiente = u.Cod_Usuario)
+	SELECT TOP 5 U.Nombre_Usuario,SUM(F.Total_Factura) AS 'Monto total facturado'
+	FROM TODO_X2_LUCAS.Usuarios U JOIN TODO_X2_LUCAS.Facturas F ON (f.Vendedor_Correspondiente = u.Cod_Usuario)
 	WHERE YEAR(f.Fecha_Factura) = @año AND (MONTH(F.Fecha_Factura) BETWEEN @mesInicio AND @mesFinal)
-	GROUP BY C.Apellido,C.DNI
-	ORDER BY 3 DESC
+	GROUP BY U.Nombre_Usuario
+	ORDER BY 2 DESC
 	
 END
 GO
@@ -1763,6 +1761,7 @@ WHERE Publicacion_Tipo is not null
 EXEC TODO_X2_LUCAS.Agregar_Rol 'Cliente'
 EXEC TODO_X2_LUCAS.Agregar_Rol 'Empresa'
 EXEC TODO_X2_LUCAS.Agregar_Rol 'Administrador'
+EXEC TODO_X2_LUCAS.Agregar_Rol 'Administrador General'
 
 -- MIGRACION TABLA FUNCIONALIDADES --
 EXEC TODO_X2_LUCAS.Agregar_Funcionalidad 'Alta Rol'
@@ -1814,6 +1813,25 @@ EXEC TODO_X2_LUCAS.Agregar_Rol_Por_Funcionalidad 'Empresa', 'Historial Cliente'
 EXEC TODO_X2_LUCAS.Agregar_Rol_Por_Funcionalidad 'Empresa', 'Calificar al vendedor'
 EXEC TODO_X2_LUCAS.Agregar_Rol_Por_Funcionalidad 'Empresa', 'Consulta de facturas realizadas al vendedor'
 EXEC TODO_X2_LUCAS.Agregar_Rol_Por_Funcionalidad 'Empresa', 'Listado Estadístico'
+
+EXEC TODO_X2_LUCAS.Agregar_Rol_Por_Funcionalidad 'Administrador General', 'Alta Rol'
+EXEC TODO_X2_LUCAS.Agregar_Rol_Por_Funcionalidad 'Administrador General', 'Modificación Rol'
+EXEC TODO_X2_LUCAS.Agregar_Rol_Por_Funcionalidad 'Administrador General', 'Baja Rol'
+EXEC TODO_X2_LUCAS.Agregar_Rol_Por_Funcionalidad 'Administrador General', 'Alta Usuario'
+EXEC TODO_X2_LUCAS.Agregar_Rol_Por_Funcionalidad 'Administrador General', 'Modificación Usuario'
+EXEC TODO_X2_LUCAS.Agregar_Rol_Por_Funcionalidad 'Administrador General', 'Baja Usuario'
+EXEC TODO_X2_LUCAS.Agregar_Rol_Por_Funcionalidad 'Administrador General', 'Alta Rubro'
+EXEC TODO_X2_LUCAS.Agregar_Rol_Por_Funcionalidad 'Administrador General', 'Modificación Rubro'
+EXEC TODO_X2_LUCAS.Agregar_Rol_Por_Funcionalidad 'Administrador General', 'Baja Rubro'
+EXEC TODO_X2_LUCAS.Agregar_Rol_Por_Funcionalidad 'Administrador General', 'Alta visibilidad de publicación'
+EXEC TODO_X2_LUCAS.Agregar_Rol_Por_Funcionalidad 'Administrador General', 'Modificación visibilidad de publicación'
+EXEC TODO_X2_LUCAS.Agregar_Rol_Por_Funcionalidad 'Administrador General', 'Baja visibilidad de publicación'
+EXEC TODO_X2_LUCAS.Agregar_Rol_Por_Funcionalidad 'Administrador General', 'Generar Publicación'
+EXEC TODO_X2_LUCAS.Agregar_Rol_Por_Funcionalidad 'Administrador General', 'Comprar/Ofertar'
+EXEC TODO_X2_LUCAS.Agregar_Rol_Por_Funcionalidad 'Administrador General', 'Historial Cliente'
+EXEC TODO_X2_LUCAS.Agregar_Rol_Por_Funcionalidad 'Administrador General', 'Calificar al vendedor'
+EXEC TODO_X2_LUCAS.Agregar_Rol_Por_Funcionalidad 'Administrador General', 'Consulta de facturas realizadas al vendedor'
+EXEC TODO_X2_LUCAS.Agregar_Rol_Por_Funcionalidad 'Administrador General', 'Listado Estadístico'
 
 -- MIGRACION TABLA CALIFICACIONES --
 EXEC TODO_X2_LUCAS.Agregar_Calificacion_Posible 1
@@ -1950,6 +1968,10 @@ WHERE f.Nro_Factura IS NOT NULL
 
 -- MIGRACION TABLA USUARIOS--
 exec TODO_X2_LUCAS.Migrar_Reputacion_Usuarios
+
+INSERT INTO TODO_X2_LUCAS.Usuarios(Cod_Rol,Contraseña,Estado_Usuario,Nombre_Usuario)
+VALUES (3,'e6b87050bfcb8143fcb8db0170a4dc9ed00d904ddd3e2a4ad1b1e8dc0fdc9be7',1,'admin')
+
 GO
 
 /************************************************** TRIGGERS ***************************************************/

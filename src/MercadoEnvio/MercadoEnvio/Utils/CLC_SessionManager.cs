@@ -23,13 +23,29 @@ namespace MercadoEnvio.Utils
 
         public static int getDNI(){
             var cliente = new ClientesRepository().getClienteByUserId(currentUser.Cod_Usuario);
-            return cliente.DNI;
+            if (cliente != null)
+            {
+                return cliente.DNI;
+            }
+            else
+            {
+                return 0;
+            }
+            
         }
 
         public static string getCUIT()
         {
             var empresa = new EmpresaRepository().getClienteByUserId(currentUser.Cod_Usuario);
-            return empresa.CUIT;    
+            if (empresa != null)
+            {
+                return empresa.CUIT;
+            }
+            else
+            {
+                return "";
+            }
+            
         }
 
         public static void setCurrentUser(Usuario u) {

@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using MercadoEnvio.Utils;
 using MercadoEnvio.Repositories;
 using MercadoEnvio.Domain;
+using MercadoEnvio.Repositories;
 
 namespace MercadoEnvio.UI.ABM_Usuario
 {
@@ -32,9 +33,22 @@ namespace MercadoEnvio.UI.ABM_Usuario
         {
             if (Validacion.validarInputs(this.Controls))
             {
-                var domicilio = new Domicilio(calleTextBox.Text,Convert.ToInt32(numeroPisoTextBox.Text), dptoTextBox.Text, Convert.ToInt32(numeroCalleTextBox.Text), localidadTextBox.Text);
-                var detalle = new DetalleEmpresa(razonTextBox.Text,mailTextBox.Text,Convert.ToInt32(telefonoTextBox.Text), domicilio, cpTextBox.Text, ciudadTextBox.Text, cuitTextBox.Text, true, this.username);
-                var retornoAlta = new EmpresaRepository().altaEmpresa(detalle);
+                
+                var retornoAlta = new EmpresaRepository().altaEmpresa(
+                    razonTextBox.Text,
+                    mailTextBox.Text,
+                    Convert.ToInt32(telefonoTextBox.Text),
+                    calleTextBox.Text,
+                    Convert.ToInt32(numeroCalleTextBox.Text), 
+                    Convert.ToInt32(numeroPisoTextBox.Text), 
+                    dptoTextBox.Text, 
+                    localidadTextBox.Text,
+                    cpTextBox.Text, 
+                    ciudadTextBox.Text, 
+                    cuitTextBox.Text, 
+                    ((Rubros)rubroComboBox.SelectedItem).Descripcion_Rubro,
+                    true
+                    );
                 if (retornoAlta == 0)
                 {
                     MessageBox.Show("La empresa ha sido creada exitosamente.");

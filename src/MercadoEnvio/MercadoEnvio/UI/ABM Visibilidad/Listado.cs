@@ -37,7 +37,7 @@ namespace MercadoEnvio.ABM_Visibilidad
             var count = visibilidadesGrid.SelectedRows.Count;
             if (count != 0)
             {
-                var visibilidad = (VisibilidadPublicaciones)visibilidadesGrid.SelectedRows[i].DataBoundItem;
+                var visibilidad = (VisibilidadPublicaciones)visibilidadesGrid.SelectedRows[0].DataBoundItem;
                 new VisibilidadRepository().bajaVisibilidad(visibilidad);   
                 MessageBox.Show("visibilidad eliminada con exito");
                 this.Close();

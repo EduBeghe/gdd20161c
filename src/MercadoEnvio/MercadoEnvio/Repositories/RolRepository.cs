@@ -34,10 +34,11 @@ namespace MercadoEnvio.Repositories {
         return retorno;
     }
 
-    //public List<Rol> findRol(  string nombre  )
-    //{
-        //return parseRoles( DBAdapter.retrieveDataTable("Filtrar_Roles", nombre ));  
-    //}
+    public List<Rol> findRol(  string nombre  )
+    {
+        // BUSCAR STORED PROCEDURE CORRECTO!
+        return parseRoles( DBAdapter.retrieveDataTable("Filtrar_Roles", nombre ));  
+    }
 
     public int ObtenerRolIDPorDescripcion(String descripcion)
     {

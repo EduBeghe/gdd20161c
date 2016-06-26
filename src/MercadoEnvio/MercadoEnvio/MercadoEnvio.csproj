@@ -33,6 +33,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -61,13 +62,11 @@
     <Compile Include="Domain\FormaDePago.cs" />
     <Compile Include="Domain\Funcionalidades.cs" />
     <Compile Include="Domain\InconsistenciasCalificaciones.cs" />
-    <Compile Include="Domain\Inmediata.cs" />
     <Compile Include="Domain\ItemsFacturas.cs" />
     <Compile Include="Domain\Ofertas.cs" />
     <Compile Include="Domain\Publicaciones.cs" />
     <Compile Include="Domain\Rol.cs" />
     <Compile Include="Domain\Rubros.cs" />
-    <Compile Include="Domain\Subasta.cs" />
     <Compile Include="Domain\Tipos_Publicaciones.cs" />
     <Compile Include="Domain\Usuario.cs" />
     <Compile Include="Domain\VisibilidadPublicaciones.cs" />
@@ -228,6 +227,7 @@
     <Compile Include="Utils\CLC_SessionManager.cs" />
     <Compile Include="Utils\DBAdapter.cs" />
     <Compile Include="Utils\Encription.cs" />
+    <Compile Include="Utils\NoSessionIsOpenException.cs" />
     <Compile Include="Utils\Validacion.cs" />
     <EmbeddedResource Include="BienvenidaWindow.resx">
       <DependentUpon>BienvenidaWindow.cs</DependentUpon>

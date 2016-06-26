@@ -14,7 +14,7 @@ namespace MercadoEnvio.Calificar
 {
     public partial class Form1 : Form
     {
-        int codigoCompra
+        int codigoCompra;
 
         public Form1()
         {

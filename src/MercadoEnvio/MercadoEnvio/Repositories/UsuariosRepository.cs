@@ -37,15 +37,19 @@ namespace MercadoEnvio.Repositories
 
         public void iniciarSesion(string userName)
         {
-            CLC_SessionManager.currentUser = getUsuario(userName);
-            var usr = getUsuario(userName);
+            var usr = getUsuarioPorUsername(userName);
             if (usr != null) CLC_SessionManager.setCurrentUser(usr);
             else MessageBox.Show("usr es null");
         }
 
-        public Usuario getUsuario(string username)
+        public Usuario getUsuarioPorUsername(String username)
         {
-            return parse(DBAdapter.retrieveDataTable("Get_Usuario", username).Rows[0]);
+            return parse(DBAdapter.retrieveDataTable("Get_Usuario_Por_Username", username).Rows[0]);
+        }
+
+        public Usuario getUsuario(int userID )
+        {
+            return parse(DBAdapter.retrieveDataTable("Get_Usuario", userID).Rows[0]);
         }
 
         public int getUsuarioIDPorIdentificadores(int dni, string cuit)
@@ -69,19 +73,17 @@ namespace MercadoEnvio.Repositories
                dr["Nombre_Usuario"] as string,
 
                dr["password"] as string,
-               Convert.ToInt32(dr["Cod_Rol"]),
+               
+               new RolesRepository().getRol(Convert.ToInt32(dr["Cod_Usuario"])),
 
-               Convert.ToInt32(dr["Reputacion"]),
                Convert.ToInt32(dr["Intentos_Login"]),
 
-               (Boolean)dr["Estado_Usuario"]
+               Convert.ToInt32(dr["Reputacion"]),
 
+               (Boolean)dr["Estado_Usuario"]
                );
 
         }
-
-
-
     }
 
 }

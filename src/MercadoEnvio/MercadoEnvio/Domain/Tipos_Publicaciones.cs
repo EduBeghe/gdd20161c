@@ -10,8 +10,8 @@ namespace MercadoEnvio.Domain
         
     public class Tipos_Publicaciones
     {
-        int cod_tipos_publicaciones { get; set; }
-        string descripcion_Tipo { get; set; }
+        public int cod_tipos_publicaciones { get; set; }
+        public string descripcion_Tipo { get; set; }
 
         public Tipos_Publicaciones( int cod_tipos_publicaciones, string descripcion_Tipo )
         {

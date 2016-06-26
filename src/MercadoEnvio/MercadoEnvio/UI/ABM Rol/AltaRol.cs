@@ -24,7 +24,7 @@ namespace MercadoEnvio.ABM_Rol
         {
             this.ShowDialog();
         }
-
+        
         private void AltaButton_Click(object sender, EventArgs e)
         {
             if (Validacion.validarInputs(this.Controls))
