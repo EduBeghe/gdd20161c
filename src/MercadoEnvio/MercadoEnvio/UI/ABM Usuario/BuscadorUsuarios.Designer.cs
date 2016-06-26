@@ -42,9 +42,7 @@
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.usuariosGrid = new System.Windows.Forms.DataGridView();
-            this.gD1C2016DataSet3 = new MercadoEnvio.GD1C2016DataSet3();
             this.usuariosBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.usuariosTableAdapter = new MercadoEnvio.GD1C2016DataSet3TableAdapters.UsuariosTableAdapter();
             this.codUsuarioDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.nombreUsuarioDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.contraseñaDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -53,7 +51,6 @@
             this.reputacionDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.estadoUsuarioDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.usuariosGrid)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gD1C2016DataSet3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.usuariosBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
@@ -182,17 +179,12 @@
             // 
             // gD1C2016DataSet3
             // 
-            this.gD1C2016DataSet3.DataSetName = "GD1C2016DataSet3";
-            this.gD1C2016DataSet3.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // usuariosBindingSource
             // 
-            this.usuariosBindingSource.DataMember = "Usuarios";
-            this.usuariosBindingSource.DataSource = this.gD1C2016DataSet3;
             // 
             // usuariosTableAdapter
             // 
-            this.usuariosTableAdapter.ClearBeforeFill = true;
             // 
             // codUsuarioDataGridViewTextBoxColumn
             // 
@@ -259,7 +251,6 @@
             this.Text = "BuscadorUsuarios";
             this.Load += new System.EventHandler(this.BuscadorUsuarios_Load);
             ((System.ComponentModel.ISupportInitialize)(this.usuariosGrid)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gD1C2016DataSet3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.usuariosBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -281,9 +272,7 @@
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.DataGridView usuariosGrid;
-        private GD1C2016DataSet3 gD1C2016DataSet3;
         private System.Windows.Forms.BindingSource usuariosBindingSource;
-        private GD1C2016DataSet3TableAdapters.UsuariosTableAdapter usuariosTableAdapter;
         private System.Windows.Forms.DataGridViewTextBoxColumn codUsuarioDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn nombreUsuarioDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn contraseñaDataGridViewTextBoxColumn;

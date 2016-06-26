@@ -57,7 +57,7 @@ namespace MercadoEnvio.UI.ABM_Rol
 
         private void button2_Click(object sender, EventArgs e)
         {
-            if (rolesList.SelectedRows.Count != 0) { new ModificarRol().ShowDialog((Rol)rolesList.SelectedRows[0].DataBoundItem); }
+            if (rolesList.SelectedRows.Count != 0) { new UI.ABM_Rol.ModificarRol().ShowDialog((Rol)rolesList.SelectedRows[0].DataBoundItem); }
             else MessageBox.Show("Debe seleccionar un rol para modificar");
         }
     }

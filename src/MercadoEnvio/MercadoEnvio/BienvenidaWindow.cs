@@ -25,7 +25,7 @@ namespace MercadoEnvio
 
         private void loginButton_Click(object sender, EventArgs e)
         {
-            new LoginScreen().ShowDialog(this);
+            new UI.Login.LoginScreen().ShowDialog(this);
             this.Close();
         }
 
