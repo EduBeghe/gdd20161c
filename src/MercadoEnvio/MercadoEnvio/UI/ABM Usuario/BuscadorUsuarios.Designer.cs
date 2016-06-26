@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -37,10 +38,23 @@
             this.apellidoTextBox = new System.Windows.Forms.TextBox();
             this.dniTextBox = new System.Windows.Forms.TextBox();
             this.mailTextBox = new System.Windows.Forms.TextBox();
-            this.checkedListBox1 = new System.Windows.Forms.CheckedListBox();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
+            this.usuariosGrid = new System.Windows.Forms.DataGridView();
+            this.gD1C2016DataSet3 = new MercadoEnvio.GD1C2016DataSet3();
+            this.usuariosBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.usuariosTableAdapter = new MercadoEnvio.GD1C2016DataSet3TableAdapters.UsuariosTableAdapter();
+            this.codUsuarioDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.nombreUsuarioDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.contraseñaDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.codRolDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.intentosLoginDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.reputacionDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.estadoUsuarioDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            ((System.ComponentModel.ISupportInitialize)(this.usuariosGrid)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gD1C2016DataSet3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.usuariosBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -118,14 +132,6 @@
             this.mailTextBox.TabIndex = 8;
             this.mailTextBox.TextChanged += new System.EventHandler(this.textBox4_TextChanged);
             // 
-            // checkedListBox1
-            // 
-            this.checkedListBox1.FormattingEnabled = true;
-            this.checkedListBox1.Location = new System.Drawing.Point(22, 229);
-            this.checkedListBox1.Name = "checkedListBox1";
-            this.checkedListBox1.Size = new System.Drawing.Size(328, 109);
-            this.checkedListBox1.TabIndex = 9;
-            // 
             // button1
             // 
             this.button1.Location = new System.Drawing.Point(125, 182);
@@ -144,6 +150,7 @@
             this.button2.TabIndex = 11;
             this.button2.Text = "Modificar";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // button3
             // 
@@ -153,16 +160,92 @@
             this.button3.TabIndex = 12;
             this.button3.Text = "Inhabilitar";
             this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
+            // usuariosGrid
+            // 
+            this.usuariosGrid.AutoGenerateColumns = false;
+            this.usuariosGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.usuariosGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.codUsuarioDataGridViewTextBoxColumn,
+            this.nombreUsuarioDataGridViewTextBoxColumn,
+            this.contraseñaDataGridViewTextBoxColumn,
+            this.codRolDataGridViewTextBoxColumn,
+            this.intentosLoginDataGridViewTextBoxColumn,
+            this.reputacionDataGridViewTextBoxColumn,
+            this.estadoUsuarioDataGridViewCheckBoxColumn});
+            this.usuariosGrid.DataSource = this.usuariosBindingSource;
+            this.usuariosGrid.Location = new System.Drawing.Point(10, 230);
+            this.usuariosGrid.Name = "usuariosGrid";
+            this.usuariosGrid.Size = new System.Drawing.Size(352, 123);
+            this.usuariosGrid.TabIndex = 13;
+            // 
+            // gD1C2016DataSet3
+            // 
+            this.gD1C2016DataSet3.DataSetName = "GD1C2016DataSet3";
+            this.gD1C2016DataSet3.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // usuariosBindingSource
+            // 
+            this.usuariosBindingSource.DataMember = "Usuarios";
+            this.usuariosBindingSource.DataSource = this.gD1C2016DataSet3;
+            // 
+            // usuariosTableAdapter
+            // 
+            this.usuariosTableAdapter.ClearBeforeFill = true;
+            // 
+            // codUsuarioDataGridViewTextBoxColumn
+            // 
+            this.codUsuarioDataGridViewTextBoxColumn.DataPropertyName = "Cod_Usuario";
+            this.codUsuarioDataGridViewTextBoxColumn.HeaderText = "Cod_Usuario";
+            this.codUsuarioDataGridViewTextBoxColumn.Name = "codUsuarioDataGridViewTextBoxColumn";
+            this.codUsuarioDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // nombreUsuarioDataGridViewTextBoxColumn
+            // 
+            this.nombreUsuarioDataGridViewTextBoxColumn.DataPropertyName = "Nombre_Usuario";
+            this.nombreUsuarioDataGridViewTextBoxColumn.HeaderText = "Nombre_Usuario";
+            this.nombreUsuarioDataGridViewTextBoxColumn.Name = "nombreUsuarioDataGridViewTextBoxColumn";
+            // 
+            // contraseñaDataGridViewTextBoxColumn
+            // 
+            this.contraseñaDataGridViewTextBoxColumn.DataPropertyName = "Contraseña";
+            this.contraseñaDataGridViewTextBoxColumn.HeaderText = "Contraseña";
+            this.contraseñaDataGridViewTextBoxColumn.Name = "contraseñaDataGridViewTextBoxColumn";
+            // 
+            // codRolDataGridViewTextBoxColumn
+            // 
+            this.codRolDataGridViewTextBoxColumn.DataPropertyName = "Cod_Rol";
+            this.codRolDataGridViewTextBoxColumn.HeaderText = "Cod_Rol";
+            this.codRolDataGridViewTextBoxColumn.Name = "codRolDataGridViewTextBoxColumn";
+            // 
+            // intentosLoginDataGridViewTextBoxColumn
+            // 
+            this.intentosLoginDataGridViewTextBoxColumn.DataPropertyName = "Intentos_Login";
+            this.intentosLoginDataGridViewTextBoxColumn.HeaderText = "Intentos_Login";
+            this.intentosLoginDataGridViewTextBoxColumn.Name = "intentosLoginDataGridViewTextBoxColumn";
+            // 
+            // reputacionDataGridViewTextBoxColumn
+            // 
+            this.reputacionDataGridViewTextBoxColumn.DataPropertyName = "Reputacion";
+            this.reputacionDataGridViewTextBoxColumn.HeaderText = "Reputacion";
+            this.reputacionDataGridViewTextBoxColumn.Name = "reputacionDataGridViewTextBoxColumn";
+            // 
+            // estadoUsuarioDataGridViewCheckBoxColumn
+            // 
+            this.estadoUsuarioDataGridViewCheckBoxColumn.DataPropertyName = "Estado_Usuario";
+            this.estadoUsuarioDataGridViewCheckBoxColumn.HeaderText = "Estado_Usuario";
+            this.estadoUsuarioDataGridViewCheckBoxColumn.Name = "estadoUsuarioDataGridViewCheckBoxColumn";
             // 
             // BuscadorUsuarios
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(373, 401);
+            this.Controls.Add(this.usuariosGrid);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
-            this.Controls.Add(this.checkedListBox1);
             this.Controls.Add(this.mailTextBox);
             this.Controls.Add(this.dniTextBox);
             this.Controls.Add(this.apellidoTextBox);
@@ -175,6 +258,9 @@
             this.Name = "BuscadorUsuarios";
             this.Text = "BuscadorUsuarios";
             this.Load += new System.EventHandler(this.BuscadorUsuarios_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.usuariosGrid)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gD1C2016DataSet3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.usuariosBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -191,9 +277,19 @@
         private System.Windows.Forms.TextBox apellidoTextBox;
         private System.Windows.Forms.TextBox dniTextBox;
         private System.Windows.Forms.TextBox mailTextBox;
-        private System.Windows.Forms.CheckedListBox checkedListBox1;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.DataGridView usuariosGrid;
+        private GD1C2016DataSet3 gD1C2016DataSet3;
+        private System.Windows.Forms.BindingSource usuariosBindingSource;
+        private GD1C2016DataSet3TableAdapters.UsuariosTableAdapter usuariosTableAdapter;
+        private System.Windows.Forms.DataGridViewTextBoxColumn codUsuarioDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn nombreUsuarioDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn contraseñaDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn codRolDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn intentosLoginDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn reputacionDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn estadoUsuarioDataGridViewCheckBoxColumn;
     }
 }

@@ -69,7 +69,7 @@ namespace MercadoEnvio.Repositories
                dr["Nombre_Usuario"] as string,
 
                dr["password"] as string,
-
+               
                new RolesRepository().getRol(Convert.ToInt32(dr["Cod_Usuario"])),
 
                Convert.ToInt32(dr["Intentos_Login"]),
@@ -77,10 +77,10 @@ namespace MercadoEnvio.Repositories
                Convert.ToInt32(dr["Reputacion"]),
 
                (Boolean)dr["Estado_Usuario"]
-
                );
 
         }
     }
 
 }
+
