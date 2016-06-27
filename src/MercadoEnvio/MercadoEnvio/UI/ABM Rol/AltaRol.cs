@@ -56,7 +56,8 @@ namespace MercadoEnvio.ABM_Rol
 
         private void AltaRol_Load(object sender, EventArgs e)
         {
-            this.ListaFuncionalidadesCheckedListBox.DataSource = new BindingSource(new BindingList<Funcionalidades>(new FuncionalidadRepository().getFuncionalidades()), null);
+            ( (ListBox) this.ListaFuncionalidadesCheckedListBox ).DataSource = new BindingSource(new BindingList<Funcionalidades>(new FuncionalidadRepository().getFuncionalidades()), null);
+            ( (ListBox)this.ListaFuncionalidadesCheckedListBox).DisplayMember = "Descripcion_Funcionalidad";
         }
     }
 }

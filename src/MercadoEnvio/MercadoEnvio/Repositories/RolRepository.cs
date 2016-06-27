@@ -36,8 +36,8 @@ namespace MercadoEnvio.Repositories {
 
     public List<Rol> findRol(  string nombre  )
     {
-        // BUSCAR STORED PROCEDURE CORRECTO!
-        return parseRoles( DBAdapter.retrieveDataTable("Filtrar_Roles", nombre ));  
+        // Deberia ser un like sql ?
+        return parseRoles(DBAdapter.retrieveDataTable("Filtrar_Rol", nombre));  
     }
 
     public int ObtenerRolIDPorDescripcion(String descripcion)

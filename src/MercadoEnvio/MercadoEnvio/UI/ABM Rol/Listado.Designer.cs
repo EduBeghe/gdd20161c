@@ -49,6 +49,8 @@
             // 
             // rolesList
             // 
+            this.rolesList.AllowUserToAddRows = false;
+            this.rolesList.AllowUserToDeleteRows = false;
             this.rolesList.AutoGenerateColumns = false;
             this.rolesList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.rolesList.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -58,6 +60,7 @@
             this.rolesList.DataSource = this.rolesBindingSource;
             this.rolesList.Location = new System.Drawing.Point(12, 135);
             this.rolesList.Name = "rolesList";
+            this.rolesList.ReadOnly = true;
             this.rolesList.RowTemplate.Height = 28;
             this.rolesList.Size = new System.Drawing.Size(528, 332);
             this.rolesList.TabIndex = 0;
@@ -74,12 +77,14 @@
             this.nombreDataGridViewTextBoxColumn.DataPropertyName = "Nombre";
             this.nombreDataGridViewTextBoxColumn.HeaderText = "Nombre";
             this.nombreDataGridViewTextBoxColumn.Name = "nombreDataGridViewTextBoxColumn";
+            this.nombreDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // estadoRolDataGridViewCheckBoxColumn
             // 
             this.estadoRolDataGridViewCheckBoxColumn.DataPropertyName = "Estado_Rol";
             this.estadoRolDataGridViewCheckBoxColumn.HeaderText = "Estado_Rol";
             this.estadoRolDataGridViewCheckBoxColumn.Name = "estadoRolDataGridViewCheckBoxColumn";
+            this.estadoRolDataGridViewCheckBoxColumn.ReadOnly = true;
             // 
             // rolesBindingSource
             // 
