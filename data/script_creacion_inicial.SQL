@@ -1393,12 +1393,25 @@ BEGIN
 			@codRubro = TODO_X2_LUCAS.Obtener_Rubro(@rubro),
 			@codVisibilidad = TODO_X2_LUCAS.Obtener_Visibilidad(@visibilidad),
 			@codUsuario = TODO_X2_LUCAS.ObtenerUsuario(@dni,@CUIT)
-
-	INSERT INTO TODO_X2_LUCAS.Publicaciones(Cod_Estado_Publicacion,Cod_Rubro,Cod_Tipos_Publicacion,Cod_Usuario_Responsable,
-											Cod_Visibilidad,Descripcion_Publicacion,Entregas,Fecha_Publicacion,
-											Fecha_Vencimiento_Publicacion,Permiso_Preguntas,Precio_Publicacion,Stock_Publicacion)
-	VALUES (@codEstado,@codRubro,@cod_Tipo_Publ,@codUsuario,@codVisibilidad,@descripcion,@entregas,
-			@fecha,@fechaVenc,@permisoPreguntas,@precio,@stock)
+	
+	IF ((SELECT COUNT(*) FROM TODO_X2_LUCAS.Publicaciones P WHERE P.Cod_Usuario_Responsable = @codUsuario GROUP BY P.Cod_Usuario_Responsable) = 0)
+	BEGIN
+		DECLARE @codGratis numeric(18);
+		SET @codGratis = (SELECT Cod_Visibilidad FROM TODO_X2_LUCAS.Visibilidades_Publicaciones WHERE Precio_Visibilidad = 0)
+		INSERT INTO TODO_X2_LUCAS.Publicaciones(Cod_Estado_Publicacion,Cod_Rubro,Cod_Tipos_Publicacion,Cod_Usuario_Responsable,
+												Cod_Visibilidad,Descripcion_Publicacion,Entregas,Fecha_Publicacion,
+												Fecha_Vencimiento_Publicacion,Permiso_Preguntas,Precio_Publicacion,Stock_Publicacion)
+		VALUES (@codEstado,@codRubro,@cod_Tipo_Publ,@codUsuario,@codGratis,@descripcion,@entregas,
+				@fecha,@fechaVenc,@permisoPreguntas,@precio,@stock)
+	END
+	ELSE
+	BEGIN
+		INSERT INTO TODO_X2_LUCAS.Publicaciones(Cod_Estado_Publicacion,Cod_Rubro,Cod_Tipos_Publicacion,Cod_Usuario_Responsable,
+												Cod_Visibilidad,Descripcion_Publicacion,Entregas,Fecha_Publicacion,
+												Fecha_Vencimiento_Publicacion,Permiso_Preguntas,Precio_Publicacion,Stock_Publicacion)
+		VALUES (@codEstado,@codRubro,@cod_Tipo_Publ,@codUsuario,@codVisibilidad,@descripcion,@entregas,
+				@fecha,@fechaVenc,@permisoPreguntas,@precio,@stock)
+	END
 END
 GO
 
