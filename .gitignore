@@ -1,0 +1,6 @@
+*.exe
+src/MercadoEnvio/MercadoEnvio/bin/Debug/MercadoEnvio.pdb
+*.resources
+src/MercadoEnvio/MercadoEnvio/obj/Debug/MercadoEnvio.csproj.FileListAbsolute.txt
+*.Cache
+src/MercadoEnvio/MercadoEnvio/obj/Debug/MercadoEnvio.pdb
