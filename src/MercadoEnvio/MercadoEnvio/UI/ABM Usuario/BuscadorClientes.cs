@@ -33,7 +33,10 @@ namespace MercadoEnvio.UI.ABM_Usuario
 
         private void button1_Click(object sender, EventArgs e)
         {
-
+            var retorno = new ClientesRepository().filtrarClientes(nombreTextBox.Text,apellidoTextBox.Text,Convert.ToInt32(dniTextBox.Text),mailTextBox.Text);
+            var source = new BindingSource();
+            source.DataSource = retorno;
+            clientesGrid.DataSource = source;
         }
 
 
@@ -45,19 +48,26 @@ namespace MercadoEnvio.UI.ABM_Usuario
 
         private void button2_Click(object sender, EventArgs e)
         {
-            var usuario = (DetallesClientes)usuariosGrid.SelectedRows[0].DataBoundItem;
+            var usuario = (DetallesClientes)clientesGrid.SelectedRows[0].DataBoundItem;
             new AltaCliente().ShowDialog(usuario);
 
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            var usuario = (DetallesClientes)usuariosGrid.SelectedRows[0].DataBoundItem;
+            var usuario = (DetallesClientes)clientesGrid.SelectedRows[0].DataBoundItem;
             new ClientesRepository().darDeBaja(usuario.Cod_Cliente);
         }
 
         private void label1_Click(object sender, EventArgs e)
         {
+
+        }
+
+        private void BuscadorClientes_Load(object sender, EventArgs e)
+        {
+            // TODO: esta línea de código carga datos en la tabla 'gD1C2016DataSet5.Detalles_Clientes' Puede moverla o quitarla según sea necesario.
+            this.detalles_ClientesTableAdapter.Fill(this.gD1C2016DataSet5.Detalles_Clientes);
 
         }
     }

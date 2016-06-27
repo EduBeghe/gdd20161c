@@ -87,6 +87,17 @@ namespace MercadoEnvio.Repositories
             return retorno;
         }
 
+        public List<DetalleEmpresa> filtrarEmpresas(string razonSocial, string cuit, string email)
+        {
+            var retorno = parseEmpresas(DBAdapter.retrieveDataTable("Filtrar_Usuarios_Empresas", razonSocial, cuit, email));
+            return retorno;
+        }
+
+        private List<DetalleEmpresa> parseEmpresas(DataTable dataTable)
+        {
+            return dataTable.AsEnumerable().Select(dr => parse(dr)).ToList();
+        }
+
         private DetalleEmpresa parse(DataRow dr)
         {
             return new DetalleEmpresa(

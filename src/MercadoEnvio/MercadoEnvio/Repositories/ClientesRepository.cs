@@ -70,6 +70,12 @@ namespace MercadoEnvio.Repositories
             return dataTable.AsEnumerable().Select(dr => parse(dr)).ToList();
         }
 
+        public List<DetallesClientes> filtrarClientes(string nombre, string apellido, int dni, string email)
+        {
+            var retorno = parseClientes(DBAdapter.retrieveDataTable("Filtrar_Usuarios_Cliente", nombre, apellido, dni, email));
+            return retorno;
+        }
+
         private DetallesClientes parse(DataRow dr)
         {
             return new DetallesClientes(
