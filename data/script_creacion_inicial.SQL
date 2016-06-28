@@ -1188,8 +1188,8 @@ AS
 BEGIN
 	SELECT *
 	FROM TODO_X2_LUCAS.Detalles_Empresas
-	WHERE (Razon_Social = @razonSocial OR @razonSocial IS NULL) AND 
-			(CUIT = @cuit OR @cuit IS NULL) AND (Mail = @email OR @email IS NULL)
+	WHERE (Razon_Social LIKE  '%' + @razonSocial + '%' OR @razonSocial IS NULL) AND 
+			(CUIT = @cuit OR @cuit IS NULL) AND (Mail LIKE '%' + @email + '%' OR @email IS NULL)
 END
 GO
 /* ------------ PROCEDIMIENTO PARA FILTRAR LOS USUARIOS CLIENTES SEGUN NOMBRE APELLIDO DNI Y EMAIL ------------ */
@@ -1198,8 +1198,8 @@ AS
 BEGIN
 	SELECT *
 	FROM TODO_X2_LUCAS.Detalles_Clientes
-	WHERE (Nombre = @nombre OR @nombre IS NULL) AND (Apellido = @apellido OR @apellido IS NULL) 
-			AND (Mail = @email OR @email IS NULL) AND (DNI = @dni OR @dni IS NULL)
+	WHERE (Nombre LIKE '%' + @nombre + '%' OR @nombre IS NULL) AND (Apellido LIKE '%' + @apellido + '%' OR @apellido IS NULL) 
+			AND (Mail LIKE '%' + @email + '%' OR @email IS NULL) AND (DNI = @dni OR @dni IS NULL)
 END
 GO
 
@@ -1435,7 +1435,7 @@ BEGIN
 	SELECT * 
 	FROM TODO_X2_LUCAS.Publicaciones
 	WHERE (Cod_Rubro = TODO_X2_LUCAS.Obtener_Rubro(@rubro) OR @rubro IS NULL) AND
-			(Descripcion_Publicacion = @descripcion OR @descripcion IS NULL)
+			(Descripcion_Publicacion LIKE '%' + @descripcion + '%' OR @descripcion IS NULL)
 END
 GO
 /* ------------ PROCEDIMIENTO PARA GENERAR UNA FACTURA ------------ */
@@ -1610,7 +1610,7 @@ BEGIN
 
 	SELECT * 
 	FROM TODO_X2_LUCAS.Roles
-	WHERE Nombre = @nombre
+	WHERE Nombre LIKE '%' + @nombre + '%'
 
 END
 GO
@@ -1622,7 +1622,7 @@ BEGIN
 	
 	SELECT * 
 	FROM TODO_X2_LUCAS.Visibilidades_Publicaciones
-	WHERE Descripcion_Visibilidad = @nombre	
+	WHERE Descripcion_Visibilidad LIKE '%' + @nombre + '%'
 
 END
 GO
