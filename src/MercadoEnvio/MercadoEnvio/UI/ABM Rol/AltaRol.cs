@@ -32,16 +32,21 @@ namespace MercadoEnvio.ABM_Rol
                 var retornoAlta = new RolesRepository().agregarRol(NombreRolTextBox.Text);
                 if (retornoAlta == 0)
                 {
+                    MessageBox.Show("Rol dato de alta exitosamente");
                     foreach (Funcionalidades itemChecked in ListaFuncionalidadesCheckedListBox.CheckedItems)
                     {
                         var retornoAgregarFuncionabilidad = new RolesRepository().agregarRelacionRolFuncionabilidad(NombreRolTextBox.Text, itemChecked);
                         if (retornoAgregarFuncionabilidad != 0)
                         {
-                            MessageBox.Show("El rol ya posee la funcionalidad " + itemChecked.Descripcion_Funcionalidad );
+                            MessageBox.Show("El rol ya posee la funcionalidad " + itemChecked.Descripcion_Funcionalidad);
                         }
-                        MessageBox.Show("Rol dato de alta exitosamente");
-                        this.Close();
+                        else
+                        {
+                            MessageBox.Show("Funcionalidad " + itemChecked.Descripcion_Funcionalidad + " agregada exitosamente" );
+                        }
                     }
+                    
+                    this.Close();
                 }
                 else {
                     MessageBox.Show("El rol que quiere dar de alta ya existe");

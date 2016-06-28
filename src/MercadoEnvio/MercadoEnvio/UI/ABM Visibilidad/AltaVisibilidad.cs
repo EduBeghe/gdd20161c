@@ -55,20 +55,23 @@ namespace MercadoEnvio.UI.ABM_Visibilidad
                 {
                     var visibilidad = new VisibilidadPublicaciones(this.codigo,
                         this.descripcionTextBox.Text,
-                    Convert.ToInt32(this.precioTextBox),
-                    Convert.ToInt32(this.PorcentajeTextBox),
-                    Convert.ToInt32(this.comisionTextBox), true
+                        Convert.ToInt32(this.precioTextBox.Text),
+                        Convert.ToInt32(this.PorcentajeTextBox.Text),
+                        Convert.ToInt32(this.comisionTextBox.Text), true
                     );
                     new VisibilidadRepository().modificarVisibilidad(visibilidad);
                 } 
                 else 
                 {
                     var retorno = new VisibilidadRepository().altaVisibilidad(
-                    this.descripcionTextBox.Text,
-                    Convert.ToInt32(this.precioTextBox),
-                    Convert.ToInt32(this.PorcentajeTextBox),
-                    Convert.ToInt32(this.comisionTextBox)
+                        this.descripcionTextBox.Text,
+                        Convert.ToInt32(this.precioTextBox.Text),
+                        Convert.ToInt32(this.PorcentajeTextBox.Text),
+                        Convert.ToInt32(this.comisionTextBox.Text)
                     );
+                    if (retorno == -1) MessageBox.Show("La visibildiad que quiere dar de alta ya existe.");
+                    else MessageBox.Show("La visibildiad fue dada de alta Existosamente");
+                    this.Close();
                 }
                 
             }

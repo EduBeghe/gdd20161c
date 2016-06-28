@@ -56,11 +56,37 @@ namespace MercadoEnvio.UI.ABM_Usuario
                 var retornoAlta = 1;
                 if (this.modificando)
                 {
-                    retornoAlta = new ClientesRepository().modificarCliente(this.cliente.DNI, nombreTextBox.Text, apellidoTextBox.Text, Convert.ToInt32(dniTextBox.Text) ,mailTextBox.Text, Convert.ToInt32(telefonoTextBox.Text), calleTextBox.Text,Convert.ToInt32(numeroCalleTextBox.Text), Convert.ToInt32(nroPisoTextBox.Text), dptoTextBox.Text, localidadTextBox.Text, cpTextBox.Text, Convert.ToDateTime(fechaNacTextBox.Text));
+                    retornoAlta = new ClientesRepository().modificarCliente(
+                        this.cliente.DNI, 
+                        nombreTextBox.Text, 
+                        apellidoTextBox.Text, 
+                        Convert.ToInt32(dniTextBox.Text),
+                        mailTextBox.Text, 
+                        Convert.ToInt32(telefonoTextBox.Text), 
+                        calleTextBox.Text,
+                        Convert.ToInt32(numeroCalleTextBox.Text), 
+                        Convert.ToInt32(nroPisoTextBox.Text), 
+                        dptoTextBox.Text, 
+                        localidadTextBox.Text, 
+                        cpTextBox.Text, 
+                        fechaNacimientoDateTimePicker.Value);
                 }
                 else
                 {
-                    retornoAlta = new ClientesRepository().altaCliente(nombreTextBox.Text, apellidoTextBox.Text, Convert.ToInt32(dniTextBox.Text), mailTextBox.Text, Convert.ToInt32(telefonoTextBox.Text), calleTextBox.Text, Convert.ToInt32(nroPisoTextBox.Text), dptoTextBox.Text, Convert.ToInt32(numeroCalleTextBox.Text), localidadTextBox.Text, cpTextBox.Text, Convert.ToDateTime(fechaNacTextBox.Text), this.username);
+                    retornoAlta = new ClientesRepository().altaCliente(
+                        nombreTextBox.Text, 
+                        apellidoTextBox.Text, 
+                        Convert.ToInt32(dniTextBox.Text), 
+                        mailTextBox.Text, 
+                        Convert.ToInt32(telefonoTextBox.Text), 
+                        calleTextBox.Text, 
+                        Convert.ToInt32(nroPisoTextBox.Text), 
+                        dptoTextBox.Text, 
+                        Convert.ToInt32(numeroCalleTextBox.Text), 
+                        localidadTextBox.Text, 
+                        cpTextBox.Text, 
+                        fechaNacimientoDateTimePicker.Value, 
+                        this.username);
                 }
                 if (retornoAlta == 0)
                 {
@@ -86,7 +112,7 @@ namespace MercadoEnvio.UI.ABM_Usuario
             numeroCalleTextBox.Text = Convert.ToString(this.cliente.domicilio.Nro_Calle);
             localidadTextBox.Text = this.cliente.domicilio.Localidad;
             cpTextBox.Text = Convert.ToString(this.cliente.Cod_Postal);
-            fechaNacTextBox.Text = Convert.ToString(this.cliente.Fecha_Nacimiento);
+            fechaNacimientoDateTimePicker.Value = this.cliente.Fecha_Nacimiento;
         }
 
     }

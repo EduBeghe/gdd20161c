@@ -10,12 +10,13 @@ using System.Windows.Forms;
 using MercadoEnvio.Domain;
 using MercadoEnvio.Repositories;
 using MercadoEnvio.UI.ABM_Visibilidad;
+using MercadoEnvio.Domain;
 
-namespace MercadoEnvio.ABM_Visibilidad
+namespace MercadoEnvio.UI.ABM_Visibilidad
 {
-    public partial class Form1 : Form
+    public partial class ListadoVisibilidad : Form
     {
-        public Form1()
+        public ListadoVisibilidad()
         {
             InitializeComponent();
         }
@@ -54,6 +55,18 @@ namespace MercadoEnvio.ABM_Visibilidad
         {
             var visibilidad = (VisibilidadPublicaciones)visibilidadesGrid.SelectedRows[0].DataBoundItem;
             new AltaVisibilidad().ShowDialog(visibilidad.Cod_Visibilidad);
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (nobreTextBox.Text != "")
+            {
+                this.visibilidadesGrid.DataSource = new BindingSource(new BindingList<VisibilidadPublicaciones>(new VisibilidadRepository().filtrarVisibilidades(nobreTextBox.Text)), null);
+            }
+            else
+            {
+                this.visibilidadesGrid.DataSource = new BindingSource(new BindingList<VisibilidadPublicaciones>(new VisibilidadRepository().getVisibilidades()), null);
+            }
         }
     }
 }

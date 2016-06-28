@@ -59,6 +59,7 @@
             this.estadoRolDataGridViewCheckBoxColumn});
             this.rolesList.DataSource = this.rolesBindingSource;
             this.rolesList.Location = new System.Drawing.Point(12, 135);
+            this.rolesList.MultiSelect = false;
             this.rolesList.Name = "rolesList";
             this.rolesList.ReadOnly = true;
             this.rolesList.RowTemplate.Height = 28;

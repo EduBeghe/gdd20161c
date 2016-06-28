@@ -4,3 +4,8 @@ src/MercadoEnvio/MercadoEnvio/bin/Debug/MercadoEnvio.pdb
 src/MercadoEnvio/MercadoEnvio/obj/Debug/MercadoEnvio.csproj.FileListAbsolute.txt
 *.Cache
 src/MercadoEnvio/MercadoEnvio/obj/Debug/MercadoEnvio.pdb
+*.cache
+src/MercadoEnvio/MercadoEnvio/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
+*.cache
+*.cache
+*.dll

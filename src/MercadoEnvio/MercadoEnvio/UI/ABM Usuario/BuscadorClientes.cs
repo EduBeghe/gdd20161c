@@ -33,10 +33,13 @@ namespace MercadoEnvio.UI.ABM_Usuario
 
         private void button1_Click(object sender, EventArgs e)
         {
-            var retorno = new ClientesRepository().filtrarClientes(nombreTextBox.Text,apellidoTextBox.Text,Convert.ToInt32(dniTextBox.Text),mailTextBox.Text);
-            var source = new BindingSource();
-            source.DataSource = retorno;
-            clientesGrid.DataSource = source;
+            var retorno = new ClientesRepository().filtrarClientes(
+                nombreTextBox.Text != "" ? nombreTextBox.Text : "",
+                apellidoTextBox.Text != "" ? apellidoTextBox.Text : "",
+                dniTextBox.Text != "" ? Convert.ToInt32(dniTextBox.Text) : 0,
+                mailTextBox.Text != "" ? mailTextBox.Text : ""
+                );
+            this.clientesGrid.DataSource = new BindingSource(new BindingList<DetallesClientes>(retorno), null);
         }
 
 
@@ -66,9 +69,8 @@ namespace MercadoEnvio.UI.ABM_Usuario
 
         private void BuscadorClientes_Load(object sender, EventArgs e)
         {
-            // TODO: esta línea de código carga datos en la tabla 'gD1C2016DataSet5.Detalles_Clientes' Puede moverla o quitarla según sea necesario.
-            this.detalles_ClientesTableAdapter.Fill(this.gD1C2016DataSet5.Detalles_Clientes);
-
+            // TODO: This line of code loads data into the 'gD1C2016DataSet4.Detalles_Clientes' table. You can move, or remove it, as needed.
+            this.detalles_ClientesTableAdapter.Fill(this.gD1C2016DataSet4.Detalles_Clientes);
         }
     }
 }

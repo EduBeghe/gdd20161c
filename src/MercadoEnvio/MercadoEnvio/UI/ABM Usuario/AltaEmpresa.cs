@@ -46,7 +46,20 @@ namespace MercadoEnvio.UI.ABM_Usuario
                 var retornoAlta = 1;
                 if (this.modificando)
                 {
-                    retornoAlta = new EmpresaRepository().modificarEmpresa(Convert.ToString(this.empresa.CUIT), this.empresa.Razon_Social, razonTextBox.Text, mailTextBox.Text, Convert.ToInt32(telefonoTextBox.Text), calleTextBox.Text, Convert.ToInt32(numeroCalleTextBox.Text), Convert.ToInt32(numeroPisoTextBox.Text), dptoTextBox.Text, localidadTextBox.Text, Convert.ToInt32(cpTextBox.Text), ciudadTextBox.Text, Convert.ToInt32(cuitTextBox.Text), rubroComboBox.Text, true);
+                    retornoAlta = new EmpresaRepository().modificarEmpresa(
+                        Convert.ToString(this.empresa.CUIT), 
+                        this.empresa.Razon_Social, 
+                        razonTextBox.Text, 
+                        mailTextBox.Text, 
+                        Convert.ToInt32(telefonoTextBox.Text), 
+                        calleTextBox.Text, Convert.ToInt32(numeroCalleTextBox.Text), 
+                        Convert.ToInt32(numeroPisoTextBox.Text), 
+                        dptoTextBox.Text, localidadTextBox.Text, 
+                        cpTextBox.Text, 
+                        ciudadTextBox.Text, 
+                        cuitTextBox.Text, 
+                        rubroComboBox.Text, 
+                        true);
                 } else
                 {
                     retornoAlta = new EmpresaRepository().altaEmpresa(

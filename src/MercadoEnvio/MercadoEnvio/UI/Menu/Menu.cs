@@ -38,7 +38,8 @@ namespace MercadoEnvio.UI.Menu
 
         private void button2_Click(object sender, EventArgs e)
         {
-            new AltaUsuario().ShowDialog();
+            //new AltaUsuario().ShowDialog();
+            new UI.ABM_Usuario.AltaCliente().ShowDialog();
         }
 
         private void button7_Click(object sender, EventArgs e)
@@ -49,6 +50,26 @@ namespace MercadoEnvio.UI.Menu
         private void FunctionsMenu_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            new UI.ABM_Usuario.BuscadorClientes().ShowDialog();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            new UI.ABM_Usuario.AltaEmpresa().ShowDialog();
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+            new UI.ABM_Visibilidad.AltaVisibilidad().ShowDialog();
+        }
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+            new UI.ABM_Visibilidad.ListadoVisibilidad().ShowDialog();
         }
     }
 }

@@ -45,15 +45,31 @@ namespace MercadoEnvio.Repositories
             return retorno;
         }
 
+        public List<VisibilidadPublicaciones> filtrarVisibilidades(string nombreVisibilidad)
+        {
+            return parseVisibilidades(DBAdapter.retrieveDataTable("Filtrar_Visibilidad"));
+        }
+
+        public List<VisibilidadPublicaciones> getVisibilidades()
+        {
+            return parseVisibilidades(DBAdapter.retrieveDataTable("Get_Visibilidades"));
+        }
+
+        public List<VisibilidadPublicaciones> parseVisibilidades(DataTable dataTable)
+        {
+            return dataTable.AsEnumerable().Select(dr => parse(dr)).ToList();
+        }
+
         private VisibilidadPublicaciones parse(DataRow dr)
         {
-            return new VisibilidadPublicaciones(Convert.ToInt32(dr["Cod_Visibilidad"]),
-                                                dr["Descripcion_Visibilidad"] as string,
-                                                Convert.ToInt32(dr["Precio_Visibilidad"]),
-                                                Convert.ToInt32(dr["Porcentaje"]),
-                                                Convert.ToInt32(dr["Comision_Entregas"]),
-                                                Convert.ToBoolean(dr["Estado_Visibilidad"])
-                                                );
+            return new VisibilidadPublicaciones(
+                Convert.ToInt32(dr["Cod_Visibilidad"]),
+                dr["Descripcion_Visibilidad"] as string,
+                Convert.ToInt32(dr["Precio_Visibilidad"]),
+                Convert.ToInt32(dr["Porcentaje"]),
+                Convert.ToInt32(dr["Comision_Entregas"]),
+                Convert.ToBoolean(dr["Estado_Visibilidad"])
+            );
         }
 
     }
