@@ -95,6 +95,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>GD1C2016DataSet41.xsd</DependentUpon>
     </Compile>
+    <Compile Include="GD1C2016DataSet52.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GD1C2016DataSet52.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Repositories\CalificarRepository.cs" />
     <Compile Include="Repositories\EstadoPublicacionesRepository.cs" />
     <Compile Include="Repositories\FacturasRepository.cs" />
@@ -377,6 +382,17 @@
     </None>
     <None Include="GD1C2016DataSet41.xss">
       <DependentUpon>GD1C2016DataSet41.xsd</DependentUpon>
+    </None>
+    <None Include="GD1C2016DataSet52.xsc">
+      <DependentUpon>GD1C2016DataSet52.xsd</DependentUpon>
+    </None>
+    <None Include="GD1C2016DataSet52.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>GD1C2016DataSet52.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="GD1C2016DataSet52.xss">
+      <DependentUpon>GD1C2016DataSet52.xsd</DependentUpon>
     </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

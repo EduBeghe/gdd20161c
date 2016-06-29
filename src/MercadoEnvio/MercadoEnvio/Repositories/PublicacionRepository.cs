@@ -74,6 +74,11 @@ namespace MercadoEnvio.Repositories
             return retorno;
         }
 
+        public Publicaciones getPublicacion(int publicacionID)
+        {
+            return parse(DBAdapter.retrieveDataTable("Get_Publicacion", publicacionID).Rows[0]);
+        }
+
         public Publicaciones parse(DataRow dr)
         {
             return new Publicaciones(

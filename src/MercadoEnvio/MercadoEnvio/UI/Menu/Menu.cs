@@ -102,7 +102,7 @@ namespace MercadoEnvio.UI.Menu
 
         private void button12_Click(object sender, EventArgs e)
         {
-            
+            //new UI.ComprarOfertar.;
         }
 
         private void groupBox1_Enter(object sender, EventArgs e)
