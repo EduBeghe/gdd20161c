@@ -34,19 +34,19 @@
             // 
             // label1
             // 
-            this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(8, 14);
+            this.label1.Location = new System.Drawing.Point(29, 9);
             this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(421, 37);
+            this.label1.Size = new System.Drawing.Size(273, 83);
             this.label1.TabIndex = 0;
             this.label1.Text = "Bienvenido a Mercado Envio";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // loginButton
             // 
-            this.loginButton.Location = new System.Drawing.Point(111, 81);
-            this.loginButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.loginButton.Location = new System.Drawing.Point(67, 104);
+            this.loginButton.Margin = new System.Windows.Forms.Padding(2);
             this.loginButton.Name = "loginButton";
             this.loginButton.Size = new System.Drawing.Size(177, 48);
             this.loginButton.TabIndex = 1;
@@ -58,15 +58,15 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(433, 136);
+            this.ClientSize = new System.Drawing.Size(320, 164);
             this.Controls.Add(this.loginButton);
             this.Controls.Add(this.label1);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "BienvenidaWindow";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "BienvenidaWindow";
             this.Load += new System.EventHandler(this.BienvenidaWindow_Load);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 

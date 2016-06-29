@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -36,6 +37,11 @@
             this.passwordTextBox = new System.Windows.Forms.TextBox();
             this.usernameTextBox = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
+            this.gD1C2016DataSet5 = new MercadoEnvio.GD1C2016DataSet5();
+            this.rolesBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.rolesTableAdapter = new MercadoEnvio.GD1C2016DataSet5TableAdapters.RolesTableAdapter();
+            ((System.ComponentModel.ISupportInitialize)(this.gD1C2016DataSet5)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.rolesBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -77,11 +83,14 @@
             // 
             // rolComboBox
             // 
+            this.rolComboBox.DataSource = this.rolesBindingSource;
+            this.rolComboBox.DisplayMember = "Nombre";
             this.rolComboBox.FormattingEnabled = true;
             this.rolComboBox.Location = new System.Drawing.Point(142, 126);
             this.rolComboBox.Name = "rolComboBox";
             this.rolComboBox.Size = new System.Drawing.Size(180, 21);
             this.rolComboBox.TabIndex = 4;
+            this.rolComboBox.ValueMember = "Cod_Rol";
             // 
             // passwordTextBox
             // 
@@ -109,6 +118,20 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // gD1C2016DataSet5
+            // 
+            this.gD1C2016DataSet5.DataSetName = "GD1C2016DataSet5";
+            this.gD1C2016DataSet5.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // rolesBindingSource
+            // 
+            this.rolesBindingSource.DataMember = "Roles";
+            this.rolesBindingSource.DataSource = this.gD1C2016DataSet5;
+            // 
+            // rolesTableAdapter
+            // 
+            this.rolesTableAdapter.ClearBeforeFill = true;
+            // 
             // AltaUsuario
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -125,6 +148,8 @@
             this.Name = "AltaUsuario";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.AltaUsuario_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.gD1C2016DataSet5)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.rolesBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -140,5 +165,8 @@
         private System.Windows.Forms.TextBox passwordTextBox;
         private System.Windows.Forms.TextBox usernameTextBox;
         private System.Windows.Forms.Button button1;
+        private GD1C2016DataSet5 gD1C2016DataSet5;
+        private System.Windows.Forms.BindingSource rolesBindingSource;
+        private GD1C2016DataSet5TableAdapters.RolesTableAdapter rolesTableAdapter;
     }
 }

@@ -114,10 +114,11 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(209, 6);
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Location = new System.Drawing.Point(288, 9);
             this.label6.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(77, 13);
+            this.label6.Size = new System.Drawing.Size(115, 17);
             this.label6.TabIndex = 10;
             this.label6.Text = "Menu Principal";
             // 
@@ -302,6 +303,7 @@
             this.Controls.Add(this.label6);
             this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "FunctionsMenu";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Menu";
             this.Load += new System.EventHandler(this.FunctionsMenu_Load);
             this.groupBox1.ResumeLayout(false);

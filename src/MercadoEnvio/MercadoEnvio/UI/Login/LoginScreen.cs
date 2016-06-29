@@ -34,6 +34,7 @@ namespace MercadoEnvio.UI.Login
                 var valido = repo.validarLogin(usuarioTextbox.Text, passwordTextbox.Text);
                 if (valido == 1)
                 {
+                    this.Hide();
                     repo.iniciarSesion(usuarioTextbox.Text);
                     MessageBox.Show("Bienvenido " + CLC_SessionManager.currentUser.Nombre_Usuario, "Login exitoso");
                     new FunctionsMenu().ShowDialog();

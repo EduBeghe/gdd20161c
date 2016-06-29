@@ -15,7 +15,7 @@ namespace MercadoEnvio.Repositories
 
         public int altaUsuario(string usuario, string pass, int codRol)
         {
-            var retorno = DBAdapter.executeProcedureWithReturnValue("Alta_Usuario", usuario, new Encription().encryptToSHA256(pass));
+            var retorno = DBAdapter.executeProcedureWithReturnValue("Alta_Usuario", usuario, new Encription().encryptToSHA256(pass), codRol);
             return retorno;
         }
 
@@ -39,7 +39,7 @@ namespace MercadoEnvio.Repositories
         {
             var usr = getUsuarioPorUsername(userName);
             if (usr != null) CLC_SessionManager.setCurrentUser(usr);
-            else MessageBox.Show("usr es null");
+            else MessageBox.Show("Usuario es null");
         }
 
         public Usuario getUsuarioPorUsername(String username)

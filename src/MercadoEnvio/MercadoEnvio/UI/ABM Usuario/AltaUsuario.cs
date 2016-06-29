@@ -35,12 +35,12 @@ namespace MercadoEnvio.ABM_Usuario
         {
             if (Validacion.validarInputs(this.Controls))
             {
-                var rolId = new RolesRepository().ObtenerRolIDPorDescripcion(rolComboBox.Text);
+                var rolId = (int)rolComboBox.SelectedValue;
                 var retornoAlta = new UsuariosRepository().altaUsuario(usernameTextBox.Text, passwordTextBox.Text, rolId);
                 if (retornoAlta == 0)
                 {
                     MessageBox.Show("El Usuario ha sido creado exitosamente. Por favor complete los siguientes datos");
-                    if(rolComboBox.Text.Equals("")){
+                    if(rolId.Equals(1)){
                         new AltaCliente().ShowDialog(usernameTextBox.Text);
                     }
                     else
@@ -57,6 +57,8 @@ namespace MercadoEnvio.ABM_Usuario
 
         private void AltaUsuario_Load(object sender, EventArgs e)
         {
+            // TODO: esta línea de código carga datos en la tabla 'gD1C2016DataSet5.Roles' Puede moverla o quitarla según sea necesario.
+            this.rolesTableAdapter.Fill(this.gD1C2016DataSet5.Roles);
 
         }
 
