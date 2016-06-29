@@ -44,7 +44,7 @@ namespace MercadoEnvio.Repositories
 
         public Usuario getUsuarioPorUsername(String username)
         {
-            var table = DBAdapter.retrieveDataTable("obtenerUsuarioPorUsername", username);
+            var table = DBAdapter.retrieveDataTable("Get_Usuario_Por_Username", username);
             if (table != null && table.Rows.Count > 0) return parse(table.Rows[0]);
             else return null;
         }
