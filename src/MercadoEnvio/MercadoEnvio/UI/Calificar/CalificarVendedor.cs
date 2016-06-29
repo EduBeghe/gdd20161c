@@ -35,7 +35,9 @@ namespace MercadoEnvio.Calificar
 
         private void calificarButton_Click(object sender, EventArgs e)
         {
-            
+            var dataRowView = (DataRowView)comprasDataGridView.SelectedRows[0].DataBoundItem;
+            var compra = new ComprasRepository().
+            new AltaVisibilidad().ShowDialog(visibilidad.Cod_Visibilidad);
             foreach (Control control in panel1.Controls)
             {
                 var radioButton = (RadioButton) control;
