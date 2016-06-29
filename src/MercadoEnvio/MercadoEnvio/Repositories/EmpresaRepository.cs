@@ -116,5 +116,10 @@ namespace MercadoEnvio.Repositories
 
         }
 
+        public void darDeBaja(int clienteID)
+        {
+            DBAdapter.executeProcedure("Baja_Empresa", clienteID);
+        }
+
     }
 }

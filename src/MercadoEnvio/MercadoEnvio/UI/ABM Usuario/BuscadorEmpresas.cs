@@ -20,34 +20,27 @@ namespace MercadoEnvio.UI.ABM_Usuario
             InitializeComponent();
         }
 
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
         private void BuscadorEmpresas_Load(object sender, EventArgs e)
         {
-            // TODO: esta línea de código carga datos en la tabla 'gD1C2016DataSet4.Detalles_Empresas' Puede moverla o quitarla según sea necesario.
-            this.detalles_EmpresasTableAdapter.Fill(this.gD1C2016DataSet4.Detalles_Empresas);
-
-        }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox3_TextChanged(object sender, EventArgs e)
-        {
+            // TODO: esta línea de código carga datos en la tabla 'gD1C2016DataSet5.Detalles_Empresas' Puede moverla o quitarla según sea necesario.
+            this.detalles_EmpresasTableAdapter.Fill(this.gD1C2016DataSet5.Detalles_Empresas);
 
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            var retorno = new EmpresaRepository().filtrarEmpresas(razonSocialTextBox.Text, cuitTextBox.Text, emailTextBox.Text);
-            var source = new BindingSource();
-            source.DataSource = retorno;
-            empresasGrid.DataSource = source;
+            var retorno = new EmpresaRepository().filtrarEmpresas(
+                razonSocialTextBox.Text != "" ? razonSocialTextBox.Text : "",
+                cuitTextBox.Text != "" ? cuitTextBox.Text : "",
+                emailTextBox.Text != "" ? emailTextBox.Text : ""
+                );
+            this.empresasGrid.DataSource = new BindingSource(new BindingList<DetalleEmpresa>(retorno), null);
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            var empresa = (DetalleEmpresa)empresasGrid.SelectedRows[0].DataBoundItem;
+            new EmpresaRepository().darDeBaja(empresa.Cod_Empresa);
         }
 
         private void button2_Click(object sender, EventArgs e)
