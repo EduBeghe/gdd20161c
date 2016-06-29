@@ -11,7 +11,7 @@ namespace MercadoEnvio.Domain
     {
         public int Cod_Publicacion { get; set; }
         public int Cod_Publicacion_Anterior { get; set; }
-        public int Descripcion_Publicacion { get; set; }
+        public string Descripcion_Publicacion { get; set; }
         public int Stock_Publicacion { get; set; }
         public DateTime Fecha_Publicacion { get; set; }
         public DateTime Fecha_Vencimiento_Publicacion { get; set; }
@@ -28,7 +28,7 @@ namespace MercadoEnvio.Domain
         public Publicaciones( 
             int Cod_Publicacion,
             int Cod_Publicacion_Anterior,
-            int Descripcion_Publicacion,
+            string Descripcion_Publicacion,
             int Stock_Publicacion,
             DateTime Fecha_Publicacion,
             DateTime Fecha_Vencimiento_Publicacion,

@@ -96,9 +96,11 @@
       <DependentUpon>GD1C2016DataSet41.xsd</DependentUpon>
     </Compile>
     <Compile Include="Repositories\CalificarRepository.cs" />
+    <Compile Include="Repositories\EstadoPublicacionesRepository.cs" />
     <Compile Include="Repositories\FacturasRepository.cs" />
     <Compile Include="Repositories\PublicacionRepository.cs" />
     <Compile Include="Repositories\RubroRepository.cs" />
+    <Compile Include="Repositories\TIpoPublicacionRepository.cs" />
     <Compile Include="Repositories\VisibilidadRepository.cs" />
     <Compile Include="Repositories\AuditoriaLoginRepository.cs" />
     <Compile Include="Repositories\ClientesRepository.cs" />
@@ -118,6 +120,12 @@
     </Compile>
     <Compile Include="UI\ABM Rol\Listado.Designer.cs">
       <DependentUpon>Listado.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\ABM Rol\ModificarRol.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\ABM Rol\ModificarRol.Designer.cs">
+      <DependentUpon>ModificarRol.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\ABM Rubro\AltaRubro.cs">
       <SubType>Form</SubType>
@@ -148,6 +156,12 @@
     </Compile>
     <Compile Include="UI\ABM Usuario\BuscadorClientes.Designer.cs">
       <DependentUpon>BuscadorClientes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\ABM Usuario\BuscadorEmpresas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\ABM Usuario\BuscadorEmpresas.Designer.cs">
+      <DependentUpon>BuscadorEmpresas.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\ABM Visibilidad\AltaVisibilidad.cs">
       <SubType>Form</SubType>
@@ -252,6 +266,9 @@
     <EmbeddedResource Include="UI\ABM Rol\Listado.resx">
       <DependentUpon>Listado.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UI\ABM Rol\ModificarRol.resx">
+      <DependentUpon>ModificarRol.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\ABM Usuario\AltaCliente.resx">
       <DependentUpon>AltaCliente.cs</DependentUpon>
     </EmbeddedResource>
@@ -263,6 +280,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\ABM Usuario\BuscadorClientes.resx">
       <DependentUpon>BuscadorClientes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\ABM Usuario\BuscadorEmpresas.resx">
+      <DependentUpon>BuscadorEmpresas.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\ABM Visibilidad\AltaVisibilidad.resx">
       <DependentUpon>AltaVisibilidad.cs</DependentUpon>

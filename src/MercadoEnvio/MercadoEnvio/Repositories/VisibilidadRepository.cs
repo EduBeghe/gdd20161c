@@ -47,7 +47,7 @@ namespace MercadoEnvio.Repositories
 
         public List<VisibilidadPublicaciones> filtrarVisibilidades(string nombreVisibilidad)
         {
-            return parseVisibilidades(DBAdapter.retrieveDataTable("Filtrar_Visibilidad"));
+            return parseVisibilidades(DBAdapter.retrieveDataTable("Filtrar_Visibilidad", nombreVisibilidad));
         }
 
         public List<VisibilidadPublicaciones> getVisibilidades()
@@ -60,7 +60,7 @@ namespace MercadoEnvio.Repositories
             return dataTable.AsEnumerable().Select(dr => parse(dr)).ToList();
         }
 
-        private VisibilidadPublicaciones parse(DataRow dr)
+        public VisibilidadPublicaciones parse(DataRow dr)
         {
             return new VisibilidadPublicaciones(
                 Convert.ToInt32(dr["Cod_Visibilidad"]),

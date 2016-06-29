@@ -98,7 +98,7 @@ namespace MercadoEnvio.Repositories
             return dataTable.AsEnumerable().Select(dr => parse(dr)).ToList();
         }
 
-        private DetalleEmpresa parse(DataRow dr)
+        public DetalleEmpresa parse(DataRow dr)
         {
             return new DetalleEmpresa(
                 Convert.ToInt32(dr["Cod_Empresa"]),

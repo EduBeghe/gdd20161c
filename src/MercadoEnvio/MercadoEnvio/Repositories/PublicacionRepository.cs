@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Data;
 using System.Threading.Tasks;
 using MercadoEnvio.Domain;
 using MercadoEnvio.Utils;
@@ -73,5 +74,25 @@ namespace MercadoEnvio.Repositories
             return retorno;
         }
 
+        public Publicaciones parse(DataRow dr)
+        {
+            return new Publicaciones(
+                Convert.ToInt32(dr["Cod_Publicacion"]),
+                Convert.ToInt32(dr["Cod_Publicacion_Anterior"]),
+                dr["Descripcion_Publicacion"] as string,
+                Convert.ToInt32(dr["Stock_Publicacion"]),
+                Convert.ToDateTime(dr["Fecha_Publicacion"]),
+                Convert.ToDateTime(dr["Fecha_Vencimiento_Publicacion"]),
+                Convert.ToInt32(dr["Precio_Publicacion"]),
+                new TipoPublicacionRepository().getTipoPublicaciones( Convert.ToInt32( dr["Cod_Tipos_Publicacion"] )),
+                new RubroRepository().getRubro( Convert.ToInt32(dr["Cod_Rubro"]) ),
+                new VisibilidadRepository().getVisibilidad(Convert.ToInt32(dr["Cod_Visibilidad"])),
+                Convert.ToInt32(dr["Costo_Publicacion"]),
+                new UsuariosRepository().getUsuario( Convert.ToInt32( dr["Cod_Usuario_Responsable"] )),
+                new EstadoPublicacionesRepository().getEstadoPublicaciones(Convert.ToInt32(dr["Cod_Estado_Publicacion"])),
+                (Boolean)dr["Permiso_Preguntas"],
+                (Boolean)dr["Entregas"]
+            );
+        }
     }
 }

@@ -22,9 +22,6 @@ namespace MercadoEnvio.UI.ABM_Usuario
 
         private void BuscadorEmpresas_Load(object sender, EventArgs e)
         {
-            // TODO: esta línea de código carga datos en la tabla 'gD1C2016DataSet5.Detalles_Empresas' Puede moverla o quitarla según sea necesario.
-            this.detalles_EmpresasTableAdapter.Fill(this.gD1C2016DataSet5.Detalles_Empresas);
-
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -39,14 +36,15 @@ namespace MercadoEnvio.UI.ABM_Usuario
 
         private void button3_Click(object sender, EventArgs e)
         {
-            var empresa = (DetalleEmpresa)empresasGrid.SelectedRows[0].DataBoundItem;
+            var dataRowView = (DataRowView)empresasGrid.SelectedRows[0].DataBoundItem;
+            var empresa = new EmpresaRepository().parse(dataRowView.Row);
             new EmpresaRepository().darDeBaja(empresa.Cod_Empresa);
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            var empresa = (DetalleEmpresa)empresasGrid.SelectedRows[0].DataBoundItem;
-            new AltaEmpresa().ShowDialog(empresa);
+            var dataRowView = (DataRowView)empresasGrid.SelectedRows[0].DataBoundItem;
+            new AltaEmpresa().ShowDialog( new EmpresaRepository().parse( dataRowView.Row ));
         }
     }
 }

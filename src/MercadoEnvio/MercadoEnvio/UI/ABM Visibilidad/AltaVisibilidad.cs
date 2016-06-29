@@ -35,11 +35,11 @@ namespace MercadoEnvio.UI.ABM_Visibilidad
             this.codigo = id;
             this.isEditing = true;
             var visibilidad = new VisibilidadRepository().getVisibilidad(id);
-            this.ShowDialog();
             descripcionTextBox.Text = visibilidad.Descripcion_Visibilidad;
             precioTextBox.Text = Convert.ToString(visibilidad.Precio_Visibilidad);
             PorcentajeTextBox.Text = Convert.ToString(visibilidad.Porcentaje);
             comisionTextBox.Text = Convert.ToString(visibilidad.Comision_Entregas);
+            this.ShowDialog();
         }
 
         private void AltaVisibilidad_Load(object sender, EventArgs e)

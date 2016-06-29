@@ -1,6 +1,6 @@
 ﻿namespace MercadoEnvio.Calificar
 {
-    partial class Form1
+    partial class CalificarVendedor
     {
         /// <summary>
         /// Required designer variable.

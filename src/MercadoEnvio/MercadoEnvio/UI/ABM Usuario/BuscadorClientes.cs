@@ -33,12 +33,19 @@ namespace MercadoEnvio.UI.ABM_Usuario
 
         private void button1_Click(object sender, EventArgs e)
         {
-            var retorno = new ClientesRepository().filtrarClientes(
-                nombreTextBox.Text != "" ? nombreTextBox.Text : "",
-                apellidoTextBox.Text != "" ? apellidoTextBox.Text : "",
-                dniTextBox.Text != "" ? Convert.ToInt32(dniTextBox.Text) : 0,
-                mailTextBox.Text != "" ? mailTextBox.Text : ""
-                );
+            var retorno = new ClientesRepository().getClientes();
+            if (   !( nombreTextBox.Text == "" &&
+                    apellidoTextBox.Text == "" &&
+                    dniTextBox.Text == "" &&
+                    mailTextBox.Text == "" ) )
+            {
+               retorno = new ClientesRepository().filtrarClientes(
+                    nombreTextBox.Text != "" ? nombreTextBox.Text : "",
+                    apellidoTextBox.Text != "" ? apellidoTextBox.Text : "",
+                    dniTextBox.Text != "" ? Convert.ToInt32(dniTextBox.Text) : 0,
+                    mailTextBox.Text != "" ? mailTextBox.Text : ""
+                    );
+            }
             this.clientesGrid.DataSource = new BindingSource(new BindingList<DetallesClientes>(retorno), null);
         }
 
@@ -51,14 +58,15 @@ namespace MercadoEnvio.UI.ABM_Usuario
 
         private void button2_Click(object sender, EventArgs e)
         {
-            var usuario = (DetallesClientes)clientesGrid.SelectedRows[0].DataBoundItem;
-            new AltaCliente().ShowDialog(usuario);
+            var dataRowView = (DataRowView)clientesGrid.SelectedRows[0].DataBoundItem;
+            new AltaCliente().ShowDialog( new ClientesRepository().parse( dataRowView.Row ) );
 
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            var usuario = (DetallesClientes)clientesGrid.SelectedRows[0].DataBoundItem;
+            var dataRowView = (DataRowView)clientesGrid.SelectedRows[0].DataBoundItem;
+            var usuario = new ClientesRepository().parse(dataRowView.Row);
             new ClientesRepository().darDeBaja(usuario.Cod_Cliente);
         }
 

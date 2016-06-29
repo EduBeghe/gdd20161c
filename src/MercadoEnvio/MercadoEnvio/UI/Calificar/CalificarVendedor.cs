@@ -12,11 +12,11 @@ using MercadoEnvio.Domain;
 
 namespace MercadoEnvio.Calificar
 {
-    public partial class Form1 : Form
+    public partial class CalificarVendedor : Form
     {
         int codigoCompra;
 
-        public Form1()
+        public CalificarVendedor()
         {
             InitializeComponent();
         }

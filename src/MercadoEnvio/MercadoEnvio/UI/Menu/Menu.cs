@@ -10,6 +10,9 @@ using System.Windows.Forms;
 using MercadoEnvio.UI.ABM_Rol;
 using MercadoEnvio.ABM_Rol;
 using MercadoEnvio.ABM_Usuario;
+using MercadoEnvio.Calificar;
+using MercadoEnvio.ComprarOfertar;
+using MercadoEnvio.UI.ComprarOfertar;
 
 namespace MercadoEnvio.UI.Menu
 {
@@ -70,6 +73,36 @@ namespace MercadoEnvio.UI.Menu
         private void button10_Click(object sender, EventArgs e)
         {
             new UI.ABM_Visibilidad.ListadoVisibilidad().ShowDialog();
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            new UI.ABM_Usuario.BuscadorEmpresas().ShowDialog();
+        }
+
+        private void button11_Click(object sender, EventArgs e)
+        {
+            new Calificar.CalificarVendedor().ShowDialog();
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            new UI.Listado_Estadistico.ListadoEstadistico().ShowDialog();
+        }
+
+        private void button15_Click(object sender, EventArgs e)
+        {
+            new Historial_Cliente.Form1().ShowDialog();
+        }
+
+        private void button14_Click(object sender, EventArgs e)
+        {
+            new Generar_Publicación.Form1().ShowDialog();
+        }
+
+        private void button12_Click(object sender, EventArgs e)
+        {
+            
         }
     }
 }

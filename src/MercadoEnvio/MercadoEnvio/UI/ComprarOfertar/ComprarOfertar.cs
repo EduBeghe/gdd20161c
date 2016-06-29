@@ -38,7 +38,8 @@ namespace MercadoEnvio.ComprarOfertar
         {
             if (publicacionesGrid.SelectedRows.Count != 0)
             {
-                new ComprarPublicacion().ShowDialog( (Publicaciones)publicacionesGrid.SelectedRows[0].DataBoundItem );
+                var dataRowView = (DataRowView)publicacionesGrid.SelectedRows[0].DataBoundItem; 
+                new ComprarPublicacion().ShowDialog( new PublicacionRepository().parse( dataRowView.Row ) );
             }
             else MessageBox.Show("Debe seleccionar una publicacion para poder comprar");
         }
@@ -47,7 +48,8 @@ namespace MercadoEnvio.ComprarOfertar
         {
             if (publicacionesGrid.SelectedRows.Count != 0)
             {
-                new OfertarPublicacion().ShowDialog((Publicaciones)publicacionesGrid.SelectedRows[0].DataBoundItem);
+                var dataRowView = (DataRowView)publicacionesGrid.SelectedRows[0].DataBoundItem;
+                new OfertarPublicacion().ShowDialog( new PublicacionRepository().parse( dataRowView.Row ) );
             }
             else MessageBox.Show("Debe seleccionar una publicacion para poder ofertar");
         }

@@ -47,8 +47,8 @@ namespace MercadoEnvio.UI.ABM_Rol
         {
             if (rolesList.SelectedRows.Count != 0)
             {
-                var rol = (Rol)rolesList.SelectedRows[0].DataBoundItem;
-                new RolesRepository().darDeBaja(rol);
+                var dataViewRow = (DataRowView)rolesList.SelectedRows[0].DataBoundItem;
+                new RolesRepository().darDeBaja( new RolesRepository().parse( dataViewRow.Row) );
                 MessageBox.Show("Rol eliminado con exito");
                 this.Close();
             }
@@ -59,7 +59,8 @@ namespace MercadoEnvio.UI.ABM_Rol
         {
             if (rolesList.SelectedRows.Count != 0)
             {
-                //new UI.ABM_Rol.ModificarRol().ShowDialog((Rol)rolesList.SelectedRows[0].DataBoundItem); 
+                var dataRowView = (DataRowView)rolesList.SelectedRows[0].DataBoundItem;
+                new UI.ABM_Rol.ModificarRol().ShowDialog( new RolesRepository().parse( dataRowView.Row ) ); 
             }
             else
             {

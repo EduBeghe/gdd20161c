@@ -139,6 +139,7 @@
             this.button4.TabIndex = 8;
             this.button4.Text = "Buscador Empresas";
             this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
             // button5
             // 
@@ -148,6 +149,7 @@
             this.button5.TabIndex = 9;
             this.button5.Text = "Listado Estadistico";
             this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
             // label6
             // 
@@ -216,6 +218,7 @@
             this.button11.TabIndex = 15;
             this.button11.Text = "Calificar";
             this.button11.UseVisualStyleBackColor = true;
+            this.button11.Click += new System.EventHandler(this.button11_Click);
             // 
             // label7
             // 
@@ -243,6 +246,7 @@
             this.button12.TabIndex = 18;
             this.button12.Text = "Comprar/Ofertar";
             this.button12.UseVisualStyleBackColor = true;
+            this.button12.Click += new System.EventHandler(this.button12_Click);
             // 
             // button13
             // 
@@ -279,6 +283,7 @@
             this.button14.TabIndex = 22;
             this.button14.Text = "Generar Publicacion";
             this.button14.UseVisualStyleBackColor = true;
+            this.button14.Click += new System.EventHandler(this.button14_Click);
             // 
             // label11
             // 
@@ -297,6 +302,7 @@
             this.button15.TabIndex = 24;
             this.button15.Text = "Historial Cliente";
             this.button15.UseVisualStyleBackColor = true;
+            this.button15.Click += new System.EventHandler(this.button15_Click);
             // 
             // FunctionsMenu
             // 

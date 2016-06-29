@@ -52,7 +52,7 @@ namespace MercadoEnvio.Repositories
 
         public List<DetallesClientes> getClientes()
         {
-            return parseClientes(DBAdapter.retrieveDataTable("Get_Clientes", DBNull.Value));
+            return parseClientes(DBAdapter.retrieveDataTable("Get_Clientes"));
         }
 
         public DetallesClientes getCliente(int ID)
@@ -76,7 +76,7 @@ namespace MercadoEnvio.Repositories
             return retorno;
         }
 
-        private DetallesClientes parse(DataRow dr)
+        public DetallesClientes parse(DataRow dr)
         {
             return new DetallesClientes(
                 Convert.ToInt32(dr["Cod_Cliente"]),
