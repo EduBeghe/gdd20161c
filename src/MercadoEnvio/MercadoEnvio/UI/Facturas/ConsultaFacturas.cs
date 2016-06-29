@@ -27,7 +27,7 @@ namespace MercadoEnvio.Facturas
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
+            
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -40,6 +40,11 @@ namespace MercadoEnvio.Facturas
             CLC_SessionManager.getDNI(),
             CLC_SessionManager.getCUIT()            
             );
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
 
     }

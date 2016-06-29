@@ -24,10 +24,17 @@ namespace MercadoEnvio.Historial_Cliente
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
+            optionsComboBox.Items.Clear();
+            optionsComboBox.Items.Add("Operaciones con Calificación Pendiente");
+            optionsComboBox.Items.Add("Resumen de estrellas dadas");
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
         {
 
         }
