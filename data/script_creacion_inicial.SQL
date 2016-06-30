@@ -1127,13 +1127,13 @@ GO
 CREATE PROCEDURE TODO_X2_LUCAS.Alta_Usuario(@username nvarchar(255),@password nvarchar(255),@rol nvarchar(255))
 AS
 BEGIN
-	IF NOT EXISTS (SELECT Nombre_Usuario FROM TODO_X2_LUCAS.Usuarios WHERE Nombre_Usuario = @username)
+	IF NOT EXISTS (SELECT 1 FROM TODO_X2_LUCAS.Usuarios WHERE Nombre_Usuario = @username)
 	BEGIN
 		DECLARE @cod_rol int;
 		SET @cod_rol = TODO_X2_LUCAS.ObtenerRol(@rol);
 
-		INSERT INTO TODO_X2_LUCAS.Usuarios(Nombre_Usuario,Contrasenia,Cod_Rol)
-		VALUES (@username,@password,@cod_rol)
+		INSERT INTO TODO_X2_LUCAS.Usuarios(Nombre_Usuario,Contrasenia,Cod_Rol,Estado_Usuario)
+		VALUES (@username,@password,@cod_rol,1)
 	END
 	ELSE
 	BEGIN
@@ -1142,6 +1142,7 @@ BEGIN
 	END
 END
 GO
+
 /* ------------ PROCEDIMIENTO PARA MODIFICAR UN USUARIO ------------ */
 CREATE PROCEDURE TODO_X2_LUCAS.Modificar_Usuario(@Usuario nvarchar(255),@contraseñaVieja nvarchar(255),@contraseñaNueva nvarchar(255))
 AS
