@@ -34,22 +34,23 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.rolComboBox = new System.Windows.Forms.ComboBox();
+            this.rolesBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.gD1C2016DataSet5 = new MercadoEnvio.GD1C2016DataSet5();
             this.passwordTextBox = new System.Windows.Forms.TextBox();
             this.usernameTextBox = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
-            this.gD1C2016DataSet5 = new MercadoEnvio.GD1C2016DataSet5();
-            this.rolesBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.rolesTableAdapter = new MercadoEnvio.GD1C2016DataSet5TableAdapters.RolesTableAdapter();
-            ((System.ComponentModel.ISupportInitialize)(this.gD1C2016DataSet5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.rolesBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gD1C2016DataSet5)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(127, 27);
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(119, 22);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(84, 13);
+            this.label1.Size = new System.Drawing.Size(123, 16);
             this.label1.TabIndex = 0;
             this.label1.Text = "Alta de Usuarios";
             this.label1.Click += new System.EventHandler(this.label1_Click);
@@ -92,6 +93,16 @@
             this.rolComboBox.TabIndex = 4;
             this.rolComboBox.ValueMember = "Cod_Rol";
             // 
+            // rolesBindingSource
+            // 
+            this.rolesBindingSource.DataMember = "Roles";
+            this.rolesBindingSource.DataSource = this.gD1C2016DataSet5;
+            // 
+            // gD1C2016DataSet5
+            // 
+            this.gD1C2016DataSet5.DataSetName = "GD1C2016DataSet5";
+            this.gD1C2016DataSet5.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
             // passwordTextBox
             // 
             this.passwordTextBox.Location = new System.Drawing.Point(142, 93);
@@ -110,23 +121,13 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(63, 185);
+            this.button1.Location = new System.Drawing.Point(63, 181);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(222, 23);
+            this.button1.Size = new System.Drawing.Size(222, 27);
             this.button1.TabIndex = 7;
             this.button1.Text = "Continuar";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // gD1C2016DataSet5
-            // 
-            this.gD1C2016DataSet5.DataSetName = "GD1C2016DataSet5";
-            this.gD1C2016DataSet5.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // rolesBindingSource
-            // 
-            this.rolesBindingSource.DataMember = "Roles";
-            this.rolesBindingSource.DataSource = this.gD1C2016DataSet5;
             // 
             // rolesTableAdapter
             // 
@@ -146,10 +147,11 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Name = "AltaUsuario";
-            this.Text = "Form1";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Alta de Usuarios";
             this.Load += new System.EventHandler(this.AltaUsuario_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.gD1C2016DataSet5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.rolesBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gD1C2016DataSet5)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

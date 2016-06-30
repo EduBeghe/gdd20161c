@@ -12,7 +12,7 @@ using MercadoEnvio.ABM_Rol;
 using MercadoEnvio.ABM_Usuario;
 using MercadoEnvio.Calificar;
 using MercadoEnvio.ComprarOfertar;
-using MercadoEnvio.UI.ComprarOfertar;
+using MercadoEnvio.UI;
 
 namespace MercadoEnvio.UI.Menu
 {
@@ -52,7 +52,6 @@ namespace MercadoEnvio.UI.Menu
 
         private void FunctionsMenu_Load(object sender, EventArgs e)
         {
-
         }
 
         private void button8_Click(object sender, EventArgs e)
@@ -106,6 +105,16 @@ namespace MercadoEnvio.UI.Menu
         }
 
         private void groupBox1_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button2_Click_1(object sender, EventArgs e)
+        {
+            new AltaUsuario().ShowDialog();
+        }
+
+        private void groupBox3_Enter(object sender, EventArgs e)
         {
 
         }
