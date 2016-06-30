@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.label1 = new System.Windows.Forms.Label();
             this.radioButton1 = new System.Windows.Forms.RadioButton();
             this.radioButton2 = new System.Windows.Forms.RadioButton();
@@ -38,18 +39,32 @@
             this.descripcionTextBox = new System.Windows.Forms.TextBox();
             this.calificarButton = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.comprasDataGridView = new System.Windows.Forms.DataGridView();
+            this.gD1C2016DataSet6 = new MercadoEnvio.GD1C2016DataSet6();
+            this.comprasBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.comprasTableAdapter = new MercadoEnvio.GD1C2016DataSet6TableAdapters.ComprasTableAdapter();
+            this.codCompraDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.compraFechaDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.compraCantidadDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.codPublicacionDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.codUsuarioDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.codCalificacionDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.descripcionDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.comprasDataGridView)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gD1C2016DataSet6)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.comprasBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(260, 35);
+            this.label1.Location = new System.Drawing.Point(308, 9);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(139, 20);
+            this.label1.Size = new System.Drawing.Size(125, 20);
             this.label1.TabIndex = 0;
-            this.label1.Text = "Calificar Vendedor";
+            this.label1.Text = "Calificar Compra";
             // 
             // radioButton1
             // 
@@ -119,7 +134,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(64, 345);
+            this.label2.Location = new System.Drawing.Point(13, 252);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(167, 20);
@@ -128,18 +143,18 @@
             // 
             // descripcionTextBox
             // 
-            this.descripcionTextBox.Location = new System.Drawing.Point(68, 369);
+            this.descripcionTextBox.Location = new System.Drawing.Point(13, 286);
             this.descripcionTextBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.descripcionTextBox.Multiline = true;
             this.descripcionTextBox.Name = "descripcionTextBox";
-            this.descripcionTextBox.Size = new System.Drawing.Size(536, 121);
+            this.descripcionTextBox.Size = new System.Drawing.Size(363, 224);
             this.descripcionTextBox.TabIndex = 7;
             // 
             // calificarButton
             // 
-            this.calificarButton.Location = new System.Drawing.Point(69, 498);
+            this.calificarButton.Location = new System.Drawing.Point(13, 526);
             this.calificarButton.Name = "calificarButton";
-            this.calificarButton.Size = new System.Drawing.Size(535, 36);
+            this.calificarButton.Size = new System.Drawing.Size(739, 36);
             this.calificarButton.TabIndex = 8;
             this.calificarButton.Text = "Calificar";
             this.calificarButton.UseVisualStyleBackColor = true;
@@ -152,27 +167,107 @@
             this.panel1.Controls.Add(this.radioButton3);
             this.panel1.Controls.Add(this.radioButton5);
             this.panel1.Controls.Add(this.radioButton4);
-            this.panel1.Location = new System.Drawing.Point(68, 72);
+            this.panel1.Location = new System.Drawing.Point(383, 252);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(536, 258);
+            this.panel1.Size = new System.Drawing.Size(369, 258);
             this.panel1.TabIndex = 9;
             // 
-            // Form1
+            // comprasDataGridView
+            // 
+            this.comprasDataGridView.AutoGenerateColumns = false;
+            this.comprasDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.comprasDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.codCompraDataGridViewTextBoxColumn,
+            this.compraFechaDataGridViewTextBoxColumn,
+            this.compraCantidadDataGridViewTextBoxColumn,
+            this.codPublicacionDataGridViewTextBoxColumn,
+            this.codUsuarioDataGridViewTextBoxColumn,
+            this.codCalificacionDataGridViewTextBoxColumn,
+            this.descripcionDataGridViewTextBoxColumn});
+            this.comprasDataGridView.DataSource = this.comprasBindingSource;
+            this.comprasDataGridView.Location = new System.Drawing.Point(17, 41);
+            this.comprasDataGridView.Name = "comprasDataGridView";
+            this.comprasDataGridView.RowTemplate.Height = 28;
+            this.comprasDataGridView.Size = new System.Drawing.Size(735, 205);
+            this.comprasDataGridView.TabIndex = 10;
+            // 
+            // gD1C2016DataSet6
+            // 
+            this.gD1C2016DataSet6.DataSetName = "GD1C2016DataSet6";
+            this.gD1C2016DataSet6.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // comprasBindingSource
+            // 
+            this.comprasBindingSource.DataMember = "Compras";
+            this.comprasBindingSource.DataSource = this.gD1C2016DataSet6;
+            // 
+            // comprasTableAdapter
+            // 
+            this.comprasTableAdapter.ClearBeforeFill = true;
+            // 
+            // codCompraDataGridViewTextBoxColumn
+            // 
+            this.codCompraDataGridViewTextBoxColumn.DataPropertyName = "Cod_Compra";
+            this.codCompraDataGridViewTextBoxColumn.HeaderText = "Cod_Compra";
+            this.codCompraDataGridViewTextBoxColumn.Name = "codCompraDataGridViewTextBoxColumn";
+            this.codCompraDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // compraFechaDataGridViewTextBoxColumn
+            // 
+            this.compraFechaDataGridViewTextBoxColumn.DataPropertyName = "Compra_Fecha";
+            this.compraFechaDataGridViewTextBoxColumn.HeaderText = "Compra_Fecha";
+            this.compraFechaDataGridViewTextBoxColumn.Name = "compraFechaDataGridViewTextBoxColumn";
+            // 
+            // compraCantidadDataGridViewTextBoxColumn
+            // 
+            this.compraCantidadDataGridViewTextBoxColumn.DataPropertyName = "Compra_Cantidad";
+            this.compraCantidadDataGridViewTextBoxColumn.HeaderText = "Compra_Cantidad";
+            this.compraCantidadDataGridViewTextBoxColumn.Name = "compraCantidadDataGridViewTextBoxColumn";
+            // 
+            // codPublicacionDataGridViewTextBoxColumn
+            // 
+            this.codPublicacionDataGridViewTextBoxColumn.DataPropertyName = "Cod_Publicacion";
+            this.codPublicacionDataGridViewTextBoxColumn.HeaderText = "Cod_Publicacion";
+            this.codPublicacionDataGridViewTextBoxColumn.Name = "codPublicacionDataGridViewTextBoxColumn";
+            // 
+            // codUsuarioDataGridViewTextBoxColumn
+            // 
+            this.codUsuarioDataGridViewTextBoxColumn.DataPropertyName = "Cod_Usuario";
+            this.codUsuarioDataGridViewTextBoxColumn.HeaderText = "Cod_Usuario";
+            this.codUsuarioDataGridViewTextBoxColumn.Name = "codUsuarioDataGridViewTextBoxColumn";
+            // 
+            // codCalificacionDataGridViewTextBoxColumn
+            // 
+            this.codCalificacionDataGridViewTextBoxColumn.DataPropertyName = "Cod_Calificacion";
+            this.codCalificacionDataGridViewTextBoxColumn.HeaderText = "Cod_Calificacion";
+            this.codCalificacionDataGridViewTextBoxColumn.Name = "codCalificacionDataGridViewTextBoxColumn";
+            // 
+            // descripcionDataGridViewTextBoxColumn
+            // 
+            this.descripcionDataGridViewTextBoxColumn.DataPropertyName = "Descripcion";
+            this.descripcionDataGridViewTextBoxColumn.HeaderText = "Descripcion";
+            this.descripcionDataGridViewTextBoxColumn.Name = "descripcionDataGridViewTextBoxColumn";
+            // 
+            // CalificarVendedor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(657, 546);
+            this.ClientSize = new System.Drawing.Size(768, 574);
+            this.Controls.Add(this.comprasDataGridView);
             this.Controls.Add(this.calificarButton);
             this.Controls.Add(this.descripcionTextBox);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.panel1);
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.Name = "Form1";
+            this.Name = "CalificarVendedor";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.comprasDataGridView)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gD1C2016DataSet6)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.comprasBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -190,5 +285,16 @@
         private System.Windows.Forms.TextBox descripcionTextBox;
         private System.Windows.Forms.Button calificarButton;
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.DataGridView comprasDataGridView;
+        private GD1C2016DataSet6 gD1C2016DataSet6;
+        private System.Windows.Forms.BindingSource comprasBindingSource;
+        private GD1C2016DataSet6TableAdapters.ComprasTableAdapter comprasTableAdapter;
+        private System.Windows.Forms.DataGridViewTextBoxColumn codCompraDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn compraFechaDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn compraCantidadDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn codPublicacionDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn codUsuarioDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn codCalificacionDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn descripcionDataGridViewTextBoxColumn;
     }
 }

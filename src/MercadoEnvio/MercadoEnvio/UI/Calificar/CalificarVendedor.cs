@@ -29,12 +29,15 @@ namespace MercadoEnvio.Calificar
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
+            // TODO: This line of code loads data into the 'gD1C2016DataSet6.Compras' table. You can move, or remove it, as needed.
+            this.comprasTableAdapter.Fill(this.gD1C2016DataSet6.Compras);
         }
 
         private void calificarButton_Click(object sender, EventArgs e)
         {
-            
+            var dataRowView = (DataRowView)comprasDataGridView.SelectedRows[0].DataBoundItem;
+            var compra = new ComprasRepository().
+            new AltaVisibilidad().ShowDialog(visibilidad.Cod_Visibilidad);
             foreach (Control control in panel1.Controls)
             {
                 var radioButton = (RadioButton) control;

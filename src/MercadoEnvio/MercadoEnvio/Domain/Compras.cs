@@ -14,7 +14,7 @@ namespace MercadoEnvio.Domain
         public Publicaciones publicacion { get; set; }
         public Usuario usuario { get; set; }
         public Calificaciones calificacion { get; set; }
-        public int Cod_Calificacion_Anterior { get; set; }
+        //public int Cod_Calificacion_Anterior { get; set; }
         public string Descripcion { get; set; }
 
         public Compras(
@@ -24,7 +24,7 @@ namespace MercadoEnvio.Domain
             Publicaciones publicacion,
             Usuario usuario,
             Calificaciones calificacion,
-            int Cod_Calificacion_Anterior,
+            //int Cod_Calificacion_Anterior,
             string Descripcion
             )
         {
@@ -34,7 +34,7 @@ namespace MercadoEnvio.Domain
             this.publicacion = publicacion;
             this.usuario = usuario;
             this.calificacion = calificacion;
-            this.Cod_Calificacion_Anterior = Cod_Calificacion_Anterior;
+            //this.Cod_Calificacion_Anterior = Cod_Calificacion_Anterior;
             this.Descripcion = Descripcion;
         }
     }
