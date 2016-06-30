@@ -43,7 +43,6 @@
             this.button3 = new System.Windows.Forms.Button();
             this.gD1C2016DataSet5 = new MercadoEnvio.GD1C2016DataSet5();
             this.detallesEmpresasBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
-            this.detalles_EmpresasTableAdapter = new MercadoEnvio.GD1C2016DataSet5TableAdapters.Detalles_EmpresasTableAdapter();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -200,7 +199,6 @@
             // 
             // detalles_EmpresasTableAdapter
             // 
-            this.detalles_EmpresasTableAdapter.ClearBeforeFill = true;
             // 
             // dataGridViewTextBoxColumn1
             // 
@@ -335,7 +333,6 @@
         private System.Windows.Forms.Button button3;
         private GD1C2016DataSet5 gD1C2016DataSet5;
         private System.Windows.Forms.BindingSource detallesEmpresasBindingSource1;
-        private GD1C2016DataSet5TableAdapters.Detalles_EmpresasTableAdapter detalles_EmpresasTableAdapter;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
