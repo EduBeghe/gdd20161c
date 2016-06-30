@@ -80,6 +80,10 @@ IF OBJECT_ID('TODO_X2_LUCAS.Get_Estado') IS NOT NULL
 DROP PROCEDURE TODO_X2_LUCAS.Get_Estado;
 IF OBJECT_ID('TODO_X2_LUCAS.Get_Estados') IS NOT NULL
 DROP PROCEDURE TODO_X2_LUCAS.Get_Estados;
+IF OBJECT_ID('TODO_X2_LUCAS.Get_Copmras') IS NOT NULL
+DROP PROCEDURE TODO_X2_LUCAS.Get_Copmras;
+IF OBJECT_ID('TODO_X2_LUCAS.Get_Compra') IS NOT NULL
+DROP PROCEDURE TODO_X2_LUCAS.Get_Compra;
 IF OBJECT_ID('TODO_X2_LUCAS.Get_Visibilidad') IS NOT NULL
 DROP PROCEDURE TODO_X2_LUCAS.Get_Visibilidad;
 IF OBJECT_ID('TODO_X2_LUCAS.Get_Visibilidades') IS NOT NULL
@@ -342,7 +346,7 @@ CREATE TABLE TODO_X2_LUCAS.Detalles_Empresas (
 	Cod_Postal nvarchar(50) NOT NULL,
 	Ciudad nvarchar(255) ,
 	CUIT nvarchar(50) NOT NULL UNIQUE,
-	Cod_Rubro int REFERENCES TODO_X2_LUCAS.Rubros(Cod_Rubro) ,
+	Cod_Rubro nvarchar(255),
 	Estado_Empresa bit NOT NULL
 )
 ;
@@ -532,6 +536,25 @@ GO
 		WHERE Cod_Usuario = @codigo
 	END
 	GO
+----------------------------- GETTERS TABLA COMPRAS -----------------------------
+-- DATOS TABLA COMPLETA --
+	CREATE PROCEDURE TODO_X2_LUCAS.Get_Copmras
+	AS
+	BEGIN
+		SELECT *
+		FROM TODO_X2_LUCAS.Compras
+	END
+	GO
+-- DATOS TABLA SEGUN CODIGO --
+	CREATE PROCEDURE TODO_X2_LUCAS.Get_Compra(@codigo int)
+	AS
+	BEGIN
+		SELECT *
+		FROM TODO_X2_LUCAS.Compras
+		WHERE Cod_Compra = @codigo
+	END
+	GO
+
 ----------------------------- GETTERS TABLA CALIFICACIONES -----------------------------
 -- DATOS TABLA COMPLETA --
 	CREATE PROCEDURE TODO_X2_LUCAS.Get_Calificaciones
@@ -1294,14 +1317,14 @@ BEGIN
 	BEGIN
 		DECLARE @codDomicilio int,@codUsuario int,@codRubro int;
 		SET @codUsuario = (SELECT Cod_Usuario FROM TODO_X2_LUCAS.Usuarios WHERE Nombre_Usuario = @username);
-		SET @codRubro = TODO_X2_LUCAS.Obtener_Rubro(@rubro);
+		---SET @codRubro = TODO_X2_LUCAS.Obtener_Rubro(@rubro);
 
 		EXEC @codDomicilio = TODO_X2_LUCAS.Alta_Domicilio @calle,@nro_Calle,@piso,@depto,@localidad;
 
 		INSERT INTO TODO_X2_LUCAS.Detalles_Empresas(Ciudad,Cod_Domicilio,Cod_Postal,Cod_Usuario,CUIT,Estado_Empresa,
 													Mail,Razon_Social,Cod_Rubro)
-		VALUES (@ciudad,@codDomicilio,@cod_Postal,@codUsuario,@CUIT,@estado_Empresa,@mail,@razon_Social,@codRubro)
-
+		VALUES (@ciudad,@codDomicilio,@cod_Postal,@codUsuario,@CUIT,@estado_Empresa,@mail,@razon_Social,@rubro)
+		
 	END
 	ELSE
 	BEGIN
@@ -1769,8 +1792,8 @@ BEGIN
 		DECLARE @codUsuario int = (SELECT DISTINCT @@IDENTITY FROM TODO_X2_LUCAS.Usuarios);
 			
 		INSERT INTO TODO_X2_LUCAS.Detalles_Clientes(Cod_Usuario,Nombre,Apellido,DNI,Mail,Telefono,Cod_Domicilio,Cod_Postal,Fecha_Nacimiento,Fecha_Creacion,Estado_Cliente)
-		VALUES(@codUsuario,@nombre,@apellido,@dni,@mail,@telefono,@codDom,@codPostal,@fechaNac,GETDATE(),1)
-
+		VALUES(@codUsuario,@nombre,@apellido,@dni,@mail,00000000,@codDom,@codPostal,@fechaNac,GETDATE(),1)
+		
 		FETCH NEXT FROM cursorCliente INTO @apellido,@codPostal,@dni,@fechaNac,@mail,@nombre,@calle,@nroCalle,@piso,@depto
 	END
 
@@ -1812,8 +1835,8 @@ BEGIN
 		DECLARE @codUsuario int = (SELECT DISTINCT @@IDENTITY FROM TODO_X2_LUCAS.Usuarios);
 			
 		INSERT INTO TODO_X2_LUCAS.Detalles_Empresas(Cod_Usuario,Razon_Social,Mail,Cod_Domicilio,
-													Cod_Postal,CUIT,Estado_Empresa)
-		VALUES(@codUsuario,@razonSocial,@mail,@codDom,@codPostal,@cuit,1)
+													Cod_Postal,CUIT,Estado_Empresa,Telefono,Cod_Rubro,Ciudad)
+		VALUES(@codUsuario,@razonSocial,@mail,@codDom,@codPostal,@cuit,1,00000000,' ',' ')
 
 	    FETCH NEXT FROM cursorEmpresas INTO @codPostal,@cuit,@depto,@calle,@fechaCreacion,@mail,@nroCalle,@piso,@razonSocial
 	END
