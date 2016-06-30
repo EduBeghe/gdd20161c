@@ -14,16 +14,14 @@ namespace MercadoEnvio.Calificar
 {
     public partial class CalificarVendedor : Form
     {
-        int codigoCompra;
 
         public CalificarVendedor()
         {
             InitializeComponent();
         }
 
-        internal void ShowDialog( int codigoCompra )
+        internal void ShowDialog()
         {
-            this.codigoCompra = codigoCompra;
             this.FindForm().ShowDialog();
         }
 
@@ -36,8 +34,7 @@ namespace MercadoEnvio.Calificar
         private void calificarButton_Click(object sender, EventArgs e)
         {
             var dataRowView = (DataRowView)comprasDataGridView.SelectedRows[0].DataBoundItem;
-            var compra = new ComprasRepository().
-            new AltaVisibilidad().ShowDialog(visibilidad.Cod_Visibilidad);
+            var compra = new ComprasRepository().parse(dataRowView.Row);
             foreach (Control control in panel1.Controls)
             {
                 var radioButton = (RadioButton) control;
@@ -45,7 +42,7 @@ namespace MercadoEnvio.Calificar
                 {
                     new CalificarRepository().calificarCompra(
                         Convert.ToInt32( radioButton.Tag ),
-                        codigoCompra,
+                        compra.Cod_Compra,
                         descripcionTextBox.Text
                         );
                     MessageBox.Show("Gracias por calificar");        

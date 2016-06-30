@@ -17,7 +17,7 @@ namespace MercadoEnvio.Repositories
             return parse(DBAdapter.retrieveDataTable("Get_Compra", compraID).Rows[0]);
         }
 
-        private Compras parse(DataRow dr)
+        public Compras parse(DataRow dr)
         {
             return new Compras(
             Convert.ToInt32(dr["Cod_Compra"]),

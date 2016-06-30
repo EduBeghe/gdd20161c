@@ -57,7 +57,7 @@ namespace MercadoEnvio.UI.ABM_Rol
         private void ModificarRol_Load(object sender, EventArgs e)
         {
             this.FuncionalidadesListBox.DataSource = new BindingSource(new BindingList<Funcionalidades>(new FuncionalidadRepository().getFuncionalidades()), null);
-
+            ((ListBox)this.FuncionalidadesListBox).DisplayMember = "Descripcion_Funcionalidad";
             for (int i = FuncionalidadesListBox.Items.Count - 1; i >= 0; i--)
             {
                 if (rol.funcionalidad.Exists(x => x.Descripcion_Funcionalidad == FuncionalidadesListBox.Items[i].ToString()))
