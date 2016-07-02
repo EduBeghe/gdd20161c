@@ -36,7 +36,8 @@ namespace MercadoEnvio.Repositories
                 string Ciudad,
                 string CUIT,
                 string rubro,
-                bool Estado_Empresa
+                bool Estado_Empresa,
+                string nombreContacto
             )
         {
             var retorno = DBAdapter.executeProcedureWithReturnValue("Alta_Empresa", 
@@ -52,7 +53,8 @@ namespace MercadoEnvio.Repositories
                 Ciudad,
                 CUIT,
                 rubro,
-                Estado_Empresa
+                Estado_Empresa,
+                nombreContacto
                 );
             return retorno;
         }
@@ -72,7 +74,8 @@ namespace MercadoEnvio.Repositories
             string Ciudad,
             string CUIT,
             string rubro,
-            bool Estado_Empresa
+            bool Estado_Empresa,
+            string nombreContacto
             )
         {
             var retorno = DBAdapter.executeProcedureWithReturnValue("Modificar_Empresa",
@@ -90,14 +93,15 @@ namespace MercadoEnvio.Repositories
                 Ciudad,
                 CUIT,
                 rubro,
-                Estado_Empresa
+                Estado_Empresa,
+                nombreContacto
                 );
             return retorno;
         }
 
         public List<DetalleEmpresa> filtrarEmpresas(string razonSocial, string cuit, string email)
         {
-            var retorno = parseEmpresas(DBAdapter.retrieveDataTable("Filtrar_Usuarios_Empresas", razonSocial, cuit, email));
+            var retorno = parseEmpresas(DBAdapter.retrieveDataTable("Filtrar_Usuarios_Empresa", razonSocial, cuit, email));
             return retorno;
         }
 
@@ -119,7 +123,8 @@ namespace MercadoEnvio.Repositories
                 dr["Ciudad"] as String,
                 dr["CUIT"] as String,
                 (Boolean)dr["Estado_Empresa"],
-                new RubroRepository().getRubro(Convert.ToInt32(dr["Cod_Rubro"]))
+                new RubroRepository().getRubro(Convert.ToInt32(dr["Cod_Rubro"])),
+                dr["Nombre_De_Contacto"] as String
             );
 
         }

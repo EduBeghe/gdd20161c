@@ -237,7 +237,7 @@
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(29, 479);
+            this.label13.Location = new System.Drawing.Point(27, 475);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(36, 13);
             this.label13.TabIndex = 9;
@@ -306,8 +306,8 @@
             // 
             // rubroTextBox
             // 
-            this.rubroTextBox.Location = new System.Drawing.Point(161, 477);
-            this.rubroTextBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.rubroTextBox.Location = new System.Drawing.Point(161, 472);
+            this.rubroTextBox.Margin = new System.Windows.Forms.Padding(2);
             this.rubroTextBox.Name = "rubroTextBox";
             this.rubroTextBox.Size = new System.Drawing.Size(272, 20);
             this.rubroTextBox.TabIndex = 19;

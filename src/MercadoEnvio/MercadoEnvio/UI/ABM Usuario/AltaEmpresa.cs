@@ -58,8 +58,9 @@ namespace MercadoEnvio.UI.ABM_Usuario
                         cpTextBox.Text, 
                         ciudadTextBox.Text, 
                         cuitTextBox.Text, 
-                        rubroTextBox.Text, 
-                        true);
+                        rubroTextBox.Text,
+                        true,
+                        contactoTextBox.Text);
                 } else
                 {
                     retornoAlta = new EmpresaRepository().altaEmpresa(
@@ -75,7 +76,8 @@ namespace MercadoEnvio.UI.ABM_Usuario
                     ciudadTextBox.Text,
                     cuitTextBox.Text,
                     rubroTextBox.Text,
-                    true
+                    true,
+                    contactoTextBox.Text
                     );
                 }
                 if (retornoAlta == 0)
@@ -91,7 +93,22 @@ namespace MercadoEnvio.UI.ABM_Usuario
 
         private void AltaEmpresa_Load(object sender, EventArgs e)
         {
-
+            if (modificando)
+            {
+                razonTextBox.Text = empresa.Razon_Social;
+                cuitTextBox.Text = Convert.ToString(empresa.CUIT);
+                mailTextBox.Text = empresa.Mail;
+                telefonoTextBox.Text = Convert.ToString(empresa.Telefono);
+                calleTextBox.Text = empresa.domicilio.Calle;
+                numeroCalleTextBox.Text = Convert.ToString(empresa.domicilio.Nro_Calle);
+                numeroPisoTextBox.Text = Convert.ToString(empresa.domicilio.Piso);
+                dptoTextBox.Text = empresa.domicilio.Depto;
+                localidadTextBox.Text = empresa.domicilio.Localidad;
+                cpTextBox.Text = empresa.Cod_Postal;
+                ciudadTextBox.Text = empresa.Ciudad;
+                contactoTextBox.Text = empresa.nombreContacto;
+                rubroTextBox.Text = empresa.rubro.Descripcion_Rubro;
+            }
         }
 
         private void telefonoTextBox_KeyPress(object sender, KeyPressEventArgs e)

@@ -9,7 +9,6 @@ E:\Edu\Facu\UTN\Gestion de Datos\TP GDD\1 C 2016\gdd20161c\src\MercadoEnvio\Merc
 E:\Edu\Facu\UTN\Gestion de Datos\TP GDD\1 C 2016\gdd20161c\src\MercadoEnvio\MercadoEnvio\obj\Debug\MercadoEnvio.UI.ABM_Usuario.AltaEmpresa.resources
 E:\Edu\Facu\UTN\Gestion de Datos\TP GDD\1 C 2016\gdd20161c\src\MercadoEnvio\MercadoEnvio\obj\Debug\MercadoEnvio.ABM_Usuario.AltaUsuario.resources
 E:\Edu\Facu\UTN\Gestion de Datos\TP GDD\1 C 2016\gdd20161c\src\MercadoEnvio\MercadoEnvio\obj\Debug\MercadoEnvio.UI.ABM_Visibilidad.AltaVisibilidad.resources
-E:\Edu\Facu\UTN\Gestion de Datos\TP GDD\1 C 2016\gdd20161c\src\MercadoEnvio\MercadoEnvio\obj\Debug\MercadoEnvio.Facturas.Form1.resources
 E:\Edu\Facu\UTN\Gestion de Datos\TP GDD\1 C 2016\gdd20161c\src\MercadoEnvio\MercadoEnvio\obj\Debug\MercadoEnvio.Generar_Publicación.Form1.resources
 E:\Edu\Facu\UTN\Gestion de Datos\TP GDD\1 C 2016\gdd20161c\src\MercadoEnvio\MercadoEnvio\obj\Debug\MercadoEnvio.Historial_Cliente.Form1.resources
 E:\Edu\Facu\UTN\Gestion de Datos\TP GDD\1 C 2016\gdd20161c\src\MercadoEnvio\MercadoEnvio\obj\Debug\MercadoEnvio.UI.Login.LoginScreen.resources
@@ -30,3 +29,4 @@ E:\Edu\Facu\UTN\Gestion de Datos\TP GDD\1 C 2016\gdd20161c\src\MercadoEnvio\Merc
 E:\Edu\Facu\UTN\Gestion de Datos\TP GDD\1 C 2016\gdd20161c\src\MercadoEnvio\MercadoEnvio\obj\Debug\MercadoEnvio.UI.Listado_Estadistico.ListadoEstadistico.resources
 E:\Edu\Facu\UTN\Gestion de Datos\TP GDD\1 C 2016\gdd20161c\src\MercadoEnvio\MercadoEnvio\obj\Debug\MercadoEnvio.exe
 E:\Edu\Facu\UTN\Gestion de Datos\TP GDD\1 C 2016\gdd20161c\src\MercadoEnvio\MercadoEnvio\obj\Debug\MercadoEnvio.pdb
+E:\Edu\Facu\UTN\Gestion de Datos\TP GDD\1 C 2016\gdd20161c\src\MercadoEnvio\MercadoEnvio\obj\Debug\MercadoEnvio.Facturas.ConsultaFacturas.resources

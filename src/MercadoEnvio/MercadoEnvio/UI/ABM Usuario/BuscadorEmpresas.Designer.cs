@@ -54,10 +54,15 @@
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
+            this.gD1C2016DataSet9 = new MercadoEnvio.GD1C2016DataSet9();
+            this.detallesEmpresasBindingSource2 = new System.Windows.Forms.BindingSource(this.components);
+            this.detalles_EmpresasTableAdapter = new MercadoEnvio.GD1C2016DataSet9TableAdapters.Detalles_EmpresasTableAdapter();
             ((System.ComponentModel.ISupportInitialize)(this.empresasGrid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.detallesEmpresasBindingSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gD1C2016DataSet5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.detallesEmpresasBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gD1C2016DataSet9)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.detallesEmpresasBindingSource2)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -136,7 +141,7 @@
             this.dataGridViewTextBoxColumn9,
             this.dataGridViewTextBoxColumn10,
             this.dataGridViewCheckBoxColumn1});
-            this.empresasGrid.DataSource = this.detallesEmpresasBindingSource1;
+            this.empresasGrid.DataSource = this.detallesEmpresasBindingSource2;
             this.empresasGrid.Location = new System.Drawing.Point(12, 213);
             this.empresasGrid.Name = "empresasGrid";
             this.empresasGrid.ReadOnly = true;
@@ -265,6 +270,20 @@
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
+            // gD1C2016DataSet9
+            // 
+            this.gD1C2016DataSet9.DataSetName = "GD1C2016DataSet9";
+            this.gD1C2016DataSet9.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // detallesEmpresasBindingSource2
+            // 
+            this.detallesEmpresasBindingSource2.DataMember = "Detalles_Empresas";
+            this.detallesEmpresasBindingSource2.DataSource = this.gD1C2016DataSet9;
+            // 
+            // detalles_EmpresasTableAdapter
+            // 
+            this.detalles_EmpresasTableAdapter.ClearBeforeFill = true;
+            // 
             // BuscadorEmpresas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -286,8 +305,9 @@
             this.Load += new System.EventHandler(this.BuscadorEmpresas_Load);
             ((System.ComponentModel.ISupportInitialize)(this.empresasGrid)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.detallesEmpresasBindingSource1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gD1C2016DataSet5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.detallesEmpresasBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gD1C2016DataSet9)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.detallesEmpresasBindingSource2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -331,5 +351,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn9;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn10;
         private System.Windows.Forms.DataGridViewCheckBoxColumn dataGridViewCheckBoxColumn1;
+        private GD1C2016DataSet9 gD1C2016DataSet9;
+        private System.Windows.Forms.BindingSource detallesEmpresasBindingSource2;
+        private GD1C2016DataSet9TableAdapters.Detalles_EmpresasTableAdapter detalles_EmpresasTableAdapter;
     }
 }

@@ -20,6 +20,7 @@ namespace MercadoEnvio.Domain
         public string CUIT { get; set; }
         public bool Estado_Empresa { get; set; }
         public Rubros rubro { get; set; }
+        public string nombreContacto { get; set; }
 
         public DetalleEmpresa( 
             int Cod_Empresa,
@@ -32,7 +33,8 @@ namespace MercadoEnvio.Domain
             string Ciudad,
             string CUIT ,
             bool Estado_Empresa,
-            Rubros rubro
+            Rubros rubro,
+            string nombreContacto
             )
         {
             this.Cod_Empresa = Cod_Empresa;
@@ -46,6 +48,7 @@ namespace MercadoEnvio.Domain
             this.CUIT = CUIT;
             this.Estado_Empresa = Estado_Empresa;
             this.rubro = rubro;
+            this.nombreContacto = nombreContacto;
         }
 
     }

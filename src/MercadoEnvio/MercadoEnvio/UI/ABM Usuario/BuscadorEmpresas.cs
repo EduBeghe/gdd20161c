@@ -22,16 +22,19 @@ namespace MercadoEnvio.UI.ABM_Usuario
 
         private void BuscadorEmpresas_Load(object sender, EventArgs e)
         {
-            // TODO: This line of code loads data into the 'gD1C2016DataSet5.Detalles_Empresas' table. You can move, or remove it, as needed.
-            //this.detalles_EmpresasTableAdapter.Fill(this.gD1C2016DataSet5.Detalles_Empresas);
+            this.detalles_EmpresasTableAdapter.Fill(this.gD1C2016DataSet9.Detalles_Empresas);
+            razonSocialTextBox.Text = "";
+            cuitTextBox.Text = "";
+            emailTextBox.Text = "";
+
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             var retorno = new EmpresaRepository().filtrarEmpresas(
-                razonSocialTextBox.Text != "" ? razonSocialTextBox.Text : "",
-                cuitTextBox.Text != "" ? cuitTextBox.Text : "",
-                emailTextBox.Text != "" ? emailTextBox.Text : ""
+                razonSocialTextBox.Text,
+                cuitTextBox.Text,
+                emailTextBox.Text
                 );
             this.empresasGrid.DataSource = new BindingSource(new BindingList<DetalleEmpresa>(retorno), null);
         }

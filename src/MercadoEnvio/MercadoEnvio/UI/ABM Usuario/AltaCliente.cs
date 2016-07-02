@@ -46,7 +46,26 @@ namespace MercadoEnvio.UI.ABM_Usuario
 
         private void AltaCliente_Load(object sender, EventArgs e)
         {
-
+            if (modificando)
+            {
+                nombreTextBox.Text = cliente.Nombre;
+                apellidoTextBox.Text = cliente.Apellido;
+                dniTextBox.Text = Convert.ToString(cliente.DNI);
+                mailTextBox.Text = cliente.Mail;
+                telefonoTextBox.Text = Convert.ToString(cliente.Telefono);
+                calleTextBox.Text = cliente.domicilio.Calle;
+                numeroCalleTextBox.Text = Convert.ToString(cliente.domicilio.Nro_Calle);
+                nroPisoTextBox.Text = Convert.ToString(cliente.domicilio.Piso);
+                dptoTextBox.Text = cliente.domicilio.Depto;
+                localidadTextBox.Text = cliente.domicilio.Localidad;
+                cpTextBox.Text = cliente.Cod_Postal;
+                fechaNacimientoDateTimePicker.Value = cliente.Fecha_Nacimiento;
+                button1.Text = "Modificar";
+            }
+            else
+            {
+                button1.Text = "Crear";
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -146,6 +165,16 @@ namespace MercadoEnvio.UI.ABM_Usuario
         private void nroPisoTextBox_KeyPress(object sender, KeyPressEventArgs e)
         {
             MercadoEnvio.Utils.Validacion.validateNumberTextBox(sender, e);
+        }
+
+        private void mailTextBox_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label4_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
