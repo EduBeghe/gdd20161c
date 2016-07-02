@@ -1484,9 +1484,10 @@ BEGIN
 
 	SELECT Cod_Publicacion,Cod_Publicacion_Anterior,Descripcion_Publicacion,
 			Stock_Publicacion,Fecha_Publicacion,Fecha_Vencimiento_Publicacion,Precio_Publicacion,
-			Cod_Tipos_Publicacion,p.Cod_Rubro,Cod_Visibilidad,Costo_Publicacion,Cod_Usuario_Responsable,Cod_Estado_Publicacion
+			T.Descripcion_Tipo,p.Cod_Rubro,Cod_Visibilidad,Costo_Publicacion,Cod_Usuario_Responsable,Cod_Estado_Publicacion
 			,Permiso_Preguntas,Entregas
 	FROM TODO_X2_LUCAS.Publicaciones p join TODO_X2_LUCAS.Rubros r ON (p.Cod_Rubro = r.Cod_Rubro)
+										join TODO_X2_LUCAS.Tipos_Publicaciones t on (t.Cod_Tipos_Publicaciones=p.Cod_Tipos_Publicacion)
 	WHERE (r.Descripcion_Rubro LIKE '%' + @rubro1 + '%') OR 
 			(r.Descripcion_Rubro LIKE '%' +  @rubro2 + '%' ) OR 
 			(r.Descripcion_Rubro LIKE '%' +  @rubro3 + '%' ) AND
