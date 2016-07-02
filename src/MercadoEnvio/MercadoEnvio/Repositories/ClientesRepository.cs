@@ -62,7 +62,16 @@ namespace MercadoEnvio.Repositories
 
         public DetallesClientes getClienteByUserId(int uID)
         {
-            return parse(DBAdapter.retrieveDataTable("obtenerClientePorCodigoUsuario", uID).Rows[0]);
+            var rows = DBAdapter.retrieveDataTable("obtenerClientePorCodigoUsuario", uID);
+            if (rows.Rows.Count > 0)
+            {
+                return parse(rows.Rows[0]);
+            }
+            else
+            {
+                return null;
+            }
+            
         }
 
         private List<DetallesClientes> parseClientes(DataTable dataTable)

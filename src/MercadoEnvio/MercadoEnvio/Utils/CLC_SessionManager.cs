@@ -37,7 +37,7 @@ namespace MercadoEnvio.Utils
 
         public static string getCUIT()
         {
-            var empresa = new EmpresaRepository().getClienteByUserId(currentUser.Cod_Usuario);
+            var empresa = new EmpresaRepository().getEmpresaPorCodigoUsuario(currentUser.Cod_Usuario);
             if (empresa != null)
             {
                 return empresa.CUIT;

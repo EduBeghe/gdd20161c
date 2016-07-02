@@ -10,9 +10,17 @@ namespace MercadoEnvio.Repositories
 {
     class EmpresaRepository
     {
-        public DetalleEmpresa getClienteByUserId(int uID)
+        public DetalleEmpresa getEmpresaPorCodigoUsuario(int uID)
         {
-            return parse(DBAdapter.retrieveDataTable("obtenerEmpresaPorCodigoUsuario", uID).Rows[0]);
+            var rows = DBAdapter.retrieveDataTable("obtenerEmpresaPorCodigoUsuario", uID);
+            if (rows.Rows.Count > 0)
+            {
+                return parse(rows.Rows[0]);
+            }
+            else
+            {
+                return null;
+            }
         }
 
         public int altaEmpresa(

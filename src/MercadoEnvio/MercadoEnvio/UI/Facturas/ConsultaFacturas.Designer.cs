@@ -39,12 +39,8 @@
             this.label5 = new System.Windows.Forms.Label();
             this.importeInicialTextBox = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.facturasDataGrid = new System.Windows.Forms.DataGridView();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.label7 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.facturasDataGrid)).BeginInit();
@@ -53,9 +49,10 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(186, 23);
+            this.label1.Location = new System.Drawing.Point(279, 35);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(107, 13);
+            this.label1.Size = new System.Drawing.Size(161, 20);
             this.label1.TabIndex = 0;
             this.label1.Text = "Consulta de Facturas";
             // 
@@ -65,44 +62,46 @@
             this.groupBox1.Controls.Add(this.DesdeDateTimePicker);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Location = new System.Drawing.Point(45, 50);
+            this.groupBox1.Location = new System.Drawing.Point(68, 77);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(410, 51);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.groupBox1.Size = new System.Drawing.Size(615, 78);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Fecha";
             // 
             // hastaDateTimePicker
             // 
-            this.hastaDateTimePicker.Location = new System.Drawing.Point(253, 17);
-            this.hastaDateTimePicker.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.hastaDateTimePicker.Location = new System.Drawing.Point(380, 26);
             this.hastaDateTimePicker.Name = "hastaDateTimePicker";
-            this.hastaDateTimePicker.Size = new System.Drawing.Size(138, 20);
+            this.hastaDateTimePicker.Size = new System.Drawing.Size(205, 26);
             this.hastaDateTimePicker.TabIndex = 3;
             // 
             // DesdeDateTimePicker
             // 
-            this.DesdeDateTimePicker.Location = new System.Drawing.Point(71, 17);
-            this.DesdeDateTimePicker.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.DesdeDateTimePicker.Location = new System.Drawing.Point(106, 26);
             this.DesdeDateTimePicker.Name = "DesdeDateTimePicker";
-            this.DesdeDateTimePicker.Size = new System.Drawing.Size(131, 20);
+            this.DesdeDateTimePicker.Size = new System.Drawing.Size(194, 26);
             this.DesdeDateTimePicker.TabIndex = 2;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(213, 21);
+            this.label3.Location = new System.Drawing.Point(320, 32);
+            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(35, 13);
+            this.label3.Size = new System.Drawing.Size(52, 20);
             this.label3.TabIndex = 1;
             this.label3.Text = "Hasta";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(22, 21);
+            this.label2.Location = new System.Drawing.Point(33, 32);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(38, 13);
+            this.label2.Size = new System.Drawing.Size(56, 20);
             this.label2.TabIndex = 0;
             this.label2.Text = "Desde";
             // 
@@ -112,59 +111,57 @@
             this.groupBox2.Controls.Add(this.label5);
             this.groupBox2.Controls.Add(this.importeInicialTextBox);
             this.groupBox2.Controls.Add(this.label4);
-            this.groupBox2.Location = new System.Drawing.Point(44, 117);
+            this.groupBox2.Location = new System.Drawing.Point(66, 180);
+            this.groupBox2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(411, 53);
+            this.groupBox2.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.groupBox2.Size = new System.Drawing.Size(616, 82);
             this.groupBox2.TabIndex = 2;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Importe";
             // 
             // importeFinalTextBox
             // 
-            this.importeFinalTextBox.Location = new System.Drawing.Point(254, 22);
+            this.importeFinalTextBox.Location = new System.Drawing.Point(381, 34);
+            this.importeFinalTextBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.importeFinalTextBox.Name = "importeFinalTextBox";
-            this.importeFinalTextBox.Size = new System.Drawing.Size(138, 20);
+            this.importeFinalTextBox.Size = new System.Drawing.Size(205, 26);
             this.importeFinalTextBox.TabIndex = 3;
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(214, 22);
+            this.label5.Location = new System.Drawing.Point(321, 34);
+            this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(35, 13);
+            this.label5.Size = new System.Drawing.Size(52, 20);
             this.label5.TabIndex = 2;
             this.label5.Text = "Hasta";
             // 
             // importeInicialTextBox
             // 
-            this.importeInicialTextBox.Location = new System.Drawing.Point(72, 19);
+            this.importeInicialTextBox.Location = new System.Drawing.Point(108, 29);
+            this.importeInicialTextBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.importeInicialTextBox.Name = "importeInicialTextBox";
-            this.importeInicialTextBox.Size = new System.Drawing.Size(131, 20);
+            this.importeInicialTextBox.Size = new System.Drawing.Size(194, 26);
             this.importeInicialTextBox.TabIndex = 1;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(23, 22);
+            this.label4.Location = new System.Drawing.Point(34, 34);
+            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(38, 13);
+            this.label4.Size = new System.Drawing.Size(56, 20);
             this.label4.TabIndex = 0;
             this.label4.Text = "Desde";
             // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(54, 185);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(51, 13);
-            this.label6.TabIndex = 3;
-            this.label6.Text = "Dirigida a";
-            // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(189, 430);
+            this.button1.Location = new System.Drawing.Point(284, 662);
+            this.button1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(104, 23);
+            this.button1.Size = new System.Drawing.Size(156, 35);
             this.button1.TabIndex = 6;
             this.button1.Text = "Filtrar";
             this.button1.UseVisualStyleBackColor = true;
@@ -173,52 +170,25 @@
             // facturasDataGrid
             // 
             this.facturasDataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.facturasDataGrid.Location = new System.Drawing.Point(44, 255);
-            this.facturasDataGrid.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.facturasDataGrid.Location = new System.Drawing.Point(66, 282);
             this.facturasDataGrid.Name = "facturasDataGrid";
             this.facturasDataGrid.RowTemplate.Height = 28;
-            this.facturasDataGrid.Size = new System.Drawing.Size(409, 161);
+            this.facturasDataGrid.Size = new System.Drawing.Size(614, 357);
             this.facturasDataGrid.TabIndex = 7;
             this.facturasDataGrid.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
-            // textBox1
+            // ConsultaFacturas
             // 
-            this.textBox1.Location = new System.Drawing.Point(161, 182);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(261, 20);
-            this.textBox1.TabIndex = 8;
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(54, 220);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(99, 13);
-            this.label7.TabIndex = 9;
-            this.label7.Text = "Detalles de Factura";
-            // 
-            // textBox2
-            // 
-            this.textBox2.Location = new System.Drawing.Point(161, 217);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(261, 20);
-            this.textBox2.TabIndex = 10;
-            // 
-            // Form1
-            // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(504, 466);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.label7);
-            this.Controls.Add(this.textBox1);
+            this.ClientSize = new System.Drawing.Size(756, 717);
             this.Controls.Add(this.facturasDataGrid);
             this.Controls.Add(this.button1);
-            this.Controls.Add(this.label6);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.label1);
-            this.Name = "Form1";
+            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.Name = "ConsultaFacturas";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.groupBox1.ResumeLayout(false);
@@ -242,13 +212,9 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox importeInicialTextBox;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.DateTimePicker hastaDateTimePicker;
         private System.Windows.Forms.DateTimePicker DesdeDateTimePicker;
         private System.Windows.Forms.DataGridView facturasDataGrid;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.TextBox textBox2;
     }
 }
