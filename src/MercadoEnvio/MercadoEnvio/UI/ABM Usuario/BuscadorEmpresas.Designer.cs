@@ -37,6 +37,12 @@
             this.cuitTextBox = new System.Windows.Forms.TextBox();
             this.emailTextBox = new System.Windows.Forms.TextBox();
             this.empresasGrid = new System.Windows.Forms.DataGridView();
+            this.button1 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
+            this.gD1C2016DataSet13 = new MercadoEnvio.GD1C2016DataSet13();
+            this.detallesEmpresasBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.detalles_EmpresasTableAdapter = new MercadoEnvio.GD1C2016DataSet13TableAdapters.Detalles_EmpresasTableAdapter();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -46,23 +52,12 @@
             this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.rubroDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewCheckBoxColumn1 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.detallesEmpresasBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
-            this.gD1C2016DataSet5 = new MercadoEnvio.GD1C2016DataSet5();
-            this.detallesEmpresasBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.gD1C2016DataSet9 = new MercadoEnvio.GD1C2016DataSet9();
-            this.detallesEmpresasBindingSource2 = new System.Windows.Forms.BindingSource(this.components);
-            this.detalles_EmpresasTableAdapter = new MercadoEnvio.GD1C2016DataSet9TableAdapters.Detalles_EmpresasTableAdapter();
+            this.nombreDeContactoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.empresasGrid)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.detallesEmpresasBindingSource1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gD1C2016DataSet5)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gD1C2016DataSet13)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.detallesEmpresasBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gD1C2016DataSet9)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.detallesEmpresasBindingSource2)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -139,15 +134,60 @@
             this.dataGridViewTextBoxColumn7,
             this.dataGridViewTextBoxColumn8,
             this.dataGridViewTextBoxColumn9,
-            this.dataGridViewTextBoxColumn10,
-            this.dataGridViewCheckBoxColumn1});
-            this.empresasGrid.DataSource = this.detallesEmpresasBindingSource2;
+            this.rubroDataGridViewTextBoxColumn,
+            this.dataGridViewCheckBoxColumn1,
+            this.nombreDeContactoDataGridViewTextBoxColumn});
+            this.empresasGrid.DataSource = this.detallesEmpresasBindingSource;
             this.empresasGrid.Location = new System.Drawing.Point(12, 213);
             this.empresasGrid.Name = "empresasGrid";
             this.empresasGrid.ReadOnly = true;
             this.empresasGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.empresasGrid.Size = new System.Drawing.Size(433, 126);
             this.empresasGrid.TabIndex = 7;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(183, 171);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(101, 25);
+            this.button1.TabIndex = 8;
+            this.button1.Text = "Buscar";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(66, 348);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(90, 24);
+            this.button2.TabIndex = 9;
+            this.button2.Text = "Modificar";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(298, 348);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(92, 24);
+            this.button3.TabIndex = 10;
+            this.button3.Text = "Inhabilitar";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
+            // gD1C2016DataSet13
+            // 
+            this.gD1C2016DataSet13.DataSetName = "GD1C2016DataSet13";
+            this.gD1C2016DataSet13.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // detallesEmpresasBindingSource
+            // 
+            this.detallesEmpresasBindingSource.DataMember = "Detalles_Empresas";
+            this.detallesEmpresasBindingSource.DataSource = this.gD1C2016DataSet13;
+            // 
+            // detalles_EmpresasTableAdapter
+            // 
+            this.detalles_EmpresasTableAdapter.ClearBeforeFill = true;
             // 
             // dataGridViewTextBoxColumn1
             // 
@@ -212,12 +252,12 @@
             this.dataGridViewTextBoxColumn9.Name = "dataGridViewTextBoxColumn9";
             this.dataGridViewTextBoxColumn9.ReadOnly = true;
             // 
-            // dataGridViewTextBoxColumn10
+            // rubroDataGridViewTextBoxColumn
             // 
-            this.dataGridViewTextBoxColumn10.DataPropertyName = "Cod_Rubro";
-            this.dataGridViewTextBoxColumn10.HeaderText = "Cod_Rubro";
-            this.dataGridViewTextBoxColumn10.Name = "dataGridViewTextBoxColumn10";
-            this.dataGridViewTextBoxColumn10.ReadOnly = true;
+            this.rubroDataGridViewTextBoxColumn.DataPropertyName = "Rubro";
+            this.rubroDataGridViewTextBoxColumn.HeaderText = "Rubro";
+            this.rubroDataGridViewTextBoxColumn.Name = "rubroDataGridViewTextBoxColumn";
+            this.rubroDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // dataGridViewCheckBoxColumn1
             // 
@@ -226,63 +266,12 @@
             this.dataGridViewCheckBoxColumn1.Name = "dataGridViewCheckBoxColumn1";
             this.dataGridViewCheckBoxColumn1.ReadOnly = true;
             // 
-            // detallesEmpresasBindingSource1
+            // nombreDeContactoDataGridViewTextBoxColumn
             // 
-            this.detallesEmpresasBindingSource1.DataMember = "Detalles_Empresas";
-            this.detallesEmpresasBindingSource1.DataSource = this.gD1C2016DataSet5;
-            // 
-            // gD1C2016DataSet5
-            // 
-            this.gD1C2016DataSet5.DataSetName = "GD1C2016DataSet5";
-            this.gD1C2016DataSet5.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // detallesEmpresasBindingSource
-            // 
-            this.detallesEmpresasBindingSource.DataMember = "Detalles_Empresas";
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(183, 171);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(101, 25);
-            this.button1.TabIndex = 8;
-            this.button1.Text = "Buscar";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(66, 348);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(90, 24);
-            this.button2.TabIndex = 9;
-            this.button2.Text = "Modificar";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
-            // 
-            // button3
-            // 
-            this.button3.Location = new System.Drawing.Point(298, 348);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(92, 24);
-            this.button3.TabIndex = 10;
-            this.button3.Text = "Inhabilitar";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
-            // 
-            // gD1C2016DataSet9
-            // 
-            this.gD1C2016DataSet9.DataSetName = "GD1C2016DataSet9";
-            this.gD1C2016DataSet9.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // detallesEmpresasBindingSource2
-            // 
-            this.detallesEmpresasBindingSource2.DataMember = "Detalles_Empresas";
-            this.detallesEmpresasBindingSource2.DataSource = this.gD1C2016DataSet9;
-            // 
-            // detalles_EmpresasTableAdapter
-            // 
-            this.detalles_EmpresasTableAdapter.ClearBeforeFill = true;
+            this.nombreDeContactoDataGridViewTextBoxColumn.DataPropertyName = "Nombre_De_Contacto";
+            this.nombreDeContactoDataGridViewTextBoxColumn.HeaderText = "Nombre_De_Contacto";
+            this.nombreDeContactoDataGridViewTextBoxColumn.Name = "nombreDeContactoDataGridViewTextBoxColumn";
+            this.nombreDeContactoDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // BuscadorEmpresas
             // 
@@ -304,10 +293,8 @@
             this.Text = "BuscadorEmpresas";
             this.Load += new System.EventHandler(this.BuscadorEmpresas_Load);
             ((System.ComponentModel.ISupportInitialize)(this.empresasGrid)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.detallesEmpresasBindingSource1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gD1C2016DataSet13)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.detallesEmpresasBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gD1C2016DataSet9)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.detallesEmpresasBindingSource2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -323,7 +310,6 @@
         private System.Windows.Forms.TextBox cuitTextBox;
         private System.Windows.Forms.TextBox emailTextBox;
         private System.Windows.Forms.DataGridView empresasGrid;
-        private System.Windows.Forms.BindingSource detallesEmpresasBindingSource;
         private System.Windows.Forms.DataGridViewTextBoxColumn codEmpresaDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn codUsuarioDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn razonSocialDataGridViewTextBoxColumn;
@@ -338,8 +324,9 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;
-        private GD1C2016DataSet5 gD1C2016DataSet5;
-        private System.Windows.Forms.BindingSource detallesEmpresasBindingSource1;
+        private GD1C2016DataSet13 gD1C2016DataSet13;
+        private System.Windows.Forms.BindingSource detallesEmpresasBindingSource;
+        private GD1C2016DataSet13TableAdapters.Detalles_EmpresasTableAdapter detalles_EmpresasTableAdapter;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
@@ -349,10 +336,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn8;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn9;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn10;
+        private System.Windows.Forms.DataGridViewTextBoxColumn rubroDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewCheckBoxColumn dataGridViewCheckBoxColumn1;
-        private GD1C2016DataSet9 gD1C2016DataSet9;
-        private System.Windows.Forms.BindingSource detallesEmpresasBindingSource2;
-        private GD1C2016DataSet9TableAdapters.Detalles_EmpresasTableAdapter detalles_EmpresasTableAdapter;
+        private System.Windows.Forms.DataGridViewTextBoxColumn nombreDeContactoDataGridViewTextBoxColumn;
     }
 }

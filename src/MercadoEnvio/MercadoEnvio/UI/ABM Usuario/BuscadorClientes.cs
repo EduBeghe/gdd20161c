@@ -59,8 +59,9 @@ namespace MercadoEnvio.UI.ABM_Usuario
         private void button2_Click(object sender, EventArgs e)
         {
             var dataRowView = (DataRowView)clientesGrid.SelectedRows[0].DataBoundItem;
-            new AltaCliente().ShowDialog( new ClientesRepository().parse( dataRowView.Row ) );
-
+            var clienteRepo = new AltaCliente();
+            clienteRepo.ShowDialog(new ClientesRepository().parse(dataRowView.Row));
+            this.detalles_ClientesTableAdapter.Fill(this.gD1C2016DataSet4.Detalles_Clientes);
         }
 
         private void button3_Click(object sender, EventArgs e)

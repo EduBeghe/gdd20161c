@@ -109,7 +109,14 @@ namespace MercadoEnvio.UI.ABM_Usuario
                 }
                 if (retornoAlta == 0)
                 {
-                    MessageBox.Show("El cliente ha sido creado exitosamente.");
+                    if (modificando)
+                    {
+                        MessageBox.Show("El cliente ha sido modificado exitosamente.");
+                    }
+                    else
+                    {
+                        MessageBox.Show("El cliente ha sido creado exitosamente.");
+                    }
                     this.Close();
                 }
                 else

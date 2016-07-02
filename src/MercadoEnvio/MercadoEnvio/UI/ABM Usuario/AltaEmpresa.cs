@@ -61,7 +61,8 @@ namespace MercadoEnvio.UI.ABM_Usuario
                         rubroTextBox.Text,
                         true,
                         contactoTextBox.Text);
-                } else
+                } 
+                else
                 {
                     retornoAlta = new EmpresaRepository().altaEmpresa(
                     razonTextBox.Text,
@@ -82,7 +83,15 @@ namespace MercadoEnvio.UI.ABM_Usuario
                 }
                 if (retornoAlta == 0)
                 {
-                    MessageBox.Show("La empresa ha sido creada exitosamente.");
+                    if (modificando)
+                    {
+                        MessageBox.Show("La empresa ha sido modificada exitosamente.");
+                    }
+                    else
+                    {
+                        MessageBox.Show("La empresa ha sido creada exitosamente.");
+                    }
+                    this.Close();
                 }
                 else
                 {
@@ -107,7 +116,12 @@ namespace MercadoEnvio.UI.ABM_Usuario
                 cpTextBox.Text = empresa.Cod_Postal;
                 ciudadTextBox.Text = empresa.Ciudad;
                 contactoTextBox.Text = empresa.nombreContacto;
-                rubroTextBox.Text = empresa.rubro.Descripcion_Rubro;
+                rubroTextBox.Text = empresa.rubro;
+                button1.Text = "Modificar";
+            }
+            else
+            {
+                button1.Text = "Crear";
             }
         }
 
