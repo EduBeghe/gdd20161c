@@ -1737,7 +1737,7 @@ BEGIN
 	DECLARE @codVisibilidad numeric(18);
 	SET @codVisibilidad = TODO_X2_LUCAS.Obtener_Visibilidad(@visibilidad);
 
-	SELECT DISTINCT TOP 5 U.Nombre_Usuario,SUM(p.Stock_Publicacion - i.Item_Factura_Cantidad)
+	SELECT DISTINCT TOP 5 U.Nombre_Usuario,SUM(p.Stock_Publicacion - i.Item_Factura_Cantidad) AS 'Cantidad Productos No Vendidos'
 	FROM TODO_X2_LUCAS.Usuarios U  JOIN TODO_X2_LUCAS.Publicaciones P ON (P.Cod_Usuario_Responsable=U.Cod_Usuario)
 									JOIN TODO_X2_LUCAS.Facturas F ON (p.Cod_Usuario_Responsable = F.Vendedor_Correspondiente)
 									JOIN TODO_X2_LUCAS.Items_Facturas I ON (I.Cod_Factura=F.Cod_Factura)
