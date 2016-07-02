@@ -73,28 +73,23 @@ namespace MercadoEnvio.UI.Listado_Estadistico
                 {
                     case 0:
                         {
-                            this.estadisticaDataGridView.DataSource = DBAdapter.retrieveDataTable("Vendedores_Mas_Perros", fechaInicial, fechaFinal);
+                            this.estadisticaDataGridView.DataSource = DBAdapter.retrieveDataTable("Vendedores_Mas_Perros", fechaInicial, fechaFinal );
                         }
                         break;
 
                     case 1:
                         {
-                            this.estadisticaDataGridView.DataSource = DBAdapter.retrieveDataTable("Aeronaves_Mas_Vacias", fechaInicial, fechaFinal);
+                            this.estadisticaDataGridView.DataSource = DBAdapter.retrieveDataTable("Clientes_Con_Mayoria_De_Compras", fechaInicial, fechaFinal);
                         } break;
 
                     case 2:
                         {
-                            this.estadisticaDataGridView.DataSource = DBAdapter.retrieveDataTable("Cliente_Mayoria_Puntos");
+                            this.estadisticaDataGridView.DataSource = DBAdapter.retrieveDataTable("Vendedores_Con_Mayoria_De_Facturas", fechaInicial, fechaFinal);
                         } break;
 
                     case 3:
                         {
-                            this.estadisticaDataGridView.DataSource = DBAdapter.retrieveDataTable("Destinos_Mas_Cancelados", fechaInicial, fechaFinal);
-                        } break;
-
-                    case 4:
-                        {
-                            this.estadisticaDataGridView.DataSource = DBAdapter.retrieveDataTable("Aeronave_Mayoria_Fuera_Servicio", fechaInicial, fechaFinal);
+                            this.estadisticaDataGridView.DataSource = DBAdapter.retrieveDataTable("Vendedores_Con_Mayoria_De_Monto_Facturado", fechaInicial, fechaFinal);
                         } break;
 
                 }
