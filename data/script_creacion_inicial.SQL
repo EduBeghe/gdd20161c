@@ -1478,9 +1478,11 @@ END
 GO
 /* ------------ PROCEDIMIENTO PARA FILTRAR PUBLICACIONES ------------ */
 CREATE PROCEDURE TODO_X2_LUCAS.Filtrar_Publicaciones(@rubro1 nvarchar(255),@rubro2 nvarchar(255),@rubro3 nvarchar(255),
-														@descripcion nvarchar(255))
+														@descripcion nvarchar(255),@dni numeric(18),@cuit nvarchar(50))
 AS
 BEGIN
+	DECLARE @usuario int; 
+	SET @usuario = TODO_X2_LUCAS.ObtenerUsuario(@dni,@cuit);
 
 	SELECT Cod_Publicacion,Cod_Publicacion_Anterior,Descripcion_Publicacion,
 			Stock_Publicacion,Fecha_Publicacion,Fecha_Vencimiento_Publicacion,Precio_Publicacion,
@@ -1491,7 +1493,8 @@ BEGIN
 	WHERE (r.Descripcion_Rubro LIKE '%' + @rubro1 + '%') OR 
 			(r.Descripcion_Rubro LIKE '%' +  @rubro2 + '%' ) OR 
 			(r.Descripcion_Rubro LIKE '%' +  @rubro3 + '%' ) AND
-			(Descripcion_Publicacion LIKE '%' + @descripcion + '%' )
+			(Descripcion_Publicacion LIKE '%' + @descripcion + '%' ) AND
+			(p.Cod_Usuario_Responsable != @usuario) AND (P.Cod_Estado_Publicacion = 2) 
 END
 GO
 
@@ -2274,7 +2277,9 @@ BEGIN
 	SELECT @codVisibilidad = i.Cod_Visibilidad, @codPublicacion = I.Cod_Publicacion
 	FROM inserted I
 
-	SET @costo = (SELECT (P.Precio_Publicacion * V.Porcentaje) + V.Precio_Visibilidad + V.Comision_Entregas
+
+	SET @costo = (SELECT CASE WHEN P.Entregas = 1 THEN (P.Precio_Publicacion * V.Porcentaje) + V.Precio_Visibilidad + V.Comision_Entregas
+								WHEN P.Entregas = 0 THEN (P.Precio_Publicacion * V.Porcentaje) + V.Precio_Visibilidad END
 					FROM TODO_X2_LUCAS.Visibilidades_Publicaciones V JOIN TODO_X2_LUCAS.Publicaciones P ON (V.Cod_Visibilidad = P.Cod_Visibilidad)
 					WHERE P.Cod_Publicacion = @codPublicacion)
 
