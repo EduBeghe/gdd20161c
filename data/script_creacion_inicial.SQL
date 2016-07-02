@@ -1302,7 +1302,7 @@ BEGIN
 		UPDATE TODO_X2_LUCAS.Domicilios
 		SET	Calle = @calle, Nro_Calle = @nro_Calle, Piso = @piso, Depto = @depto, Localidad = @localidad
 		WHERE Cod_Domicilio = (SELECT D.Cod_Domicilio 
-								FROM TODO_X2_LUCAS.Domicilios D JOIN Detalles_Clientes C ON (D.Cod_Domicilio = C.Cod_Domicilio)
+								FROM TODO_X2_LUCAS.Domicilios D JOIN TODO_X2_LUCAS.Detalles_Clientes C ON (D.Cod_Domicilio = C.Cod_Domicilio)
 								WHERE C.DNI = @dniViejo)
 	END
 	ELSE
