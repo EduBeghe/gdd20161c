@@ -226,6 +226,8 @@ IF OBJECT_ID('TODO_X2_LUCAS.Dias_De_Expiracion') IS NOT NULL
 DROP PROCEDURE TODO_X2_LUCAS.Dias_De_Expiracion;
 IF OBJECT_ID('TODO_X2_LUCAS.Get_Compras_Por_Usuario') IS NOT NULL
 DROP PROCEDURE TODO_X2_LUCAS.Get_Compras_Por_Usuario;
+IF OBJECT_ID('TODO_X2_LUCAS.Publicaciones_Modificables') IS NOT NULL
+DROP PROCEDURE TODO_X2_LUCAS.Publicaciones_Modificables;
 
 IF OBJECT_ID('TODO_X2_LUCAS.ObtenerUsuario') IS NOT NULL
 DROP FUNCTION TODO_X2_LUCAS.ObtenerUsuario;
@@ -942,6 +944,16 @@ END
 GO
 
 /************************************************** PROCEDIMIENTOS ALMACENADOS ***************************************************/
+/* ------------ PROCEDIMIENTO PARA BUSCAR LAS PUBLICACIONES A MODIFICAR ------------ */
+CREATE PROCEDURE TODO_X2_LUCAS.Publicaciones_Modificables(@dni numeric(18),@cuit nvarchar(50))
+AS
+BEGIN
+	SELECT *
+	FROM TODO_X2_LUCAS.Publicaciones
+	WHERE  Cod_Tipos_Publicacion IN (1,2,3)
+END
+GO
+
 
 /* ------------ PROCEDIMIENTO PARA AGREGAR FUNCIONALIDADES ------------ */
 
