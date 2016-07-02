@@ -58,7 +58,7 @@ namespace MercadoEnvio.UI.ABM_Usuario
                         cpTextBox.Text, 
                         ciudadTextBox.Text, 
                         cuitTextBox.Text, 
-                        rubroComboBox.Text, 
+                        rubroTextBox.Text, 
                         true);
                 } else
                 {
@@ -74,7 +74,7 @@ namespace MercadoEnvio.UI.ABM_Usuario
                     cpTextBox.Text,
                     ciudadTextBox.Text,
                     cuitTextBox.Text,
-                    ((Rubros)rubroComboBox.SelectedItem).Descripcion_Rubro,
+                    rubroTextBox.Text,
                     true
                     );
                 }

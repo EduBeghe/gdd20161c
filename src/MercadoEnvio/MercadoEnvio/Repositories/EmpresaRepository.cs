@@ -27,7 +27,7 @@ namespace MercadoEnvio.Repositories
                 string Cod_Postal,
                 string Ciudad,
                 string CUIT,
-                string descripcion_rubro,
+                string rubro,
                 bool Estado_Empresa
             )
         {
@@ -43,7 +43,7 @@ namespace MercadoEnvio.Repositories
                 Cod_Postal,
                 Ciudad,
                 CUIT,
-                descripcion_rubro,
+                rubro,
                 Estado_Empresa
                 );
             return retorno;
@@ -63,7 +63,7 @@ namespace MercadoEnvio.Repositories
             string Cod_Postal,
             string Ciudad,
             string CUIT,
-            string descripcion_rubro,
+            string rubro,
             bool Estado_Empresa
             )
         {
@@ -81,7 +81,7 @@ namespace MercadoEnvio.Repositories
                 Cod_Postal,
                 Ciudad,
                 CUIT,
-                descripcion_rubro,
+                rubro,
                 Estado_Empresa
                 );
             return retorno;
