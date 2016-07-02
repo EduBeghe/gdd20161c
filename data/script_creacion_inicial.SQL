@@ -1215,23 +1215,24 @@ END
 GO
 
 /* ------------ PROCEDIMIENTO PARA FILTRAR LOS USUARIOS EMPRESAS SEGUN RAZON SOCIAL CUIT Y EMAIL ------------ */
-CREATE PROCEDURE TODO_X2_LUCAS.Filtrar_Usuarios_Empresa(@razonSocial nvarchar(255),@cuit nvarchar(50),@email nvarchar(255))
+CREATE PROCEDURE TODO_X2_LUCAS.Filtrar_Usuarios_Empresa(@razonSocial nvarchar(255) = NULL,@cuit nvarchar(50) = NULL,@email nvarchar(255) = NULL)
 AS
 BEGIN
 	SELECT *
 	FROM TODO_X2_LUCAS.Detalles_Empresas
-	WHERE (Razon_Social LIKE  '%' + @razonSocial + '%' OR @razonSocial IS NULL) AND 
-			(CUIT = @cuit OR @cuit IS NULL) AND (Mail LIKE '%' + @email + '%' OR @email IS NULL)
+	WHERE (Razon_Social LIKE  '%' + @razonSocial + '%' OR @razonSocial = '') 
+			AND (CUIT = @cuit OR @cuit = '') AND (Mail LIKE '%' + @email + '%' OR @email = '')
 END
 GO
+
 /* ------------ PROCEDIMIENTO PARA FILTRAR LOS USUARIOS CLIENTES SEGUN NOMBRE APELLIDO DNI Y EMAIL ------------ */
 CREATE PROCEDURE TODO_X2_LUCAS.Filtrar_Usuarios_Cliente(@nombre nvarchar(255),@apellido nvarchar(255),@dni numeric(18),@email nvarchar(255))
 AS
 BEGIN
 	SELECT *
 	FROM TODO_X2_LUCAS.Detalles_Clientes
-	WHERE (Nombre LIKE '%' + @nombre + '%' OR @nombre IS NULL) AND (Apellido LIKE '%' + @apellido + '%' OR @apellido IS NULL) 
-			AND (Mail LIKE '%' + @email + '%' OR @email IS NULL) AND (DNI = @dni OR @dni IS NULL)
+	WHERE (Nombre LIKE '%' + @nombre + '%' OR @nombre = '') AND (Apellido LIKE '%' + @apellido + '%' OR @apellido = '') 
+			AND (Mail LIKE '%' + @email + '%' OR @email = '') AND (DNI = @dni OR @dni = '')
 END
 GO
 
@@ -1763,6 +1764,7 @@ BEGIN
 
 END
 GO
+
 /* ------------ PROCEDIMIENTOS PARA EL LISTADO ESTADISTICO ------------ */
 /* ------------ PROCEDIMIENTO 1 PARA EL LISTADO ESTADISTICO ------------ */
 --Vendedores con mayor cantidad de productos no vendidos, dicho listado debe
