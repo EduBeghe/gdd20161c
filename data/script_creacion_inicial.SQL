@@ -245,6 +245,8 @@ IF OBJECT_ID('TODO_X2_LUCAS.Obtener_Tipo_De_Publicacion') IS NOT NULL
 DROP FUNCTION TODO_X2_LUCAS.Obtener_Tipo_De_Publicacion;
 IF OBJECT_ID('TODO_X2_LUCAS.Obtener_Forma_De_Pago') IS NOT NULL
 DROP FUNCTION TODO_X2_LUCAS.Obtener_Forma_De_Pago;
+IF OBJECT_ID('TODO_X2_LUCAS.Get_Compras_Por_Usuario') IS NOT NULL
+DROP FUNCTION TODO_X2_LUCAS.Get_Compras_Por_Usuario;
 
 IF OBJECT_ID('TODO_X2_LUCAS.Reputacion') IS NOT NULL
 DROP TRIGGER TODO_X2_LUCAS.Reputacion;
@@ -1655,6 +1657,18 @@ BEGIN
 		PRINT 'LA COMPRA YA ESTA CALIFICADA'
 	END
 
+END
+GO
+/* ------------ PROCEDIMIENTO PARA CALIFICAR UNA COMPRA ------------ */
+CREATE PROCEDURE TODO_X2_LUCAS.Get_Compras_Por_Usuario(@dni numeric(18),@cuit nvarchar(255))
+AS
+BEGIN
+	DECLARE @usuario int;
+	SET @usuario = TODO_X2_LUCAS.ObtenerUsuario(@dni,@cuit);
+
+	SELECT *
+	FROM TODO_X2_LUCAS.Compras 
+	WHERE Cod_Usuario = @usuario
 END
 GO
 /* ------------ PROCEDIMIENTO PARA LA CONSULTA DE LAS FACTURAS DE UN VENDEDOR - CANTIDADES ------------ */
