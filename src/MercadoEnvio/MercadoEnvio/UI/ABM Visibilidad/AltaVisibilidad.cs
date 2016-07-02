@@ -68,6 +68,7 @@ namespace MercadoEnvio.UI.ABM_Visibilidad
                         Convert.ToInt32(this.comisionTextBox.Text), true
                     );
                     new VisibilidadRepository().modificarVisibilidad(visibilidad);
+                    MessageBox.Show("La visibildiad fue modificada existosamente");
                 } 
                 else 
                 {

@@ -19,7 +19,7 @@ namespace MercadoEnvio.Repositories {
 
     public int agregarRelacionRolFuncionabilidad(string nombreRol,Funcionalidades funcionalidad)
     {
-        var retorno = DBAdapter.executeProcedureWithReturnValue("Agregar_Rol_Por_Funcionalidad", nombreRol, funcionalidad.Cod_Funcionalidad );
+        var retorno = DBAdapter.executeProcedureWithReturnValue("Agregar_Rol_Por_Funcionalidad", nombreRol, funcionalidad.Descripcion_Funcionalidad );
         return retorno;
     }
 
