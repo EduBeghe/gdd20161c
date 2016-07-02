@@ -835,17 +835,17 @@ RETURNS INT
 AS
 BEGIN
 	DECLARE @codUsuario int;
-	IF (@dni IS NOT NULL)
-	BEGIN
-		SELECT @codUsuario = u.Cod_Usuario
-		FROM TODO_X2_LUCAS.Usuarios u JOIN TODO_X2_LUCAS.Detalles_Clientes c ON (c.Cod_Usuario = u.Cod_Usuario)
-		WHERE c.DNI = @dni
-	END
-	ELSE
+	IF (@dni = 0)
 	BEGIN
 		SELECT @codUsuario = u.Cod_Usuario
 		FROM TODO_X2_LUCAS.Usuarios u JOIN TODO_X2_LUCAS.Detalles_Empresas e ON (e.Cod_Usuario = u.Cod_Usuario)
 		WHERE e.CUIT = @cuit
+	END
+	ELSE
+	BEGIN
+		SELECT @codUsuario = u.Cod_Usuario
+		FROM TODO_X2_LUCAS.Usuarios u JOIN TODO_X2_LUCAS.Detalles_Clientes c ON (c.Cod_Usuario = u.Cod_Usuario)
+		WHERE c.DNI = @dni
 	END
 	RETURN @codUsuario;
 END
@@ -1312,6 +1312,7 @@ BEGIN
 	END
 END
 GO
+
 /* ------------ PROCEDIMIENTO PARA ALTA DE UNA EMPRESA ------------ */
 CREATE PROCEDURE TODO_X2_LUCAS.Alta_Empresa(@razon_Social nvarchar(255),@mail nvarchar(50),@telefono numeric(10),
 											@calle nvarchar(255),@nro_Calle numeric(18),@piso numeric(18),@depto nvarchar(50),
@@ -1735,11 +1736,12 @@ BEGIN
 									JOIN TODO_X2_LUCAS.Formas_De_Pago FO ON (FO.Cod_Formas_De_Pago=F.Cod_Forma_De_Pago)
 									JOIN TODO_X2_LUCAS.Publicaciones P ON (F.Cod_Publicacion = P.Cod_Publicacion)
 	WHERE F.Vendedor_Correspondiente = @usuario AND
-			((F.Fecha_Factura BETWEEN (@fechaInicio) AND @fechaFinal) OR (@fechaInicio IS NULL AND @fechaFinal IS NULL)) AND
-			(F.Total_Factura BETWEEN (@precioInicio) AND @precioFinal OR (@precioInicio IS NULL AND @precioFinal IS NULL)) 
+			((F.Fecha_Factura BETWEEN (@fechaInicio) AND @fechaFinal) OR (@fechaInicio = '' AND @fechaFinal = '')) AND
+			(F.Total_Factura BETWEEN (@precioInicio) AND @precioFinal OR (@precioInicio = '' AND @precioFinal = '')) 
 			
 END
 GO
+
 
 /* ------------ PROCEDIMIENTO PARA FILTRAR UN ROL POR NOMBRE ------------ */
 CREATE PROCEDURE TODO_X2_LUCAS.Filtrar_Rol(@nombre nvarchar(255))
