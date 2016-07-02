@@ -2063,16 +2063,16 @@ SET IDENTITY_INSERT TODO_X2_LUCAS.Calificaciones ON
 SET IDENTITY_INSERT TODO_X2_LUCAS.Calificaciones OFF
 
 -- MIGRACION TABLA DOMICILIOS --
-INSERT INTO TODO_X2_LUCAS.Domicilios(Calle,Nro_Calle,Piso,Depto)
-SELECT DISTINCT Cli_Dom_Calle,Cli_Nro_Calle,Cli_Piso,Cli_Depto
+INSERT INTO TODO_X2_LUCAS.Domicilios(Calle,Nro_Calle,Piso,Depto,Localidad)
+SELECT DISTINCT Cli_Dom_Calle,Cli_Nro_Calle,Cli_Piso,Cli_Depto,' '
 FROM gd_esquema.Maestra
 WHERE Cli_Dom_Calle IS NOT NULL
 UNION
-SELECT DISTINCT Publ_Cli_Dom_Calle,Publ_Cli_Nro_Calle,Publ_Cli_Piso,Publ_Cli_Depto
+SELECT DISTINCT Publ_Cli_Dom_Calle,Publ_Cli_Nro_Calle,Publ_Cli_Piso,Publ_Cli_Depto,' '
 FROM gd_esquema.Maestra
 WHERE Publ_Cli_Dom_Calle IS NOT NULL
 UNION
-SELECT DISTINCT Publ_Empresa_Dom_Calle,Publ_Empresa_Nro_Calle,Publ_Empresa_Piso,Publ_Empresa_Depto
+SELECT DISTINCT Publ_Empresa_Dom_Calle,Publ_Empresa_Nro_Calle,Publ_Empresa_Piso,Publ_Empresa_Depto,' '
 FROM gd_esquema.Maestra
 WHERE Publ_Empresa_Dom_Calle IS NOT NULL
 
