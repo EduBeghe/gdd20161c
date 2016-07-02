@@ -29,14 +29,30 @@ namespace MercadoEnvio.Repositories
 
         public void consultaFacturas(DateTime fechaInicio, DateTime fechaFinal, double precioInicio, double precioFinal, int dni, string cuit )
         {
-            DBAdapter.executeProcedure("Consulta_Facturas",
-                dni,
-                cuit,
-                fechaInicio,
-                fechaFinal,
-                precioInicio,
-                precioFinal
-                );
+
+            if (dni != 0)
+            {
+                DBAdapter.executeProcedure("Consulta_Facturas",
+                    dni,
+                    null,
+                    fechaInicio,
+                    fechaFinal,
+                    precioInicio,
+                    precioFinal
+                    );
+            }
+            else
+            {
+                DBAdapter.executeProcedure("Consulta_Facturas",
+                   null,
+                   cuit,
+                   fechaInicio,
+                   fechaFinal,
+                   precioInicio,
+                   precioFinal
+                   );
+            }
+
         }
     }
 }

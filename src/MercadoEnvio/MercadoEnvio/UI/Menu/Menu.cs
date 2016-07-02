@@ -118,5 +118,11 @@ namespace MercadoEnvio.UI.Menu
         {
 
         }
+
+        private void button13_Click(object sender, EventArgs e)
+        {
+            new Facturas.ConsultaFacturas().ShowDialog();
+        }
     }
 }
+ 

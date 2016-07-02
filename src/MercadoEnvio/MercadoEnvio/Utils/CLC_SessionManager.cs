@@ -22,6 +22,7 @@ namespace MercadoEnvio.Utils
         }
 
         public static int getDNI(){
+            
             var cliente = new ClientesRepository().getClienteByUserId(currentUser.Cod_Usuario);
             if (cliente != null)
             {

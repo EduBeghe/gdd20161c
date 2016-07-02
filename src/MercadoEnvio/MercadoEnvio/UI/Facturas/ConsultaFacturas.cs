@@ -13,9 +13,9 @@ using MercadoEnvio.Utils;
 
 namespace MercadoEnvio.Facturas
 {
-    public partial class Form1 : Form
+    public partial class ConsultaFacturas : Form
     {
-        public Form1()
+        public ConsultaFacturas()
         {
             InitializeComponent();
         }
