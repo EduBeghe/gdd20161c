@@ -348,7 +348,8 @@ CREATE TABLE TODO_X2_LUCAS.Detalles_Empresas (
 	Ciudad nvarchar(255) ,
 	CUIT nvarchar(50) NOT NULL UNIQUE,
 	Cod_Rubro nvarchar(255),
-	Estado_Empresa bit NOT NULL
+	Estado_Empresa bit NOT NULL,
+	Nombre_De_Contacto nvarchar(255)
 )
 ;
 -- CREACION FORMAS DE PAGO --
@@ -1312,7 +1313,7 @@ GO
 CREATE PROCEDURE TODO_X2_LUCAS.Alta_Empresa(@razon_Social nvarchar(255),@mail nvarchar(50),@telefono numeric(10),
 											@calle nvarchar(255),@nro_Calle numeric(18),@piso numeric(18),@depto nvarchar(50),
 											@localidad nvarchar(50),@cod_Postal nvarchar(50),@ciudad nvarchar(255),
-											@CUIT nvarchar(50),@rubro nvarchar(255),@estado_Empresa bit,@username nvarchar(255))
+											@CUIT nvarchar(50),@rubro nvarchar(255),@estado_Empresa bit,@username nvarchar(255),@nombreDeContacto nvarchar(255))
 AS
 BEGIN
 	IF NOT EXISTS (SELECT * FROM TODO_X2_LUCAS.Detalles_Empresas WHERE CUIT = @CUIT OR Razon_Social = @razon_Social)
@@ -1324,8 +1325,8 @@ BEGIN
 		EXEC @codDomicilio = TODO_X2_LUCAS.Alta_Domicilio @calle,@nro_Calle,@piso,@depto,@localidad;
 
 		INSERT INTO TODO_X2_LUCAS.Detalles_Empresas(Ciudad,Cod_Domicilio,Cod_Postal,Cod_Usuario,CUIT,Estado_Empresa,
-													Mail,Razon_Social,Cod_Rubro)
-		VALUES (@ciudad,@codDomicilio,@cod_Postal,@codUsuario,@CUIT,@estado_Empresa,@mail,@razon_Social,@rubro)
+													Mail,Razon_Social,Cod_Rubro,Nombre_De_Contacto)
+		VALUES (@ciudad,@codDomicilio,@cod_Postal,@codUsuario,@CUIT,@estado_Empresa,@mail,@razon_Social,@rubro,@nombreDeContacto)
 		
 	END
 	ELSE
@@ -1340,7 +1341,7 @@ GO
 CREATE PROCEDURE TODO_X2_LUCAS.Modificar_Empresa(@cuitViejo nvarchar(50),@razonSocialVieja nvarchar(255),@razon_Social nvarchar(255),@mail nvarchar(50),@telefono numeric(10),
 											@calle nvarchar(255),@nro_Calle numeric(18),@piso numeric(18),@depto nvarchar(50),
 											@localidad nvarchar(50),@cod_Postal nvarchar(50),@ciudad nvarchar(255),
-											@CUIT nvarchar(50),@rubro nvarchar(255),@estado_Empresa bit)
+											@CUIT nvarchar(50),@rubro nvarchar(255),@estado_Empresa bit,@nombreDeContacto nvarchar(255))
 AS
 BEGIN
 	
@@ -1349,7 +1350,7 @@ BEGIN
 
 		UPDATE TODO_X2_LUCAS.Detalles_Empresas
 		SET Razon_Social = @razon_Social, Mail = @mail, Telefono = @telefono,Cod_Postal = @cod_Postal, Ciudad = @ciudad,
-			CUIT = @CUIT, Cod_Rubro = TODO_X2_LUCAS.Obtener_Rubro(@rubro), Estado_Empresa = @estado_Empresa
+			CUIT = @CUIT, Cod_Rubro = TODO_X2_LUCAS.Obtener_Rubro(@rubro), Estado_Empresa = @estado_Empresa,Nombre_De_Contacto = @nombreDeContacto
 		WHERE CUIT = @cuitViejo
 
 		UPDATE TODO_X2_LUCAS.Domicilios
