@@ -224,6 +224,8 @@ IF OBJECT_ID('TODO_X2_LUCAS.Cantidad_Facturas_Consultadas') IS NOT NULL
 DROP PROCEDURE TODO_X2_LUCAS.Cantidad_Facturas_Consultadas;
 IF OBJECT_ID('TODO_X2_LUCAS.Dias_De_Expiracion') IS NOT NULL
 DROP PROCEDURE TODO_X2_LUCAS.Dias_De_Expiracion;
+IF OBJECT_ID('TODO_X2_LUCAS.Get_Compras_Por_Usuario') IS NOT NULL
+DROP PROCEDURE TODO_X2_LUCAS.Get_Compras_Por_Usuario;
 
 IF OBJECT_ID('TODO_X2_LUCAS.ObtenerUsuario') IS NOT NULL
 DROP FUNCTION TODO_X2_LUCAS.ObtenerUsuario;
@@ -245,8 +247,6 @@ IF OBJECT_ID('TODO_X2_LUCAS.Obtener_Tipo_De_Publicacion') IS NOT NULL
 DROP FUNCTION TODO_X2_LUCAS.Obtener_Tipo_De_Publicacion;
 IF OBJECT_ID('TODO_X2_LUCAS.Obtener_Forma_De_Pago') IS NOT NULL
 DROP FUNCTION TODO_X2_LUCAS.Obtener_Forma_De_Pago;
-IF OBJECT_ID('TODO_X2_LUCAS.Get_Compras_Por_Usuario') IS NOT NULL
-DROP FUNCTION TODO_X2_LUCAS.Get_Compras_Por_Usuario;
 
 IF OBJECT_ID('TODO_X2_LUCAS.Reputacion') IS NOT NULL
 DROP TRIGGER TODO_X2_LUCAS.Reputacion;
@@ -351,7 +351,7 @@ CREATE TABLE TODO_X2_LUCAS.Detalles_Empresas (
 	Cod_Postal nvarchar(50) NOT NULL,
 	Ciudad nvarchar(255) ,
 	CUIT nvarchar(50) NOT NULL UNIQUE,
-	Cod_Rubro nvarchar(255),
+	Rubro nvarchar(255),
 	Estado_Empresa bit NOT NULL,
 	Nombre_De_Contacto nvarchar(255)
 )
@@ -1310,7 +1310,8 @@ GO
 CREATE PROCEDURE TODO_X2_LUCAS.Alta_Empresa(@razon_Social nvarchar(255),@mail nvarchar(50),@telefono numeric(10),
 											@calle nvarchar(255),@nro_Calle numeric(18),@piso numeric(18),@depto nvarchar(50),
 											@localidad nvarchar(50),@cod_Postal nvarchar(50),@ciudad nvarchar(255),
-											@CUIT nvarchar(50),@rubro nvarchar(255),@estado_Empresa bit,@username nvarchar(255),@nombreDeContacto nvarchar(255))
+											@CUIT nvarchar(50),@rubro nvarchar(255),@estado_Empresa bit,@username nvarchar(255),
+											@nombreDeContacto nvarchar(255))
 AS
 BEGIN
 	IF NOT EXISTS (SELECT * FROM TODO_X2_LUCAS.Detalles_Empresas WHERE CUIT = @CUIT OR Razon_Social = @razon_Social)
@@ -1322,7 +1323,7 @@ BEGIN
 		EXEC @codDomicilio = TODO_X2_LUCAS.Alta_Domicilio @calle,@nro_Calle,@piso,@depto,@localidad;
 
 		INSERT INTO TODO_X2_LUCAS.Detalles_Empresas(Ciudad,Cod_Domicilio,Cod_Postal,Cod_Usuario,CUIT,Estado_Empresa,
-													Mail,Razon_Social,Cod_Rubro,Nombre_De_Contacto)
+													Mail,Razon_Social,Rubro,Nombre_De_Contacto)
 		VALUES (@ciudad,@codDomicilio,@cod_Postal,@codUsuario,@CUIT,@estado_Empresa,@mail,@razon_Social,@rubro,@nombreDeContacto)
 		
 	END
@@ -1343,7 +1344,7 @@ AS
 BEGIN
 	UPDATE TODO_X2_LUCAS.Detalles_Empresas
 	SET Razon_Social = @razon_Social, Mail = @mail, Telefono = @telefono,Cod_Postal = @cod_Postal, Ciudad = @ciudad,
-		CUIT = @CUIT, Cod_Rubro = TODO_X2_LUCAS.Obtener_Rubro(@rubro), Estado_Empresa = @estado_Empresa,Nombre_De_Contacto = @nombreDeContacto
+		CUIT = @CUIT, Rubro = @rubro, Estado_Empresa = @estado_Empresa,Nombre_De_Contacto = @nombreDeContacto
 	WHERE CUIT = @cuitViejo
 	
 	UPDATE TODO_X2_LUCAS.Domicilios
@@ -1666,8 +1667,9 @@ BEGIN
 	DECLARE @usuario int;
 	SET @usuario = TODO_X2_LUCAS.ObtenerUsuario(@dni,@cuit);
 
-	SELECT *
-	FROM TODO_X2_LUCAS.Compras 
+	SELECT Cod_Compra,Compra_Fecha,P.Cod_Publicacion,Ca.Descripcion
+	FROM TODO_X2_LUCAS.Compras C Join TODO_X2_LUCAS.Calificaciones CA ON (C.Cod_Calificacion=CA.Cod_Calificacion)
+								JOIN TODO_X2_LUCAS.Publicaciones P ON (C.Cod_Publicacion = P.Cod_Publicacion)
 	WHERE Cod_Usuario = @usuario
 END
 GO
@@ -1908,7 +1910,7 @@ BEGIN
 		DECLARE @codUsuario int = (SELECT DISTINCT @@IDENTITY FROM TODO_X2_LUCAS.Usuarios);
 			
 		INSERT INTO TODO_X2_LUCAS.Detalles_Empresas(Cod_Usuario,Razon_Social,Mail,Cod_Domicilio,
-													Cod_Postal,CUIT,Estado_Empresa,Telefono,Cod_Rubro,Ciudad,Nombre_De_Contacto)
+													Cod_Postal,CUIT,Estado_Empresa,Telefono,Rubro,Ciudad,Nombre_De_Contacto)
 		VALUES(@codUsuario,@razonSocial,@mail,@codDom,@codPostal,@cuit,1,00000000,' ',' ',' ')
 		
 	    FETCH NEXT FROM cursorEmpresas INTO @codPostal,@cuit,@depto,@calle,@fechaCreacion,@mail,@nroCalle,@piso,@razonSocial
