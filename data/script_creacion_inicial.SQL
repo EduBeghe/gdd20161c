@@ -1640,6 +1640,7 @@ BEGIN
 
 END
 GO
+
 /* ------------ PROCEDIMIENTO PARA CALIFICAR UNA COMPRA ------------ */
 CREATE PROCEDURE TODO_X2_LUCAS.Calificar_Compra(@estrellas numeric(18),@codCompra int,@descripcion nvarchar(255))
 AS
@@ -1647,7 +1648,7 @@ BEGIN
 	DECLARE @codCalificacion int;
 	SELECT @codCalificacion = TODO_X2_LUCAS.Obtener_Calificacion(@estrellas)
 
-	IF ((SELECT Cod_Calificacion FROM TODO_X2_LUCAS.Compras WHERE Cod_Compra = @codCompra) != 99)
+	IF ((SELECT Cod_Calificacion FROM TODO_X2_LUCAS.Compras WHERE Cod_Compra = @codCompra) = 99)
 	BEGIN
 		UPDATE TODO_X2_LUCAS.Compras
 		SET Cod_Calificacion = @codCalificacion,Descripcion = @descripcion
@@ -1660,6 +1661,7 @@ BEGIN
 
 END
 GO
+
 /* ------------ PROCEDIMIENTO PARA CALIFICAR UNA COMPRA ------------ */
 CREATE PROCEDURE TODO_X2_LUCAS.Get_Compras_Por_Usuario(@dni numeric(18),@cuit nvarchar(255))
 AS
