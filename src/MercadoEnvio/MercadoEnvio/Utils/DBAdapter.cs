@@ -163,6 +163,7 @@ namespace MercadoEnvio.Utils
             }
             catch (Exception ex)
             {
+                MessageBox.Show("Exception : " + ex);
                 throw ex;
             }
 
@@ -192,8 +193,9 @@ namespace MercadoEnvio.Utils
                 cm.ExecuteNonQuery();
                 return (int)cm.Parameters["@RETURN_VALUE"].Value;
             }
-            catch (Exception)
+            catch (Exception e )
             {
+                MessageBox.Show("Exception : " + e);
                 return -1;
             }
 
@@ -225,8 +227,9 @@ namespace MercadoEnvio.Utils
                 dt.Load(dr);
                 return dt;
             }
-            catch (Exception)
+            catch (Exception e )
             {
+                MessageBox.Show("Exception : " + e);
                 return null;
             }
 
@@ -258,8 +261,9 @@ namespace MercadoEnvio.Utils
                 }
                 return args;
             }
-            catch (Exception)
+            catch (Exception e )
             {
+                MessageBox.Show("Exception : " + e);
                 return null;
             }
 

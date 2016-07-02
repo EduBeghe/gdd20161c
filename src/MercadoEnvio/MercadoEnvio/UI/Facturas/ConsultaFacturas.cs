@@ -32,13 +32,14 @@ namespace MercadoEnvio.Facturas
 
         private void button1_Click(object sender, EventArgs e)
         {
-            DBAdapter.retrieveDataTable("Consulta_Facturas",
+
+            this.facturasDataGrid.DataSource = DBAdapter.retrieveDataTable("Consulta_Facturas",
+                CLC_SessionManager.getDNI(),
+                CLC_SessionManager.getCUIT(),            
                 Convert.ToDateTime(this.DesdeDateTimePicker.Value ),
                 Convert.ToDateTime( this.hastaDateTimePicker.Value ),
                 Convert.ToInt32( this.importeInicialTextBox.Text ),
-                Convert.ToInt32( this.importeFinalTextBox.Text ),
-                CLC_SessionManager.getDNI(),
-                CLC_SessionManager.getCUIT()            
+                Convert.ToInt32( this.importeFinalTextBox.Text )
             );
         }
 
