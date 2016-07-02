@@ -1234,7 +1234,7 @@ BEGIN
 	SELECT *
 	FROM TODO_X2_LUCAS.Detalles_Clientes
 	WHERE (Nombre LIKE '%' + @nombre + '%' OR @nombre = '') AND (Apellido LIKE '%' + @apellido + '%' OR @apellido = '') 
-			AND (Mail LIKE '%' + @email + '%' OR @email = '') AND (DNI = @dni OR @dni = '')
+			AND (Mail LIKE '%' + @email + '%' OR @email = '') AND (DNI = @dni OR @dni = 0)
 END
 GO
 
@@ -1477,18 +1477,27 @@ BEGIN
 END
 GO
 /* ------------ PROCEDIMIENTO PARA FILTRAR PUBLICACIONES ------------ */
-CREATE PROCEDURE TODO_X2_LUCAS.Filtrar_Publicaciones(@rubro nvarchar(255),@descripcion nvarchar(255),@pagina int)
+CREATE PROCEDURE TODO_X2_LUCAS.Filtrar_Publicaciones(@rubro1 nvarchar(255),@rubro2 nvarchar(255),@rubro3 nvarchar(255),
+														@descripcion nvarchar(255))
 AS
 BEGIN
+	DECLARE @cod1 int, @cod2 int, @cod3 int;
+	SELECT @cod1 = TODO_X2_LUCAS.Obtener_Rubro(@rubro1),
+			@cod2 = TODO_X2_LUCAS.Obtener_Rubro(@rubro2),
+			@cod3 = TODO_X2_LUCAS.Obtener_Rubro(@rubro3)
+
 	SELECT Cod_Publicacion,Cod_Publicacion_Anterior,Descripcion_Publicacion,
 			Stock_Publicacion,Fecha_Publicacion,Fecha_Vencimiento_Publicacion,Precio_Publicacion,
 			Cod_Tipos_Publicacion,Cod_Rubro,Cod_Visibilidad,Costo_Publicacion,Cod_Usuario_Responsable,Cod_Estado_Publicacion
 			,Permiso_Preguntas,Entregas
 	FROM TODO_X2_LUCAS.Publicaciones 
-	WHERE (Cod_Rubro = TODO_X2_LUCAS.Obtener_Rubro(@rubro) OR @rubro IS NULL) AND
-			(Descripcion_Publicacion LIKE '%' + @descripcion + '%' OR @descripcion IS NULL)
+	WHERE (Cod_Rubro = @cod1 OR @cod1 = '') AND 
+--			(Cod_Rubro = @cod2 OR @cod2 = '') AND 
+	--		(Cod_Rubro = @cod3 or @cod3 = '') AND
+			(Descripcion_Publicacion LIKE '%' + @descripcion + '%' OR @descripcion = '')
 END
 GO
+
 /* ------------ PROCEDIMIENTO PARA GENERAR UNA FACTURA ------------ */
 CREATE PROCEDURE TODO_X2_LUCAS.Generar_Factura(@codPublicacion int,@cantidad numeric(18),@formaDePago nvarchar(255),
 												@dni numeric(18),@cuit nvarchar(50))
