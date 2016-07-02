@@ -1650,13 +1650,36 @@ BEGIN
 
 	IF ((SELECT Cod_Calificacion FROM TODO_X2_LUCAS.Compras WHERE Cod_Compra = @codCompra) = 99)
 	BEGIN
-		UPDATE TODO_X2_LUCAS.Compras
-		SET Cod_Calificacion = @codCalificacion,Descripcion = @descripcion
-		WHERE Cod_Compra = @codCompra
+		DECLARE @tipo int, @estado int;
+		SELECT @tipo = P.Cod_Tipos_Publicacion, @estado = P.Cod_Estado_Publicacion
+		FROM TODO_X2_LUCAS.Compras C JOIN TODO_X2_LUCAS.Publicaciones P ON (C.Cod_Publicacion=P.Cod_Publicacion) 
+		WHERE Cod_Compra =@codCompra
+		
+		IF (@tipo = 1)	
+		BEGIN
+			UPDATE TODO_X2_LUCAS.Compras
+			SET Cod_Calificacion = @codCalificacion,Descripcion = @descripcion
+			WHERE Cod_Compra = @codCompra
+		END
+		ELSE 
+		BEGIN
+			IF (@estado = 5)
+			BEGIN
+				UPDATE TODO_X2_LUCAS.Compras
+				SET Cod_Calificacion = @codCalificacion,Descripcion = @descripcion
+				WHERE Cod_Compra = @codCompra	
+			END
+			ELSE
+			BEGIN
+				PRINT 'LA SUBASTA NO ESTA FINALIZADA, NO PUEDE CALIFICARSE'
+				RETURN -2;
+			END
+		END
 	END
 	ELSE
 	BEGIN 
 		PRINT 'LA COMPRA YA ESTA CALIFICADA'
+		RETURN -1;
 	END
 
 END
@@ -1669,7 +1692,7 @@ BEGIN
 	DECLARE @usuario int;
 	SET @usuario = TODO_X2_LUCAS.ObtenerUsuario(@dni,@cuit);
 
-	SELECT Cod_Compra,Compra_Fecha,P.Cod_Publicacion,Ca.Descripcion
+	SELECT Cod_Compra,Compra_Fecha,P.Descripcion_Publicacion,Ca.Descripcion,C.Descripcion
 	FROM TODO_X2_LUCAS.Compras C Join TODO_X2_LUCAS.Calificaciones CA ON (C.Cod_Calificacion=CA.Cod_Calificacion)
 								JOIN TODO_X2_LUCAS.Publicaciones P ON (C.Cod_Publicacion = P.Cod_Publicacion)
 	WHERE Cod_Usuario = @usuario
