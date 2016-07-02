@@ -11,13 +11,14 @@ namespace MercadoEnvio.Repositories
 {
     class CalificarRepository
     {
-        public void calificarCompra(int estrellas, int codCompra, string descripcion)
+        public int calificarCompra(int estrellas, int codCompra, string descripcion)
         {
-            DBAdapter.executeProcedure("Calificar_Compra", 
+            var retorno = DBAdapter.executeProcedureWithReturnValue("Calificar_Compra", 
                 estrellas,
                 codCompra,
                 descripcion
             );
+            return retorno;
         }
 
             public Calificaciones getCalificacion(int calificacionID)

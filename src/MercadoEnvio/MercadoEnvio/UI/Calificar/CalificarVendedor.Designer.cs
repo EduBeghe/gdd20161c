@@ -40,20 +40,13 @@
             this.calificarButton = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.comprasDataGridView = new System.Windows.Forms.DataGridView();
-            this.gD1C2016DataSet6 = new MercadoEnvio.GD1C2016DataSet6();
             this.comprasBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.gD1C2016DataSet6 = new MercadoEnvio.GD1C2016DataSet6();
             this.comprasTableAdapter = new MercadoEnvio.GD1C2016DataSet6TableAdapters.ComprasTableAdapter();
-            this.codCompraDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.compraFechaDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.compraCantidadDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.codPublicacionDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.codUsuarioDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.codCalificacionDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.descripcionDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.comprasDataGridView)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gD1C2016DataSet6)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.comprasBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gD1C2016DataSet6)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -174,79 +167,30 @@
             // 
             // comprasDataGridView
             // 
-            this.comprasDataGridView.AutoGenerateColumns = false;
+            this.comprasDataGridView.AllowUserToAddRows = false;
+            this.comprasDataGridView.AllowUserToDeleteRows = false;
             this.comprasDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.comprasDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.codCompraDataGridViewTextBoxColumn,
-            this.compraFechaDataGridViewTextBoxColumn,
-            this.compraCantidadDataGridViewTextBoxColumn,
-            this.codPublicacionDataGridViewTextBoxColumn,
-            this.codUsuarioDataGridViewTextBoxColumn,
-            this.codCalificacionDataGridViewTextBoxColumn,
-            this.descripcionDataGridViewTextBoxColumn});
-            this.comprasDataGridView.DataSource = this.comprasBindingSource;
-            this.comprasDataGridView.Location = new System.Drawing.Point(17, 41);
+            this.comprasDataGridView.Location = new System.Drawing.Point(17, 43);
             this.comprasDataGridView.Name = "comprasDataGridView";
+            this.comprasDataGridView.ReadOnly = true;
             this.comprasDataGridView.RowTemplate.Height = 28;
+            this.comprasDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.comprasDataGridView.Size = new System.Drawing.Size(735, 205);
             this.comprasDataGridView.TabIndex = 10;
-            // 
-            // gD1C2016DataSet6
-            // 
-            this.gD1C2016DataSet6.DataSetName = "GD1C2016DataSet6";
-            this.gD1C2016DataSet6.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // comprasBindingSource
             // 
             this.comprasBindingSource.DataMember = "Compras";
             this.comprasBindingSource.DataSource = this.gD1C2016DataSet6;
             // 
+            // gD1C2016DataSet6
+            // 
+            this.gD1C2016DataSet6.DataSetName = "GD1C2016DataSet6";
+            this.gD1C2016DataSet6.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
             // comprasTableAdapter
             // 
             this.comprasTableAdapter.ClearBeforeFill = true;
-            // 
-            // codCompraDataGridViewTextBoxColumn
-            // 
-            this.codCompraDataGridViewTextBoxColumn.DataPropertyName = "Cod_Compra";
-            this.codCompraDataGridViewTextBoxColumn.HeaderText = "Cod_Compra";
-            this.codCompraDataGridViewTextBoxColumn.Name = "codCompraDataGridViewTextBoxColumn";
-            this.codCompraDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // compraFechaDataGridViewTextBoxColumn
-            // 
-            this.compraFechaDataGridViewTextBoxColumn.DataPropertyName = "Compra_Fecha";
-            this.compraFechaDataGridViewTextBoxColumn.HeaderText = "Compra_Fecha";
-            this.compraFechaDataGridViewTextBoxColumn.Name = "compraFechaDataGridViewTextBoxColumn";
-            // 
-            // compraCantidadDataGridViewTextBoxColumn
-            // 
-            this.compraCantidadDataGridViewTextBoxColumn.DataPropertyName = "Compra_Cantidad";
-            this.compraCantidadDataGridViewTextBoxColumn.HeaderText = "Compra_Cantidad";
-            this.compraCantidadDataGridViewTextBoxColumn.Name = "compraCantidadDataGridViewTextBoxColumn";
-            // 
-            // codPublicacionDataGridViewTextBoxColumn
-            // 
-            this.codPublicacionDataGridViewTextBoxColumn.DataPropertyName = "Cod_Publicacion";
-            this.codPublicacionDataGridViewTextBoxColumn.HeaderText = "Cod_Publicacion";
-            this.codPublicacionDataGridViewTextBoxColumn.Name = "codPublicacionDataGridViewTextBoxColumn";
-            // 
-            // codUsuarioDataGridViewTextBoxColumn
-            // 
-            this.codUsuarioDataGridViewTextBoxColumn.DataPropertyName = "Cod_Usuario";
-            this.codUsuarioDataGridViewTextBoxColumn.HeaderText = "Cod_Usuario";
-            this.codUsuarioDataGridViewTextBoxColumn.Name = "codUsuarioDataGridViewTextBoxColumn";
-            // 
-            // codCalificacionDataGridViewTextBoxColumn
-            // 
-            this.codCalificacionDataGridViewTextBoxColumn.DataPropertyName = "Cod_Calificacion";
-            this.codCalificacionDataGridViewTextBoxColumn.HeaderText = "Cod_Calificacion";
-            this.codCalificacionDataGridViewTextBoxColumn.Name = "codCalificacionDataGridViewTextBoxColumn";
-            // 
-            // descripcionDataGridViewTextBoxColumn
-            // 
-            this.descripcionDataGridViewTextBoxColumn.DataPropertyName = "Descripcion";
-            this.descripcionDataGridViewTextBoxColumn.HeaderText = "Descripcion";
-            this.descripcionDataGridViewTextBoxColumn.Name = "descripcionDataGridViewTextBoxColumn";
             // 
             // CalificarVendedor
             // 
@@ -266,8 +210,8 @@
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.comprasDataGridView)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gD1C2016DataSet6)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.comprasBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gD1C2016DataSet6)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -289,12 +233,5 @@
         private GD1C2016DataSet6 gD1C2016DataSet6;
         private System.Windows.Forms.BindingSource comprasBindingSource;
         private GD1C2016DataSet6TableAdapters.ComprasTableAdapter comprasTableAdapter;
-        private System.Windows.Forms.DataGridViewTextBoxColumn codCompraDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn compraFechaDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn compraCantidadDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn codPublicacionDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn codUsuarioDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn codCalificacionDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn descripcionDataGridViewTextBoxColumn;
     }
 }

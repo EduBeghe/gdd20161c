@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using MercadoEnvio.Repositories;
 using MercadoEnvio.Domain;
+using MercadoEnvio.Utils;
 
 namespace MercadoEnvio.Calificar
 {
@@ -27,25 +28,37 @@ namespace MercadoEnvio.Calificar
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            // TODO: This line of code loads data into the 'gD1C2016DataSet6.Compras' table. You can move, or remove it, as needed.
-            this.comprasTableAdapter.Fill(this.gD1C2016DataSet6.Compras);
+            this.comprasDataGridView.DataSource = DBAdapter.retrieveDataTable("Get_Compras_Por_Usuario", CLC_SessionManager.getDNI(), CLC_SessionManager.getCUIT() );
         }
 
         private void calificarButton_Click(object sender, EventArgs e)
         {
             var dataRowView = (DataRowView)comprasDataGridView.SelectedRows[0].DataBoundItem;
-            var compra = new ComprasRepository().parse(dataRowView.Row);
+            var dataRow = (DataRow)dataRowView.Row;
+            var codCompra = Convert.ToInt32(dataRow["Cod_Compra"]);
+            
             foreach (Control control in panel1.Controls)
             {
                 var radioButton = (RadioButton) control;
                 if (radioButton.Checked )
                 {
-                    new CalificarRepository().calificarCompra(
+                    int retorno = new CalificarRepository().calificarCompra(
                         Convert.ToInt32( radioButton.Tag ),
-                        compra.Cod_Compra,
+                        codCompra,
                         descripcionTextBox.Text
                         );
-                    MessageBox.Show("Gracias por calificar");        
+                    if (retorno == -1)
+                    {
+                        MessageBox.Show("No puede calificar una compra ya calificada");
+                    }
+                    else if (retorno == -2)
+                    {
+                        MessageBox.Show("No puede calificar una subasta en proceso");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Gracias por calificar");
+                    }
                     this.Close();
                     return;
                 }

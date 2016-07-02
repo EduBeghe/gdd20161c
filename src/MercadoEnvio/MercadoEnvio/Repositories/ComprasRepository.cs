@@ -20,13 +20,13 @@ namespace MercadoEnvio.Repositories
         public Compras parse(DataRow dr)
         {
             return new Compras(
-            Convert.ToInt32(dr["Cod_Compra"]),
-            Convert.ToDateTime(dr["Compra_Fecha"]),
-            Convert.ToInt32(dr["Compra_Cantidad"]),
-            new PublicacionRepository().getPublicacion( Convert.ToInt32(dr["Cod_Publicacion"]) ),
-            new UsuariosRepository().getUsuario( Convert.ToInt32(dr["Cod_Usuario"]) ),
-            new CalificarRepository().getCalificacion( Convert.ToInt32(dr["Cod_Calificacion"])),
-            dr["Descripcion"] as String
+                Convert.ToInt32(dr["Cod_Compra"]),
+                Convert.ToDateTime(dr["Compra_Fecha"]),
+                Convert.ToInt32(dr["Compra_Cantidad"]),
+                new PublicacionRepository().getPublicacion( Convert.ToInt32(dr["Cod_Publicacion"]) ),
+                new UsuariosRepository().getUsuario( Convert.ToInt32(dr["Cod_Usuario"]) ),
+                new CalificarRepository().getCalificacion( Convert.ToInt32(dr["Cod_Calificacion"])),
+                dr["Descripcion"] as String
             );
         }
     }
