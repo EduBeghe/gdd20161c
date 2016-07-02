@@ -120,6 +120,16 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>GD1C2016DataSet6.xsd</DependentUpon>
     </Compile>
+    <Compile Include="GD1C2016DataSet7.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GD1C2016DataSet7.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="GD1C2016DataSet8.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GD1C2016DataSet8.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Repositories\CalificarRepository.cs" />
     <Compile Include="Repositories\ComprasRepository.cs" />
     <Compile Include="Repositories\EstadoPublicacionesRepository.cs" />
@@ -425,6 +435,28 @@
     </None>
     <None Include="GD1C2016DataSet6.xss">
       <DependentUpon>GD1C2016DataSet6.xsd</DependentUpon>
+    </None>
+    <None Include="GD1C2016DataSet7.xsc">
+      <DependentUpon>GD1C2016DataSet7.xsd</DependentUpon>
+    </None>
+    <None Include="GD1C2016DataSet7.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>GD1C2016DataSet7.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="GD1C2016DataSet7.xss">
+      <DependentUpon>GD1C2016DataSet7.xsd</DependentUpon>
+    </None>
+    <None Include="GD1C2016DataSet8.xsc">
+      <DependentUpon>GD1C2016DataSet8.xsd</DependentUpon>
+    </None>
+    <None Include="GD1C2016DataSet8.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>GD1C2016DataSet8.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="GD1C2016DataSet8.xss">
+      <DependentUpon>GD1C2016DataSet8.xsd</DependentUpon>
     </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

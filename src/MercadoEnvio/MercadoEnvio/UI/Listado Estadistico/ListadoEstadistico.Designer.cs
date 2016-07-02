@@ -28,14 +28,27 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.label1 = new System.Windows.Forms.Label();
             this.estadisticaDataGridView = new System.Windows.Forms.DataGridView();
             this.trimestreComboBox = new System.Windows.Forms.ComboBox();
             this.anioNumericUpDown = new System.Windows.Forms.NumericUpDown();
             this.consultarButton = new System.Windows.Forms.Button();
             this.estadisticaComboBox = new System.Windows.Forms.ComboBox();
+            this.visibilidadComboBox = new System.Windows.Forms.ComboBox();
+            this.rubroComboBox = new System.Windows.Forms.ComboBox();
+            this.gD1C2016DataSet7 = new MercadoEnvio.GD1C2016DataSet7();
+            this.visibilidadesPublicacionesBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.visibilidades_PublicacionesTableAdapter = new MercadoEnvio.GD1C2016DataSet7TableAdapters.Visibilidades_PublicacionesTableAdapter();
+            this.gD1C2016DataSet8 = new MercadoEnvio.GD1C2016DataSet8();
+            this.rubrosBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.rubrosTableAdapter = new MercadoEnvio.GD1C2016DataSet8TableAdapters.RubrosTableAdapter();
             ((System.ComponentModel.ISupportInitialize)(this.estadisticaDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.anioNumericUpDown)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gD1C2016DataSet7)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.visibilidadesPublicacionesBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gD1C2016DataSet8)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.rubrosBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -50,10 +63,10 @@
             // estadisticaDataGridView
             // 
             this.estadisticaDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.estadisticaDataGridView.Location = new System.Drawing.Point(12, 166);
+            this.estadisticaDataGridView.Location = new System.Drawing.Point(15, 218);
             this.estadisticaDataGridView.Name = "estadisticaDataGridView";
             this.estadisticaDataGridView.RowTemplate.Height = 28;
-            this.estadisticaDataGridView.Size = new System.Drawing.Size(447, 243);
+            this.estadisticaDataGridView.Size = new System.Drawing.Size(447, 266);
             this.estadisticaDataGridView.TabIndex = 1;
             // 
             // trimestreComboBox
@@ -113,12 +126,66 @@
             this.estadisticaComboBox.Name = "estadisticaComboBox";
             this.estadisticaComboBox.Size = new System.Drawing.Size(447, 28);
             this.estadisticaComboBox.TabIndex = 5;
+            this.estadisticaComboBox.SelectedIndexChanged += new System.EventHandler(this.estadisticaComboBox_SelectedIndexChanged);
+            this.estadisticaComboBox.SelectedValueChanged += new System.EventHandler(this.ListadoEstadistico_Load);
+            // 
+            // visibilidadComboBox
+            // 
+            this.visibilidadComboBox.DataSource = this.visibilidadesPublicacionesBindingSource;
+            this.visibilidadComboBox.DisplayMember = "Descripcion_Visibilidad";
+            this.visibilidadComboBox.FormattingEnabled = true;
+            this.visibilidadComboBox.Location = new System.Drawing.Point(15, 166);
+            this.visibilidadComboBox.Name = "visibilidadComboBox";
+            this.visibilidadComboBox.Size = new System.Drawing.Size(211, 28);
+            this.visibilidadComboBox.TabIndex = 6;
+            this.visibilidadComboBox.ValueMember = "Descripcion_Visibilidad";
+            // 
+            // rubroComboBox
+            // 
+            this.rubroComboBox.DataSource = this.rubrosBindingSource;
+            this.rubroComboBox.DisplayMember = "Descripcion_Rubro";
+            this.rubroComboBox.FormattingEnabled = true;
+            this.rubroComboBox.Location = new System.Drawing.Point(242, 166);
+            this.rubroComboBox.Name = "rubroComboBox";
+            this.rubroComboBox.Size = new System.Drawing.Size(217, 28);
+            this.rubroComboBox.TabIndex = 7;
+            this.rubroComboBox.ValueMember = "Descripcion_Rubro";
+            // 
+            // gD1C2016DataSet7
+            // 
+            this.gD1C2016DataSet7.DataSetName = "GD1C2016DataSet7";
+            this.gD1C2016DataSet7.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // visibilidadesPublicacionesBindingSource
+            // 
+            this.visibilidadesPublicacionesBindingSource.DataMember = "Visibilidades_Publicaciones";
+            this.visibilidadesPublicacionesBindingSource.DataSource = this.gD1C2016DataSet7;
+            // 
+            // visibilidades_PublicacionesTableAdapter
+            // 
+            this.visibilidades_PublicacionesTableAdapter.ClearBeforeFill = true;
+            // 
+            // gD1C2016DataSet8
+            // 
+            this.gD1C2016DataSet8.DataSetName = "GD1C2016DataSet8";
+            this.gD1C2016DataSet8.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // rubrosBindingSource
+            // 
+            this.rubrosBindingSource.DataMember = "Rubros";
+            this.rubrosBindingSource.DataSource = this.gD1C2016DataSet8;
+            // 
+            // rubrosTableAdapter
+            // 
+            this.rubrosTableAdapter.ClearBeforeFill = true;
             // 
             // ListadoEstadistico
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(474, 421);
+            this.ClientSize = new System.Drawing.Size(474, 496);
+            this.Controls.Add(this.rubroComboBox);
+            this.Controls.Add(this.visibilidadComboBox);
             this.Controls.Add(this.estadisticaComboBox);
             this.Controls.Add(this.consultarButton);
             this.Controls.Add(this.anioNumericUpDown);
@@ -127,8 +194,13 @@
             this.Controls.Add(this.label1);
             this.Name = "ListadoEstadistico";
             this.Text = "Listado Estadistico";
+            this.Load += new System.EventHandler(this.ListadoEstadistico_Load);
             ((System.ComponentModel.ISupportInitialize)(this.estadisticaDataGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.anioNumericUpDown)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gD1C2016DataSet7)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.visibilidadesPublicacionesBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gD1C2016DataSet8)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.rubrosBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -142,5 +214,13 @@
         private System.Windows.Forms.NumericUpDown anioNumericUpDown;
         private System.Windows.Forms.Button consultarButton;
         private System.Windows.Forms.ComboBox estadisticaComboBox;
+        private System.Windows.Forms.ComboBox visibilidadComboBox;
+        private System.Windows.Forms.ComboBox rubroComboBox;
+        private GD1C2016DataSet7 gD1C2016DataSet7;
+        private System.Windows.Forms.BindingSource visibilidadesPublicacionesBindingSource;
+        private GD1C2016DataSet7TableAdapters.Visibilidades_PublicacionesTableAdapter visibilidades_PublicacionesTableAdapter;
+        private GD1C2016DataSet8 gD1C2016DataSet8;
+        private System.Windows.Forms.BindingSource rubrosBindingSource;
+        private GD1C2016DataSet8TableAdapters.RubrosTableAdapter rubrosTableAdapter;
     }
 }
