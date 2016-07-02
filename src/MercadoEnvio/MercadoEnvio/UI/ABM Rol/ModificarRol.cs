@@ -31,17 +31,13 @@ namespace MercadoEnvio.UI.ABM_Rol
 
         private void modificarButton_Click(object sender, EventArgs e)
         {
-            if (nombreTextBox.Text != "")
+            if (!rol.Nombre.Equals(nombreTextBox.Text))
             {
                 new RolesRepository().modificarNombre(rol, nombreTextBox.Text);
             }
-            if (estadoCheckBox.Checked)
+            if (!rol.Estado_Rol.Equals(estadoCheckBox.Checked))
             {
-                new RolesRepository().modificarEstado(rol, true);
-            }
-            else
-            {
-                new RolesRepository().modificarEstado(rol, false);
+                new RolesRepository().modificarEstado(rol, estadoCheckBox.Checked);
             }
             foreach (Object item in FuncionalidadesListBox.Items)
             {
@@ -56,6 +52,7 @@ namespace MercadoEnvio.UI.ABM_Rol
 
         private void ModificarRol_Load(object sender, EventArgs e)
         {
+            nombreTextBox.Text = rol.Nombre;
             this.FuncionalidadesListBox.DataSource = new BindingSource(new BindingList<Funcionalidades>(new FuncionalidadRepository().getFuncionalidades()), null);
             ((ListBox)this.FuncionalidadesListBox).DisplayMember = "Descripcion_Funcionalidad";
             estadoCheckBox.Checked = rol.Estado_Rol;

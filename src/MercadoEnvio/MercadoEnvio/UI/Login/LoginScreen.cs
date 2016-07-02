@@ -50,7 +50,12 @@ namespace MercadoEnvio.UI.Login
 
         private void LoginScreen_Load(object sender, EventArgs e)
         {
+        }
 
+        private void passwordTextbox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Enter)
+                button1.PerformClick();
         }
     }
 }

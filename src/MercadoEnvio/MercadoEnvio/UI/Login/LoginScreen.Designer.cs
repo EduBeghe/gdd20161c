@@ -80,8 +80,10 @@
             this.passwordTextbox.Location = new System.Drawing.Point(82, 97);
             this.passwordTextbox.Margin = new System.Windows.Forms.Padding(2);
             this.passwordTextbox.Name = "passwordTextbox";
+            this.passwordTextbox.PasswordChar = '*';
             this.passwordTextbox.Size = new System.Drawing.Size(185, 20);
             this.passwordTextbox.TabIndex = 4;
+            this.passwordTextbox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.passwordTextbox_KeyPress);
             // 
             // button1
             // 
