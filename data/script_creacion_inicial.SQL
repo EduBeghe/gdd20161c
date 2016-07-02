@@ -1737,13 +1737,13 @@ BEGIN
 	DECLARE @codVisibilidad numeric(18);
 	SET @codVisibilidad = TODO_X2_LUCAS.Obtener_Visibilidad(@visibilidad);
 
-	SELECT TOP 5 U.Nombre_Usuario,SUM(p.Stock_Publicacion)
+	SELECT DISTINCT TOP 5 U.Nombre_Usuario,SUM(p.Stock_Publicacion - i.Item_Factura_Cantidad)
 	FROM TODO_X2_LUCAS.Usuarios U  JOIN TODO_X2_LUCAS.Publicaciones P ON (P.Cod_Usuario_Responsable=U.Cod_Usuario)
-									JOIN TODO_X2_LUCAS.Facturas F ON (p.Cod_Usuario_Responsable != F.Vendedor_Correspondiente)
+									JOIN TODO_X2_LUCAS.Facturas F ON (p.Cod_Usuario_Responsable = F.Vendedor_Correspondiente)
 									JOIN TODO_X2_LUCAS.Items_Facturas I ON (I.Cod_Factura=F.Cod_Factura)
 	WHERE (P.Cod_Visibilidad = @codVisibilidad OR P.Cod_Visibilidad IS NULL) AND
 			(MONTH(F.Fecha_Factura) BETWEEN @mesInicio AND @mesFinal) AND YEAR(F.Fecha_Factura) = @anio
-	GROUP BY U.Nombre_Usuario
+	GROUP BY U.Nombre_Usuario,p.Cod_Publicacion
 	ORDER BY 2 DESC
 
 END
