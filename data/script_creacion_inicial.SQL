@@ -1911,9 +1911,9 @@ BEGIN
 		DECLARE @codUsuario int = (SELECT DISTINCT @@IDENTITY FROM TODO_X2_LUCAS.Usuarios);
 			
 		INSERT INTO TODO_X2_LUCAS.Detalles_Empresas(Cod_Usuario,Razon_Social,Mail,Cod_Domicilio,
-													Cod_Postal,CUIT,Estado_Empresa,Telefono,Cod_Rubro,Ciudad)
-		VALUES(@codUsuario,@razonSocial,@mail,@codDom,@codPostal,@cuit,1,00000000,' ',' ')
-
+													Cod_Postal,CUIT,Estado_Empresa,Telefono,Cod_Rubro,Ciudad,Nombre_De_Contacto)
+		VALUES(@codUsuario,@razonSocial,@mail,@codDom,@codPostal,@cuit,1,00000000,' ',' ',' ')
+		
 	    FETCH NEXT FROM cursorEmpresas INTO @codPostal,@cuit,@depto,@calle,@fechaCreacion,@mail,@nroCalle,@piso,@razonSocial
 	END
 
