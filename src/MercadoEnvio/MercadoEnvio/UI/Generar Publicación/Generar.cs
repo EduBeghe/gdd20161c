@@ -56,6 +56,8 @@ namespace MercadoEnvio.Generar_Publicación
                 this.permitirPreguntasCheckBox.Checked,
                 this.permitirEnvioCheckBox.Checked
                 );
+            MessageBox.Show("Publicacion dada de Alta exitosamente");
+            this.Close();
         }
     }
 }
