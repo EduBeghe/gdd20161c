@@ -1292,27 +1292,18 @@ CREATE PROCEDURE TODO_X2_LUCAS.Modificar_Cliente(@dniViejo numeric(18),@nombre n
 											@localidad nvarchar(50),@codPostal nvarchar(50),@fechaNacimiento datetime)
 AS
 BEGIN
-	IF NOT EXISTS (SELECT * FROM TODO_X2_LUCAS.Detalles_Clientes WHERE DNI = @dni)
-	BEGIN
-		UPDATE TODO_X2_LUCAS.Detalles_Clientes
-		SET Nombre = @nombre, Apellido = @apellido, DNI = @dni, Mail = @mail, Telefono = @telefono, 
-			Cod_Postal = @codPostal,Fecha_Nacimiento = @fechaNacimiento
-		WHERE DNI = @dniViejo
+	UPDATE TODO_X2_LUCAS.Detalles_Clientes
+	SET Nombre = @nombre, Apellido = @apellido, DNI = @dni, Mail = @mail, Telefono = @telefono, 
+		Cod_Postal = @codPostal,Fecha_Nacimiento = @fechaNacimiento
+	WHERE DNI = @dniViejo
 
-		UPDATE TODO_X2_LUCAS.Domicilios
-		SET	Calle = @calle, Nro_Calle = @nro_Calle, Piso = @piso, Depto = @depto, Localidad = @localidad
-		WHERE Cod_Domicilio = (SELECT D.Cod_Domicilio 
-								FROM TODO_X2_LUCAS.Domicilios D JOIN TODO_X2_LUCAS.Detalles_Clientes C ON (D.Cod_Domicilio = C.Cod_Domicilio)
-								WHERE C.DNI = @dniViejo)
-	END
-	ELSE
-	BEGIN
-		PRINT 'EL DNI NUEVO QUE SE MODIFICO YA EXISTE, NO SE PUEDE REALIZAR LA MODIFICACION'
-		RETURN -1;
-	END
+	UPDATE TODO_X2_LUCAS.Domicilios
+	SET	Calle = @calle, Nro_Calle = @nro_Calle, Piso = @piso, Depto = @depto, Localidad = @localidad
+	WHERE Cod_Domicilio = (SELECT D.Cod_Domicilio 
+							FROM TODO_X2_LUCAS.Domicilios D JOIN TODO_X2_LUCAS.Detalles_Clientes C ON (D.Cod_Domicilio = C.Cod_Domicilio)
+							WHERE C.DNI = @dniViejo)
 END
 GO
-
 /* ------------ PROCEDIMIENTO PARA ALTA DE UNA EMPRESA ------------ */
 CREATE PROCEDURE TODO_X2_LUCAS.Alta_Empresa(@razon_Social nvarchar(255),@mail nvarchar(50),@telefono numeric(10),
 											@calle nvarchar(255),@nro_Calle numeric(18),@piso numeric(18),@depto nvarchar(50),
@@ -1348,29 +1339,16 @@ CREATE PROCEDURE TODO_X2_LUCAS.Modificar_Empresa(@cuitViejo nvarchar(50),@razonS
 											@CUIT nvarchar(50),@rubro nvarchar(255),@estado_Empresa bit,@nombreDeContacto nvarchar(255))
 AS
 BEGIN
+	UPDATE TODO_X2_LUCAS.Detalles_Empresas
+	SET Razon_Social = @razon_Social, Mail = @mail, Telefono = @telefono,Cod_Postal = @cod_Postal, Ciudad = @ciudad,
+		CUIT = @CUIT, Cod_Rubro = TODO_X2_LUCAS.Obtener_Rubro(@rubro), Estado_Empresa = @estado_Empresa,Nombre_De_Contacto = @nombreDeContacto
+	WHERE CUIT = @cuitViejo
 	
-	IF NOT EXISTS (SELECT * FROM TODO_X2_LUCAS.Detalles_Empresas WHERE CUIT = @CUIT OR Razon_Social = @razonSocialVieja)
-	BEGIN
-
-		UPDATE TODO_X2_LUCAS.Detalles_Empresas
-		SET Razon_Social = @razon_Social, Mail = @mail, Telefono = @telefono,Cod_Postal = @cod_Postal, Ciudad = @ciudad,
-			CUIT = @CUIT, Cod_Rubro = TODO_X2_LUCAS.Obtener_Rubro(@rubro), Estado_Empresa = @estado_Empresa,Nombre_De_Contacto = @nombreDeContacto
-		WHERE CUIT = @cuitViejo
-
-		UPDATE TODO_X2_LUCAS.Domicilios
-		SET	Calle = @calle, Nro_Calle = @nro_Calle, Piso = @piso, Depto = @depto, Localidad = @localidad
-		WHERE Cod_Domicilio = (SELECT D.Cod_Domicilio 
-							FROM TODO_X2_LUCAS.Domicilios D JOIN Detalles_Empresas E ON (D.Cod_Domicilio = E.Cod_Domicilio)
+	UPDATE TODO_X2_LUCAS.Domicilios
+	SET	Calle = @calle, Nro_Calle = @nro_Calle, Piso = @piso, Depto = @depto, Localidad = @localidad
+	WHERE Cod_Domicilio = (SELECT D.Cod_Domicilio 
+							FROM TODO_X2_LUCAS.Domicilios D JOIN TODO_X2_LUCAS.Detalles_Empresas E ON (D.Cod_Domicilio = E.Cod_Domicilio)
 							WHERE CUIT = @cuitViejo)
-
-	END
-	ELSE
-	BEGIN
-		PRINT 'EL CUIT O LA RAZON SOCIAL NUEVAS MODIFICADAS YA EXISTEN, NO SE PUEDE REALIZAR LA MODIFICACION'
-		RETURN -1; 
-	END
-
-
 END
 GO
 
