@@ -84,5 +84,20 @@ namespace MercadoEnvio.UI.ABM_Visibilidad
                 this.Close();
             }
         }
+
+        private void precioTextBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            MercadoEnvio.Utils.Validacion.validateNumberTextBox(sender, e);
+        }
+
+        private void PorcentajeTextBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            MercadoEnvio.Utils.Validacion.validateNumberTextBox(sender, e);
+        }
+
+        private void comisionTextBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            MercadoEnvio.Utils.Validacion.validateNumberTextBox(sender, e);
+        }
     }
 }

@@ -93,5 +93,25 @@ namespace MercadoEnvio.UI.ABM_Usuario
         {
 
         }
+
+        private void telefonoTextBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            MercadoEnvio.Utils.Validacion.validateNumberTextBox(sender, e);
+        }
+
+        private void numeroCalleTextBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            MercadoEnvio.Utils.Validacion.validateNumberTextBox(sender, e);
+        }
+
+        private void numeroPisoTextBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            MercadoEnvio.Utils.Validacion.validateNumberTextBox(sender, e);
+        }
+
+        private void cpTextBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            MercadoEnvio.Utils.Validacion.validateNumberTextBox(sender, e);
+        }
     }
 }

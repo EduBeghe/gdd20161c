@@ -42,11 +42,6 @@
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.clientesGrid = new System.Windows.Forms.DataGridView();
-            this.detallesClientesBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.usuariosBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.gD1C2016DataSet4 = new MercadoEnvio.GD1C2016DataSet4();
-            this.detallesClientesBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
-            this.detalles_ClientesTableAdapter = new MercadoEnvio.GD1C2016DataSet4TableAdapters.Detalles_ClientesTableAdapter();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -59,20 +54,25 @@
             this.dataGridViewTextBoxColumn11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewCheckBoxColumn1 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.detallesClientesBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.gD1C2016DataSet4 = new MercadoEnvio.GD1C2016DataSet4();
+            this.detallesClientesBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.usuariosBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.detalles_ClientesTableAdapter = new MercadoEnvio.GD1C2016DataSet4TableAdapters.Detalles_ClientesTableAdapter();
             ((System.ComponentModel.ISupportInitialize)(this.clientesGrid)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.detallesClientesBindingSource1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gD1C2016DataSet4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.detallesClientesBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.usuariosBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gD1C2016DataSet4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.detallesClientesBindingSource1)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(316, 30);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(211, 19);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(160, 20);
+            this.label1.Size = new System.Drawing.Size(156, 16);
             this.label1.TabIndex = 0;
             this.label1.Text = "Buscador de Clientes";
             this.label1.Click += new System.EventHandler(this.label1_Click);
@@ -80,20 +80,18 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(172, 86);
-            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label2.Location = new System.Drawing.Point(115, 56);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(65, 20);
+            this.label2.Size = new System.Drawing.Size(44, 13);
             this.label2.TabIndex = 1;
             this.label2.Text = "Nombre";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(172, 134);
-            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label3.Location = new System.Drawing.Point(115, 87);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(65, 20);
+            this.label3.Size = new System.Drawing.Size(44, 13);
             this.label3.TabIndex = 2;
             this.label3.Text = "Apellido";
             this.label3.Click += new System.EventHandler(this.label3_Click);
@@ -101,62 +99,55 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(172, 181);
-            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label4.Location = new System.Drawing.Point(115, 118);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(37, 20);
+            this.label4.Size = new System.Drawing.Size(26, 13);
             this.label4.TabIndex = 3;
             this.label4.Text = "DNI";
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(172, 224);
-            this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label5.Location = new System.Drawing.Point(115, 146);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(48, 20);
+            this.label5.Size = new System.Drawing.Size(32, 13);
             this.label5.TabIndex = 4;
             this.label5.Text = "Email";
             // 
             // nombreTextBox
             // 
-            this.nombreTextBox.Location = new System.Drawing.Point(304, 75);
-            this.nombreTextBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.nombreTextBox.Location = new System.Drawing.Point(203, 49);
             this.nombreTextBox.Name = "nombreTextBox";
-            this.nombreTextBox.Size = new System.Drawing.Size(362, 26);
+            this.nombreTextBox.Size = new System.Drawing.Size(243, 20);
             this.nombreTextBox.TabIndex = 5;
             // 
             // apellidoTextBox
             // 
-            this.apellidoTextBox.Location = new System.Drawing.Point(304, 123);
-            this.apellidoTextBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.apellidoTextBox.Location = new System.Drawing.Point(203, 80);
             this.apellidoTextBox.Name = "apellidoTextBox";
-            this.apellidoTextBox.Size = new System.Drawing.Size(362, 26);
+            this.apellidoTextBox.Size = new System.Drawing.Size(243, 20);
             this.apellidoTextBox.TabIndex = 6;
             // 
             // dniTextBox
             // 
-            this.dniTextBox.Location = new System.Drawing.Point(304, 170);
-            this.dniTextBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.dniTextBox.Location = new System.Drawing.Point(203, 110);
             this.dniTextBox.Name = "dniTextBox";
-            this.dniTextBox.Size = new System.Drawing.Size(362, 26);
+            this.dniTextBox.Size = new System.Drawing.Size(243, 20);
             this.dniTextBox.TabIndex = 7;
             // 
             // mailTextBox
             // 
-            this.mailTextBox.Location = new System.Drawing.Point(304, 214);
-            this.mailTextBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.mailTextBox.Location = new System.Drawing.Point(203, 139);
             this.mailTextBox.Name = "mailTextBox";
-            this.mailTextBox.Size = new System.Drawing.Size(362, 26);
+            this.mailTextBox.Size = new System.Drawing.Size(243, 20);
             this.mailTextBox.TabIndex = 8;
             this.mailTextBox.TextChanged += new System.EventHandler(this.textBox4_TextChanged);
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(609, 271);
-            this.button1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.button1.Location = new System.Drawing.Point(406, 176);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(178, 45);
+            this.button1.Size = new System.Drawing.Size(119, 29);
             this.button1.TabIndex = 10;
             this.button1.Text = "Buscar";
             this.button1.UseVisualStyleBackColor = true;
@@ -164,10 +155,9 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(12, 561);
-            this.button2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.button2.Location = new System.Drawing.Point(8, 365);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(142, 35);
+            this.button2.Size = new System.Drawing.Size(95, 23);
             this.button2.TabIndex = 11;
             this.button2.Text = "Modificar";
             this.button2.UseVisualStyleBackColor = true;
@@ -175,10 +165,9 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(633, 561);
-            this.button3.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.button3.Location = new System.Drawing.Point(422, 365);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(154, 35);
+            this.button3.Size = new System.Drawing.Size(103, 23);
             this.button3.TabIndex = 12;
             this.button3.Text = "Inhabilitar";
             this.button3.UseVisualStyleBackColor = true;
@@ -204,29 +193,13 @@
             this.dataGridViewTextBoxColumn12,
             this.dataGridViewCheckBoxColumn1});
             this.clientesGrid.DataSource = this.detallesClientesBindingSource1;
-            this.clientesGrid.Location = new System.Drawing.Point(12, 333);
+            this.clientesGrid.Location = new System.Drawing.Point(8, 216);
+            this.clientesGrid.Margin = new System.Windows.Forms.Padding(2);
             this.clientesGrid.Name = "clientesGrid";
             this.clientesGrid.ReadOnly = true;
-            this.clientesGrid.Size = new System.Drawing.Size(775, 220);
+            this.clientesGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.clientesGrid.Size = new System.Drawing.Size(517, 143);
             this.clientesGrid.TabIndex = 13;
-            // 
-            // detallesClientesBindingSource
-            // 
-            this.detallesClientesBindingSource.DataMember = "Detalles_Clientes";
-            // 
-            // gD1C2016DataSet4
-            // 
-            this.gD1C2016DataSet4.DataSetName = "GD1C2016DataSet4";
-            this.gD1C2016DataSet4.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // detallesClientesBindingSource1
-            // 
-            this.detallesClientesBindingSource1.DataMember = "Detalles_Clientes";
-            this.detallesClientesBindingSource1.DataSource = this.gD1C2016DataSet4;
-            // 
-            // detalles_ClientesTableAdapter
-            // 
-            this.detalles_ClientesTableAdapter.ClearBeforeFill = true;
             // 
             // dataGridViewTextBoxColumn2
             // 
@@ -312,11 +285,29 @@
             this.dataGridViewCheckBoxColumn1.Name = "dataGridViewCheckBoxColumn1";
             this.dataGridViewCheckBoxColumn1.ReadOnly = true;
             // 
+            // detallesClientesBindingSource1
+            // 
+            this.detallesClientesBindingSource1.DataMember = "Detalles_Clientes";
+            this.detallesClientesBindingSource1.DataSource = this.gD1C2016DataSet4;
+            // 
+            // gD1C2016DataSet4
+            // 
+            this.gD1C2016DataSet4.DataSetName = "GD1C2016DataSet4";
+            this.gD1C2016DataSet4.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // detallesClientesBindingSource
+            // 
+            this.detallesClientesBindingSource.DataMember = "Detalles_Clientes";
+            // 
+            // detalles_ClientesTableAdapter
+            // 
+            this.detalles_ClientesTableAdapter.ClearBeforeFill = true;
+            // 
             // BuscadorClientes
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(806, 606);
+            this.ClientSize = new System.Drawing.Size(537, 394);
             this.Controls.Add(this.clientesGrid);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
@@ -330,14 +321,15 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "BuscadorClientes";
             this.Text = "BuscadorUsuarios";
             this.Load += new System.EventHandler(this.BuscadorClientes_Load);
             ((System.ComponentModel.ISupportInitialize)(this.clientesGrid)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.detallesClientesBindingSource1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gD1C2016DataSet4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.detallesClientesBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.usuariosBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gD1C2016DataSet4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.detallesClientesBindingSource1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

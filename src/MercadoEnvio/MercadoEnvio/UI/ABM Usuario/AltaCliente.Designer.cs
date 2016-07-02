@@ -63,9 +63,10 @@
             // label1
             // 
             this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(149, 6);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(80, 13);
+            this.label1.Size = new System.Drawing.Size(117, 16);
             this.label1.TabIndex = 0;
             this.label1.Text = "Alta de Clientes";
             this.label1.Click += new System.EventHandler(this.label1_Click);
@@ -149,6 +150,7 @@
             this.numeroCalleTextBox.Name = "numeroCalleTextBox";
             this.numeroCalleTextBox.Size = new System.Drawing.Size(207, 20);
             this.numeroCalleTextBox.TabIndex = 9;
+            this.numeroCalleTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numeroCalleTextBox_KeyPress);
             // 
             // label14
             // 
@@ -179,6 +181,7 @@
             this.nroPisoTextBox.Name = "nroPisoTextBox";
             this.nroPisoTextBox.Size = new System.Drawing.Size(206, 20);
             this.nroPisoTextBox.TabIndex = 5;
+            this.nroPisoTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.nroPisoTextBox_KeyPress);
             // 
             // calleTextBox
             // 
@@ -261,6 +264,7 @@
             this.dniTextBox.Name = "dniTextBox";
             this.dniTextBox.Size = new System.Drawing.Size(226, 20);
             this.dniTextBox.TabIndex = 13;
+            this.dniTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.dniTextBox_KeyPress);
             // 
             // tipoDocumentoTextBox
             // 
@@ -268,6 +272,7 @@
             this.tipoDocumentoTextBox.Name = "tipoDocumentoTextBox";
             this.tipoDocumentoTextBox.Size = new System.Drawing.Size(226, 20);
             this.tipoDocumentoTextBox.TabIndex = 14;
+            this.tipoDocumentoTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tipoDocumentoTextBox_KeyPress);
             // 
             // mailTextBox
             // 
@@ -282,6 +287,7 @@
             this.telefonoTextBox.Name = "telefonoTextBox";
             this.telefonoTextBox.Size = new System.Drawing.Size(226, 20);
             this.telefonoTextBox.TabIndex = 16;
+            this.telefonoTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.telefonoTextBox_KeyPress);
             // 
             // cpTextBox
             // 
@@ -303,7 +309,7 @@
             // fechaNacimientoDateTimePicker
             // 
             this.fechaNacimientoDateTimePicker.Location = new System.Drawing.Point(153, 384);
-            this.fechaNacimientoDateTimePicker.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.fechaNacimientoDateTimePicker.Margin = new System.Windows.Forms.Padding(2);
             this.fechaNacimientoDateTimePicker.Name = "fechaNacimientoDateTimePicker";
             this.fechaNacimientoDateTimePicker.Size = new System.Drawing.Size(226, 20);
             this.fechaNacimientoDateTimePicker.TabIndex = 21;

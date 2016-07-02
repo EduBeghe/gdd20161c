@@ -81,6 +81,7 @@
             this.precioTextBox.Name = "precioTextBox";
             this.precioTextBox.Size = new System.Drawing.Size(170, 20);
             this.precioTextBox.TabIndex = 4;
+            this.precioTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.precioTextBox_KeyPress);
             // 
             // label4
             // 
@@ -97,6 +98,7 @@
             this.PorcentajeTextBox.Name = "PorcentajeTextBox";
             this.PorcentajeTextBox.Size = new System.Drawing.Size(170, 20);
             this.PorcentajeTextBox.TabIndex = 6;
+            this.PorcentajeTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.PorcentajeTextBox_KeyPress);
             // 
             // label5
             // 
@@ -113,6 +115,7 @@
             this.comisionTextBox.Name = "comisionTextBox";
             this.comisionTextBox.Size = new System.Drawing.Size(171, 20);
             this.comisionTextBox.TabIndex = 8;
+            this.comisionTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.comisionTextBox_KeyPress);
             // 
             // button1
             // 

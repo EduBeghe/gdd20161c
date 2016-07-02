@@ -57,44 +57,52 @@ namespace MercadoEnvio.UI.ABM_Usuario
                 if (this.modificando)
                 {
                     retornoAlta = new ClientesRepository().modificarCliente(
-                        this.cliente.DNI, 
-                        nombreTextBox.Text, 
-                        apellidoTextBox.Text, 
+                        this.cliente.DNI,
+                        nombreTextBox.Text,
+                        apellidoTextBox.Text,
                         Convert.ToInt32(dniTextBox.Text),
-                        mailTextBox.Text, 
-                        Convert.ToInt32(telefonoTextBox.Text), 
+                        mailTextBox.Text,
+                        Convert.ToInt32(telefonoTextBox.Text),
                         calleTextBox.Text,
-                        Convert.ToInt32(numeroCalleTextBox.Text), 
-                        Convert.ToInt32(nroPisoTextBox.Text), 
-                        dptoTextBox.Text, 
-                        localidadTextBox.Text, 
-                        cpTextBox.Text, 
+                        Convert.ToInt32(numeroCalleTextBox.Text),
+                        Convert.ToInt32(nroPisoTextBox.Text),
+                        dptoTextBox.Text,
+                        localidadTextBox.Text,
+                        cpTextBox.Text,
                         fechaNacimientoDateTimePicker.Value);
                 }
                 else
                 {
                     retornoAlta = new ClientesRepository().altaCliente(
-                        nombreTextBox.Text, 
-                        apellidoTextBox.Text, 
-                        Convert.ToInt32(dniTextBox.Text), 
-                        mailTextBox.Text, 
-                        Convert.ToInt32(telefonoTextBox.Text), 
-                        calleTextBox.Text, 
-                        Convert.ToInt32(nroPisoTextBox.Text), 
-                        dptoTextBox.Text, 
-                        Convert.ToInt32(numeroCalleTextBox.Text), 
-                        localidadTextBox.Text, 
-                        cpTextBox.Text, 
-                        fechaNacimientoDateTimePicker.Value, 
+                        nombreTextBox.Text,
+                        apellidoTextBox.Text,
+                        Convert.ToInt32(dniTextBox.Text),
+                        mailTextBox.Text,
+                        Convert.ToInt32(telefonoTextBox.Text),
+                        calleTextBox.Text,
+                        Convert.ToInt32(nroPisoTextBox.Text),
+                        dptoTextBox.Text,
+                        Convert.ToInt32(numeroCalleTextBox.Text),
+                        localidadTextBox.Text,
+                        cpTextBox.Text,
+                        fechaNacimientoDateTimePicker.Value,
                         this.username);
                 }
                 if (retornoAlta == 0)
                 {
                     MessageBox.Show("El cliente ha sido creado exitosamente.");
+                    this.Close();
                 }
                 else
                 {
-                    MessageBox.Show("El cliente que quiere dar de alta ya existe.");
+                    if (modificando)
+                    {
+                        MessageBox.Show("No se pudo modificar el cliente adecuadamente.");
+                    }
+                    else
+                    {
+                        MessageBox.Show("No se pudo dar de alta el cliente adecuadamente.");
+                    }
                 }
             }
         }
@@ -107,7 +115,7 @@ namespace MercadoEnvio.UI.ABM_Usuario
             mailTextBox.Text = this.cliente.Mail;
             telefonoTextBox.Text = Convert.ToString(this.cliente.Telefono);
             calleTextBox.Text = this.cliente.domicilio.Calle;
-            nroPisoTextBox.Text =  Convert.ToString(this.cliente.domicilio.Piso);
+            nroPisoTextBox.Text = Convert.ToString(this.cliente.domicilio.Piso);
             dptoTextBox.Text = Convert.ToString(this.cliente.domicilio.Depto);
             numeroCalleTextBox.Text = Convert.ToString(this.cliente.domicilio.Nro_Calle);
             localidadTextBox.Text = this.cliente.domicilio.Localidad;
@@ -115,17 +123,29 @@ namespace MercadoEnvio.UI.ABM_Usuario
             fechaNacimientoDateTimePicker.Value = this.cliente.Fecha_Nacimiento;
         }
 
-        private void dniTextBox_TextChanged(object sender, KeyPressEventArgs e)
+        private void dniTextBox_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.'))
-            {
-                e.Handled = true;
-            }
-            else
-            {
-                MessageBox.Show("El campo solo acepta numeros");
-            }
+            MercadoEnvio.Utils.Validacion.validateNumberTextBox(sender, e);
         }
 
+        private void tipoDocumentoTextBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            MercadoEnvio.Utils.Validacion.validateNumberTextBox(sender, e);
+        }
+
+        private void telefonoTextBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            MercadoEnvio.Utils.Validacion.validateNumberTextBox(sender, e);
+        }
+
+        private void numeroCalleTextBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            MercadoEnvio.Utils.Validacion.validateNumberTextBox(sender, e);
+        }
+
+        private void nroPisoTextBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            MercadoEnvio.Utils.Validacion.validateNumberTextBox(sender, e);
+        }
     }
 }
