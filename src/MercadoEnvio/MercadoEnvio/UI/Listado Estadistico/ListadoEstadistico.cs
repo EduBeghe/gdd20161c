@@ -89,32 +89,28 @@ namespace MercadoEnvio.UI.Listado_Estadistico
                 int fechaInicial = this.parsearFechaInicial();
                 int fechaFinal = this.parsearFechaFinal();
 
-                MessageBox.Show("Fecha Inicial : " + fechaInicial );
-                MessageBox.Show("Fecha Final : " + fechaFinal);
-
                 switch (estadisticaComboBox.SelectedIndex)
                 {
                     case 0:
                         {
                             this.estadisticaDataGridView.DataSource = DBAdapter.retrieveDataTable("Vendedores_Mas_Perros", visibilidadComboBox.SelectedValue, fechaInicial, fechaFinal, anioNumericUpDown.Value);
+                            break;
                         }
-                        break;
-
                     case 1:
                         {
-                            this.estadisticaDataGridView.DataSource = DBAdapter.retrieveDataTable("Clientes_Con_Mayoria_De_Compras", fechaInicial, fechaFinal, rubroComboBox.SelectedValue, anioNumericUpDown );
-                        } break;
-
+                            this.estadisticaDataGridView.DataSource = DBAdapter.retrieveDataTable("Clientes_Con_Mayoria_De_Compras", fechaInicial, fechaFinal, rubroComboBox.SelectedValue, anioNumericUpDown.Value );
+                            break;
+                        } 
                     case 2:
                         {
                             this.estadisticaDataGridView.DataSource = DBAdapter.retrieveDataTable("Vendedores_Con_Mayoria_De_Facturas", fechaInicial, fechaFinal, anioNumericUpDown.Value);
-                        } break;
-
+                            break;
+                        } 
                     case 3:
                         {
                             this.estadisticaDataGridView.DataSource = DBAdapter.retrieveDataTable("Vendedores_Con_Mayoria_De_Monto_Facturado", fechaInicial, fechaFinal, anioNumericUpDown.Value);
-                        } break;
-
+                            break;
+                        } 
                 }
 
             }

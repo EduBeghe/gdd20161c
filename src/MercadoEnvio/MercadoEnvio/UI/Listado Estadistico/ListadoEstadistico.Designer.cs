@@ -36,19 +36,19 @@
             this.consultarButton = new System.Windows.Forms.Button();
             this.estadisticaComboBox = new System.Windows.Forms.ComboBox();
             this.visibilidadComboBox = new System.Windows.Forms.ComboBox();
-            this.rubroComboBox = new System.Windows.Forms.ComboBox();
-            this.gD1C2016DataSet7 = new MercadoEnvio.GD1C2016DataSet7();
             this.visibilidadesPublicacionesBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.visibilidades_PublicacionesTableAdapter = new MercadoEnvio.GD1C2016DataSet7TableAdapters.Visibilidades_PublicacionesTableAdapter();
-            this.gD1C2016DataSet8 = new MercadoEnvio.GD1C2016DataSet8();
+            this.gD1C2016DataSet7 = new MercadoEnvio.GD1C2016DataSet7();
+            this.rubroComboBox = new System.Windows.Forms.ComboBox();
             this.rubrosBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.gD1C2016DataSet8 = new MercadoEnvio.GD1C2016DataSet8();
+            this.visibilidades_PublicacionesTableAdapter = new MercadoEnvio.GD1C2016DataSet7TableAdapters.Visibilidades_PublicacionesTableAdapter();
             this.rubrosTableAdapter = new MercadoEnvio.GD1C2016DataSet8TableAdapters.RubrosTableAdapter();
             ((System.ComponentModel.ISupportInitialize)(this.estadisticaDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.anioNumericUpDown)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gD1C2016DataSet7)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.visibilidadesPublicacionesBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gD1C2016DataSet8)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gD1C2016DataSet7)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.rubrosBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gD1C2016DataSet8)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -139,6 +139,17 @@
             this.visibilidadComboBox.Size = new System.Drawing.Size(211, 28);
             this.visibilidadComboBox.TabIndex = 6;
             this.visibilidadComboBox.ValueMember = "Descripcion_Visibilidad";
+            this.visibilidadComboBox.Visible = false;
+            // 
+            // visibilidadesPublicacionesBindingSource
+            // 
+            this.visibilidadesPublicacionesBindingSource.DataMember = "Visibilidades_Publicaciones";
+            this.visibilidadesPublicacionesBindingSource.DataSource = this.gD1C2016DataSet7;
+            // 
+            // gD1C2016DataSet7
+            // 
+            this.gD1C2016DataSet7.DataSetName = "GD1C2016DataSet7";
+            this.gD1C2016DataSet7.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // rubroComboBox
             // 
@@ -150,30 +161,21 @@
             this.rubroComboBox.Size = new System.Drawing.Size(217, 28);
             this.rubroComboBox.TabIndex = 7;
             this.rubroComboBox.ValueMember = "Descripcion_Rubro";
+            this.rubroComboBox.Visible = false;
             // 
-            // gD1C2016DataSet7
+            // rubrosBindingSource
             // 
-            this.gD1C2016DataSet7.DataSetName = "GD1C2016DataSet7";
-            this.gD1C2016DataSet7.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // visibilidadesPublicacionesBindingSource
-            // 
-            this.visibilidadesPublicacionesBindingSource.DataMember = "Visibilidades_Publicaciones";
-            this.visibilidadesPublicacionesBindingSource.DataSource = this.gD1C2016DataSet7;
-            // 
-            // visibilidades_PublicacionesTableAdapter
-            // 
-            this.visibilidades_PublicacionesTableAdapter.ClearBeforeFill = true;
+            this.rubrosBindingSource.DataMember = "Rubros";
+            this.rubrosBindingSource.DataSource = this.gD1C2016DataSet8;
             // 
             // gD1C2016DataSet8
             // 
             this.gD1C2016DataSet8.DataSetName = "GD1C2016DataSet8";
             this.gD1C2016DataSet8.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
-            // rubrosBindingSource
+            // visibilidades_PublicacionesTableAdapter
             // 
-            this.rubrosBindingSource.DataMember = "Rubros";
-            this.rubrosBindingSource.DataSource = this.gD1C2016DataSet8;
+            this.visibilidades_PublicacionesTableAdapter.ClearBeforeFill = true;
             // 
             // rubrosTableAdapter
             // 
@@ -197,10 +199,10 @@
             this.Load += new System.EventHandler(this.ListadoEstadistico_Load);
             ((System.ComponentModel.ISupportInitialize)(this.estadisticaDataGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.anioNumericUpDown)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gD1C2016DataSet7)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.visibilidadesPublicacionesBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gD1C2016DataSet8)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gD1C2016DataSet7)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.rubrosBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gD1C2016DataSet8)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
