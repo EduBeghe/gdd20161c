@@ -59,7 +59,7 @@
             this.estadoRolDataGridViewCheckBoxColumn});
             this.rolesList.DataSource = this.rolesBindingSource;
             this.rolesList.Location = new System.Drawing.Point(8, 88);
-            this.rolesList.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.rolesList.Margin = new System.Windows.Forms.Padding(2);
             this.rolesList.MultiSelect = false;
             this.rolesList.Name = "rolesList";
             this.rolesList.ReadOnly = true;
@@ -102,7 +102,7 @@
             // button1
             // 
             this.button1.Location = new System.Drawing.Point(8, 308);
-            this.button1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button1.Margin = new System.Windows.Forms.Padding(2);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(152, 22);
             this.button1.TabIndex = 1;
@@ -113,7 +113,7 @@
             // button2
             // 
             this.button2.Location = new System.Drawing.Point(201, 308);
-            this.button2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button2.Margin = new System.Windows.Forms.Padding(2);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(159, 22);
             this.button2.TabIndex = 2;
@@ -135,17 +135,18 @@
             // label2
             // 
             this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.Location = new System.Drawing.Point(161, 9);
             this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(34, 13);
+            this.label2.Size = new System.Drawing.Size(49, 16);
             this.label2.TabIndex = 4;
             this.label2.Text = "Roles";
             // 
             // nombreTextBox
             // 
             this.nombreTextBox.Location = new System.Drawing.Point(143, 36);
-            this.nombreTextBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.nombreTextBox.Margin = new System.Windows.Forms.Padding(2);
             this.nombreTextBox.Name = "nombreTextBox";
             this.nombreTextBox.Size = new System.Drawing.Size(217, 20);
             this.nombreTextBox.TabIndex = 5;
@@ -153,7 +154,7 @@
             // button3
             // 
             this.button3.Location = new System.Drawing.Point(264, 61);
-            this.button3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button3.Margin = new System.Windows.Forms.Padding(2);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(96, 23);
             this.button3.TabIndex = 6;
@@ -177,7 +178,7 @@
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.rolesList);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Listado";
             this.Text = "Listado";
             this.Load += new System.EventHandler(this.Listado_Load);

@@ -80,9 +80,8 @@ namespace MercadoEnvio.UI.ABM_Visibilidad
                     );
                     if (retorno == -1) MessageBox.Show("La visibildiad que quiere dar de alta ya existe.");
                     else MessageBox.Show("La visibildiad fue dada de alta Existosamente");
-                    this.Close();
                 }
-                
+                this.Close();
             }
         }
     }
