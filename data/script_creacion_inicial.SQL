@@ -184,6 +184,8 @@ IF OBJECT_ID('TODO_X2_LUCAS.Historial_Cliente_Calficaciones') IS NOT NULL
 DROP PROCEDURE TODO_X2_LUCAS.Historial_Cliente_Calficaciones;
 IF OBJECT_ID('TODO_X2_LUCAS.Calificar_Compra') IS NOT NULL
 DROP PROCEDURE TODO_X2_LUCAS.Calificar_Compra;
+IF OBJECT_ID('TODO_X2_LUCAS.Consulta_Facturas_Paginado') IS NOT NULL
+DROP PROCEDURE TODO_X2_LUCAS.Consulta_Facturas_Paginado;
 IF OBJECT_ID('TODO_X2_LUCAS.Consulta_Facturas') IS NOT NULL
 DROP PROCEDURE TODO_X2_LUCAS.Consulta_Facturas;
 IF OBJECT_ID('TODO_X2_LUCAS.Vendedores_Con_Mayoria_De_Monto_Facturado') IS NOT NULL
@@ -200,8 +202,8 @@ IF OBJECT_ID('TODO_X2_LUCAS.Filtrar_Usuarios_Empresa') IS NOT NULL
 DROP PROCEDURE TODO_X2_LUCAS.Filtrar_Usuarios_Empresa;
 IF OBJECT_ID('TODO_X2_LUCAS.Filtrar_Usuarios_Cliente') IS NOT NULL
 DROP PROCEDURE TODO_X2_LUCAS.Filtrar_Usuarios_Cliente;
-IF OBJECT_ID('TODO_X2_LUCAS.Filtrar_Publicaciones') IS NOT NULL
-DROP PROCEDURE TODO_X2_LUCAS.Filtrar_Publicaciones;
+IF OBJECT_ID('TODO_X2_LUCAS.Filtrar_Publicaciones_Paginado') IS NOT NULL
+DROP PROCEDURE TODO_X2_LUCAS.Filtrar_Publicaciones_Paginado;
 IF OBJECT_ID('TODO_X2_LUCAS.Filtrar_Rol') IS NOT NULL
 DROP PROCEDURE TODO_X2_LUCAS.Filtrar_Rol;
 IF OBJECT_ID('TODO_X2_LUCAS.Filtrar_Visibilidad') IS NOT NULL
@@ -1476,8 +1478,8 @@ BEGIN
 	GROUP BY Cod_Publicacion
 END
 GO
-/* ------------ PROCEDIMIENTO PARA FILTRAR PUBLICACIONES ------------ */
-CREATE PROCEDURE TODO_X2_LUCAS.Filtrar_Publicaciones(@rubro nvarchar(255),@descripcion nvarchar(255),@pagina int)
+/* ------------ PROCEDIMIENTO PARA FILTRAR PUBLICACIONES -- VERSION PAGINADA ------------ */
+CREATE PROCEDURE TODO_X2_LUCAS.Filtrar_Publicaciones_Paginado(@rubro nvarchar(255),@descripcion nvarchar(255),@pagina int)
 AS
 BEGIN
 	SELECT i.Cod_Publicacion,i.Cod_Publicacion_Anterior,i.Descripcion_Publicacion,
@@ -1489,6 +1491,19 @@ BEGIN
 	WHERE (Cod_Rubro = TODO_X2_LUCAS.Obtener_Rubro(@rubro) OR @rubro IS NULL) AND
 			(Descripcion_Publicacion LIKE '%' + @descripcion + '%' OR @descripcion IS NULL) AND
 			(i.RowNumber BETWEEN (@pagina * 10) - 9 AND (@pagina * 10))
+END
+GO
+/* ------------ PROCEDIMIENTO PARA FILTRAR PUBLICACIONES ------------ */
+CREATE PROCEDURE TODO_X2_LUCAS.Filtrar_Publicaciones(@rubro nvarchar(255),@descripcion nvarchar(255),@pagina int)
+AS
+BEGIN
+	SELECT Cod_Publicacion,Cod_Publicacion_Anterior,Descripcion_Publicacion,
+			Stock_Publicacion,Fecha_Publicacion,Fecha_Vencimiento_Publicacion,Precio_Publicacion,
+			Cod_Tipos_Publicacion,Cod_Rubro,Cod_Visibilidad,Costo_Publicacion,Cod_Usuario_Responsable,Cod_Estado_Publicacion
+			,Permiso_Preguntas,Entregas
+	FROM TODO_X2_LUCAS.Publicaciones 
+	WHERE (Cod_Rubro = TODO_X2_LUCAS.Obtener_Rubro(@rubro) OR @rubro IS NULL) AND
+			(Descripcion_Publicacion LIKE '%' + @descripcion + '%' OR @descripcion IS NULL)
 END
 GO
 /* ------------ PROCEDIMIENTO PARA GENERAR UNA FACTURA ------------ */
@@ -1682,8 +1697,8 @@ BEGIN
 END
 GO
 
-/* ------------ PROCEDIMIENTO PARA LA CONSULTA DE LAS FACTURAS DE UN VENDEDOR ------------ */
-CREATE PROCEDURE TODO_X2_LUCAS.Consulta_Facturas(@dni numeric(18),@cuit nvarchar(50),
+/* ------------ PROCEDIMIENTO PARA LA CONSULTA DE LAS FACTURAS DE UN VENDEDOR -- VERSION PAGINADA ------------ */
+CREATE PROCEDURE TODO_X2_LUCAS.Consulta_Facturas_Paginado(@dni numeric(18),@cuit nvarchar(50),
 												@fechaInicio datetime,@fechaFinal datetime,
 												@precioInicio numeric(18,2),@precioFinal numeric(18,2), @pagina int)
 AS
@@ -1704,6 +1719,27 @@ BEGIN
 			(B.RowNumber BETWEEN ((@pagina * 10) - 9) AND (@pagina * 10))
 END
 GO
+/* ------------ PROCEDIMIENTO PARA LA CONSULTA DE LAS FACTURAS DE UN VENDEDOR ------------ */
+CREATE PROCEDURE TODO_X2_LUCAS.Consulta_Facturas(@dni numeric(18),@cuit nvarchar(50),
+												@fechaInicio datetime,@fechaFinal datetime,
+												@precioInicio numeric(18,2),@precioFinal numeric(18,2))
+AS
+BEGIN
+	DECLARE @usuario int;
+	SELECT @usuario = TODO_X2_LUCAS.ObtenerUsuario(@dni,@cuit);
+
+	SELECT F.Cod_Factura,F.Cod_Forma_De_Pago,F.Cod_Publicacion,F.Fecha_Factura,F.Nro_Factura,
+			F.Total_Factura,F.Vendedor_Correspondiente
+	FROM TODO_X2_LUCAS.Facturas F JOIN TODO_X2_LUCAS.Items_Facturas I ON (F.Cod_Factura = I.Cod_Factura)
+									JOIN TODO_X2_LUCAS.Formas_De_Pago FO ON (FO.Cod_Formas_De_Pago=F.Cod_Forma_De_Pago)
+									JOIN TODO_X2_LUCAS.Publicaciones P ON (F.Cod_Publicacion = P.Cod_Publicacion)
+	WHERE F.Vendedor_Correspondiente = @usuario AND
+			((F.Fecha_Factura BETWEEN (@fechaInicio) AND @fechaFinal) OR (@fechaInicio IS NULL AND @fechaFinal IS NULL)) AND
+			(F.Total_Factura BETWEEN (@precioInicio) AND @precioFinal OR (@precioInicio IS NULL AND @precioFinal IS NULL)) 
+			
+END
+GO
+
 /* ------------ PROCEDIMIENTO PARA FILTRAR UN ROL POR NOMBRE ------------ */
 CREATE PROCEDURE TODO_X2_LUCAS.Filtrar_Rol(@nombre nvarchar(255))
 AS
