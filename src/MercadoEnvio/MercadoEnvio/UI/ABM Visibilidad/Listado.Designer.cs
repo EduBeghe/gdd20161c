@@ -53,29 +53,26 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(243, 37);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Location = new System.Drawing.Point(162, 24);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(96, 20);
+            this.label1.Size = new System.Drawing.Size(64, 13);
             this.label1.TabIndex = 0;
             this.label1.Text = "Visibilidades";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(39, 97);
-            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label2.Location = new System.Drawing.Point(26, 63);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(161, 20);
+            this.label2.Size = new System.Drawing.Size(108, 13);
             this.label2.TabIndex = 1;
             this.label2.Text = "Nombre de Visibilidad";
             // 
             // nobreTextBox
             // 
-            this.nobreTextBox.Location = new System.Drawing.Point(252, 92);
-            this.nobreTextBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.nobreTextBox.Location = new System.Drawing.Point(168, 60);
             this.nobreTextBox.Name = "nobreTextBox";
-            this.nobreTextBox.Size = new System.Drawing.Size(348, 26);
+            this.nobreTextBox.Size = new System.Drawing.Size(233, 20);
             this.nobreTextBox.TabIndex = 2;
             // 
             // visibilidadesGrid
@@ -92,12 +89,12 @@
             this.comisionEntregasDataGridViewTextBoxColumn,
             this.estadoVisibilidadDataGridViewCheckBoxColumn});
             this.visibilidadesGrid.DataSource = this.visibilidadesPublicacionesBindingSource;
-            this.visibilidadesGrid.Location = new System.Drawing.Point(44, 198);
-            this.visibilidadesGrid.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.visibilidadesGrid.Location = new System.Drawing.Point(29, 129);
             this.visibilidadesGrid.MultiSelect = false;
             this.visibilidadesGrid.Name = "visibilidadesGrid";
             this.visibilidadesGrid.ReadOnly = true;
-            this.visibilidadesGrid.Size = new System.Drawing.Size(558, 337);
+            this.visibilidadesGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.visibilidadesGrid.Size = new System.Drawing.Size(372, 219);
             this.visibilidadesGrid.TabIndex = 3;
             this.visibilidadesGrid.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.visibilidadesGrid_CellContentClick);
             // 
@@ -155,10 +152,9 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(339, 152);
-            this.button1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.button1.Location = new System.Drawing.Point(226, 99);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(262, 37);
+            this.button1.Size = new System.Drawing.Size(175, 24);
             this.button1.TabIndex = 4;
             this.button1.Text = "Buscar";
             this.button1.UseVisualStyleBackColor = true;
@@ -166,10 +162,9 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(44, 545);
-            this.button2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.button2.Location = new System.Drawing.Point(29, 354);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(158, 35);
+            this.button2.Size = new System.Drawing.Size(105, 23);
             this.button2.TabIndex = 5;
             this.button2.Text = "Modificar";
             this.button2.UseVisualStyleBackColor = true;
@@ -177,10 +172,9 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(450, 545);
-            this.button3.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.button3.Location = new System.Drawing.Point(300, 354);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(152, 35);
+            this.button3.Size = new System.Drawing.Size(101, 23);
             this.button3.TabIndex = 6;
             this.button3.Text = "Inhabilitar";
             this.button3.UseVisualStyleBackColor = true;
@@ -192,9 +186,9 @@
             // 
             // ListadoVisibilidad
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(652, 595);
+            this.ClientSize = new System.Drawing.Size(435, 387);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
@@ -202,7 +196,6 @@
             this.Controls.Add(this.nobreTextBox);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "ListadoVisibilidad";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);

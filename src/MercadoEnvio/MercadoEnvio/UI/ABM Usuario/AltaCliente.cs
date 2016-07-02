@@ -115,5 +115,17 @@ namespace MercadoEnvio.UI.ABM_Usuario
             fechaNacimientoDateTimePicker.Value = this.cliente.Fecha_Nacimiento;
         }
 
+        private void dniTextBox_TextChanged(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.'))
+            {
+                e.Handled = true;
+            }
+            else
+            {
+                MessageBox.Show("El campo solo acepta numeros");
+            }
+        }
+
     }
 }
