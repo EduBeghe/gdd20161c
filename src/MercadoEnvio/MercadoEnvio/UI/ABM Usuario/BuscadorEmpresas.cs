@@ -22,9 +22,9 @@ namespace MercadoEnvio.UI.ABM_Usuario
 
         private void BuscadorEmpresas_Load(object sender, EventArgs e)
         {
-            // TODO: esta línea de código carga datos en la tabla 'gD1C2016DataSet13.Detalles_Empresas' Puede moverla o quitarla según sea necesario.
-            this.detalles_EmpresasTableAdapter.Fill(this.gD1C2016DataSet13.Detalles_Empresas);
-            // TODO: esta línea de código carga datos en la tabla 'gD1C2016DataSet12.Detalles_Empresas' Puede moverla o quitarla según sea necesario.
+            // TODO: This line of code loads data into the 'gD1C2016DataSet14.Detalles_Empresas' table. You can move, or remove it, as needed.
+            this.detalles_EmpresasTableAdapter.Fill(this.gD1C2016DataSet14.Detalles_Empresas);
+            
             razonSocialTextBox.Text = "";
             cuitTextBox.Text = "";
             emailTextBox.Text = "";
@@ -53,7 +53,6 @@ namespace MercadoEnvio.UI.ABM_Usuario
             var dataRowView = (DataRowView)empresasGrid.SelectedRows[0].DataBoundItem;
             var repoEmpresa = new AltaEmpresa();
             repoEmpresa.ShowDialog(new EmpresaRepository().parse(dataRowView.Row));
-            this.detalles_EmpresasTableAdapter.Fill(this.gD1C2016DataSet13.Detalles_Empresas);
         }
     }
 }
