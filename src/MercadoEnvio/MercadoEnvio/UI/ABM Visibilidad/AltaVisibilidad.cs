@@ -16,7 +16,7 @@ namespace MercadoEnvio.UI.ABM_Visibilidad
     public partial class AltaVisibilidad : Form
     {
 
-        bool isEditing = false;
+        bool isEditing = true;
         int codigo;
 
         public AltaVisibilidad()
@@ -24,7 +24,8 @@ namespace MercadoEnvio.UI.ABM_Visibilidad
             InitializeComponent();
         }
 
-        internal void ShowDialog()
+
+        internal void ShowDialog(bool algo)
         {
             this.isEditing = false;
             this.FindForm().ShowDialog();
@@ -39,12 +40,19 @@ namespace MercadoEnvio.UI.ABM_Visibilidad
             precioTextBox.Text = Convert.ToString(visibilidad.Precio_Visibilidad);
             PorcentajeTextBox.Text = Convert.ToString(visibilidad.Porcentaje);
             comisionTextBox.Text = Convert.ToString(visibilidad.Comision_Entregas);
-            this.ShowDialog();
+            this.FindForm().ShowDialog();
         }
 
         private void AltaVisibilidad_Load(object sender, EventArgs e)
         {
-
+            if (this.isEditing)
+            {
+                button1.Text = "Modificar";
+            }
+            else 
+            {
+                button1.Text = "Crear";
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)

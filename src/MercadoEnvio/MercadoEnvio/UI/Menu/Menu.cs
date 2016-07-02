@@ -66,7 +66,7 @@ namespace MercadoEnvio.UI.Menu
 
         private void button9_Click(object sender, EventArgs e)
         {
-            new UI.ABM_Visibilidad.AltaVisibilidad().ShowDialog();
+            new UI.ABM_Visibilidad.AltaVisibilidad().ShowDialog(true);
         }
 
         private void button10_Click(object sender, EventArgs e)

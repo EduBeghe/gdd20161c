@@ -13,9 +13,9 @@ namespace MercadoEnvio.Repositories
     class UsuariosRepository
     {
 
-        public int altaUsuario(string usuario, string pass, int codRol)
+        public int altaUsuario(string usuario, string pass, string nombreRol)
         {
-            var retorno = DBAdapter.executeProcedureWithReturnValue("Alta_Usuario", usuario, new Encription().encryptToSHA256(pass), codRol);
+            var retorno = DBAdapter.executeProcedureWithReturnValue("Alta_Usuario", usuario, new Encription().encryptToSHA256(pass), nombreRol);
             return retorno;
         }
 

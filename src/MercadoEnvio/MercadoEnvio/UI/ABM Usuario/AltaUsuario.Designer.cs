@@ -91,7 +91,7 @@
             this.rolComboBox.Name = "rolComboBox";
             this.rolComboBox.Size = new System.Drawing.Size(180, 21);
             this.rolComboBox.TabIndex = 4;
-            this.rolComboBox.ValueMember = "Cod_Rol";
+            this.rolComboBox.ValueMember = "Nombre";
             // 
             // rolesBindingSource
             // 
