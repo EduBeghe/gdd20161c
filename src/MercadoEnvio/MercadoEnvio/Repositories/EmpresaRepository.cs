@@ -119,12 +119,12 @@ namespace MercadoEnvio.Repositories
                 dr["Mail"] as string,
                 Convert.ToInt32(dr["Telefono"]),
                 new DomicilioRepository().getDomicilio(Convert.ToInt32(dr["Cod_Domicilio"])),
-                dr["Cod_Postal"] as String,
-                dr["Ciudad"] as String,
-                dr["CUIT"] as String,
+                dr["Cod_Postal"] as string,
+                dr["Ciudad"] as string,
+                dr["CUIT"] as string,
                 (Boolean)dr["Estado_Empresa"],
-                new RubroRepository().getRubro(Convert.ToInt32(dr["Cod_Rubro"])),
-                dr["Nombre_De_Contacto"] as String
+                dr["Rubro"] as string,
+                dr["Nombre_De_Contacto"] as string
             );
 
         }
