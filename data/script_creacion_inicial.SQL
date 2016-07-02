@@ -1731,7 +1731,7 @@ GO
 --Vendedores con mayor cantidad de productos no vendidos, dicho listado debe
 --filtrarse por grado de visibilidad de la publicación y por mes-año. Primero se deberá
 --ordenar por fecha y luego por visibilidad.
-CREATE PROCEDURE TODO_X2_LUCAS.Vendedores_Mas_Perros(@visibilidad nvarchar(255),@mesInicio datetime,@mesFinal datetime)
+CREATE PROCEDURE TODO_X2_LUCAS.Vendedores_Mas_Perros(@visibilidad nvarchar(255),@mesInicio datetime,@mesFinal datetime,@año datetime)
 AS
 BEGIN
 	
@@ -1740,7 +1740,7 @@ BEGIN
 									JOIN TODO_X2_LUCAS.Facturas F ON (p.Cod_Usuario_Responsable != F.Vendedor_Correspondiente)
 									JOIN TODO_X2_LUCAS.Items_Facturas I ON (I.Cod_Factura=F.Cod_Factura)
 	WHERE P.Cod_Visibilidad = TODO_X2_LUCAS.Obtener_Visibilidad(@visibilidad) AND
-			(MONTH(F.Fecha_Factura) BETWEEN @mesInicio AND @mesFinal) AND YEAR(F.Fecha_Factura) = YEAR(@mesInicio)
+			(MONTH(F.Fecha_Factura) BETWEEN @mesInicio AND @mesFinal) AND YEAR(F.Fecha_Factura) = @año
 	GROUP BY U.Nombre_Usuario
 	ORDER BY 2 DESC
 
@@ -1749,7 +1749,7 @@ GO
 /* ------------ PROCEDIMIENTO 2 PARA EL LISTADO ESTADISTICO ------------ */
 --Clientes con mayor cantidad de productos comprados, por mes y por año, dentro de
 --un rubro particular
-CREATE PROCEDURE TODO_X2_LUCAS.Clientes_Con_Mayoria_De_Compras(@mesInicio datetime,@mesFinal datetime,@rubro nvarchar(255))
+CREATE PROCEDURE TODO_X2_LUCAS.Clientes_Con_Mayoria_De_Compras(@año datetime,@mesInicio datetime,@mesFinal datetime,@rubro nvarchar(255))
 AS
 BEGIN
 	DECLARE @codRubro int;
@@ -1759,7 +1759,7 @@ BEGIN
 	FROM TODO_X2_LUCAS.Usuarios U JOIN TODO_X2_LUCAS.Detalles_Clientes C ON (u.Cod_Usuario = c.Cod_Usuario)
 									JOIN TODO_X2_LUCAS.Compras CO ON (CO.Cod_Usuario = U.Cod_Usuario)
 									JOIN TODO_X2_LUCAS.Publicaciones P ON (CO.Cod_Publicacion = P.Cod_Publicacion)
-	WHERE P.Cod_Rubro = @codRubro AND YEAR(Compra_Fecha) = YEAR(@mesInicio) AND (MONTH (Compra_Fecha) BETWEEN @mesInicio AND @mesFinal)
+	WHERE P.Cod_Rubro = @codRubro AND YEAR(Compra_Fecha) = @año AND (MONTH (Compra_Fecha) BETWEEN @mesInicio AND @mesFinal)
 	GROUP BY C.Apellido,C.DNI
 	ORDER BY 3
 	
@@ -1768,12 +1768,12 @@ GO
 
 /* ------------ PROCEDIMIENTO 3 PARA EL LISTADO ESTADISTICO ------------ */
 --Vendedores con mayor cantidad de facturas dentro de un mes y año particular
-CREATE PROCEDURE TODO_X2_LUCAS.Vendedores_Con_Mayoria_De_Facturas(@mesInicio datetime,@mesFinal datetime)
+CREATE PROCEDURE TODO_X2_LUCAS.Vendedores_Con_Mayoria_De_Facturas(@año datetime,@mesInicio datetime,@mesFinal datetime)
 AS
 BEGIN
 	SELECT TOP 5 U.Nombre_Usuario,COUNT(F.Cod_Factura) AS 'Cantidad de facturas'
 	FROM TODO_X2_LUCAS.Usuarios U JOIN TODO_X2_LUCAS.Facturas F ON (f.Vendedor_Correspondiente = u.Cod_Usuario)
-	WHERE YEAR(f.Fecha_Factura) = YEAR(@mesInicio)  AND (MONTH(F.Fecha_Factura) BETWEEN @mesInicio AND @mesFinal)
+	WHERE YEAR(f.Fecha_Factura) = @año  AND (MONTH(F.Fecha_Factura) BETWEEN @mesInicio AND @mesFinal)
 	GROUP BY U.Nombre_Usuario
 	ORDER BY 2 DESC
 
@@ -1781,12 +1781,12 @@ END
 GO
 /* ------------ PROCEDIMIENTO 4 PARA EL LISTADO ESTADISTICO ------------ */
 --Vendedores con mayor monto facturado dentro de un mes y año particular.
-CREATE PROCEDURE TODO_X2_LUCAS.Vendedores_Con_Mayoria_De_Monto_Facturado(@mesInicio datetime,@mesFinal datetime)
+CREATE PROCEDURE TODO_X2_LUCAS.Vendedores_Con_Mayoria_De_Monto_Facturado(@año datetime,@mesInicio datetime,@mesFinal datetime)
 AS
 BEGIN
 	SELECT TOP 5 U.Nombre_Usuario,SUM(F.Total_Factura) AS 'Monto total facturado'
 	FROM TODO_X2_LUCAS.Usuarios U JOIN TODO_X2_LUCAS.Facturas F ON (f.Vendedor_Correspondiente = u.Cod_Usuario)
-	WHERE YEAR(f.Fecha_Factura) = YEAR(@mesInicio) AND (MONTH(F.Fecha_Factura) BETWEEN @mesInicio AND @mesFinal)
+	WHERE YEAR(f.Fecha_Factura) = @año AND (MONTH(F.Fecha_Factura) BETWEEN @mesInicio AND @mesFinal)
 	GROUP BY U.Nombre_Usuario
 	ORDER BY 2 DESC
 	
