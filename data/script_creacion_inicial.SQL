@@ -1700,6 +1700,7 @@ BEGIN
 END
 GO
 /* ------------ PROCEDIMIENTO PARA LA CONSULTA DE LAS FACTURAS DE UN VENDEDOR ------------ */
+
 CREATE PROCEDURE TODO_X2_LUCAS.Consulta_Facturas(@dni numeric(18),@cuit nvarchar(50),
 												@fechaInicio datetime,@fechaFinal datetime,
 												@precioInicio numeric(18,2),@precioFinal numeric(18,2))
@@ -1715,7 +1716,7 @@ BEGIN
 									JOIN TODO_X2_LUCAS.Publicaciones P ON (F.Cod_Publicacion = P.Cod_Publicacion)
 	WHERE F.Vendedor_Correspondiente = @usuario AND
 			((F.Fecha_Factura BETWEEN (@fechaInicio) AND @fechaFinal) OR (@fechaInicio = '' AND @fechaFinal = '')) AND
-			(F.Total_Factura BETWEEN (@precioInicio) AND @precioFinal OR (@precioInicio = '' AND @precioFinal = '')) 
+			(F.Total_Factura BETWEEN (@precioInicio) AND @precioFinal OR (@precioInicio = 0 AND @precioFinal = 0)) 
 			
 END
 GO
