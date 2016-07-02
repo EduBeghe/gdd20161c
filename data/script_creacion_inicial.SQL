@@ -220,6 +220,8 @@ IF OBJECT_ID('TODO_X2_LUCAS.Cantidad_Publicaciones_Filtradas') IS NOT NULL
 DROP PROCEDURE TODO_X2_LUCAS.Cantidad_Publicaciones_Filtradas;
 IF OBJECT_ID('TODO_X2_LUCAS.Cantidad_Facturas_Consultadas') IS NOT NULL
 DROP PROCEDURE TODO_X2_LUCAS.Cantidad_Facturas_Consultadas;
+IF OBJECT_ID('TODO_X2_LUCAS.Dias_De_Expiracion') IS NOT NULL
+DROP PROCEDURE TODO_X2_LUCAS.Dias_De_Expiracion;
 
 IF OBJECT_ID('TODO_X2_LUCAS.ObtenerUsuario') IS NOT NULL
 DROP FUNCTION TODO_X2_LUCAS.ObtenerUsuario;
@@ -246,7 +248,6 @@ IF OBJECT_ID('TODO_X2_LUCAS.Reputacion') IS NOT NULL
 DROP TRIGGER TODO_X2_LUCAS.Reputacion;
 IF OBJECT_ID('TODO_X2_LUCAS.Costo_Publicacion') IS NOT NULL
 DROP TRIGGER TODO_X2_LUCAS.Costo_Publicacion;
-
 
 /**************************************************  CREACION DE TABLAS ***************************************************/
 -- CREACION TABLA TIPOS DE PUBLICACIONES -- 
@@ -1422,7 +1423,7 @@ BEGIN
 			@codVisibilidad = TODO_X2_LUCAS.Obtener_Visibilidad(@visibilidad),
 			@codUsuario = TODO_X2_LUCAS.ObtenerUsuario(@dni,@CUIT)
 	
-	IF ((SELECT COUNT(*) FROM TODO_X2_LUCAS.Publicaciones P WHERE P.Cod_Usuario_Responsable = @codUsuario GROUP BY P.Cod_Usuario_Responsable) = 0)
+	IF NOT EXISTS ((SELECT COUNT(*) FROM TODO_X2_LUCAS.Publicaciones P WHERE P.Cod_Usuario_Responsable = 97 GROUP BY P.Cod_Usuario_Responsable))
 	BEGIN
 		DECLARE @codGratis numeric(18);
 		SET @codGratis = (SELECT Cod_Visibilidad FROM TODO_X2_LUCAS.Visibilidades_Publicaciones WHERE Precio_Visibilidad = 0)
@@ -1450,10 +1451,17 @@ BEGIN
 	DECLARE @codEstadoNuevo int;
 	SET @codEstadoNuevo = TODO_X2_LUCAS.Obtener_Estado(@estado);
 
-	UPDATE TODO_X2_LUCAS.Publicaciones
-	SET Cod_Estado_Publicacion = @codEstadoNuevo
-	WHERE Cod_Publicacion = @codPublicacion
-
+	IF ((SELECT Cod_Estado_Publicacion FROM TODO_X2_LUCAS.Publicaciones WHERE Cod_Publicacion = @codPublicacion) != 5)
+	BEGIN
+		UPDATE TODO_X2_LUCAS.Publicaciones
+		SET Cod_Estado_Publicacion = @codEstadoNuevo
+		WHERE Cod_Publicacion = @codPublicacion
+	END
+	ELSE
+	BEGIN
+		PRINT 'NO PUEDE CAMBIARSE DE ESTADO UNA VEZ QUE ESTE SE FINALIZO'
+		RETURN -1;
+	END
 END
 GO
 /* ------------ PROCEDIMIENTO PARA FILTRAR PUBLICACIONES - TOTAL FILTRADO ------------ */
@@ -1510,32 +1518,51 @@ BEGIN
 	SELECT @codCalificacion = TODO_X2_LUCAS.Obtener_Calificacion(0),
 			@codUsuario = TODO_X2_LUCAS.ObtenerUsuario(@dni,NULL)
 	
-	IF ((SELECT COUNT(*) 
-		FROM TODO_X2_LUCAS.Compras C JOIN TODO_X2_LUCAS.Calificaciones CA ON(C.Cod_Calificacion=CA.Cod_Calificacion)
-		WHERE CA.Cod_Calificacion = 99 AND C.Cod_Usuario=@codUsuario) <=3 )
+	IF(@codPublicacion NOT IN (SELECT Cod_Publicacion FROM TODO_X2_LUCAS.Publicaciones WHERE Cod_Usuario_Responsable = @codUsuario) )
 	BEGIN
-		IF ((SELECT Stock_Publicacion FROM TODO_X2_LUCAS.Publicaciones WHERE Cod_Publicacion = @codPublicacion) < @cantidad)
+		
+		IF ((SELECT COUNT(*) 
+			FROM TODO_X2_LUCAS.Compras C JOIN TODO_X2_LUCAS.Calificaciones CA ON(C.Cod_Calificacion=CA.Cod_Calificacion)
+			WHERE CA.Cod_Calificacion = 99 AND C.Cod_Usuario=@codUsuario) <=3 )
 		BEGIN
-			PRINT 'NO HAY SUFICIENTE STOCK'
-			RETURN -2;
+			IF ((SELECT Stock_Publicacion FROM TODO_X2_LUCAS.Publicaciones WHERE Cod_Publicacion = @codPublicacion) < @cantidad)
+			BEGIN
+				PRINT 'NO HAY SUFICIENTE STOCK'
+				RETURN -2;
+			END
+			ELSE
+			BEGIN
+				INSERT INTO TODO_X2_LUCAS.Compras(Cod_Calificacion,Cod_Publicacion,Cod_Usuario,Compra_Cantidad,Compra_Fecha)
+				VALUES(@codCalificacion,@codPublicacion,@codUsuario,@cantidad,GETDATE())
+			
+				EXEC TODO_X2_LUCAS.Generar_Factura @codPublicacion,@cantidad,@formaDePago,@dni,@CUIT;
+			
+				IF (@cantidad = (SELECT Stock_Publicacion FROM TODO_X2_LUCAS.Publicaciones WHERE Cod_Publicacion=@codPublicacion))
+				BEGIN
+					EXEC TODO_X2_LUCAS.Cambiar_Estado @codPublicacion,'Finalizado'
+				END
+				ELSE
+				BEGIN
+					UPDATE TODO_X2_LUCAS.Publicaciones
+					SET Stock_Publicacion = Stock_Publicacion - @cantidad
+					WHERE Cod_Publicacion = @codPublicacion
+				END
+			END
 		END
-		ELSE
+		ELSE 
 		BEGIN
-			INSERT INTO TODO_X2_LUCAS.Compras(Cod_Calificacion,Cod_Publicacion,Cod_Usuario,Compra_Cantidad,Compra_Fecha)
-			VALUES(@codCalificacion,@codPublicacion,@codUsuario,@cantidad,GETDATE())
-		
-			EXEC TODO_X2_LUCAS.Generar_Factura @codPublicacion,@cantidad,@formaDePago,@dni,@CUIT;
-		
-			EXEC TODO_X2_LUCAS.Cambiar_Estado @codPublicacion,'Finalizado'
+			PRINT 'TIENE QUE CALIFICAR LAS COMPRAS QUE NO CALIFICO AUN'
+			RETURN -1;
 		END
 	END
-	ELSE 
+	ELSE
 	BEGIN
-		PRINT 'TIENE QUE CALIFICAR LAS COMPRAS QUE NO CALIFICO AUN'
-		RETURN -1;
+		PRINT 'NO PUEDE COMPRAR/OFERTAR UNA PUBLICACION PROPIA'
+		RETURN -2;
 	END
 END
 GO
+
 
 /* ------------ PROCEDIMIENTO PARA LA COMPRA DE UNA PUBLICACION ------------ */
 CREATE PROCEDURE TODO_X2_LUCAS.Ofertar_Publicacion(@dni numeric(18),@cuit nvarchar(50),@codPublicacion int,@oferta numeric(18,2))
@@ -1544,30 +1571,38 @@ BEGIN
 	DECLARE @codUsuario int;
 	SET @codUsuario = TODO_X2_LUCAS.ObtenerUsuario(@dni,@cuit);
 	
-	IF ((SELECT COUNT(*) 
-		FROM TODO_X2_LUCAS.Compras C JOIN TODO_X2_LUCAS.Calificaciones CA ON(C.Cod_Calificacion=CA.Cod_Calificacion)
-		WHERE CA.Cod_Calificacion = 99 AND C.Cod_Usuario=@codUsuario) <=3 )
+	IF(@codPublicacion NOT IN (SELECT Cod_Publicacion FROM TODO_X2_LUCAS.Publicaciones WHERE Cod_Usuario_Responsable = @codUsuario) )
 	BEGIN
-		IF ((SELECT Precio_Publicacion FROM TODO_X2_LUCAS.Publicaciones WHERE Cod_Publicacion = @codPublicacion) < @oferta)
+		IF ((SELECT COUNT(*) 
+			FROM TODO_X2_LUCAS.Compras C JOIN TODO_X2_LUCAS.Calificaciones CA ON(C.Cod_Calificacion=CA.Cod_Calificacion)
+			WHERE CA.Cod_Calificacion = 99 AND C.Cod_Usuario=@codUsuario) <=3 )
 		BEGIN
-			INSERT INTO TODO_X2_LUCAS.Ofertas(Cod_Publicacion,Cod_Usuario,Oferta_Fecha,Oferta_Monto)
-			VALUES(@codPublicacion,@codUsuario,GETDATE(),@oferta)
-
-			UPDATE TODO_X2_LUCAS.Publicaciones
-			SET Precio_Publicacion = @oferta
-			WHERE Cod_Publicacion = @codPublicacion
+			IF ((SELECT Precio_Publicacion FROM TODO_X2_LUCAS.Publicaciones WHERE Cod_Publicacion = @codPublicacion) < @oferta)
+			BEGIN
+				INSERT INTO TODO_X2_LUCAS.Ofertas(Cod_Publicacion,Cod_Usuario,Oferta_Fecha,Oferta_Monto)
+				VALUES(@codPublicacion,@codUsuario,GETDATE(),@oferta)
 	
+				UPDATE TODO_X2_LUCAS.Publicaciones
+				SET Precio_Publicacion = @oferta
+				WHERE Cod_Publicacion = @codPublicacion
+		
+			END
+			ELSE
+			BEGIN
+				PRINT 'LA OFERTA ES MENOR AL PRECIO INICIAL DE LA SUBASTA'
+				RETURN -2
+			END	
 		END
 		ELSE
 		BEGIN
-			PRINT 'LA OFERTA ES MENOR AL PRECIO INICIAL DE LA SUBASTA'
-			RETURN -2
-		END	
+			PRINT 'TIENE QUE CALIFICAR LAS COMPRAS QUE NO CALIFICO AUN'
+			RETURN -1
+		END
 	END
 	ELSE
 	BEGIN
-		PRINT 'TIENE QUE CALIFICAR LAS COMPRAS QUE NO CALIFICO AUN'
-		RETURN -1
+		PRINT 'NO PUEDE COMPRAR/OFERTAR UNA PUBLICACION PROPIA'
+		RETURN -3;
 	END
 END
 GO
@@ -2183,3 +2218,33 @@ BEGIN
 
 END
 GO
+
+
+
+CREATE PROCEDURE TODO_X2_LUCAS.Dias_De_Expiracion
+AS
+BEGIN
+	DECLARE @codPublicacion int;
+
+	DECLARE publicaciones CURSOR FOR
+	SELECT Cod_Publicacion
+	FROM TODO_X2_LUCAS.Publicaciones
+
+	OPEN publicaciones
+	FETCH NEXT FROM publicaciones INTO @codPublicacion
+
+	WHILE @@FETCH_STATUS = 0
+	BEGIN
+		IF (GETDATE() < (SELECT Fecha_Vencimiento_Publicacion FROM TODO_X2_LUCAS.Publicaciones WHERE Cod_Publicacion = @codPublicacion AND Cod_Tipos_Publicacion = 2))
+		BEGIN
+			EXEC TODO_X2_LUCAS.Cambiar_Estado @codPublicacion,'Finalizado'
+		END
+
+		FETCH NEXT FROM publicaciones INTO @codPublicacion
+	END
+	CLOSE publicaciones
+	DEALLOCATE publicaciones
+END
+GO
+
+
