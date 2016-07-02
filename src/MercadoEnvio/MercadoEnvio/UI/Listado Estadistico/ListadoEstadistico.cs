@@ -35,7 +35,13 @@ namespace MercadoEnvio.UI.Listado_Estadistico
                     fecha = Convert.ToDateTime("01/01/" + Convert.ToString(anioNumericUpDown.Value));
                     break;
                 case 1:
-                    fecha = Convert.ToDateTime("01/07/" + Convert.ToString(anioNumericUpDown.Value + 1));
+                    fecha = Convert.ToDateTime("01/03/" + Convert.ToString(anioNumericUpDown.Value));
+                    break;
+                case 2:
+                    fecha = Convert.ToDateTime("01/06/" + Convert.ToString(anioNumericUpDown.Value));
+                    break;
+                case 3:
+                    fecha = Convert.ToDateTime("01/09/" + Convert.ToString(anioNumericUpDown.Value));
                     break;
             }
 
@@ -50,10 +56,16 @@ namespace MercadoEnvio.UI.Listado_Estadistico
             switch (trimestreComboBox.SelectedIndex)
             {
                 case 0:
-                    fecha = Convert.ToDateTime("01/07/" + Convert.ToString(anioNumericUpDown.Value));
+                    fecha = Convert.ToDateTime("01/03/" + Convert.ToString(anioNumericUpDown.Value));
                     break;
                 case 1:
-                    fecha = Convert.ToDateTime("01/01/" + Convert.ToString(anioNumericUpDown.Value + 1));
+                    fecha = Convert.ToDateTime("01/06/" + Convert.ToString(anioNumericUpDown.Value));
+                    break;
+                case 2:
+                    fecha = Convert.ToDateTime("01/09/" + Convert.ToString(anioNumericUpDown.Value));
+                    break;
+                case 3:
+                    fecha = Convert.ToDateTime("01/12/" + Convert.ToString(anioNumericUpDown.Value));
                     break;
             }
 
@@ -68,6 +80,9 @@ namespace MercadoEnvio.UI.Listado_Estadistico
 
                 DateTime fechaInicial = this.parsearFechaInicial();
                 DateTime fechaFinal = this.parsearFechaFinal();
+
+                MessageBox.Show("Fecha Inicial : " + fechaInicial );
+                MessageBox.Show("Fecha Final : " + fechaFinal);
 
                 switch (estadisticaComboBox.SelectedIndex)
                 {

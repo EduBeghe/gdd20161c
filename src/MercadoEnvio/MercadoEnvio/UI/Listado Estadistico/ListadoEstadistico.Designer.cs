@@ -60,8 +60,10 @@
             // 
             this.trimestreComboBox.FormattingEnabled = true;
             this.trimestreComboBox.Items.AddRange(new object[] {
-            "1° Semestre",
-            "2° Semestre"});
+            "1° Trimestre",
+            "2° Trimestre",
+            "3° Trimestre",
+            "4° Trimestre"});
             this.trimestreComboBox.Location = new System.Drawing.Point(12, 121);
             this.trimestreComboBox.Name = "trimestreComboBox";
             this.trimestreComboBox.Size = new System.Drawing.Size(121, 28);
