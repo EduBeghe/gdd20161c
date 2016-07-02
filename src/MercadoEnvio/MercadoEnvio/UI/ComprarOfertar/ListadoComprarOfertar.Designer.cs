@@ -1,6 +1,6 @@
 ﻿namespace MercadoEnvio.ComprarOfertar
 {
-    partial class ComprarOfertar
+    partial class ListadoComprarOfertar
     {
         /// <summary>
         /// Required designer variable.
@@ -174,7 +174,7 @@
             this.Controls.Add(this.publicacionesGrid);
             this.Controls.Add(this.label1);
             this.Name = "ComprarOfertar";
-            this.Text = "Form1";
+            this.Text = "Comprar y Ofertar";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.publicacionesGrid)).EndInit();
             this.ResumeLayout(false);
