@@ -27,6 +27,14 @@ namespace MercadoEnvio.Generar_Publicación
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            // TODO: This line of code loads data into the 'gD1C2016DataSet13.Estados_Publicaciones' table. You can move, or remove it, as needed.
+            this.estados_PublicacionesTableAdapter.Fill(this.gD1C2016DataSet13.Estados_Publicaciones);
+            // TODO: This line of code loads data into the 'gD1C2016DataSet12.Visibilidades_Publicaciones' table. You can move, or remove it, as needed.
+            this.visibilidades_PublicacionesTableAdapter.Fill(this.gD1C2016DataSet12.Visibilidades_Publicaciones);
+            // TODO: This line of code loads data into the 'gD1C2016DataSet11.Rubros' table. You can move, or remove it, as needed.
+            this.rubrosTableAdapter.Fill(this.gD1C2016DataSet11.Rubros);
+            // TODO: This line of code loads data into the 'gD1C2016DataSet10.Tipos_Publicaciones' table. You can move, or remove it, as needed.
+            this.tipos_PublicacionesTableAdapter.Fill(this.gD1C2016DataSet10.Tipos_Publicaciones);
 
         }
 
@@ -39,15 +47,14 @@ namespace MercadoEnvio.Generar_Publicación
                 Convert.ToDateTime( this.inicioDateTimePicker.Value ),
                 Convert.ToDateTime( this.vencimientoDateTimePicker.Value ),
                 Convert.ToInt32( this.precioTextBox.Text ),
-                ((Tipos_Publicaciones)tipoPublicacionComboBox.SelectedItem).descripcion_Tipo,
-                ((Rubros)rubroComboBox.SelectedItem).Descripcion_Rubro,
-                ((VisibilidadPublicaciones)visibilidadComboBox.SelectedItem).Descripcion_Visibilidad,
+                tipoPublicacionComboBox.SelectedValue as String,
+                rubroComboBox.SelectedValue as String,
+                visibilidadComboBox.SelectedValue as String,
                 CLC_SessionManager.getDNI(),
                 CLC_SessionManager.getCUIT(),
-                ((EstadosPublicaciones)estadoComboBox.SelectedItem).Descripcion_Estado,
+                estadoComboBox.SelectedValue as String,
                 this.permitirPreguntasCheckBox.Checked,
-                // Agregar 
-                true
+                this.permitirEnvioCheckBox.Checked
                 );
         }
     }

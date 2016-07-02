@@ -222,11 +222,11 @@
     <Compile Include="UI\Calificar\CalificarVendedor.Designer.cs">
       <DependentUpon>CalificarVendedor.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\ComprarOfertar\ComprarOfertar.cs">
+    <Compile Include="UI\ComprarOfertar\ListadoComprarOfertar.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\ComprarOfertar\ComprarOfertar.Designer.cs">
-      <DependentUpon>ComprarOfertar.cs</DependentUpon>
+    <Compile Include="UI\ComprarOfertar\ListadoComprarOfertar.Designer.cs">
+      <DependentUpon>ListadoComprarOfertar.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\ComprarOfertar\ComprarPublicacion.cs">
       <SubType>Form</SubType>
@@ -334,8 +334,8 @@
     <EmbeddedResource Include="UI\Calificar\CalificarVendedor.resx">
       <DependentUpon>CalificarVendedor.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\ComprarOfertar\ComprarOfertar.resx">
-      <DependentUpon>ComprarOfertar.cs</DependentUpon>
+    <EmbeddedResource Include="UI\ComprarOfertar\ListadoComprarOfertar.resx">
+      <DependentUpon>ListadoComprarOfertar.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\ComprarOfertar\ComprarPublicacion.resx">
       <DependentUpon>ComprarPublicacion.cs</DependentUpon>

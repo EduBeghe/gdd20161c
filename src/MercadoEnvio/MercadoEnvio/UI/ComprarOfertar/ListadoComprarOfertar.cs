@@ -15,9 +15,9 @@ using MercadoEnvio.UI.ComprarOfertar;
 
 namespace MercadoEnvio.ComprarOfertar
 {
-    public partial class ComprarOfertar : Form
+    public partial class ListadoComprarOfertar : Form
     {
-        public ComprarOfertar()
+        public ListadoComprarOfertar()
         {
             InitializeComponent();
         }
