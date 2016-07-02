@@ -1409,7 +1409,7 @@ BEGIN
 			@codVisibilidad = TODO_X2_LUCAS.Obtener_Visibilidad(@visibilidad),
 			@codUsuario = TODO_X2_LUCAS.ObtenerUsuario(@dni,@CUIT)
 	
-	IF NOT EXISTS ((SELECT COUNT(*) FROM TODO_X2_LUCAS.Publicaciones P WHERE P.Cod_Usuario_Responsable = 97 GROUP BY P.Cod_Usuario_Responsable))
+	IF NOT EXISTS ((SELECT COUNT(*) FROM TODO_X2_LUCAS.Publicaciones P WHERE P.Cod_Usuario_Responsable = @codUsuario GROUP BY P.Cod_Usuario_Responsable))
 	BEGIN
 		DECLARE @codGratis numeric(18);
 		SET @codGratis = (SELECT Cod_Visibilidad FROM TODO_X2_LUCAS.Visibilidades_Publicaciones WHERE Precio_Visibilidad = 0)
@@ -2132,10 +2132,6 @@ SET IDENTITY_INSERT TODO_X2_LUCAS.Visibilidades_Publicaciones ON
 SET IDENTITY_INSERT TODO_X2_LUCAS.Visibilidades_Publicaciones OFF
 
 -- MIGRACION TABLA ESTADOS DE PUBLICACIONES --
-INSERT INTO TODO_X2_LUCAS.Estados_Publicaciones
-SELECT DISTINCT Publicacion_Estado
-FROM gd_esquema.Maestra
-
 INSERT INTO TODO_X2_LUCAS.Estados_Publicaciones(Descripcion_Estado)
 VALUES ('Borrador')
 INSERT INTO TODO_X2_LUCAS.Estados_Publicaciones(Descripcion_Estado)
@@ -2156,9 +2152,8 @@ SELECT DISTINCT Publicacion_Cod,Publicacion_Descripcion,
 				Publicacion_Precio,t.Cod_Tipos_Publicaciones,r.Cod_Rubro,
 				v.Cod_Visibilidad,Usuario = CASE WHEN Publ_Cli_Dni IS NULL THEN (SELECT Cod_Empresa FROM TODO_X2_LUCAS.Detalles_Empresas WHERE CUIT = Publ_Empresa_Cuit)
 												ELSE (SELECT Cod_Cliente FROM TODO_X2_LUCAS.Detalles_Clientes WHERE DNI = Publ_Cli_Dni) END,
-				e.Cod_Estado,((Publicacion_Precio * Porcentaje) + Precio_Visibilidad )
-FROM gd_esquema.Maestra m JOIN TODO_X2_LUCAS.Estados_Publicaciones e ON (m.Publicacion_Estado = e.Descripcion_Estado)
-						JOIN TODO_X2_LUCAS.Rubros r ON (m.Publicacion_Rubro_Descripcion = r.Descripcion_Rubro)
+				4,((Publicacion_Precio * Porcentaje) + Precio_Visibilidad )
+FROM gd_esquema.Maestra m JOIN TODO_X2_LUCAS.Rubros r ON (m.Publicacion_Rubro_Descripcion = r.Descripcion_Rubro)
 						JOIN TODO_X2_LUCAS.Tipos_Publicaciones t ON (m.Publicacion_Tipo = t.Descripcion_Tipo)
 						JOIN TODO_X2_LUCAS.Visibilidades_Publicaciones v ON (m.Publicacion_Visibilidad_Cod = v.Cod_Visibilidad)
 WHERE Publicacion_Cod IS NOT NULL
