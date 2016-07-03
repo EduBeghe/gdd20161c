@@ -23,7 +23,6 @@ E:\Edu\Facu\UTN\Gestion de Datos\TP GDD\1 C 2016\gdd20161c\src\MercadoEnvio\Merc
 E:\Edu\Facu\UTN\Gestion de Datos\TP GDD\1 C 2016\gdd20161c\src\MercadoEnvio\MercadoEnvio\obj\Debug\MercadoEnvio.UI.ABM_Usuario.BuscadorEmpresas.resources
 E:\Edu\Facu\UTN\Gestion de Datos\TP GDD\1 C 2016\gdd20161c\src\MercadoEnvio\MercadoEnvio\obj\Debug\MercadoEnvio.UI.ABM_Visibilidad.ListadoVisibilidad.resources
 E:\Edu\Facu\UTN\Gestion de Datos\TP GDD\1 C 2016\gdd20161c\src\MercadoEnvio\MercadoEnvio\obj\Debug\MercadoEnvio.Calificar.CalificarVendedor.resources
-E:\Edu\Facu\UTN\Gestion de Datos\TP GDD\1 C 2016\gdd20161c\src\MercadoEnvio\MercadoEnvio\obj\Debug\MercadoEnvio.ComprarOfertar.ComprarOfertar.resources
 E:\Edu\Facu\UTN\Gestion de Datos\TP GDD\1 C 2016\gdd20161c\src\MercadoEnvio\MercadoEnvio\obj\Debug\MercadoEnvio.UI.ComprarOfertar.ComprarPublicacion.resources
 E:\Edu\Facu\UTN\Gestion de Datos\TP GDD\1 C 2016\gdd20161c\src\MercadoEnvio\MercadoEnvio\obj\Debug\MercadoEnvio.UI.ComprarOfertar.OfertarPublicacion.resources
 E:\Edu\Facu\UTN\Gestion de Datos\TP GDD\1 C 2016\gdd20161c\src\MercadoEnvio\MercadoEnvio\obj\Debug\MercadoEnvio.UI.Listado_Estadistico.ListadoEstadistico.resources

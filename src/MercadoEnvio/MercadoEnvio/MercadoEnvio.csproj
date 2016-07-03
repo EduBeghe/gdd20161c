@@ -120,6 +120,16 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>GD1C2016DataSet14.xsd</DependentUpon>
     </Compile>
+    <Compile Include="GD1C2016DataSet15.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GD1C2016DataSet15.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="GD1C2016DataSet16.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GD1C2016DataSet16.xsd</DependentUpon>
+    </Compile>
     <Compile Include="GD1C2016DataSet2.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -465,6 +475,28 @@
     </None>
     <None Include="GD1C2016DataSet14.xss">
       <DependentUpon>GD1C2016DataSet14.xsd</DependentUpon>
+    </None>
+    <None Include="GD1C2016DataSet15.xsc">
+      <DependentUpon>GD1C2016DataSet15.xsd</DependentUpon>
+    </None>
+    <None Include="GD1C2016DataSet15.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>GD1C2016DataSet15.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="GD1C2016DataSet15.xss">
+      <DependentUpon>GD1C2016DataSet15.xsd</DependentUpon>
+    </None>
+    <None Include="GD1C2016DataSet16.xsc">
+      <DependentUpon>GD1C2016DataSet16.xsd</DependentUpon>
+    </None>
+    <None Include="GD1C2016DataSet16.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>GD1C2016DataSet16.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="GD1C2016DataSet16.xss">
+      <DependentUpon>GD1C2016DataSet16.xsd</DependentUpon>
     </None>
     <None Include="GD1C2016DataSet2.xsc">
       <DependentUpon>GD1C2016DataSet2.xsd</DependentUpon>

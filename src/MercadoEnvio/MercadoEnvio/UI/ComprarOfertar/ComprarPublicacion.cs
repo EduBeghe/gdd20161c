@@ -15,26 +15,44 @@ namespace MercadoEnvio.UI.ComprarOfertar
 {
     public partial class ComprarPublicacion : Form
     {
-        Publicaciones publicacion;
+        DataRow row;
 
         public ComprarPublicacion()
         {
             InitializeComponent();
         }
 
-        internal void ShowDialog( Publicaciones publicacion )
+        internal void ShowDialog( DataRow dow )
         {
-            this.publicacion = publicacion;
+            this.row = dow;
             this.FindForm().ShowDialog();
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            new PublicacionRepository().comprarPublicacion( 
-                this.publicacion,
-                Convert.ToInt32( this.cantidadTextBox.Text ),
-                FormaDePagoComboBox.SelectedItem as String
-            );
+            var codigoPublicacion = Convert.ToInt32(row["Cod_Publicacion"]);
+            var retorno = new PublicacionRepository().comprarPublicacion(CLC_SessionManager.getDNI(), CLC_SessionManager.getCUIT(), codigoPublicacion, Convert.ToInt32(cantidadTextBox.Text), Convert.ToString(FormaDePagoComboBox.SelectedValue));
+            if (retorno == 0)
+            {
+                MessageBox.Show("La compra ha sido realizada con exito.");
+                this.Close();
+            }
+            else
+            {
+                MessageBox.Show("Hubo un problema y no se pudo efectuar la compra.");
+            }
+        }
+
+        private void ComprarPublicacion_Load(object sender, EventArgs e)
+        {
+            // TODO: esta línea de código carga datos en la tabla 'gD1C2016DataSet16.Formas_De_Pago' Puede moverla o quitarla según sea necesario.
+            this.formas_De_PagoTableAdapter.Fill(this.gD1C2016DataSet16.Formas_De_Pago);
+
+        }
+
+        private void cantidadTextBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            MercadoEnvio.Utils.Validacion.validateNumberTextBox(sender, e);
         }
     }
 }

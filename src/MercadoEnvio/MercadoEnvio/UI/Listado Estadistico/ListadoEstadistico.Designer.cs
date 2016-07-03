@@ -54,19 +54,22 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(155, 9);
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(83, 9);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(159, 20);
+            this.label1.Size = new System.Drawing.Size(156, 16);
             this.label1.TabIndex = 0;
             this.label1.Text = "Listados Estadisticos";
             // 
             // estadisticaDataGridView
             // 
             this.estadisticaDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.estadisticaDataGridView.Location = new System.Drawing.Point(15, 218);
+            this.estadisticaDataGridView.Location = new System.Drawing.Point(10, 142);
+            this.estadisticaDataGridView.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.estadisticaDataGridView.Name = "estadisticaDataGridView";
             this.estadisticaDataGridView.RowTemplate.Height = 28;
-            this.estadisticaDataGridView.Size = new System.Drawing.Size(447, 266);
+            this.estadisticaDataGridView.Size = new System.Drawing.Size(298, 173);
             this.estadisticaDataGridView.TabIndex = 1;
             // 
             // trimestreComboBox
@@ -77,14 +80,16 @@
             "2° Trimestre",
             "3° Trimestre",
             "4° Trimestre"});
-            this.trimestreComboBox.Location = new System.Drawing.Point(12, 121);
+            this.trimestreComboBox.Location = new System.Drawing.Point(8, 79);
+            this.trimestreComboBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.trimestreComboBox.Name = "trimestreComboBox";
-            this.trimestreComboBox.Size = new System.Drawing.Size(121, 28);
+            this.trimestreComboBox.Size = new System.Drawing.Size(82, 21);
             this.trimestreComboBox.TabIndex = 2;
             // 
             // anioNumericUpDown
             // 
-            this.anioNumericUpDown.Location = new System.Drawing.Point(169, 121);
+            this.anioNumericUpDown.Location = new System.Drawing.Point(113, 79);
+            this.anioNumericUpDown.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.anioNumericUpDown.Maximum = new decimal(new int[] {
             2025,
             0,
@@ -96,7 +101,7 @@
             0,
             0});
             this.anioNumericUpDown.Name = "anioNumericUpDown";
-            this.anioNumericUpDown.Size = new System.Drawing.Size(120, 26);
+            this.anioNumericUpDown.Size = new System.Drawing.Size(80, 20);
             this.anioNumericUpDown.TabIndex = 3;
             this.anioNumericUpDown.Value = new decimal(new int[] {
             2016,
@@ -106,9 +111,10 @@
             // 
             // consultarButton
             // 
-            this.consultarButton.Location = new System.Drawing.Point(337, 121);
+            this.consultarButton.Location = new System.Drawing.Point(224, 74);
+            this.consultarButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.consultarButton.Name = "consultarButton";
-            this.consultarButton.Size = new System.Drawing.Size(122, 28);
+            this.consultarButton.Size = new System.Drawing.Size(81, 25);
             this.consultarButton.TabIndex = 4;
             this.consultarButton.Text = "Consultar";
             this.consultarButton.UseVisualStyleBackColor = true;
@@ -122,9 +128,10 @@
             "Clientes con mayor cantidad de productos comprados",
             "Vendedores con mayor cantidad de facturas",
             "Vendedores con mayor monto facturado"});
-            this.estadisticaComboBox.Location = new System.Drawing.Point(12, 66);
+            this.estadisticaComboBox.Location = new System.Drawing.Point(8, 43);
+            this.estadisticaComboBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.estadisticaComboBox.Name = "estadisticaComboBox";
-            this.estadisticaComboBox.Size = new System.Drawing.Size(447, 28);
+            this.estadisticaComboBox.Size = new System.Drawing.Size(299, 21);
             this.estadisticaComboBox.TabIndex = 5;
             this.estadisticaComboBox.SelectedIndexChanged += new System.EventHandler(this.estadisticaComboBox_SelectedIndexChanged);
             this.estadisticaComboBox.SelectedValueChanged += new System.EventHandler(this.ListadoEstadistico_Load);
@@ -134,9 +141,10 @@
             this.visibilidadComboBox.DataSource = this.visibilidadesPublicacionesBindingSource;
             this.visibilidadComboBox.DisplayMember = "Descripcion_Visibilidad";
             this.visibilidadComboBox.FormattingEnabled = true;
-            this.visibilidadComboBox.Location = new System.Drawing.Point(15, 166);
+            this.visibilidadComboBox.Location = new System.Drawing.Point(10, 108);
+            this.visibilidadComboBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.visibilidadComboBox.Name = "visibilidadComboBox";
-            this.visibilidadComboBox.Size = new System.Drawing.Size(211, 28);
+            this.visibilidadComboBox.Size = new System.Drawing.Size(142, 21);
             this.visibilidadComboBox.TabIndex = 6;
             this.visibilidadComboBox.ValueMember = "Descripcion_Visibilidad";
             this.visibilidadComboBox.Visible = false;
@@ -156,9 +164,10 @@
             this.rubroComboBox.DataSource = this.rubrosBindingSource;
             this.rubroComboBox.DisplayMember = "Descripcion_Rubro";
             this.rubroComboBox.FormattingEnabled = true;
-            this.rubroComboBox.Location = new System.Drawing.Point(242, 166);
+            this.rubroComboBox.Location = new System.Drawing.Point(161, 108);
+            this.rubroComboBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.rubroComboBox.Name = "rubroComboBox";
-            this.rubroComboBox.Size = new System.Drawing.Size(217, 28);
+            this.rubroComboBox.Size = new System.Drawing.Size(146, 21);
             this.rubroComboBox.TabIndex = 7;
             this.rubroComboBox.ValueMember = "Descripcion_Rubro";
             this.rubroComboBox.Visible = false;
@@ -183,9 +192,9 @@
             // 
             // ListadoEstadistico
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(474, 496);
+            this.ClientSize = new System.Drawing.Size(316, 322);
             this.Controls.Add(this.rubroComboBox);
             this.Controls.Add(this.visibilidadComboBox);
             this.Controls.Add(this.estadisticaComboBox);
@@ -194,6 +203,7 @@
             this.Controls.Add(this.trimestreComboBox);
             this.Controls.Add(this.estadisticaDataGridView);
             this.Controls.Add(this.label1);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "ListadoEstadistico";
             this.Text = "Listado Estadistico";
             this.Load += new System.EventHandler(this.ListadoEstadistico_Load);

@@ -51,32 +51,26 @@ namespace MercadoEnvio.Repositories
                 );
         }
 
-        public int comprarPublicacion(Publicaciones publicacion, int cantidad, string formaDePago )
+        public int comprarPublicacion(int dni, string cuit, int codigoPublicacion, int cantidad, string formaDePago )
         {
-            var retorno = DBAdapter.executeProcedureWithReturnValue( "Comprar_Publicacion",
-                // dni
-                // cuit
-                publicacion.Cod_Publicacion,
-                cantidad,
-                formaDePago
-                );
+            var retorno = DBAdapter.executeProcedureWithReturnValue( "Comprar_Publicacion", dni, cuit, codigoPublicacion, cantidad, formaDePago );
             return retorno;
         }
 
-        public int ofertarPublicacion(Publicaciones publicacion, double oferta)
+        public int ofertarPublicacion(int dni, string cuit, int codigoPublicacion, double oferta)
         {
-            var retorno = DBAdapter.executeProcedureWithReturnValue("Ofertar_Publicacion",
-                // dni
-                // cuit
-                publicacion.Cod_Publicacion,
-                oferta
-            );
+            var retorno = DBAdapter.executeProcedureWithReturnValue("Ofertar_Publicacion", dni, cuit, codigoPublicacion, oferta );
             return retorno;
         }
 
         public Publicaciones getPublicacion(int publicacionID)
         {
             return parse(DBAdapter.retrieveDataTable("Get_Publicacion", publicacionID).Rows[0]);
+        }
+
+        public List<Publicaciones> parsePublicaciones(DataTable dataTable)
+        {
+            return dataTable.AsEnumerable().Select(dr => parse(dr)).ToList();
         }
 
         public Publicaciones parse(DataRow dr)
