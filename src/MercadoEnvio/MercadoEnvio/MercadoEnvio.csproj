@@ -120,6 +120,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>GD1C2016DataSet14.xsd</DependentUpon>
     </Compile>
+    <Compile Include="GD1C2016DataSet151.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GD1C2016DataSet151.xsd</DependentUpon>
+    </Compile>
     <Compile Include="GD1C2016DataSet2.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -277,6 +282,12 @@
     <Compile Include="UI\Generar Publicación\Generar.Designer.cs">
       <DependentUpon>Generar.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\Generar Publicación\ListadoPublicaciones.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Generar Publicación\ListadoPublicaciones.Designer.cs">
+      <DependentUpon>ListadoPublicaciones.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\Historial Cliente\Historial.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -374,6 +385,9 @@
     <EmbeddedResource Include="UI\Generar Publicación\Generar.resx">
       <DependentUpon>Generar.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UI\Generar Publicación\ListadoPublicaciones.resx">
+      <DependentUpon>ListadoPublicaciones.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\Historial Cliente\Historial.resx">
       <DependentUpon>Historial.cs</DependentUpon>
     </EmbeddedResource>
@@ -465,6 +479,17 @@
     </None>
     <None Include="GD1C2016DataSet14.xss">
       <DependentUpon>GD1C2016DataSet14.xsd</DependentUpon>
+    </None>
+    <None Include="GD1C2016DataSet151.xsc">
+      <DependentUpon>GD1C2016DataSet151.xsd</DependentUpon>
+    </None>
+    <None Include="GD1C2016DataSet151.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>GD1C2016DataSet151.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="GD1C2016DataSet151.xss">
+      <DependentUpon>GD1C2016DataSet151.xsd</DependentUpon>
     </None>
     <None Include="GD1C2016DataSet2.xsc">
       <DependentUpon>GD1C2016DataSet2.xsd</DependentUpon>

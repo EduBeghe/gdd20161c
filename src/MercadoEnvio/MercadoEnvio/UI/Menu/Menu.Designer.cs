@@ -47,10 +47,13 @@
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.button2 = new System.Windows.Forms.Button();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.button3 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox5.SuspendLayout();
+            this.groupBox4.SuspendLayout();
             this.SuspendLayout();
             // 
             // button1
@@ -75,7 +78,7 @@
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(504, 43);
+            this.button5.Location = new System.Drawing.Point(274, 43);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(168, 38);
             this.button5.TabIndex = 9;
@@ -165,9 +168,9 @@
             // 
             // button13
             // 
-            this.button13.Location = new System.Drawing.Point(274, 43);
+            this.button13.Location = new System.Drawing.Point(23, 123);
             this.button13.Name = "button13";
-            this.button13.Size = new System.Drawing.Size(168, 38);
+            this.button13.Size = new System.Drawing.Size(182, 38);
             this.button13.TabIndex = 19;
             this.button13.Text = "Consultar Facturas";
             this.button13.UseVisualStyleBackColor = true;
@@ -249,12 +252,11 @@
             // groupBox5
             // 
             this.groupBox5.Controls.Add(this.button11);
-            this.groupBox5.Controls.Add(this.button13);
             this.groupBox5.Controls.Add(this.button5);
             this.groupBox5.Controls.Add(this.button15);
             this.groupBox5.Controls.Add(this.button14);
             this.groupBox5.Controls.Add(this.button12);
-            this.groupBox5.Location = new System.Drawing.Point(162, 311);
+            this.groupBox5.Location = new System.Drawing.Point(275, 311);
             this.groupBox5.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.groupBox5.Name = "groupBox5";
             this.groupBox5.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
@@ -263,11 +265,33 @@
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Consultas / Acciones";
             // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.button3);
+            this.groupBox4.Controls.Add(this.button13);
+            this.groupBox4.Location = new System.Drawing.Point(18, 311);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(226, 203);
+            this.groupBox4.TabIndex = 30;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "Publicaciones";
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(23, 43);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(182, 38);
+            this.button3.TabIndex = 20;
+            this.button3.Text = "Listado Publicaciones";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click_1);
+            // 
             // FunctionsMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1044, 549);
+            this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
@@ -281,6 +305,7 @@
             this.groupBox2.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
             this.groupBox5.ResumeLayout(false);
+            this.groupBox4.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -307,5 +332,7 @@
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.GroupBox groupBox5;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.Button button3;
     }
 }

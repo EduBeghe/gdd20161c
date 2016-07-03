@@ -96,7 +96,8 @@ namespace MercadoEnvio.UI.Menu
 
         private void button14_Click(object sender, EventArgs e)
         {
-            new Generar_Publicación.Form1().ShowDialog();
+            ////new Generar_Publicación.ShowDialog();
+            //new Generar_PublicaciónO()
         }
 
         private void button12_Click(object sender, EventArgs e)
@@ -122,6 +123,11 @@ namespace MercadoEnvio.UI.Menu
         private void button13_Click(object sender, EventArgs e)
         {
             new Facturas.ConsultaFacturas().ShowDialog();
+        }
+
+        private void button3_Click_1(object sender, EventArgs e)
+        {
+            new Generar_Publicación.ListadoPublicaciones().ShowDialog();
         }
     }
 }
