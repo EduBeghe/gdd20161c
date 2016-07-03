@@ -30,7 +30,6 @@ namespace MercadoEnvio.ComprarOfertar
         private void Form1_Load(object sender, EventArgs e)
         {
             // TODO: esta línea de código carga datos en la tabla 'gD1C2016DataSet15.Publicaciones' Puede moverla o quitarla según sea necesario.
-            this.publicacionesTableAdapter.Fill(this.gD1C2016DataSet15.Publicaciones);
             // TODO: This line of code loads data into the 'gD1C2016DataSet2.Publicaciones' table. You can move, or remove it, as needed.
 
         }

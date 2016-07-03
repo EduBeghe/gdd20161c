@@ -42,9 +42,7 @@
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.textBox4 = new System.Windows.Forms.TextBox();
-            this.gD1C2016DataSet15 = new MercadoEnvio.GD1C2016DataSet15();
             this.publicacionesBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.publicacionesTableAdapter = new MercadoEnvio.GD1C2016DataSet15TableAdapters.PublicacionesTableAdapter();
             this.codPublicacionDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.codPublicacionAnteriorDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.descripcionPublicacionDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -61,7 +59,6 @@
             this.permisoPreguntasDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.entregasDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.publicacionesGrid)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gD1C2016DataSet15)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.publicacionesBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
@@ -196,17 +193,12 @@
             // 
             // gD1C2016DataSet15
             // 
-            this.gD1C2016DataSet15.DataSetName = "GD1C2016DataSet15";
-            this.gD1C2016DataSet15.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // publicacionesBindingSource
             // 
-            this.publicacionesBindingSource.DataMember = "Publicaciones";
-            this.publicacionesBindingSource.DataSource = this.gD1C2016DataSet15;
             // 
             // publicacionesTableAdapter
             // 
-            this.publicacionesTableAdapter.ClearBeforeFill = true;
             // 
             // codPublicacionDataGridViewTextBoxColumn
             // 
@@ -321,7 +313,6 @@
             this.Text = "Comprar y Ofertar";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.publicacionesGrid)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gD1C2016DataSet15)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.publicacionesBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -343,9 +334,7 @@
         private System.Windows.Forms.TextBox textBox3;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox textBox4;
-        private GD1C2016DataSet15 gD1C2016DataSet15;
         private System.Windows.Forms.BindingSource publicacionesBindingSource;
-        private GD1C2016DataSet15TableAdapters.PublicacionesTableAdapter publicacionesTableAdapter;
         private System.Windows.Forms.DataGridViewTextBoxColumn codPublicacionDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn codPublicacionAnteriorDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn descripcionPublicacionDataGridViewTextBoxColumn;

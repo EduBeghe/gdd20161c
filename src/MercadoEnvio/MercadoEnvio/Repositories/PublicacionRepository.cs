@@ -43,6 +43,40 @@ namespace MercadoEnvio.Repositories
             );
         }
 
+        public void modificarPublicacion(
+            int Cod_Publicacion,
+            string Descripcion_Publicacion,
+            int Stock_Publicacion,
+            DateTime Fecha_Publicacion,
+            DateTime Fecha_Vencimiento_Publicacion,
+            int Precio_Publicacion,
+            string Tipo_Publicacion,
+            string rubro,
+            string visibilidadPublicaciones,
+            int dni,
+            string cuit,
+            string estado,
+            bool Permiso_Preguntas,
+            bool Entregas)
+        {
+            DBAdapter.executeProcedure("Modificar_Publicacion",
+              Cod_Publicacion,
+              Descripcion_Publicacion,
+              Stock_Publicacion,
+              Fecha_Publicacion,
+              Fecha_Vencimiento_Publicacion,
+              Precio_Publicacion,
+              Tipo_Publicacion,
+              rubro,
+              visibilidadPublicaciones,
+              dni,
+              cuit,
+              estado,
+              Permiso_Preguntas,
+              Entregas
+              );
+        }
+
         public void cambiarEstado(EstadosPublicaciones estadoPublicacion)
         {
             DBAdapter.executeProcedure( "Cambiar_Estado", 
@@ -99,5 +133,7 @@ namespace MercadoEnvio.Repositories
                 (Boolean)dr["Entregas"]
             );
         }
+
+        
     }
 }
