@@ -30,6 +30,10 @@ namespace MercadoEnvio.UI.Login
             var repo = new UsuariosRepository();
             if (Validacion.validarInputs(this.Controls))
             {
+                // Cargamos la fecha 
+                //DBAdapter.executeProcedure("CARGAR_FECHA_SISTEMA", CLC_SessionManager.getFecha() );
+        
+
 
                 var valido = repo.validarLogin(usuarioTextbox.Text, passwordTextbox.Text);
                 if (valido == 1)

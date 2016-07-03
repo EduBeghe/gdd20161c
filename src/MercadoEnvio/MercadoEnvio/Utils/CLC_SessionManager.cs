@@ -17,10 +17,6 @@ namespace MercadoEnvio.Utils
         public static Usuario currentUser { get { if (_usuario == null) throw new NoSessionIsOpenException(); else  return _usuario; } set { _usuario = value; } }
         public static string connectionString = System.Configuration.ConfigurationManager.ConnectionStrings["GD1C2016"].ConnectionString;      
         
-        public static DateTime getFecha() {
-            return DateTime.Parse(System.Configuration.ConfigurationManager.AppSettings["fechaSistema"]);
-        }
-
         public static int getDNI(){
             
             var cliente = new ClientesRepository().getClienteByUserId(currentUser.Cod_Usuario);
@@ -33,6 +29,11 @@ namespace MercadoEnvio.Utils
                 return 0;
             }
             
+        }
+
+        public static DateTime getFecha()
+        {
+            return DateTime.Parse(System.Configuration.ConfigurationManager.AppSettings["fechaSistema"]);
         }
 
         public static string getCUIT()
