@@ -950,9 +950,12 @@ GO
 CREATE PROCEDURE TODO_X2_LUCAS.Publicaciones_Modificables(@dni numeric(18),@cuit nvarchar(50))
 AS
 BEGIN
+	DECLARE @USUARIO INT;
+	SET @USUARIO = TODO_X2_LUCAS.ObtenerUsuario(@dni,@cuit);
+
 	SELECT *
 	FROM TODO_X2_LUCAS.Publicaciones
-	WHERE  Cod_Tipos_Publicacion IN (1,2,3)
+	WHERE  Cod_Tipos_Publicacion IN (1,2,3) AND Cod_Usuario_Responsable = @USUARIO
 END
 GO
 
