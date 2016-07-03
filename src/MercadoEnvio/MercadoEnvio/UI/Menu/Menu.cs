@@ -96,8 +96,8 @@ namespace MercadoEnvio.UI.Menu
 
         private void button14_Click(object sender, EventArgs e)
         {
-            ////new Generar_Publicación.ShowDialog();
-            //new Generar_PublicaciónO()
+
+            new Generar_Publicación.GenerarPublicaciones().ShowDialog();
         }
 
         private void button12_Click(object sender, EventArgs e)

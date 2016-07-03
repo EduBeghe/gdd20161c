@@ -1,6 +1,6 @@
-﻿namespace MercadoEnvio.Generar_Publicación
+﻿namespace MercadoEnvio.UI.Generar_Publicación
 {
-    partial class Form1
+    partial class GenerarPublicaciones
     {
         /// <summary>
         /// Required designer variable.

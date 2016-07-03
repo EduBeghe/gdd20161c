@@ -168,9 +168,9 @@
             // 
             // button13
             // 
-            this.button13.Location = new System.Drawing.Point(23, 123);
+            this.button13.Location = new System.Drawing.Point(274, 123);
             this.button13.Name = "button13";
-            this.button13.Size = new System.Drawing.Size(182, 38);
+            this.button13.Size = new System.Drawing.Size(168, 38);
             this.button13.TabIndex = 19;
             this.button13.Text = "Consultar Facturas";
             this.button13.UseVisualStyleBackColor = true;
@@ -178,9 +178,9 @@
             // 
             // button14
             // 
-            this.button14.Location = new System.Drawing.Point(274, 123);
+            this.button14.Location = new System.Drawing.Point(23, 123);
             this.button14.Name = "button14";
-            this.button14.Size = new System.Drawing.Size(168, 38);
+            this.button14.Size = new System.Drawing.Size(182, 38);
             this.button14.TabIndex = 22;
             this.button14.Text = "Generar Publicacion";
             this.button14.UseVisualStyleBackColor = true;
@@ -252,9 +252,9 @@
             // groupBox5
             // 
             this.groupBox5.Controls.Add(this.button11);
+            this.groupBox5.Controls.Add(this.button13);
             this.groupBox5.Controls.Add(this.button5);
             this.groupBox5.Controls.Add(this.button15);
-            this.groupBox5.Controls.Add(this.button14);
             this.groupBox5.Controls.Add(this.button12);
             this.groupBox5.Location = new System.Drawing.Point(275, 311);
             this.groupBox5.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
@@ -268,7 +268,7 @@
             // groupBox4
             // 
             this.groupBox4.Controls.Add(this.button3);
-            this.groupBox4.Controls.Add(this.button13);
+            this.groupBox4.Controls.Add(this.button14);
             this.groupBox4.Location = new System.Drawing.Point(18, 311);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Size = new System.Drawing.Size(226, 203);

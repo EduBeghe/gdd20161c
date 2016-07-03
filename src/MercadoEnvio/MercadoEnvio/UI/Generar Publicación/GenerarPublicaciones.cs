@@ -11,17 +11,27 @@ using MercadoEnvio.Repositories;
 using MercadoEnvio.Domain;
 using MercadoEnvio.Utils;
 
-namespace MercadoEnvio.Generar_Publicación
+namespace MercadoEnvio.UI.Generar_Publicación
 {
-    public partial class Form1 : Form
+    public partial class GenerarPublicaciones : Form
     {
-        public Form1()
+        Publicaciones publicacion;
+        bool modificando;
+
+        public GenerarPublicaciones()
         {
             InitializeComponent();
         }
 
         internal void ShowDialog()
         {
+            this.FindForm().ShowDialog();
+        }
+
+        internal void ShowDialog(Publicaciones publicacion)
+        {
+            this.modificando = true;
+            this.publicacion = publicacion;
             this.FindForm().ShowDialog();
         }
 
@@ -35,6 +45,28 @@ namespace MercadoEnvio.Generar_Publicación
             this.rubrosTableAdapter.Fill(this.gD1C2016DataSet11.Rubros);
             // TODO: This line of code loads data into the 'gD1C2016DataSet10.Tipos_Publicaciones' table. You can move, or remove it, as needed.
             this.tipos_PublicacionesTableAdapter.Fill(this.gD1C2016DataSet10.Tipos_Publicaciones);
+
+            if (modificando)
+            {
+                this.descripcionTextBox.Text = publicacion.Descripcion_Publicacion;
+                this.tipoPublicacionComboBox.SelectedItem = publicacion.tipoPublicacion;
+                this.stockTextBox.Text = Convert.ToString( publicacion.Stock_Publicacion );
+                this.inicioDateTimePicker.Value = publicacion.Fecha_Publicacion;
+                this.vencimientoDateTimePicker.Value = publicacion.Fecha_Vencimiento_Publicacion;
+                this.precioTextBox.Text = Convert.ToString( publicacion.Precio_Publicacion );
+                this.rubroComboBox.SelectedItem = publicacion.rubro;
+                this.visibilidadComboBox.SelectedItem = publicacion.visibilidadPublicaciones;
+                // Cambiar
+                this.responsableTextBox.Text = publicacion.usuarioResponsable.Nombre_Usuario;
+                this.estadoComboBox.SelectedItem = publicacion.estado;
+                this.permitirEnvioCheckBox.Checked = publicacion.Permiso_Preguntas;
+                this.permitirEnvioCheckBox.Checked = publicacion.Entregas;
+                button1.Text = "Modificar";
+            }
+            else
+            {
+                button1.Text = "Generar";
+            }
 
         }
 
