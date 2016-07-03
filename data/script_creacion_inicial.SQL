@@ -2194,9 +2194,12 @@ INSERT INTO TODO_X2_LUCAS.Publicaciones(Cod_Publicacion_Anterior,Descripcion_Pub
 SELECT DISTINCT Publicacion_Cod,Publicacion_Descripcion,
 				Publicacion_Stock,Publicacion_Fecha,Publicacion_Fecha_Venc,
 				Publicacion_Precio,t.Cod_Tipos_Publicaciones,r.Cod_Rubro,
-				v.Cod_Visibilidad,Usuario = CASE WHEN Publ_Cli_Dni IS NULL THEN (SELECT Cod_Empresa FROM TODO_X2_LUCAS.Detalles_Empresas WHERE CUIT = Publ_Empresa_Cuit)
+				v.Cod_Visibilidad,
+				Usuario = CASE WHEN Publ_Cli_Dni IS NULL THEN (SELECT Cod_Empresa FROM TODO_X2_LUCAS.Detalles_Empresas WHERE CUIT = Publ_Empresa_Cuit)
 												ELSE (SELECT Cod_Cliente FROM TODO_X2_LUCAS.Detalles_Clientes WHERE DNI = Publ_Cli_Dni) END,
-				4,((Publicacion_Precio * Porcentaje) + Precio_Visibilidad )
+				Estado = CASE WHEN t.Cod_Tipos_Publicaciones = 1 THEN 2
+								WHEN t.Cod_Tipos_Publicaciones = 2 THEN 4 END,
+				((Publicacion_Precio * Porcentaje) + Precio_Visibilidad )
 FROM gd_esquema.Maestra m JOIN TODO_X2_LUCAS.Rubros r ON (m.Publicacion_Rubro_Descripcion = r.Descripcion_Rubro)
 						JOIN TODO_X2_LUCAS.Tipos_Publicaciones t ON (m.Publicacion_Tipo = t.Descripcion_Tipo)
 						JOIN TODO_X2_LUCAS.Visibilidades_Publicaciones v ON (m.Publicacion_Visibilidad_Cod = v.Cod_Visibilidad)
