@@ -230,6 +230,8 @@ IF OBJECT_ID('TODO_X2_LUCAS.Publicaciones_Modificables') IS NOT NULL
 DROP PROCEDURE TODO_X2_LUCAS.Publicaciones_Modificables;
 IF OBJECT_ID('TODO_X2_LUCAS.Modificar_Publicacion') IS NOT NULL
 DROP PROCEDURE TODO_X2_LUCAS.Modificar_Publicacion;
+IF OBJECT_ID('TODO_X2_LUCAS.Cambiar_Estado') IS NOT NULL
+DROP PROCEDURE TODO_X2_LUCAS.Cambiar_Estado;
 
 IF OBJECT_ID('TODO_X2_LUCAS.ObtenerUsuario') IS NOT NULL
 DROP FUNCTION TODO_X2_LUCAS.ObtenerUsuario;
@@ -946,6 +948,23 @@ END
 GO
 
 /************************************************** PROCEDIMIENTOS ALMACENADOS ***************************************************/
+/* ------------ PROCEDIMIENTO PARA CAMBIAR DE ESTADO UNA PUBLICACION ------------ */
+CREATE PROCEDURE TODO_X2_LUCAS.Cambiar_Estado(@estado nvarchar(255),@codPublicacion int)
+AS
+BEGIN
+	IF ((SELECT Cod_Estado_Publicacion FROM TODO_X2_LUCAS.Publicaciones WHERE Cod_Publicacion=@codPublicacion) != 4)
+	BEGIN
+		UPDATE TODO_X2_LUCAS.Publicaciones
+		SET Cod_Estado_Publicacion = (TODO_X2_LUCAS.Obtener_Estado(@estado))
+		WHERE Cod_Publicacion = @codPublicacion
+	END
+	ELSE
+	BEGIN
+		PRINT 'NO PUEDE CAMBIARSE DE ESTADO UNA PUBLICACION FINALIZADA'
+		RETURN -1;
+	END
+END
+GO
 /* ------------ PROCEDIMIENTO PARA BUSCAR LAS PUBLICACIONES A MODIFICAR ------------ */
 CREATE PROCEDURE TODO_X2_LUCAS.Publicaciones_Modificables(@dni numeric(18),@cuit nvarchar(50))
 AS
