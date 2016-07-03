@@ -80,6 +80,21 @@ namespace MercadoEnvio.UI.ABM_Usuario
         {
             // TODO: This line of code loads data into the 'gD1C2016DataSet4.Detalles_Clientes' table. You can move, or remove it, as needed.
             this.detalles_ClientesTableAdapter.Fill(this.gD1C2016DataSet4.Detalles_Clientes);
+            var usuario = CLC_SessionManager.currentUser;
+            var funcionalidades = usuario.rol.funcionalidad;
+            button2.Hide();
+            button3.Hide();
+            foreach (Funcionalidades funcionalidad in funcionalidades)
+            {
+                if (funcionalidad.Cod_Funcionalidad.Equals(5))
+                {
+                    button2.Show();
+                }
+                if (funcionalidad.Cod_Funcionalidad.Equals(6))
+                {
+                    button3.Show();
+                }
+            }
         }
     }
 }

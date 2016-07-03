@@ -13,6 +13,9 @@ using MercadoEnvio.ABM_Usuario;
 using MercadoEnvio.Calificar;
 using MercadoEnvio.ComprarOfertar;
 using MercadoEnvio.UI;
+using MercadoEnvio.Domain;
+using MercadoEnvio.Repositories;
+using MercadoEnvio.Utils;
 
 namespace MercadoEnvio.UI.Menu
 {
@@ -52,6 +55,56 @@ namespace MercadoEnvio.UI.Menu
 
         private void FunctionsMenu_Load(object sender, EventArgs e)
         {
+            var usuario = CLC_SessionManager.currentUser;
+            var funcionalidades = usuario.rol.funcionalidad;
+            button1.Hide();
+            button9.Hide();
+            button2.Hide();
+            button14.Hide();
+            button12.Hide();
+            button15.Hide();
+            button11.Hide();
+            button13.Hide();
+            button5.Hide();
+            foreach(Funcionalidades funcionalidad in funcionalidades)
+            {
+                if(funcionalidad.Cod_Funcionalidad.Equals(1))
+                {
+                    button1.Show();
+                }
+                if(funcionalidad.Cod_Funcionalidad.Equals(10))
+                {
+                    button9.Show();
+                }
+                if(funcionalidad.Cod_Funcionalidad.Equals(4))
+                {
+                    button2.Show();
+                }
+                if (funcionalidad.Cod_Funcionalidad.Equals(13))
+                {
+                    button14.Show();
+                } 
+                if(funcionalidad.Cod_Funcionalidad.Equals(14))
+                {
+                    button12.Show();
+                }
+                if (funcionalidad.Cod_Funcionalidad.Equals(15))
+                {
+                    button15.Show();
+                }
+                if(funcionalidad.Cod_Funcionalidad.Equals(16))
+                {
+                    button11.Show();
+                }
+                if(funcionalidad.Cod_Funcionalidad.Equals(17))
+                {
+                    button13.Show();
+                }
+                if(funcionalidad.Cod_Funcionalidad.Equals(18))
+                {
+                    button5.Show();
+                } 
+            }
         }
 
         private void button8_Click(object sender, EventArgs e)

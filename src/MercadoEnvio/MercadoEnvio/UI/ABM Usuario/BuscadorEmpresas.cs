@@ -29,6 +29,22 @@ namespace MercadoEnvio.UI.ABM_Usuario
             cuitTextBox.Text = "";
             emailTextBox.Text = "";
 
+            var usuario = CLC_SessionManager.currentUser;
+            var funcionalidades = usuario.rol.funcionalidad;
+            button2.Hide();
+            button3.Hide();
+            foreach (Funcionalidades funcionalidad in funcionalidades)
+            {
+                if (funcionalidad.Cod_Funcionalidad.Equals(5))
+                {
+                    button2.Show();
+                }
+                if (funcionalidad.Cod_Funcionalidad.Equals(6))
+                {
+                    button3.Show();
+                }
+            }
+
         }
 
         private void button1_Click(object sender, EventArgs e)

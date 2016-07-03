@@ -10,7 +10,7 @@ using System.Windows.Forms;
 using MercadoEnvio.Domain;
 using MercadoEnvio.Repositories;
 using MercadoEnvio.UI.ABM_Visibilidad;
-using MercadoEnvio.Domain;
+using MercadoEnvio.Utils;
 
 namespace MercadoEnvio.UI.ABM_Visibilidad
 {
@@ -30,6 +30,21 @@ namespace MercadoEnvio.UI.ABM_Visibilidad
         {
             // TODO: This line of code loads data into the 'gD1C2016DataSet1.Visibilidades_Publicaciones' table. You can move, or remove it, as needed.
             this.visibilidades_PublicacionesTableAdapter.Fill(this.gD1C2016DataSet1.Visibilidades_Publicaciones);
+            var usuario = CLC_SessionManager.currentUser;
+            var funcionalidades = usuario.rol.funcionalidad;
+            button2.Hide();
+            button3.Hide();
+            foreach (Funcionalidades funcionalidad in funcionalidades)
+            {
+                if (funcionalidad.Cod_Funcionalidad.Equals(11))
+                {
+                    button2.Show();
+                }
+                if (funcionalidad.Cod_Funcionalidad.Equals(12))
+                {
+                    button3.Show();
+                }
+            }
 
         }
 
