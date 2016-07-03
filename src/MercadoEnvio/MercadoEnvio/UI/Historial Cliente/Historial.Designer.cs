@@ -39,20 +39,19 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(241, 9);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(149, 9);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(119, 20);
+            this.label1.Size = new System.Drawing.Size(118, 16);
             this.label1.TabIndex = 0;
             this.label1.Text = "Historial Cliente";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(24, 61);
-            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label2.Location = new System.Drawing.Point(16, 40);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(76, 20);
+            this.label2.Size = new System.Drawing.Size(50, 13);
             this.label2.TabIndex = 1;
             this.label2.Text = "Filtrar por";
             // 
@@ -62,28 +61,25 @@
             this.filtroComboBox.Items.AddRange(new object[] {
             "Historial Compras y Ofertas",
             "Historial Calificaciones"});
-            this.filtroComboBox.Location = new System.Drawing.Point(258, 53);
-            this.filtroComboBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.filtroComboBox.Location = new System.Drawing.Point(172, 34);
             this.filtroComboBox.Name = "filtroComboBox";
-            this.filtroComboBox.Size = new System.Drawing.Size(352, 28);
+            this.filtroComboBox.Size = new System.Drawing.Size(236, 21);
             this.filtroComboBox.TabIndex = 2;
             this.filtroComboBox.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
             // historialDataGridView
             // 
             this.historialDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.historialDataGridView.Location = new System.Drawing.Point(13, 139);
-            this.historialDataGridView.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.historialDataGridView.Location = new System.Drawing.Point(9, 90);
             this.historialDataGridView.Name = "historialDataGridView";
-            this.historialDataGridView.Size = new System.Drawing.Size(597, 307);
+            this.historialDataGridView.Size = new System.Drawing.Size(398, 200);
             this.historialDataGridView.TabIndex = 3;
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(496, 91);
-            this.button1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.button1.Location = new System.Drawing.Point(331, 59);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(114, 38);
+            this.button1.Size = new System.Drawing.Size(76, 25);
             this.button1.TabIndex = 4;
             this.button1.Text = "Filtrar";
             this.button1.UseVisualStyleBackColor = true;
@@ -91,15 +87,14 @@
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(645, 460);
+            this.ClientSize = new System.Drawing.Size(430, 299);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.historialDataGridView);
             this.Controls.Add(this.filtroComboBox);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);

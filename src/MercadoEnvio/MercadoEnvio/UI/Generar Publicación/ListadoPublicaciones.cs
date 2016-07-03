@@ -24,16 +24,6 @@ namespace MercadoEnvio.UI.Generar_Publicación
         private void ListadoPublicaciones_Load(object sender, EventArgs e)
         {
             this.publicacionesBindingSource.DataSource = DBAdapter.retrieveDataTable("Publicaciones_Modificables", CLC_SessionManager.getDNI(), CLC_SessionManager.getCUIT() );
-            var usuario = CLC_SessionManager.currentUser;
-            var funcionalidades = usuario.rol.funcionalidad;
-            button1.Hide();
-            foreach (Funcionalidades funcionalidad in funcionalidades)
-            {
-                if (funcionalidad.Cod_Funcionalidad.Equals(11))
-                {
-                    button1.Show();
-                }
-            }
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -63,6 +53,11 @@ namespace MercadoEnvio.UI.Generar_Publicación
                 this.Close();
             }
             else MessageBox.Show("Debe seleccionar un rol para dar de baja");
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
