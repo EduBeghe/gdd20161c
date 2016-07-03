@@ -77,11 +77,11 @@ namespace MercadoEnvio.Repositories
               );
         }
 
-        public void cambiarEstado(EstadosPublicaciones estadoPublicacion)
+        public void cambiarEstado(int codigoPublicacion, string estadoPublicacion)
         {
-            DBAdapter.executeProcedure( "Cambiar_Estado", 
-                estadoPublicacion.Cod_Estado,
-                estadoPublicacion
+            DBAdapter.executeProcedure("Cambiar_Estado", 
+                estadoPublicacion,
+                codigoPublicacion
                 );
         }
 

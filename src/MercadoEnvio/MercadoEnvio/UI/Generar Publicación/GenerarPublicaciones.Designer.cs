@@ -32,6 +32,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.tipoPublicacionComboBox = new System.Windows.Forms.ComboBox();
+            this.tiposPublicacionesBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.gD1C2016DataSet10 = new MercadoEnvio.GD1C2016DataSet10();
             this.label3 = new System.Windows.Forms.Label();
             this.descripcionTextBox = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
@@ -44,35 +46,33 @@
             this.precioTextBox = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.rubroComboBox = new System.Windows.Forms.ComboBox();
+            this.rubrosBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.gD1C2016DataSet11 = new MercadoEnvio.GD1C2016DataSet11();
             this.label9 = new System.Windows.Forms.Label();
             this.visibilidadComboBox = new System.Windows.Forms.ComboBox();
+            this.visibilidadesPublicacionesBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.gD1C2016DataSet12 = new MercadoEnvio.GD1C2016DataSet12();
             this.label10 = new System.Windows.Forms.Label();
             this.responsableTextBox = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
             this.estadoComboBox = new System.Windows.Forms.ComboBox();
+            this.estadosPublicacionesBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.gD1C2016DataSet13 = new MercadoEnvio.GD1C2016DataSet13();
             this.permitirPreguntasCheckBox = new System.Windows.Forms.CheckBox();
             this.button1 = new System.Windows.Forms.Button();
             this.permitirEnvioCheckBox = new System.Windows.Forms.CheckBox();
-            this.gD1C2016DataSet10 = new MercadoEnvio.GD1C2016DataSet10();
-            this.tiposPublicacionesBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.tipos_PublicacionesTableAdapter = new MercadoEnvio.GD1C2016DataSet10TableAdapters.Tipos_PublicacionesTableAdapter();
-            this.gD1C2016DataSet11 = new MercadoEnvio.GD1C2016DataSet11();
-            this.rubrosBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.rubrosTableAdapter = new MercadoEnvio.GD1C2016DataSet11TableAdapters.RubrosTableAdapter();
-            this.gD1C2016DataSet12 = new MercadoEnvio.GD1C2016DataSet12();
-            this.visibilidadesPublicacionesBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.visibilidades_PublicacionesTableAdapter = new MercadoEnvio.GD1C2016DataSet12TableAdapters.Visibilidades_PublicacionesTableAdapter();
-            this.gD1C2016DataSet13 = new MercadoEnvio.GD1C2016DataSet13();
-            this.estadosPublicacionesBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.estados_PublicacionesTableAdapter = new MercadoEnvio.GD1C2016DataSet13TableAdapters.Estados_PublicacionesTableAdapter();
-            ((System.ComponentModel.ISupportInitialize)(this.gD1C2016DataSet10)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tiposPublicacionesBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gD1C2016DataSet11)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gD1C2016DataSet10)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.rubrosBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gD1C2016DataSet12)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gD1C2016DataSet11)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.visibilidadesPublicacionesBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gD1C2016DataSet13)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gD1C2016DataSet12)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.estadosPublicacionesBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gD1C2016DataSet13)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -106,6 +106,16 @@
             this.tipoPublicacionComboBox.Size = new System.Drawing.Size(288, 28);
             this.tipoPublicacionComboBox.TabIndex = 2;
             this.tipoPublicacionComboBox.ValueMember = "Descripcion_Tipo";
+            // 
+            // tiposPublicacionesBindingSource
+            // 
+            this.tiposPublicacionesBindingSource.DataMember = "Tipos_Publicaciones";
+            this.tiposPublicacionesBindingSource.DataSource = this.gD1C2016DataSet10;
+            // 
+            // gD1C2016DataSet10
+            // 
+            this.gD1C2016DataSet10.DataSetName = "GD1C2016DataSet10";
+            this.gD1C2016DataSet10.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // label3
             // 
@@ -142,6 +152,7 @@
             this.stockTextBox.Name = "stockTextBox";
             this.stockTextBox.Size = new System.Drawing.Size(288, 26);
             this.stockTextBox.TabIndex = 6;
+            this.stockTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.stock);
             // 
             // label5
             // 
@@ -196,6 +207,7 @@
             this.precioTextBox.Name = "precioTextBox";
             this.precioTextBox.Size = new System.Drawing.Size(288, 26);
             this.precioTextBox.TabIndex = 12;
+            this.precioTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.precio);
             // 
             // label8
             // 
@@ -219,6 +231,16 @@
             this.rubroComboBox.TabIndex = 14;
             this.rubroComboBox.ValueMember = "Descripcion_Rubro";
             // 
+            // rubrosBindingSource
+            // 
+            this.rubrosBindingSource.DataMember = "Rubros";
+            this.rubrosBindingSource.DataSource = this.gD1C2016DataSet11;
+            // 
+            // gD1C2016DataSet11
+            // 
+            this.gD1C2016DataSet11.DataSetName = "GD1C2016DataSet11";
+            this.gD1C2016DataSet11.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
             // label9
             // 
             this.label9.AutoSize = true;
@@ -240,6 +262,16 @@
             this.visibilidadComboBox.Size = new System.Drawing.Size(284, 28);
             this.visibilidadComboBox.TabIndex = 16;
             this.visibilidadComboBox.ValueMember = "Descripcion_Visibilidad";
+            // 
+            // visibilidadesPublicacionesBindingSource
+            // 
+            this.visibilidadesPublicacionesBindingSource.DataMember = "Visibilidades_Publicaciones";
+            this.visibilidadesPublicacionesBindingSource.DataSource = this.gD1C2016DataSet12;
+            // 
+            // gD1C2016DataSet12
+            // 
+            this.gD1C2016DataSet12.DataSetName = "GD1C2016DataSet12";
+            this.gD1C2016DataSet12.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // label10
             // 
@@ -281,6 +313,16 @@
             this.estadoComboBox.TabIndex = 20;
             this.estadoComboBox.ValueMember = "Descripcion_Estado";
             // 
+            // estadosPublicacionesBindingSource
+            // 
+            this.estadosPublicacionesBindingSource.DataMember = "Estados_Publicaciones";
+            this.estadosPublicacionesBindingSource.DataSource = this.gD1C2016DataSet13;
+            // 
+            // gD1C2016DataSet13
+            // 
+            this.gD1C2016DataSet13.DataSetName = "GD1C2016DataSet13";
+            this.gD1C2016DataSet13.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
             // permitirPreguntasCheckBox
             // 
             this.permitirPreguntasCheckBox.AutoSize = true;
@@ -313,63 +355,23 @@
             this.permitirEnvioCheckBox.Text = "Permitir Envio";
             this.permitirEnvioCheckBox.UseVisualStyleBackColor = true;
             // 
-            // gD1C2016DataSet10
-            // 
-            this.gD1C2016DataSet10.DataSetName = "GD1C2016DataSet10";
-            this.gD1C2016DataSet10.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // tiposPublicacionesBindingSource
-            // 
-            this.tiposPublicacionesBindingSource.DataMember = "Tipos_Publicaciones";
-            this.tiposPublicacionesBindingSource.DataSource = this.gD1C2016DataSet10;
-            // 
             // tipos_PublicacionesTableAdapter
             // 
             this.tipos_PublicacionesTableAdapter.ClearBeforeFill = true;
-            // 
-            // gD1C2016DataSet11
-            // 
-            this.gD1C2016DataSet11.DataSetName = "GD1C2016DataSet11";
-            this.gD1C2016DataSet11.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // rubrosBindingSource
-            // 
-            this.rubrosBindingSource.DataMember = "Rubros";
-            this.rubrosBindingSource.DataSource = this.gD1C2016DataSet11;
             // 
             // rubrosTableAdapter
             // 
             this.rubrosTableAdapter.ClearBeforeFill = true;
             // 
-            // gD1C2016DataSet12
-            // 
-            this.gD1C2016DataSet12.DataSetName = "GD1C2016DataSet12";
-            this.gD1C2016DataSet12.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // visibilidadesPublicacionesBindingSource
-            // 
-            this.visibilidadesPublicacionesBindingSource.DataMember = "Visibilidades_Publicaciones";
-            this.visibilidadesPublicacionesBindingSource.DataSource = this.gD1C2016DataSet12;
-            // 
             // visibilidades_PublicacionesTableAdapter
             // 
             this.visibilidades_PublicacionesTableAdapter.ClearBeforeFill = true;
-            // 
-            // gD1C2016DataSet13
-            // 
-            this.gD1C2016DataSet13.DataSetName = "GD1C2016DataSet13";
-            this.gD1C2016DataSet13.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // estadosPublicacionesBindingSource
-            // 
-            this.estadosPublicacionesBindingSource.DataMember = "Estados_Publicaciones";
-            this.estadosPublicacionesBindingSource.DataSource = this.gD1C2016DataSet13;
             // 
             // estados_PublicacionesTableAdapter
             // 
             this.estados_PublicacionesTableAdapter.ClearBeforeFill = true;
             // 
-            // Form1
+            // GenerarPublicaciones
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -399,17 +401,17 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.Name = "Form1";
+            this.Name = "GenerarPublicaciones";
             this.Text = "Generar";
             this.Load += new System.EventHandler(this.Form1_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.gD1C2016DataSet10)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tiposPublicacionesBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gD1C2016DataSet11)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gD1C2016DataSet10)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.rubrosBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gD1C2016DataSet12)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gD1C2016DataSet11)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.visibilidadesPublicacionesBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gD1C2016DataSet13)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gD1C2016DataSet12)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.estadosPublicacionesBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gD1C2016DataSet13)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

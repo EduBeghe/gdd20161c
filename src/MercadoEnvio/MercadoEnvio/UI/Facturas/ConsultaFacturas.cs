@@ -48,5 +48,15 @@ namespace MercadoEnvio.Facturas
 
         }
 
+        private void desde(object sender, KeyPressEventArgs e)
+        {
+            MercadoEnvio.Utils.Validacion.validateNumberTextBox(sender, e);
+        }
+
+        private void hasta(object sender, KeyPressEventArgs e)
+        {
+            MercadoEnvio.Utils.Validacion.validateNumberTextBox(sender, e);
+        }
+
     }
 }

@@ -91,5 +91,15 @@ namespace MercadoEnvio.UI.Generar_Publicación
             MessageBox.Show("Publicacion dada de Alta exitosamente");
             this.Close();
         }
+
+        private void stock(object sender, KeyPressEventArgs e)
+        {
+            MercadoEnvio.Utils.Validacion.validateNumberTextBox(sender, e);
+        }
+
+        private void precio(object sender, KeyPressEventArgs e)
+        {
+            MercadoEnvio.Utils.Validacion.validateNumberTextBox(sender, e);
+        }
     }
 }
