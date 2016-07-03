@@ -127,6 +127,7 @@
             this.importeFinalTextBox.Name = "importeFinalTextBox";
             this.importeFinalTextBox.Size = new System.Drawing.Size(205, 26);
             this.importeFinalTextBox.TabIndex = 3;
+            this.importeFinalTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.hasta);
             // 
             // label5
             // 
@@ -145,6 +146,7 @@
             this.importeInicialTextBox.Name = "importeInicialTextBox";
             this.importeInicialTextBox.Size = new System.Drawing.Size(194, 26);
             this.importeInicialTextBox.TabIndex = 1;
+            this.importeInicialTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.desde);
             // 
             // label4
             // 
