@@ -974,10 +974,9 @@ BEGIN
 
 	SELECT *
 	FROM TODO_X2_LUCAS.Publicaciones
-	WHERE  Cod_Tipos_Publicacion IN (1,2,3) AND Cod_Usuario_Responsable = @USUARIO
+	WHERE  Cod_Estado_Publicacion IN (1,2,3) AND Cod_Usuario_Responsable = @USUARIO
 END
 GO
-
 
 /* ------------ PROCEDIMIENTO PARA AGREGAR FUNCIONALIDADES ------------ */
 
