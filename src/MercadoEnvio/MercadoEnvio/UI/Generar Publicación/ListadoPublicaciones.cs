@@ -21,7 +21,8 @@ namespace MercadoEnvio.UI.Generar_Publicación
 
         private void ListadoPublicaciones_Load(object sender, EventArgs e)
         {
-            this.publicacionesBindingSource.DataSource = DBAdapter.retrieveDataTable("Publicaciones_Modificables", CLC_SessionManager.getDNI(), CLC_SessionManager.getCUIT() );
+            var publicacionesModificables = DBAdapter.retrieveDataTable("Publicaciones_Modificables", CLC_SessionManager.getDNI(), CLC_SessionManager.getCUIT());
+            this.publicacionesBindingSource.DataSource = publicacionesModificables;
         }
 
         private void button1_Click(object sender, EventArgs e)

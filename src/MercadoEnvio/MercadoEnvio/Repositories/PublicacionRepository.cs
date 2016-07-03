@@ -79,9 +79,9 @@ namespace MercadoEnvio.Repositories
 
         public void cambiarEstado(int codigoPublicacion, string estadoPublicacion)
         {
-            DBAdapter.executeProcedure( "Cambiar_Estado", 
-                codigoPublicacion,
-                estadoPublicacion
+            DBAdapter.executeProcedure("Cambiar_Estado", 
+                estadoPublicacion,
+                codigoPublicacion
                 );
         }
 
