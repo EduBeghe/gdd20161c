@@ -30,27 +30,64 @@ namespace MercadoEnvio.UI.Generar_Publicación
             {
                 var dataViewRow = (DataRowView)publicacionesDataGridView.SelectedRows[0].DataBoundItem;
                 var publicacion = new PublicacionRepository().parse(dataViewRow.Row);
-                new PublicacionRepository().modificarPublicacion(
-                    publicacion.Cod_Publicacion,
-                    publicacion.Descripcion_Publicacion,
-                    publicacion.Stock_Publicacion,
-                    publicacion.Fecha_Publicacion,
-                    publicacion.Fecha_Vencimiento_Publicacion,
-                    publicacion.Precio_Publicacion,
-                    publicacion.tipoPublicacion.descripcion_Tipo, // string de subasta/compra inmediata
-                    publicacion.rubro.Descripcion_Rubro,
-                    publicacion.visibilidadPublicaciones.Descripcion_Visibilidad,
-                    CLC_SessionManager.getDNI(),
-                    CLC_SessionManager.getCUIT(),
-                    publicacion.estado.Descripcion_Estado, // Este es el string del tipo de publicacion ( pausada, borrado... ) 
-                    publicacion.Permiso_Preguntas,
-                    publicacion.Entregas
-                    );
-                // MENSAJE DE ALGO
-                //MessageBox.Show("Rol eliminado con exito");
-                this.Close();
+                if (publicacion.tipoPublicacion.descripcion_Tipo.Equals("Borrador"))
+                {
+                    var vistaModificar = new GenerarPublicaciones();
+                    vistaModificar.ShowDialog(new PublicacionRepository().parse(dataViewRow.Row));
+                }
+                else
+                {
+                    MessageBox.Show("Solo puede editar publicaciones en estado Borrardor");
+                }
             }
-            else MessageBox.Show("Debe seleccionar un rol para dar de baja");
+            else MessageBox.Show("Debe seleccionar una publicacion para modificar");
+        }
+
+        private void activarButton_Click(object sender, EventArgs e)
+        {
+            if (publicacionesDataGridView.SelectedRows.Count != 0)
+            {
+                var dataViewRow = (DataRowView)publicacionesDataGridView.SelectedRows[0].DataBoundItem;
+                var publicacion = new PublicacionRepository().parse(dataViewRow.Row);
+                if (!publicacion.tipoPublicacion.descripcion_Tipo.Equals("Activa"))
+                {
+                    new PublicacionRepository().cambiarEstado(publicacion.Cod_Publicacion, "Activa" );
+                }
+                else
+                {
+                    MessageBox.Show("La publicacion seleccionada ya esta activa");
+                }
+            }
+            else MessageBox.Show("Debe seleccionar una publicacion para activar");
+        }
+
+        private void finalizarButton_Click(object sender, EventArgs e)
+        {
+            if (publicacionesDataGridView.SelectedRows.Count != 0)
+            {
+                var dataViewRow = (DataRowView)publicacionesDataGridView.SelectedRows[0].DataBoundItem;
+                var publicacion = new PublicacionRepository().parse(dataViewRow.Row);
+                new PublicacionRepository().cambiarEstado(publicacion.Cod_Publicacion, "Finalizado");
+            }
+            else MessageBox.Show("Debe seleccionar una publicacion para finalizar");
+        }
+
+        private void pausarButton_Click(object sender, EventArgs e)
+        {
+            if (publicacionesDataGridView.SelectedRows.Count != 0)
+            {
+                var dataViewRow = (DataRowView)publicacionesDataGridView.SelectedRows[0].DataBoundItem;
+                var publicacion = new PublicacionRepository().parse(dataViewRow.Row);
+                if (!publicacion.tipoPublicacion.descripcion_Tipo.Equals("Pausada"))
+                {
+                    new PublicacionRepository().cambiarEstado(publicacion.Cod_Publicacion, "Pausada");
+                }
+                else
+                {
+                    MessageBox.Show("La publicacion seleccionada ya esta pausada");
+                }
+            }
+            else MessageBox.Show("Debe seleccionar una publicacion para pausar");
         }
     }
 }
