@@ -15,25 +15,37 @@ namespace MercadoEnvio.UI.ComprarOfertar
 {
     public partial class OfertarPublicacion : Form
     {
-        Publicaciones publicacion;
+        DataRow row;
 
         public OfertarPublicacion()
         {
             InitializeComponent();
         }
 
-        internal void ShowDialog(Publicaciones publicacion)
+        internal void ShowDialog(DataRow row)
         {
-            this.publicacion = publicacion;
+            this.row = row;
             this.FindForm().ShowDialog();
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            new PublicacionRepository().ofertarPublicacion(
-               this.publicacion,
-               Convert.ToInt32(this.ofertarTextBox.Text)
-           );
+            var codigoPublicacion = Convert.ToInt32(row["Cod_Publicacion"]);
+            var retorno = new PublicacionRepository().ofertarPublicacion(CLC_SessionManager.getDNI(), CLC_SessionManager.getCUIT(), codigoPublicacion, Convert.ToInt32(ofertarTextBox.Text));
+            if (retorno == 0)
+            {
+                MessageBox.Show("La oferta ha sido realizada con exito.");
+                this.Close();
+            }
+            else
+            {
+                MessageBox.Show("Hubo un problema y no se pudo efectuar la oferta.");
+            }
+        }
+
+        private void OfertarPublicacion_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

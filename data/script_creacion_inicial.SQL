@@ -226,6 +226,10 @@ IF OBJECT_ID('TODO_X2_LUCAS.Dias_De_Expiracion') IS NOT NULL
 DROP PROCEDURE TODO_X2_LUCAS.Dias_De_Expiracion;
 IF OBJECT_ID('TODO_X2_LUCAS.Get_Compras_Por_Usuario') IS NOT NULL
 DROP PROCEDURE TODO_X2_LUCAS.Get_Compras_Por_Usuario;
+IF OBJECT_ID('TODO_X2_LUCAS.Publicaciones_Modificables') IS NOT NULL
+DROP PROCEDURE TODO_X2_LUCAS.Publicaciones_Modificables;
+IF OBJECT_ID('TODO_X2_LUCAS.Modificar_Publicacion') IS NOT NULL
+DROP PROCEDURE TODO_X2_LUCAS.Modificar_Publicacion;
 
 IF OBJECT_ID('TODO_X2_LUCAS.ObtenerUsuario') IS NOT NULL
 DROP FUNCTION TODO_X2_LUCAS.ObtenerUsuario;
@@ -942,6 +946,16 @@ END
 GO
 
 /************************************************** PROCEDIMIENTOS ALMACENADOS ***************************************************/
+/* ------------ PROCEDIMIENTO PARA BUSCAR LAS PUBLICACIONES A MODIFICAR ------------ */
+CREATE PROCEDURE TODO_X2_LUCAS.Publicaciones_Modificables(@dni numeric(18),@cuit nvarchar(50))
+AS
+BEGIN
+	SELECT *
+	FROM TODO_X2_LUCAS.Publicaciones
+	WHERE  Cod_Tipos_Publicacion IN (1,2,3)
+END
+GO
+
 
 /* ------------ PROCEDIMIENTO PARA AGREGAR FUNCIONALIDADES ------------ */
 
@@ -1429,27 +1443,30 @@ BEGIN
 	END
 END
 GO
-
-/* ------------ PROCEDIMIENTO PARA EL CAMBIO DE ESTADO DE UNA PUBLICACION ------------ */
-CREATE PROCEDURE TODO_X2_LUCAS.Cambiar_Estado(@codPublicacion int,@estado nvarchar(255))
+/* ------------ PROCEDIMIENTO PARA EL ALTA DE UNA PUBLICACION ------------ */
+CREATE PROCEDURE TODO_X2_LUCAS.Modificar_Publicacion(@codPublicacion int,@descripcion nvarchar(255),@stock numeric(18),@fecha datetime,
+												@fechaVenc datetime,@precio numeric(18,2),@tipoPublic nvarchar(255),
+												@rubro nvarchar(255),@visibilidad nvarchar(255),
+												@dni numeric(18),@CUIT nvarchar(50),@estado nvarchar(255),
+												@permisoPreguntas bit, @entregas bit)
 AS
 BEGIN
-	DECLARE @codEstadoNuevo int;
-	SET @codEstadoNuevo = TODO_X2_LUCAS.Obtener_Estado(@estado);
+	DECLARE @CODTIPO INT,@CODRUBRO INT,@CODVISI NUMERIC(18),@usuario int,@codestado int;
+	SELECT @CODTIPO = TODO_X2_LUCAS.Obtener_Tipo_De_Publicacion(@tipoPublic),
+			@CODRUBRO = TODO_X2_LUCAS.Obtener_Rubro(@rubro),
+			@CODVISI = TODO_X2_LUCAS.Obtener_Visibilidad(@CODVISI),
+			@usuario = TODO_X2_LUCAS.ObtenerUsuario(@dni,@cuit),
+			@codestado = TODO_X2_LUCAS.Obtener_Estado(@estado)
 
-	IF ((SELECT Cod_Estado_Publicacion FROM TODO_X2_LUCAS.Publicaciones WHERE Cod_Publicacion = @codPublicacion) != 5)
-	BEGIN
-		UPDATE TODO_X2_LUCAS.Publicaciones
-		SET Cod_Estado_Publicacion = @codEstadoNuevo
-		WHERE Cod_Publicacion = @codPublicacion
-	END
-	ELSE
-	BEGIN
-		PRINT 'NO PUEDE CAMBIARSE DE ESTADO UNA VEZ QUE ESTE SE FINALIZO'
-		RETURN -1;
-	END
+	UPDATE	TODO_X2_LUCAS.Publicaciones
+	SET Descripcion_Publicacion = @descripcion,Stock_Publicacion = @stock, Fecha_Publicacion = @fecha,
+		Fecha_Vencimiento_Publicacion = @fechaVenc, Precio_Publicacion = @precio, Cod_Tipos_Publicacion = @CODTIPO,
+		Cod_Rubro = @CODRUBRO,Cod_Visibilidad = @CODVISI,Cod_Usuario_Responsable = @usuario,
+		Cod_Estado_Publicacion = @codestado, Permiso_Preguntas = @permisoPreguntas, Entregas = @entregas
+	WHERE Cod_Publicacion = @codPublicacion
 END
 GO
+
 /* ------------ PROCEDIMIENTO PARA FILTRAR PUBLICACIONES - TOTAL FILTRADO ------------ */
 CREATE PROCEDURE TODO_X2_LUCAS.Cantidad_Publicaciones_Filtradas(@rubro nvarchar(255),@descripcion nvarchar(255))
 AS
@@ -1478,19 +1495,23 @@ END
 GO
 /* ------------ PROCEDIMIENTO PARA FILTRAR PUBLICACIONES ------------ */
 CREATE PROCEDURE TODO_X2_LUCAS.Filtrar_Publicaciones(@rubro1 nvarchar(255),@rubro2 nvarchar(255),@rubro3 nvarchar(255),
-														@descripcion nvarchar(255))
+														@descripcion nvarchar(255),@dni numeric(18),@cuit nvarchar(50))
 AS
 BEGIN
+	DECLARE @usuario int; 
+	SET @usuario = TODO_X2_LUCAS.ObtenerUsuario(@dni,@cuit);
 
 	SELECT Cod_Publicacion,Cod_Publicacion_Anterior,Descripcion_Publicacion,
 			Stock_Publicacion,Fecha_Publicacion,Fecha_Vencimiento_Publicacion,Precio_Publicacion,
-			Cod_Tipos_Publicacion,p.Cod_Rubro,Cod_Visibilidad,Costo_Publicacion,Cod_Usuario_Responsable,Cod_Estado_Publicacion
+			T.Descripcion_Tipo,p.Cod_Rubro,Cod_Visibilidad,Costo_Publicacion,Cod_Usuario_Responsable,Cod_Estado_Publicacion
 			,Permiso_Preguntas,Entregas
 	FROM TODO_X2_LUCAS.Publicaciones p join TODO_X2_LUCAS.Rubros r ON (p.Cod_Rubro = r.Cod_Rubro)
+										join TODO_X2_LUCAS.Tipos_Publicaciones t on (t.Cod_Tipos_Publicaciones=p.Cod_Tipos_Publicacion)
 	WHERE (r.Descripcion_Rubro LIKE '%' + @rubro1 + '%') OR 
 			(r.Descripcion_Rubro LIKE '%' +  @rubro2 + '%' ) OR 
 			(r.Descripcion_Rubro LIKE '%' +  @rubro3 + '%' ) AND
-			(Descripcion_Publicacion LIKE '%' + @descripcion + '%' )
+			(Descripcion_Publicacion LIKE '%' + @descripcion + '%' ) AND
+			(p.Cod_Usuario_Responsable != @usuario) AND (P.Cod_Estado_Publicacion = 2) 
 END
 GO
 
@@ -1544,7 +1565,9 @@ BEGIN
 			
 				IF (@cantidad = (SELECT Stock_Publicacion FROM TODO_X2_LUCAS.Publicaciones WHERE Cod_Publicacion=@codPublicacion))
 				BEGIN
-					EXEC TODO_X2_LUCAS.Cambiar_Estado @codPublicacion,'Finalizado'
+					UPDATE TODO_X2_LUCAS.Publicaciones
+					set Cod_Estado_Publicacion = 4
+					WHERE Cod_Publicacion = @codPublicacion
 				END
 				ELSE
 				BEGIN
@@ -2273,7 +2296,9 @@ BEGIN
 	SELECT @codVisibilidad = i.Cod_Visibilidad, @codPublicacion = I.Cod_Publicacion
 	FROM inserted I
 
-	SET @costo = (SELECT (P.Precio_Publicacion * V.Porcentaje) + V.Precio_Visibilidad + V.Comision_Entregas
+
+	SET @costo = (SELECT CASE WHEN P.Entregas = 1 THEN (P.Precio_Publicacion * V.Porcentaje) + V.Precio_Visibilidad + V.Comision_Entregas
+								WHEN P.Entregas = 0 THEN (P.Precio_Publicacion * V.Porcentaje) + V.Precio_Visibilidad END
 					FROM TODO_X2_LUCAS.Visibilidades_Publicaciones V JOIN TODO_X2_LUCAS.Publicaciones P ON (V.Cod_Visibilidad = P.Cod_Visibilidad)
 					WHERE P.Cod_Publicacion = @codPublicacion)
 
@@ -2302,7 +2327,9 @@ BEGIN
 	BEGIN
 		IF (GETDATE() < (SELECT Fecha_Vencimiento_Publicacion FROM TODO_X2_LUCAS.Publicaciones WHERE Cod_Publicacion = @codPublicacion AND Cod_Tipos_Publicacion = 2))
 		BEGIN
-			EXEC TODO_X2_LUCAS.Cambiar_Estado @codPublicacion,'Finalizado'
+			update TODO_X2_LUCAS.Publicaciones
+			set Cod_Estado_Publicacion = 4
+			where Cod_Publicacion = @codPublicacion
 		END
 
 		FETCH NEXT FROM publicaciones INTO @codPublicacion

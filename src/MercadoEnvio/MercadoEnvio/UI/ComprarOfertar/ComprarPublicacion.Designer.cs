@@ -28,30 +28,40 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.cantidadTextBox = new System.Windows.Forms.TextBox();
             this.FormaDePagoComboBox = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
+            this.gD1C2016DataSet16 = new MercadoEnvio.GD1C2016DataSet16();
+            this.formasDePagoBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.formas_De_PagoTableAdapter = new MercadoEnvio.GD1C2016DataSet16TableAdapters.Formas_De_PagoTableAdapter();
+            ((System.ComponentModel.ISupportInitialize)(this.gD1C2016DataSet16)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.formasDePagoBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // cantidadTextBox
             // 
             this.cantidadTextBox.Location = new System.Drawing.Point(117, 37);
-            this.cantidadTextBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cantidadTextBox.Margin = new System.Windows.Forms.Padding(2);
             this.cantidadTextBox.Name = "cantidadTextBox";
             this.cantidadTextBox.Size = new System.Drawing.Size(145, 20);
             this.cantidadTextBox.TabIndex = 0;
+            this.cantidadTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cantidadTextBox_KeyPress);
             // 
             // FormaDePagoComboBox
             // 
+            this.FormaDePagoComboBox.DataSource = this.formasDePagoBindingSource;
+            this.FormaDePagoComboBox.DisplayMember = "Descripcion_Forma";
             this.FormaDePagoComboBox.FormattingEnabled = true;
             this.FormaDePagoComboBox.Location = new System.Drawing.Point(117, 68);
-            this.FormaDePagoComboBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.FormaDePagoComboBox.Margin = new System.Windows.Forms.Padding(2);
             this.FormaDePagoComboBox.Name = "FormaDePagoComboBox";
             this.FormaDePagoComboBox.Size = new System.Drawing.Size(145, 21);
             this.FormaDePagoComboBox.TabIndex = 1;
+            this.FormaDePagoComboBox.ValueMember = "Descripcion_Forma";
             // 
             // label1
             // 
@@ -87,13 +97,27 @@
             // button1
             // 
             this.button1.Location = new System.Drawing.Point(63, 103);
-            this.button1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button1.Margin = new System.Windows.Forms.Padding(2);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(149, 28);
             this.button1.TabIndex = 5;
             this.button1.Text = "Confirmar Compra";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // gD1C2016DataSet16
+            // 
+            this.gD1C2016DataSet16.DataSetName = "GD1C2016DataSet16";
+            this.gD1C2016DataSet16.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // formasDePagoBindingSource
+            // 
+            this.formasDePagoBindingSource.DataMember = "Formas_De_Pago";
+            this.formasDePagoBindingSource.DataSource = this.gD1C2016DataSet16;
+            // 
+            // formas_De_PagoTableAdapter
+            // 
+            this.formas_De_PagoTableAdapter.ClearBeforeFill = true;
             // 
             // ComprarPublicacion
             // 
@@ -106,9 +130,12 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.FormaDePagoComboBox);
             this.Controls.Add(this.cantidadTextBox);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "ComprarPublicacion";
             this.Text = "ComprarPublicacion";
+            this.Load += new System.EventHandler(this.ComprarPublicacion_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.gD1C2016DataSet16)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.formasDePagoBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -122,5 +149,8 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button button1;
+        private GD1C2016DataSet16 gD1C2016DataSet16;
+        private System.Windows.Forms.BindingSource formasDePagoBindingSource;
+        private GD1C2016DataSet16TableAdapters.Formas_De_PagoTableAdapter formas_De_PagoTableAdapter;
     }
 }
