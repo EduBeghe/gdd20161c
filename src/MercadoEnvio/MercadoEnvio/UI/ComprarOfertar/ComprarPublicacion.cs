@@ -37,6 +37,16 @@ namespace MercadoEnvio.UI.ComprarOfertar
                 MessageBox.Show("La compra ha sido realizada con exito.");
                 this.Close();
             }
+            else if (retorno == -1)
+            {
+                MessageBox.Show("Tiene que calificar las compras que no califico aun.");
+                this.Close();
+            }
+            else if (retorno == -2)
+            {
+                MessageBox.Show("No hay suficiente stock.");
+                this.Close();
+            }
             else
             {
                 MessageBox.Show("Hubo un problema y no se pudo efectuar la compra.");

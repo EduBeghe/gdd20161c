@@ -29,9 +29,7 @@ namespace MercadoEnvio.ComprarOfertar
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            // TODO: esta línea de código carga datos en la tabla 'gD1C2016DataSet15.Publicaciones' Puede moverla o quitarla según sea necesario.
-            // TODO: This line of code loads data into the 'gD1C2016DataSet2.Publicaciones' table. You can move, or remove it, as needed.
-
+            this.publicacionesGrid.DataSource = DBAdapter.retrieveDataTable("Filtrar_Publicaciones", rubroTextBox1.Text, rubroTextBox2.Text, rubroTextBox3.Text, descTextBox.Text, CLC_SessionManager.getDNI(), CLC_SessionManager.getCUIT());
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -39,7 +37,6 @@ namespace MercadoEnvio.ComprarOfertar
             if (publicacionesGrid.SelectedRows.Count != 0)
             {
                 var dataRowView = (DataRowView)publicacionesGrid.SelectedRows[0].DataBoundItem;
-                //var publicacion = new PublicacionRepository().parse(dataRowView.Row);
                 new ComprarPublicacion().ShowDialog(dataRowView.Row);
             }
             else MessageBox.Show("Debe seleccionar una publicacion para poder comprar");
@@ -50,7 +47,6 @@ namespace MercadoEnvio.ComprarOfertar
             if (publicacionesGrid.SelectedRows.Count != 0)
             {
                 var dataRowView = (DataRowView)publicacionesGrid.SelectedRows[0].DataBoundItem;
-                var publicacion = new PublicacionRepository().parse(dataRowView.Row);
                 new OfertarPublicacion().ShowDialog( dataRowView.Row );
             }
             else MessageBox.Show("Debe seleccionar una publicacion para poder ofertar");
@@ -60,5 +56,11 @@ namespace MercadoEnvio.ComprarOfertar
         {
 
         }
+
+        private void publicacionesGrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            this.publicacionesGrid.DataSource = DBAdapter.retrieveDataTable("Filtrar_Publicaciones", rubroTextBox1.Text, rubroTextBox2.Text, rubroTextBox3.Text, descTextBox.Text, CLC_SessionManager.getDNI(), CLC_SessionManager.getCUIT());
+        }
+
     }
 }

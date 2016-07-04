@@ -37,6 +37,14 @@ namespace MercadoEnvio.UI.ComprarOfertar
                 MessageBox.Show("La oferta ha sido realizada con exito.");
                 this.Close();
             }
+            else if (retorno == -1)
+            {
+                MessageBox.Show("La oferta es menor al precio inicial de la subasta.");
+            }
+            else if (retorno == -2)
+            {
+                MessageBox.Show("Tiene que calificar las compras que no califico aun.");
+            }
             else
             {
                 MessageBox.Show("Hubo un problema y no se pudo efectuar la oferta.");

@@ -28,74 +28,42 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.label1 = new System.Windows.Forms.Label();
             this.publicacionesGrid = new System.Windows.Forms.DataGridView();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.descTextBox = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.rubroTextBox3 = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.rubroTextBox2 = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.publicacionesBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.codPublicacionDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.codPublicacionAnteriorDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.descripcionPublicacionDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.stockPublicacionDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.fechaPublicacionDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.fechaVencimientoPublicacionDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.precioPublicacionDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.codTiposPublicacionDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.codRubroDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.codVisibilidadDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.costoPublicacionDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.codUsuarioResponsableDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.codEstadoPublicacionDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.permisoPreguntasDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.entregasDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.rubroTextBox1 = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.publicacionesGrid)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.publicacionesBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
             // 
             this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(165, 20);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(83, 13);
+            this.label1.Size = new System.Drawing.Size(119, 16);
             this.label1.TabIndex = 0;
             this.label1.Text = "Comprar/Ofertar";
             // 
             // publicacionesGrid
             // 
-            this.publicacionesGrid.AutoGenerateColumns = false;
             this.publicacionesGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.publicacionesGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.codPublicacionDataGridViewTextBoxColumn,
-            this.codPublicacionAnteriorDataGridViewTextBoxColumn,
-            this.descripcionPublicacionDataGridViewTextBoxColumn,
-            this.stockPublicacionDataGridViewTextBoxColumn,
-            this.fechaPublicacionDataGridViewTextBoxColumn,
-            this.fechaVencimientoPublicacionDataGridViewTextBoxColumn,
-            this.precioPublicacionDataGridViewTextBoxColumn,
-            this.codTiposPublicacionDataGridViewTextBoxColumn,
-            this.codRubroDataGridViewTextBoxColumn,
-            this.codVisibilidadDataGridViewTextBoxColumn,
-            this.costoPublicacionDataGridViewTextBoxColumn,
-            this.codUsuarioResponsableDataGridViewTextBoxColumn,
-            this.codEstadoPublicacionDataGridViewTextBoxColumn,
-            this.permisoPreguntasDataGridViewCheckBoxColumn,
-            this.entregasDataGridViewCheckBoxColumn});
-            this.publicacionesGrid.DataSource = this.publicacionesBindingSource;
-            this.publicacionesGrid.Location = new System.Drawing.Point(24, 240);
+            this.publicacionesGrid.Location = new System.Drawing.Point(29, 231);
             this.publicacionesGrid.Name = "publicacionesGrid";
+            this.publicacionesGrid.ReadOnly = true;
+            this.publicacionesGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.publicacionesGrid.Size = new System.Drawing.Size(405, 228);
             this.publicacionesGrid.TabIndex = 1;
+            this.publicacionesGrid.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.publicacionesGrid_CellContentClick);
             // 
             // button1
             // 
@@ -136,12 +104,12 @@
             this.label2.TabIndex = 5;
             this.label2.Text = "Descripcion";
             // 
-            // textBox1
+            // descTextBox
             // 
-            this.textBox1.Location = new System.Drawing.Point(155, 162);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(281, 20);
-            this.textBox1.TabIndex = 6;
+            this.descTextBox.Location = new System.Drawing.Point(155, 162);
+            this.descTextBox.Name = "descTextBox";
+            this.descTextBox.Size = new System.Drawing.Size(281, 20);
+            this.descTextBox.TabIndex = 6;
             // 
             // label3
             // 
@@ -152,12 +120,12 @@
             this.label3.TabIndex = 7;
             this.label3.Text = "Rubro";
             // 
-            // textBox2
+            // rubroTextBox3
             // 
-            this.textBox2.Location = new System.Drawing.Point(155, 130);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(280, 20);
-            this.textBox2.TabIndex = 8;
+            this.rubroTextBox3.Location = new System.Drawing.Point(155, 130);
+            this.rubroTextBox3.Name = "rubroTextBox3";
+            this.rubroTextBox3.Size = new System.Drawing.Size(280, 20);
+            this.rubroTextBox3.TabIndex = 8;
             // 
             // label4
             // 
@@ -168,12 +136,12 @@
             this.label4.TabIndex = 9;
             this.label4.Text = "Rubro";
             // 
-            // textBox3
+            // rubroTextBox2
             // 
-            this.textBox3.Location = new System.Drawing.Point(155, 94);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(280, 20);
-            this.textBox3.TabIndex = 10;
+            this.rubroTextBox2.Location = new System.Drawing.Point(155, 94);
+            this.rubroTextBox2.Name = "rubroTextBox2";
+            this.rubroTextBox2.Size = new System.Drawing.Size(280, 20);
+            this.rubroTextBox2.TabIndex = 10;
             // 
             // label5
             // 
@@ -184,125 +152,25 @@
             this.label5.TabIndex = 11;
             this.label5.Text = "Rubro";
             // 
-            // textBox4
+            // rubroTextBox1
             // 
-            this.textBox4.Location = new System.Drawing.Point(155, 60);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(279, 20);
-            this.textBox4.TabIndex = 12;
-            // 
-            // gD1C2016DataSet15
-            // 
-            // 
-            // publicacionesBindingSource
-            // 
-            // 
-            // publicacionesTableAdapter
-            // 
-            // 
-            // codPublicacionDataGridViewTextBoxColumn
-            // 
-            this.codPublicacionDataGridViewTextBoxColumn.DataPropertyName = "Cod_Publicacion";
-            this.codPublicacionDataGridViewTextBoxColumn.HeaderText = "Cod_Publicacion";
-            this.codPublicacionDataGridViewTextBoxColumn.Name = "codPublicacionDataGridViewTextBoxColumn";
-            this.codPublicacionDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // codPublicacionAnteriorDataGridViewTextBoxColumn
-            // 
-            this.codPublicacionAnteriorDataGridViewTextBoxColumn.DataPropertyName = "Cod_Publicacion_Anterior";
-            this.codPublicacionAnteriorDataGridViewTextBoxColumn.HeaderText = "Cod_Publicacion_Anterior";
-            this.codPublicacionAnteriorDataGridViewTextBoxColumn.Name = "codPublicacionAnteriorDataGridViewTextBoxColumn";
-            // 
-            // descripcionPublicacionDataGridViewTextBoxColumn
-            // 
-            this.descripcionPublicacionDataGridViewTextBoxColumn.DataPropertyName = "Descripcion_Publicacion";
-            this.descripcionPublicacionDataGridViewTextBoxColumn.HeaderText = "Descripcion_Publicacion";
-            this.descripcionPublicacionDataGridViewTextBoxColumn.Name = "descripcionPublicacionDataGridViewTextBoxColumn";
-            // 
-            // stockPublicacionDataGridViewTextBoxColumn
-            // 
-            this.stockPublicacionDataGridViewTextBoxColumn.DataPropertyName = "Stock_Publicacion";
-            this.stockPublicacionDataGridViewTextBoxColumn.HeaderText = "Stock_Publicacion";
-            this.stockPublicacionDataGridViewTextBoxColumn.Name = "stockPublicacionDataGridViewTextBoxColumn";
-            // 
-            // fechaPublicacionDataGridViewTextBoxColumn
-            // 
-            this.fechaPublicacionDataGridViewTextBoxColumn.DataPropertyName = "Fecha_Publicacion";
-            this.fechaPublicacionDataGridViewTextBoxColumn.HeaderText = "Fecha_Publicacion";
-            this.fechaPublicacionDataGridViewTextBoxColumn.Name = "fechaPublicacionDataGridViewTextBoxColumn";
-            // 
-            // fechaVencimientoPublicacionDataGridViewTextBoxColumn
-            // 
-            this.fechaVencimientoPublicacionDataGridViewTextBoxColumn.DataPropertyName = "Fecha_Vencimiento_Publicacion";
-            this.fechaVencimientoPublicacionDataGridViewTextBoxColumn.HeaderText = "Fecha_Vencimiento_Publicacion";
-            this.fechaVencimientoPublicacionDataGridViewTextBoxColumn.Name = "fechaVencimientoPublicacionDataGridViewTextBoxColumn";
-            // 
-            // precioPublicacionDataGridViewTextBoxColumn
-            // 
-            this.precioPublicacionDataGridViewTextBoxColumn.DataPropertyName = "Precio_Publicacion";
-            this.precioPublicacionDataGridViewTextBoxColumn.HeaderText = "Precio_Publicacion";
-            this.precioPublicacionDataGridViewTextBoxColumn.Name = "precioPublicacionDataGridViewTextBoxColumn";
-            // 
-            // codTiposPublicacionDataGridViewTextBoxColumn
-            // 
-            this.codTiposPublicacionDataGridViewTextBoxColumn.DataPropertyName = "Cod_Tipos_Publicacion";
-            this.codTiposPublicacionDataGridViewTextBoxColumn.HeaderText = "Cod_Tipos_Publicacion";
-            this.codTiposPublicacionDataGridViewTextBoxColumn.Name = "codTiposPublicacionDataGridViewTextBoxColumn";
-            // 
-            // codRubroDataGridViewTextBoxColumn
-            // 
-            this.codRubroDataGridViewTextBoxColumn.DataPropertyName = "Cod_Rubro";
-            this.codRubroDataGridViewTextBoxColumn.HeaderText = "Cod_Rubro";
-            this.codRubroDataGridViewTextBoxColumn.Name = "codRubroDataGridViewTextBoxColumn";
-            // 
-            // codVisibilidadDataGridViewTextBoxColumn
-            // 
-            this.codVisibilidadDataGridViewTextBoxColumn.DataPropertyName = "Cod_Visibilidad";
-            this.codVisibilidadDataGridViewTextBoxColumn.HeaderText = "Cod_Visibilidad";
-            this.codVisibilidadDataGridViewTextBoxColumn.Name = "codVisibilidadDataGridViewTextBoxColumn";
-            // 
-            // costoPublicacionDataGridViewTextBoxColumn
-            // 
-            this.costoPublicacionDataGridViewTextBoxColumn.DataPropertyName = "Costo_Publicacion";
-            this.costoPublicacionDataGridViewTextBoxColumn.HeaderText = "Costo_Publicacion";
-            this.costoPublicacionDataGridViewTextBoxColumn.Name = "costoPublicacionDataGridViewTextBoxColumn";
-            // 
-            // codUsuarioResponsableDataGridViewTextBoxColumn
-            // 
-            this.codUsuarioResponsableDataGridViewTextBoxColumn.DataPropertyName = "Cod_Usuario_Responsable";
-            this.codUsuarioResponsableDataGridViewTextBoxColumn.HeaderText = "Cod_Usuario_Responsable";
-            this.codUsuarioResponsableDataGridViewTextBoxColumn.Name = "codUsuarioResponsableDataGridViewTextBoxColumn";
-            // 
-            // codEstadoPublicacionDataGridViewTextBoxColumn
-            // 
-            this.codEstadoPublicacionDataGridViewTextBoxColumn.DataPropertyName = "Cod_Estado_Publicacion";
-            this.codEstadoPublicacionDataGridViewTextBoxColumn.HeaderText = "Cod_Estado_Publicacion";
-            this.codEstadoPublicacionDataGridViewTextBoxColumn.Name = "codEstadoPublicacionDataGridViewTextBoxColumn";
-            // 
-            // permisoPreguntasDataGridViewCheckBoxColumn
-            // 
-            this.permisoPreguntasDataGridViewCheckBoxColumn.DataPropertyName = "Permiso_Preguntas";
-            this.permisoPreguntasDataGridViewCheckBoxColumn.HeaderText = "Permiso_Preguntas";
-            this.permisoPreguntasDataGridViewCheckBoxColumn.Name = "permisoPreguntasDataGridViewCheckBoxColumn";
-            // 
-            // entregasDataGridViewCheckBoxColumn
-            // 
-            this.entregasDataGridViewCheckBoxColumn.DataPropertyName = "Entregas";
-            this.entregasDataGridViewCheckBoxColumn.HeaderText = "Entregas";
-            this.entregasDataGridViewCheckBoxColumn.Name = "entregasDataGridViewCheckBoxColumn";
+            this.rubroTextBox1.Location = new System.Drawing.Point(155, 60);
+            this.rubroTextBox1.Name = "rubroTextBox1";
+            this.rubroTextBox1.Size = new System.Drawing.Size(279, 20);
+            this.rubroTextBox1.TabIndex = 12;
             // 
             // ListadoComprarOfertar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(448, 518);
-            this.Controls.Add(this.textBox4);
+            this.Controls.Add(this.rubroTextBox1);
             this.Controls.Add(this.label5);
-            this.Controls.Add(this.textBox3);
+            this.Controls.Add(this.rubroTextBox2);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.textBox2);
+            this.Controls.Add(this.rubroTextBox3);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.descTextBox);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
@@ -313,7 +181,6 @@
             this.Text = "Comprar y Ofertar";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.publicacionesGrid)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.publicacionesBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -327,14 +194,13 @@
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox descTextBox;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox rubroTextBox3;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.TextBox rubroTextBox2;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox textBox4;
-        private System.Windows.Forms.BindingSource publicacionesBindingSource;
+        private System.Windows.Forms.TextBox rubroTextBox1;
         private System.Windows.Forms.DataGridViewTextBoxColumn codPublicacionDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn codPublicacionAnteriorDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn descripcionPublicacionDataGridViewTextBoxColumn;
