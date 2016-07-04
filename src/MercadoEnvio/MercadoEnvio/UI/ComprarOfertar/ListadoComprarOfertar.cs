@@ -54,12 +54,12 @@ namespace MercadoEnvio.ComprarOfertar
 
         private void button3_Click(object sender, EventArgs e)
         {
-
+            this.publicacionesGrid.DataSource = DBAdapter.retrieveDataTable("Filtrar_Publicaciones", rubroTextBox1.Text, rubroTextBox2.Text, rubroTextBox3.Text, descTextBox.Text, CLC_SessionManager.getDNI(), CLC_SessionManager.getCUIT());
         }
 
         private void publicacionesGrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            this.publicacionesGrid.DataSource = DBAdapter.retrieveDataTable("Filtrar_Publicaciones", rubroTextBox1.Text, rubroTextBox2.Text, rubroTextBox3.Text, descTextBox.Text, CLC_SessionManager.getDNI(), CLC_SessionManager.getCUIT());
+            
         }
 
     }
