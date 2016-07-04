@@ -33,7 +33,8 @@ namespace MercadoEnvio.Utils
 
         public static DateTime getFecha()
         {
-            return DateTime.Parse(System.Configuration.ConfigurationManager.AppSettings["fechaSistema"]);
+            var fecha = System.Configuration.ConfigurationManager.AppSettings["fechaSistema"];
+            return DateTime.Parse( fecha );
         }
 
         public static string getCUIT()
