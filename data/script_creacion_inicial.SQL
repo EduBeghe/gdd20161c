@@ -1592,7 +1592,7 @@ BEGIN
 			--(r.Descripcion_Rubro LIKE '%' +  @rubro2 + '%' ) OR 
 			--(r.Descripcion_Rubro LIKE '%' +  @rubro3 + '%' ) AND
 			(Descripcion_Publicacion LIKE '%' + @descripcion + '%' ) AND
-			(p.Cod_Usuario_Responsable != @usuario) AND (P.Cod_Estado_Publicacion = 2) 
+			(p.Cod_Usuario_Responsable != @usuario) AND (P.Cod_Estado_Publicacion = 3) 
 END
 GO
 
