@@ -170,8 +170,8 @@ IF OBJECT_ID('TODO_X2_LUCAS.Alta_Visibilidad') IS NOT NULL
 DROP PROCEDURE TODO_X2_LUCAS.Alta_Visibilidad;
 IF OBJECT_ID('TODO_X2_LUCAS.Comprar_Publicacion') IS NOT NULL
 DROP PROCEDURE TODO_X2_LUCAS.Comprar_Publicacion;
-IF OBJECT_ID('TODO_X2_LUCAS.Generar_Factura') IS NOT NULL
-DROP PROCEDURE TODO_X2_LUCAS.Generar_Factura;
+IF OBJECT_ID('TODO_X2_LUCAS.Generar_Item') IS NOT NULL
+DROP PROCEDURE TODO_X2_LUCAS.Generar_Item;
 IF OBJECT_ID('TODO_X2_LUCAS.Cambiar_Estado') IS NOT NULL
 DROP PROCEDURE TODO_X2_LUCAS.Cambiar_Estado;
 IF OBJECT_ID('TODO_X2_LUCAS.Ofertar_Publicacion') IS NOT NULL
@@ -258,6 +258,8 @@ IF OBJECT_ID('TODO_X2_LUCAS.Reputacion') IS NOT NULL
 DROP TRIGGER TODO_X2_LUCAS.Reputacion;
 IF OBJECT_ID('TODO_X2_LUCAS.Costo_Publicacion') IS NOT NULL
 DROP TRIGGER TODO_X2_LUCAS.Costo_Publicacion;
+IF OBJECT_ID('TODO_X2_LUCAS.Items_Nuevos') IS NOT NULL
+DROP TRIGGER TODO_X2_LUCAS.Items_Nuevos;
 
 /**************************************************  CREACION DE TABLAS ***************************************************/
 -- CREACION TABLA TIPOS DE PUBLICACIONES -- 
@@ -972,8 +974,14 @@ BEGIN
 	DECLARE @USUARIO INT;
 	SET @USUARIO = TODO_X2_LUCAS.ObtenerUsuario(@dni,@cuit);
 
-	SELECT *
-	FROM TODO_X2_LUCAS.Publicaciones
+	SELECT p.Cod_Publicacion,P.Descripcion_Publicacion,P.Costo_Publicacion,P.Fecha_Publicacion,P.Stock_Publicacion,
+			P.Precio_Publicacion,E.Descripcion_Estado,R.Descripcion_Rubro,T.Descripcion_Tipo,
+			U.Nombre_Usuario,V.Descripcion_Visibilidad,P.Entregas,P.Permiso_Preguntas
+	FROM TODO_X2_LUCAS.Publicaciones P JOIN TODO_X2_LUCAS.Estados_Publicaciones E ON (P.Cod_Estado_Publicacion=E.Cod_Estado)
+										JOIN TODO_X2_LUCAS.Rubros R ON (P.Cod_Rubro=R.Cod_Rubro)
+										JOIN TODO_X2_LUCAS.Tipos_Publicaciones T ON (P.Cod_Tipos_Publicacion=T.Cod_Tipos_Publicaciones)
+										JOIN TODO_X2_LUCAS.Usuarios U ON (P.Cod_Usuario_Responsable=U.Cod_Usuario)
+										JOIN TODO_X2_LUCAS.Visibilidades_Publicaciones V ON (P.Cod_Visibilidad=V.Cod_Visibilidad)
 	WHERE  Cod_Estado_Publicacion IN (1,2,3) AND Cod_Usuario_Responsable = @USUARIO
 END
 GO
@@ -1428,6 +1436,22 @@ BEGIN
 	WHERE Cod_Visibilidad = @codVisibilidad
 END
 GO
+/* ------------ PROCEDIMIENTO PARA GENERAR UNA FACTURA ------------ */
+CREATE PROCEDURE TODO_X2_LUCAS.Generar_Item(@codPublicacion int,@cantidad numeric(18),@formaDePago nvarchar(255),
+												@dni numeric(18),@cuit nvarchar(50))
+AS
+BEGIN
+	DECLARE @codFactura int,@monto numeric(18);
+
+	SET @codFactura = (SELECT Cod_Factura FROM TODO_X2_LUCAS.Facturas WHERE Cod_Publicacion = @codPublicacion);
+	SET @monto = (SELECT  P.Precio_Publicacion * V.Porcentaje
+					FROM TODO_X2_LUCAS.Publicaciones P JOIN TODO_X2_LUCAS.Visibilidades_Publicaciones V ON (P.Cod_Visibilidad=V.Cod_Visibilidad)
+					WHERE P.Cod_Publicacion = @codPublicacion)
+
+	INSERT INTO TODO_X2_LUCAS.Items_Facturas(Cod_Factura,Item_Factura_Cantidad,Item_Factura_Monto)
+	VALUES (@codFactura,@cantidad,@monto)
+END
+GO
 
 /* ------------ PROCEDIMIENTO PARA EL ALTA DE UNA PUBLICACION ------------ */
 CREATE PROCEDURE TODO_X2_LUCAS.Alta_Publicacion(@descripcion nvarchar(255),@stock numeric(18),@fecha datetime,
@@ -1437,7 +1461,8 @@ CREATE PROCEDURE TODO_X2_LUCAS.Alta_Publicacion(@descripcion nvarchar(255),@stoc
 												@permisoPreguntas bit, @entregas bit)
 AS
 BEGIN
-	DECLARE @cod_Tipo_Publ int, @codRubro int, @codVisibilidad numeric(18),@codEstado int,@codUsuario int;
+	DECLARE @cod_Tipo_Publ int, @codRubro int, @codVisibilidad numeric(18),@codEstado int,@codUsuario int,@COD int,@codFactura int;
+
 	SELECT @cod_Tipo_Publ = TODO_X2_LUCAS.Obtener_Tipo_De_Publicacion( @tipoPublic ), 
 			@codEstado = TODO_X2_LUCAS.Obtener_Estado(@estado),
 			@codRubro = TODO_X2_LUCAS.Obtener_Rubro(@rubro),
@@ -1453,6 +1478,17 @@ BEGIN
 												Fecha_Vencimiento_Publicacion,Permiso_Preguntas,Precio_Publicacion,Stock_Publicacion,Cod_Publicacion_Anterior)
 		VALUES (@codEstado,@codRubro,@cod_Tipo_Publ,@codUsuario,@codGratis,@descripcion,@entregas,
 				@fecha,@fechaVenc,@permisoPreguntas,@precio,@stock,0)
+		
+		SET @COD = (SELECT DISTINCT @@IDENTITY FROM TODO_X2_LUCAS.Publicaciones);
+		
+		INSERT INTO TODO_X2_LUCAS.Facturas(Cod_Forma_De_Pago,Cod_Publicacion,Fecha_Factura,Nro_Factura,Total_Factura,Vendedor_Correspondiente)
+		VALUES(1,@COD,GETDATE(),0,0,@codUsuario)
+
+		SET @codFactura = (SELECT DISTINCT @@IDENTITY FROM TODO_X2_LUCAS.Facturas);
+
+		INSERT INTO TODO_X2_LUCAS.Items_Facturas(Cod_Factura,Item_Factura_Cantidad,Item_Factura_Monto)
+		VALUES(@codFactura,1,(SELECT Precio_Visibilidad FROM TODO_X2_LUCAS.Visibilidades_Publicaciones WHERE Cod_Visibilidad = @codGratis))
+		
 	END
 	ELSE
 	BEGIN
@@ -1461,6 +1497,17 @@ BEGIN
 												Fecha_Vencimiento_Publicacion,Permiso_Preguntas,Precio_Publicacion,Stock_Publicacion)
 		VALUES (@codEstado,@codRubro,@cod_Tipo_Publ,@codUsuario,@codVisibilidad,@descripcion,@entregas,
 				@fecha,@fechaVenc,@permisoPreguntas,@precio,@stock)
+
+		SET @COD = (SELECT DISTINCT @@IDENTITY FROM TODO_X2_LUCAS.Publicaciones);
+		
+		INSERT INTO TODO_X2_LUCAS.Facturas(Cod_Forma_De_Pago,Cod_Publicacion,Fecha_Factura,Nro_Factura,Total_Factura,Vendedor_Correspondiente)
+		VALUES(1,@COD,GETDATE(),0,0,@codUsuario)
+
+		SET @codFactura = (SELECT DISTINCT @@IDENTITY FROM TODO_X2_LUCAS.Facturas);
+
+		INSERT INTO TODO_X2_LUCAS.Items_Facturas(Cod_Factura,Item_Factura_Cantidad,Item_Factura_Monto)
+		VALUES(@codFactura,1,(SELECT Precio_Visibilidad FROM TODO_X2_LUCAS.Visibilidades_Publicaciones WHERE Cod_Visibilidad = @codVisibilidad))
+		
 	END
 END
 GO
@@ -1536,26 +1583,6 @@ BEGIN
 END
 GO
 
-
-/* ------------ PROCEDIMIENTO PARA GENERAR UNA FACTURA ------------ */
-CREATE PROCEDURE TODO_X2_LUCAS.Generar_Factura(@codPublicacion int,@cantidad numeric(18),@formaDePago nvarchar(255),
-												@dni numeric(18),@cuit nvarchar(50))
-AS
-BEGIN
-	DECLARE @codFormaDePago int,@totalFactura numeric(18,2),@codUsuario int;
-
-	SELECT @codFormaDePago = TODO_X2_LUCAS.Obtener_Forma_De_Pago(@formaDePago),
-			@codUsuario = TODO_X2_LUCAS.ObtenerUsuario(@dni,@cuit),
-			@totalFactura = Costo_Publicacion * @cantidad
-	FROM TODO_X2_LUCAS.Publicaciones P JOIN TODO_X2_LUCAS.Visibilidades_Publicaciones V ON (P.Cod_Visibilidad = V.Cod_Visibilidad)
-	WHERE Cod_Publicacion = @codPublicacion
-
-	INSERT INTO TODO_X2_LUCAS.Facturas(Cod_Forma_De_Pago,Fecha_Factura,Total_Factura,Vendedor_Correspondiente,Cod_Publicacion)
-	VALUES (@codFormaDePago,GETDATE(),@totalFactura,@codUsuario,@codPublicacion)
-
-END
-GO
-
 /* ------------ PROCEDIMIENTO PARA LA COMPRA DE UNA PUBLICACION ------------ */
 CREATE PROCEDURE TODO_X2_LUCAS.Comprar_Publicacion(@dni numeric(18),@CUIT nvarchar(50),@codPublicacion int,
 													@cantidad numeric(18),@formaDePago nvarchar(255))
@@ -1582,7 +1609,7 @@ BEGIN
 				INSERT INTO TODO_X2_LUCAS.Compras(Cod_Calificacion,Cod_Publicacion,Cod_Usuario,Compra_Cantidad,Compra_Fecha)
 				VALUES(@codCalificacion,@codPublicacion,@codUsuario,@cantidad,GETDATE())
 			
-				EXEC TODO_X2_LUCAS.Generar_Factura @codPublicacion,@cantidad,@formaDePago,@dni,@CUIT;
+				EXEC TODO_X2_LUCAS.Generar_Item @codPublicacion,@cantidad,@formaDePago,@dni,@CUIT;
 			
 				IF (@cantidad = (SELECT Stock_Publicacion FROM TODO_X2_LUCAS.Publicaciones WHERE Cod_Publicacion=@codPublicacion))
 				BEGIN
@@ -2333,7 +2360,21 @@ BEGIN
 END
 GO
 
+CREATE TRIGGER TODO_X2_LUCAS.Items_Nuevos
+ON TODO_X2_LUCAS.Items_Facturas
+AFTER INSERT
+AS
+BEGIN
+	DECLARE @codFactura int,@cantidad numeric(18),@monto numeric(18,2);
+	
+	SELECT @codFactura = i.Cod_Factura,@cantidad = i.Item_Factura_Cantidad,@monto = i.Item_Factura_Monto
+	FROM inserted i
 
+	UPDATE TODO_X2_LUCAS.Facturas
+	SET Total_Factura = Total_Factura + (@cantidad * @monto)
+	WHERE Cod_Factura = @codFactura
+END
+GO
 
 CREATE PROCEDURE TODO_X2_LUCAS.Dias_De_Expiracion
 AS
