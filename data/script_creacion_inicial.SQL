@@ -1523,7 +1523,8 @@ BEGIN
 	END
 END
 GO
-/* ------------ PROCEDIMIENTO PARA EL ALTA DE UNA PUBLICACION ------------ */
+
+/* ------------ PROCEDIMIENTO PARA MODIFICAR UNA PUBLICACION ------------ */
 CREATE PROCEDURE TODO_X2_LUCAS.Modificar_Publicacion(@codPublicacion int,@descripcion nvarchar(255),@stock numeric(18),@fecha datetime,
 												@fechaVenc datetime,@precio numeric(18,2),@tipoPublic nvarchar(255),
 												@rubro nvarchar(255),@visibilidad nvarchar(255),
@@ -1587,9 +1588,9 @@ BEGIN
 			,Permiso_Preguntas,Entregas
 	FROM TODO_X2_LUCAS.Publicaciones p join TODO_X2_LUCAS.Rubros r ON (p.Cod_Rubro = r.Cod_Rubro)
 										join TODO_X2_LUCAS.Tipos_Publicaciones t on (t.Cod_Tipos_Publicaciones=p.Cod_Tipos_Publicacion)
-	WHERE (r.Descripcion_Rubro LIKE '%' + @rubro1 + '%') OR 
-			(r.Descripcion_Rubro LIKE '%' +  @rubro2 + '%' ) OR 
-			(r.Descripcion_Rubro LIKE '%' +  @rubro3 + '%' ) AND
+	WHERE (r.Descripcion_Rubro LIKE '%' + @rubro1 + '%') AND 
+			--(r.Descripcion_Rubro LIKE '%' +  @rubro2 + '%' ) OR 
+			--(r.Descripcion_Rubro LIKE '%' +  @rubro3 + '%' ) AND
 			(Descripcion_Publicacion LIKE '%' + @descripcion + '%' ) AND
 			(p.Cod_Usuario_Responsable != @usuario) AND (P.Cod_Estado_Publicacion = 2) 
 END
@@ -1779,7 +1780,7 @@ BEGIN
 END
 GO
 
-/* ------------ PROCEDIMIENTO PARA CALIFICAR UNA COMPRA ------------ */
+/* ------------ PROCEDIMIENTO PARA OBTENER LAS COMPRAS DE UN USUARIO EN PARTICULAR ------------ */
 CREATE PROCEDURE TODO_X2_LUCAS.Get_Compras_Por_Usuario(@dni numeric(18),@cuit nvarchar(255))
 AS
 BEGIN
@@ -2403,6 +2404,7 @@ BEGIN
 	DECLARE publicaciones CURSOR FOR
 	SELECT Cod_Publicacion
 	FROM TODO_X2_LUCAS.Publicaciones
+	WHERE Cod_Estado_Publicacion != 4 AND Cod_Tipos_Publicacion = 2
 
 	OPEN publicaciones
 	FETCH NEXT FROM publicaciones INTO @codPublicacion
@@ -2438,3 +2440,4 @@ BEGIN
 	VALUES(@fecha)
 END
 GO
+
