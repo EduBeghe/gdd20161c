@@ -2405,7 +2405,7 @@ BEGIN
 	SELECT Cod_Publicacion
 	FROM TODO_X2_LUCAS.Publicaciones
 	WHERE Cod_Estado_Publicacion != 4 AND Cod_Tipos_Publicacion = 2
-
+	
 	OPEN publicaciones
 	FETCH NEXT FROM publicaciones INTO @codPublicacion
 
@@ -2436,8 +2436,15 @@ GO
 CREATE PROCEDURE TODO_X2_LUCAS.Fecha_Config(@fecha datetime)
 AS
 BEGIN
-	INSERT INTO TODO_X2_LUCAS.Fecha(Fecha_Config)
-	VALUES(@fecha)
+	IF NOT EXISTS (SELECT Fecha_Config FROM TODO_X2_LUCAS.Fecha) 
+	BEGIN
+		INSERT INTO TODO_X2_LUCAS.Fecha(Fecha_Config)
+		VALUES(@fecha)
+	END
+	ELSE
+	BEGIN
+		UPDATE TODO_X2_LUCAS.Fecha
+		SET Fecha_Config = @fecha
+	END
 END
 GO
-
