@@ -23,7 +23,7 @@ namespace MercadoEnvio.UI.Generar_Publicación
 
         private void ListadoPublicaciones_Load(object sender, EventArgs e)
         {
-            this.publicacionesBindingSource.DataSource = DBAdapter.retrieveDataTable("Publicaciones_Modificables", CLC_SessionManager.getDNI(), CLC_SessionManager.getCUIT() );
+            this.publicacionesDataGridView.DataSource = DBAdapter.retrieveDataTable("Publicaciones_Modificables", CLC_SessionManager.getDNI(), CLC_SessionManager.getCUIT());
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -31,33 +31,132 @@ namespace MercadoEnvio.UI.Generar_Publicación
             if (publicacionesDataGridView.SelectedRows.Count != 0)
             {
                 var dataViewRow = (DataRowView)publicacionesDataGridView.SelectedRows[0].DataBoundItem;
-                var publicacion = new PublicacionRepository().parse(dataViewRow.Row);
-                new PublicacionRepository().modificarPublicacion(
-                    publicacion.Cod_Publicacion,
-                    publicacion.Descripcion_Publicacion,
-                    publicacion.Stock_Publicacion,
-                    publicacion.Fecha_Publicacion,
-                    publicacion.Fecha_Vencimiento_Publicacion,
-                    publicacion.Precio_Publicacion,
-                    publicacion.tipoPublicacion.descripcion_Tipo, // string de subasta/compra inmediata
-                    publicacion.rubro.Descripcion_Rubro,
-                    publicacion.visibilidadPublicaciones.Descripcion_Visibilidad,
-                    CLC_SessionManager.getDNI(),
-                    CLC_SessionManager.getCUIT(),
-                    publicacion.estado.Descripcion_Estado, // Este es el string del tipo de publicacion ( pausada, borrado... ) 
-                    publicacion.Permiso_Preguntas,
-                    publicacion.Entregas
-                    );
-                // MENSAJE DE ALGO
-                //MessageBox.Show("Rol eliminado con exito");
-                this.Close();
+                var estado = dataViewRow.Row["Descripcion_Estado"];
+                var codigoPublicacion = Convert.ToInt32(dataViewRow.Row["Cod_Publicacion"]);
+                if (estado.Equals("Borrador"))
+                {
+                    var vistaModificar = new GenerarPublicaciones();
+                    vistaModificar.ShowDialog(codigoPublicacion);
+                }
+                else
+                {
+                    MessageBox.Show("Solo puede editar publicaciones en estado Borrardor");
+                }
             }
-            else MessageBox.Show("Debe seleccionar un rol para dar de baja");
+            else MessageBox.Show("Debe seleccionar una publicacion para modificar");
+        }
+
+        private void activarButton_Click(object sender, EventArgs e)
+        {
+            if (publicacionesDataGridView.SelectedRows.Count != 0)
+            {
+                var dataViewRow = (DataRowView)publicacionesDataGridView.SelectedRows[0].DataBoundItem;
+                var estado = dataViewRow.Row["Descripcion_Estado"];
+                var codigoPublicacion = Convert.ToInt32(dataViewRow.Row["Cod_Publicacion"]);
+                if (!estado.Equals("Activa"))
+                {
+                    new PublicacionRepository().cambiarEstado(codigoPublicacion, "Activa");
+                    this.Close();
+                }
+                else
+                {
+                    MessageBox.Show("La publicacion seleccionada ya esta activa");
+                }
+            }
+            else MessageBox.Show("Debe seleccionar una publicacion para activar");
+        }
+
+        private void finalizarButton_Click(object sender, EventArgs e)
+        {
+            if (publicacionesDataGridView.SelectedRows.Count != 0)
+            {
+                var dataViewRow = (DataRowView)publicacionesDataGridView.SelectedRows[0].DataBoundItem;
+                var codigoPublicacion = Convert.ToInt32(dataViewRow.Row["Cod_Publicacion"]);
+                new PublicacionRepository().cambiarEstado(codigoPublicacion, "Finalizado");
+            }
+            else MessageBox.Show("Debe seleccionar una publicacion para finalizar");
+        }
+
+        private void pausarButton_Click(object sender, EventArgs e)
+        {
+            if (publicacionesDataGridView.SelectedRows.Count != 0)
+            {
+                var dataViewRow = (DataRowView)publicacionesDataGridView.SelectedRows[0].DataBoundItem;
+                var estado = dataViewRow.Row["Descripcion_Estado"];
+                var codigoPublicacion = Convert.ToInt32(dataViewRow.Row["Cod_Publicacion"]);
+                if (!estado.Equals("Pausada"))
+                {
+                    new PublicacionRepository().cambiarEstado(codigoPublicacion, "Pausada");
+                    MessageBox.Show("Publicacion pausada exitosamente");
+                    this.Close();
+                }
+                else
+                {
+                    MessageBox.Show("La publicacion seleccionada ya esta pausada");
+                }
+            }
+            else MessageBox.Show("Debe seleccionar una publicacion para pausar");
         }
 
         private void label1_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void activarButton_Click_1(object sender, EventArgs e)
+        {
+            if (publicacionesDataGridView.SelectedRows.Count != 0)
+            {
+                var dataViewRow = (DataRowView)publicacionesDataGridView.SelectedRows[0].DataBoundItem;
+                var estado = dataViewRow.Row["Descripcion_Estado"];
+                var codigoPublicacion = Convert.ToInt32(dataViewRow.Row["Cod_Publicacion"]);
+                if (!estado.Equals("Activa"))
+                {
+                    new PublicacionRepository().cambiarEstado(codigoPublicacion, "Activa");
+                    MessageBox.Show("Publicacion activada exitosamente");
+                    this.Close();
+                }
+                else
+                {
+                    MessageBox.Show("La publicacion seleccionada ya esta activa");
+                }
+            }
+            else MessageBox.Show("Debe seleccionar una publicacion para activar");
+        }
+
+        private void finalizarButton_Click_1(object sender, EventArgs e)
+        {
+               if (publicacionesDataGridView.SelectedRows.Count != 0)
+            {
+                var dataViewRow = (DataRowView)publicacionesDataGridView.SelectedRows[0].DataBoundItem;
+                var codigoPublicacion = Convert.ToInt32(dataViewRow.Row["Cod_Publicacion"]);
+                new PublicacionRepository().cambiarEstado(codigoPublicacion, "Finalizado");
+                MessageBox.Show("Publicacion finalizada exitosamente");
+                this.Close();
+                
+            }
+            else MessageBox.Show("Debe seleccionar una publicacion para activar");
+        }
+
+        private void pausarButton_Click_1(object sender, EventArgs e)
+        {
+            if (publicacionesDataGridView.SelectedRows.Count != 0)
+            {
+                var dataViewRow = (DataRowView)publicacionesDataGridView.SelectedRows[0].DataBoundItem;
+                var estado = dataViewRow.Row["Descripcion_Estado"];
+                var codigoPublicacion = Convert.ToInt32(dataViewRow.Row["Cod_Publicacion"]);
+                if (!estado.Equals("Pausada"))
+                {
+                    new PublicacionRepository().cambiarEstado(codigoPublicacion, "Pausada");
+                    MessageBox.Show("Publicacion pausada exitosamente");
+                    this.Close();
+                }
+                else
+                {
+                    MessageBox.Show("La publicacion seleccionada ya esta pausada");
+                }
+            }
+            else MessageBox.Show("Debe seleccionar una publicacion para pausar");
         }
     }
 }
