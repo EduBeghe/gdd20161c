@@ -55,6 +55,8 @@ namespace MercadoEnvio.UI.ComprarOfertar
 
         private void ComprarPublicacion_Load(object sender, EventArgs e)
         {
+            // TODO: esta línea de código carga datos en la tabla 'gD1C2016DataSet17.Formas_De_Pago' Puede moverla o quitarla según sea necesario.
+            this.formas_De_PagoTableAdapter.Fill(this.gD1C2016DataSet17.Formas_De_Pago);
             // TODO: esta línea de código carga datos en la tabla 'gD1C2016DataSet16.Formas_De_Pago' Puede moverla o quitarla según sea necesario.
             //this.formas_De_PagoTableAdapter.Fill(this.gD1C2016DataSet16.Formas_De_Pago);
 

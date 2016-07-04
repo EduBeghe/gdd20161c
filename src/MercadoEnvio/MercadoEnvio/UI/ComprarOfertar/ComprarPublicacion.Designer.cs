@@ -31,12 +31,17 @@
             this.components = new System.ComponentModel.Container();
             this.cantidadTextBox = new System.Windows.Forms.TextBox();
             this.FormaDePagoComboBox = new System.Windows.Forms.ComboBox();
+            this.formasDePagoBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
-            this.formasDePagoBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.gD1C2016DataSet17 = new MercadoEnvio.GD1C2016DataSet17();
+            this.formasDePagoBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.formas_De_PagoTableAdapter = new MercadoEnvio.GD1C2016DataSet17TableAdapters.Formas_De_PagoTableAdapter();
             ((System.ComponentModel.ISupportInitialize)(this.formasDePagoBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gD1C2016DataSet17)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.formasDePagoBindingSource1)).BeginInit();
             this.SuspendLayout();
             // 
             // cantidadTextBox
@@ -50,7 +55,7 @@
             // 
             // FormaDePagoComboBox
             // 
-            this.FormaDePagoComboBox.DataSource = this.formasDePagoBindingSource;
+            this.FormaDePagoComboBox.DataSource = this.formasDePagoBindingSource1;
             this.FormaDePagoComboBox.DisplayMember = "Descripcion_Forma";
             this.FormaDePagoComboBox.FormattingEnabled = true;
             this.FormaDePagoComboBox.Location = new System.Drawing.Point(117, 68);
@@ -59,6 +64,10 @@
             this.FormaDePagoComboBox.Size = new System.Drawing.Size(145, 21);
             this.FormaDePagoComboBox.TabIndex = 1;
             this.FormaDePagoComboBox.ValueMember = "Descripcion_Forma";
+            // 
+            // formasDePagoBindingSource
+            // 
+            this.formasDePagoBindingSource.DataMember = "Formas_De_Pago";
             // 
             // label1
             // 
@@ -102,15 +111,19 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // gD1C2016DataSet16
+            // gD1C2016DataSet17
             // 
+            this.gD1C2016DataSet17.DataSetName = "GD1C2016DataSet17";
+            this.gD1C2016DataSet17.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
-            // formasDePagoBindingSource
+            // formasDePagoBindingSource1
             // 
-            this.formasDePagoBindingSource.DataMember = "Formas_De_Pago";
+            this.formasDePagoBindingSource1.DataMember = "Formas_De_Pago";
+            this.formasDePagoBindingSource1.DataSource = this.gD1C2016DataSet17;
             // 
             // formas_De_PagoTableAdapter
             // 
+            this.formas_De_PagoTableAdapter.ClearBeforeFill = true;
             // 
             // ComprarPublicacion
             // 
@@ -128,6 +141,8 @@
             this.Text = "ComprarPublicacion";
             this.Load += new System.EventHandler(this.ComprarPublicacion_Load);
             ((System.ComponentModel.ISupportInitialize)(this.formasDePagoBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gD1C2016DataSet17)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.formasDePagoBindingSource1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -142,5 +157,8 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.BindingSource formasDePagoBindingSource;
+        private GD1C2016DataSet17 gD1C2016DataSet17;
+        private System.Windows.Forms.BindingSource formasDePagoBindingSource1;
+        private GD1C2016DataSet17TableAdapters.Formas_De_PagoTableAdapter formas_De_PagoTableAdapter;
     }
 }
