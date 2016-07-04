@@ -28,10 +28,10 @@ namespace MercadoEnvio.UI.Generar_Publicación
             this.FindForm().ShowDialog();
         }
 
-        internal void ShowDialog(Publicaciones publicacion)
+        internal void ShowDialog(int codigoPublicacion)
         {
             this.modificando = true;
-            this.publicacion = publicacion;
+            this.publicacion = new PublicacionRepository().getPublicacion(codigoPublicacion);
             this.FindForm().ShowDialog();
         }
 
@@ -72,10 +72,32 @@ namespace MercadoEnvio.UI.Generar_Publicación
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (modificando)
+            if (Validacion.validarInputs(this.Controls))
             {
-                new PublicacionRepository().modificarPublicacion(
-                    this.publicacion.Cod_Publicacion,
+                if (modificando)
+                {
+                    new PublicacionRepository().modificarPublicacion(
+                        this.publicacion.Cod_Publicacion,
+                        this.descripcionTextBox.Text,
+                        Convert.ToInt32(this.stockTextBox.Text),
+                        Convert.ToDateTime(this.inicioDateTimePicker.Value),
+                        Convert.ToDateTime(this.vencimientoDateTimePicker.Value),
+                        Convert.ToInt32(this.precioTextBox.Text),
+                        tipoPublicacionComboBox.SelectedValue as String,
+                        rubroComboBox.SelectedValue as String,
+                        visibilidadComboBox.SelectedValue as String,
+                        CLC_SessionManager.getDNI(),
+                        CLC_SessionManager.getCUIT(),
+                        publicacion.estado.Descripcion_Estado,
+                        this.permitirPreguntasCheckBox.Checked,
+                        this.permitirEnvioCheckBox.Checked
+                        );
+                    MessageBox.Show("Publicacion modificada exitosamente");
+                    this.Close();
+                }
+                else
+                {
+                    new PublicacionRepository().altaPublicaciones(
                     this.descripcionTextBox.Text,
                     Convert.ToInt32(this.stockTextBox.Text),
                     Convert.ToDateTime(this.inicioDateTimePicker.Value),
@@ -86,34 +108,14 @@ namespace MercadoEnvio.UI.Generar_Publicación
                     visibilidadComboBox.SelectedValue as String,
                     CLC_SessionManager.getDNI(),
                     CLC_SessionManager.getCUIT(),
-                    publicacion.estado.Descripcion_Estado,
+                    estadoComboBox.SelectedValue as String,
                     this.permitirPreguntasCheckBox.Checked,
                     this.permitirEnvioCheckBox.Checked
                     );
-                MessageBox.Show("Publicacion modificada exitosamente");
-                this.Close();
-            }
-            else
-            {
-                new PublicacionRepository().altaPublicaciones(
-                this.descripcionTextBox.Text,
-                Convert.ToInt32(this.stockTextBox.Text),
-                Convert.ToDateTime(this.inicioDateTimePicker.Value),
-                Convert.ToDateTime(this.vencimientoDateTimePicker.Value),
-                Convert.ToInt32(this.precioTextBox.Text),
-                tipoPublicacionComboBox.SelectedValue as String,
-                rubroComboBox.SelectedValue as String,
-                visibilidadComboBox.SelectedValue as String,
-                CLC_SessionManager.getDNI(),
-                CLC_SessionManager.getCUIT(),
-                estadoComboBox.SelectedValue as String,
-                this.permitirPreguntasCheckBox.Checked,
-                this.permitirEnvioCheckBox.Checked
-                );
-                MessageBox.Show("Publicacion dada de Alta exitosamente");
-                this.Close();
-            }
-            
+                    MessageBox.Show("Publicacion dada de Alta exitosamente");
+                    this.Close();
+                }
+            }   
         }
 
         private void stock(object sender, KeyPressEventArgs e)

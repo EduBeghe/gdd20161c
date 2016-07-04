@@ -31,11 +31,12 @@ namespace MercadoEnvio.UI.Generar_Publicación
             if (publicacionesDataGridView.SelectedRows.Count != 0)
             {
                 var dataViewRow = (DataRowView)publicacionesDataGridView.SelectedRows[0].DataBoundItem;
-                var publicacion = new PublicacionRepository().parse(dataViewRow.Row);
-                if (publicacion.estado.Descripcion_Estado.Equals("Borrador"))
+                var estado = dataViewRow.Row["Descripcion_Estado"];
+                var codigoPublicacion = Convert.ToInt32(dataViewRow.Row["Cod_Publicacion"]);
+                if (estado.Equals("Borrador"))
                 {
                     var vistaModificar = new GenerarPublicaciones();
-                    vistaModificar.ShowDialog(new PublicacionRepository().parse(dataViewRow.Row));
+                    vistaModificar.ShowDialog(codigoPublicacion);
                 }
                 else
                 {
@@ -50,10 +51,11 @@ namespace MercadoEnvio.UI.Generar_Publicación
             if (publicacionesDataGridView.SelectedRows.Count != 0)
             {
                 var dataViewRow = (DataRowView)publicacionesDataGridView.SelectedRows[0].DataBoundItem;
-                var publicacion = new PublicacionRepository().parse(dataViewRow.Row);
-                if (!publicacion.estado.Descripcion_Estado.Equals("Activa"))
+                var estado = dataViewRow.Row["Descripcion_Estado"];
+                var codigoPublicacion = Convert.ToInt32(dataViewRow.Row["Cod_Publicacion"]);
+                if (!estado.Equals("Activa"))
                 {
-                    new PublicacionRepository().cambiarEstado(publicacion.Cod_Publicacion, "Activa");
+                    new PublicacionRepository().cambiarEstado(codigoPublicacion, "Activa");
                     this.Close();
                 }
                 else
@@ -69,8 +71,8 @@ namespace MercadoEnvio.UI.Generar_Publicación
             if (publicacionesDataGridView.SelectedRows.Count != 0)
             {
                 var dataViewRow = (DataRowView)publicacionesDataGridView.SelectedRows[0].DataBoundItem;
-                var publicacion = new PublicacionRepository().parse(dataViewRow.Row);
-                new PublicacionRepository().cambiarEstado(publicacion.Cod_Publicacion, "Finalizado");
+                var codigoPublicacion = Convert.ToInt32(dataViewRow.Row["Cod_Publicacion"]);
+                new PublicacionRepository().cambiarEstado(codigoPublicacion, "Finalizado");
             }
             else MessageBox.Show("Debe seleccionar una publicacion para finalizar");
         }
@@ -80,10 +82,11 @@ namespace MercadoEnvio.UI.Generar_Publicación
             if (publicacionesDataGridView.SelectedRows.Count != 0)
             {
                 var dataViewRow = (DataRowView)publicacionesDataGridView.SelectedRows[0].DataBoundItem;
-                var publicacion = new PublicacionRepository().parse(dataViewRow.Row);
-                if (!publicacion.estado.Descripcion_Estado.Equals("Pausada"))
+                var estado = dataViewRow.Row["Descripcion_Estado"];
+                var codigoPublicacion = Convert.ToInt32(dataViewRow.Row["Cod_Publicacion"]);
+                if (!estado.Equals("Pausada"))
                 {
-                    new PublicacionRepository().cambiarEstado(publicacion.Cod_Publicacion, "Pausada");
+                    new PublicacionRepository().cambiarEstado(codigoPublicacion, "Pausada");
                     MessageBox.Show("Publicacion pausada exitosamente");
                     this.Close();
                 }
@@ -105,10 +108,11 @@ namespace MercadoEnvio.UI.Generar_Publicación
             if (publicacionesDataGridView.SelectedRows.Count != 0)
             {
                 var dataViewRow = (DataRowView)publicacionesDataGridView.SelectedRows[0].DataBoundItem;
-                var publicacion = new PublicacionRepository().parse(dataViewRow.Row);
-                if (!publicacion.estado.Descripcion_Estado.Equals("Activa"))
+                var estado = dataViewRow.Row["Descripcion_Estado"];
+                var codigoPublicacion = Convert.ToInt32(dataViewRow.Row["Cod_Publicacion"]);
+                if (!estado.Equals("Activa"))
                 {
-                    new PublicacionRepository().cambiarEstado(publicacion.Cod_Publicacion, "Activa");
+                    new PublicacionRepository().cambiarEstado(codigoPublicacion, "Activa");
                     MessageBox.Show("Publicacion activada exitosamente");
                     this.Close();
                 }
@@ -125,8 +129,8 @@ namespace MercadoEnvio.UI.Generar_Publicación
                if (publicacionesDataGridView.SelectedRows.Count != 0)
             {
                 var dataViewRow = (DataRowView)publicacionesDataGridView.SelectedRows[0].DataBoundItem;
-                var publicacion = new PublicacionRepository().parse(dataViewRow.Row);
-                new PublicacionRepository().cambiarEstado(publicacion.Cod_Publicacion, "Finalizado");
+                var codigoPublicacion = Convert.ToInt32(dataViewRow.Row["Cod_Publicacion"]);
+                new PublicacionRepository().cambiarEstado(codigoPublicacion, "Finalizado");
                 MessageBox.Show("Publicacion finalizada exitosamente");
                 this.Close();
                 
@@ -139,10 +143,11 @@ namespace MercadoEnvio.UI.Generar_Publicación
             if (publicacionesDataGridView.SelectedRows.Count != 0)
             {
                 var dataViewRow = (DataRowView)publicacionesDataGridView.SelectedRows[0].DataBoundItem;
-                var publicacion = new PublicacionRepository().parse(dataViewRow.Row);
-                if (!publicacion.estado.Descripcion_Estado.Equals("Pausada"))
+                var estado = dataViewRow.Row["Descripcion_Estado"];
+                var codigoPublicacion = Convert.ToInt32(dataViewRow.Row["Cod_Publicacion"]);
+                if (!estado.Equals("Pausada"))
                 {
-                    new PublicacionRepository().cambiarEstado(publicacion.Cod_Publicacion, "Pausada");
+                    new PublicacionRepository().cambiarEstado(codigoPublicacion, "Pausada");
                     MessageBox.Show("Publicacion pausada exitosamente");
                     this.Close();
                 }
