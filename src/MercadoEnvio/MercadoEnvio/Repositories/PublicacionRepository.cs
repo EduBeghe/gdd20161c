@@ -111,7 +111,7 @@ namespace MercadoEnvio.Repositories
         {
             return new Publicaciones(
                 Convert.ToInt32(dr["Cod_Publicacion"]),
-                Convert.ToInt32(dr["Cod_Publicacion_Anterior"]),
+                0,
                 dr["Descripcion_Publicacion"] as string,
                 Convert.ToInt32(dr["Stock_Publicacion"]),
                 Convert.ToDateTime(dr["Fecha_Publicacion"]),
@@ -123,8 +123,8 @@ namespace MercadoEnvio.Repositories
                 Convert.ToInt32(dr["Costo_Publicacion"]),
                 new UsuariosRepository().getUsuario( Convert.ToInt32( dr["Cod_Usuario_Responsable"] )),
                 new EstadoPublicacionesRepository().getEstadoPublicaciones(Convert.ToInt32(dr["Cod_Estado_Publicacion"])),
-                (Boolean)dr["Permiso_Preguntas"],
-                (Boolean)dr["Entregas"]
+                dr["Permiso_Preguntas"] == null ? false : (Boolean)dr["Permiso_Preguntas"],
+                dr["Entregas"]== null ? false : (Boolean)dr["Entregas"]
             );
         }
 

@@ -16,7 +16,7 @@ namespace MercadoEnvio.UI.Generar_Publicación
     public partial class GenerarPublicaciones : Form
     {
         Publicaciones publicacion;
-        bool modificando;
+        bool modificando = false;
 
         public GenerarPublicaciones()
         {
@@ -56,11 +56,11 @@ namespace MercadoEnvio.UI.Generar_Publicación
                 this.precioTextBox.Text = Convert.ToString( publicacion.Precio_Publicacion );
                 this.rubroComboBox.SelectedItem = publicacion.rubro;
                 this.visibilidadComboBox.SelectedItem = publicacion.visibilidadPublicaciones;
-                // Cambiar
-                this.responsableTextBox.Text = publicacion.usuarioResponsable.Nombre_Usuario;
                 this.estadoComboBox.SelectedItem = publicacion.estado;
                 this.permitirEnvioCheckBox.Checked = publicacion.Permiso_Preguntas;
                 this.permitirEnvioCheckBox.Checked = publicacion.Entregas;
+                this.label11.Hide();
+                this.estadoComboBox.Hide();
                 button1.Text = "Modificar";
             }
             else
@@ -72,13 +72,35 @@ namespace MercadoEnvio.UI.Generar_Publicación
 
         private void button1_Click(object sender, EventArgs e)
         {
-
-            new PublicacionRepository().altaPublicaciones( 
+            if (modificando)
+            {
+                new PublicacionRepository().modificarPublicacion(
+                    this.publicacion.Cod_Publicacion,
+                    this.descripcionTextBox.Text,
+                    Convert.ToInt32(this.stockTextBox.Text),
+                    Convert.ToDateTime(this.inicioDateTimePicker.Value),
+                    Convert.ToDateTime(this.vencimientoDateTimePicker.Value),
+                    Convert.ToInt32(this.precioTextBox.Text),
+                    tipoPublicacionComboBox.SelectedValue as String,
+                    rubroComboBox.SelectedValue as String,
+                    visibilidadComboBox.SelectedValue as String,
+                    CLC_SessionManager.getDNI(),
+                    CLC_SessionManager.getCUIT(),
+                    publicacion.estado.Descripcion_Estado,
+                    this.permitirPreguntasCheckBox.Checked,
+                    this.permitirEnvioCheckBox.Checked
+                    );
+                MessageBox.Show("Publicacion modificada exitosamente");
+                this.Close();
+            }
+            else
+            {
+                new PublicacionRepository().altaPublicaciones(
                 this.descripcionTextBox.Text,
-                Convert.ToInt32( this.stockTextBox.Text ),
-                Convert.ToDateTime( this.inicioDateTimePicker.Value ),
-                Convert.ToDateTime( this.vencimientoDateTimePicker.Value ),
-                Convert.ToInt32( this.precioTextBox.Text ),
+                Convert.ToInt32(this.stockTextBox.Text),
+                Convert.ToDateTime(this.inicioDateTimePicker.Value),
+                Convert.ToDateTime(this.vencimientoDateTimePicker.Value),
+                Convert.ToInt32(this.precioTextBox.Text),
                 tipoPublicacionComboBox.SelectedValue as String,
                 rubroComboBox.SelectedValue as String,
                 visibilidadComboBox.SelectedValue as String,
@@ -88,8 +110,10 @@ namespace MercadoEnvio.UI.Generar_Publicación
                 this.permitirPreguntasCheckBox.Checked,
                 this.permitirEnvioCheckBox.Checked
                 );
-            MessageBox.Show("Publicacion dada de Alta exitosamente");
-            this.Close();
+                MessageBox.Show("Publicacion dada de Alta exitosamente");
+                this.Close();
+            }
+            
         }
 
         private void stock(object sender, KeyPressEventArgs e)
