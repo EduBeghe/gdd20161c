@@ -2242,7 +2242,7 @@ SELECT DISTINCT Publicacion_Cod,Publicacion_Descripcion,
 				v.Cod_Visibilidad,
 				Usuario = CASE WHEN Publ_Cli_Dni IS NULL THEN (SELECT Cod_Empresa FROM TODO_X2_LUCAS.Detalles_Empresas WHERE CUIT = Publ_Empresa_Cuit)
 												ELSE (SELECT Cod_Cliente FROM TODO_X2_LUCAS.Detalles_Clientes WHERE DNI = Publ_Cli_Dni) END,
-				Estado = CASE WHEN t.Cod_Tipos_Publicaciones = 1 THEN 2
+				Estado = CASE WHEN t.Cod_Tipos_Publicaciones = 1 THEN 1
 								WHEN t.Cod_Tipos_Publicaciones = 2 THEN 4 END,
 				((Publicacion_Precio * Porcentaje) + Precio_Visibilidad )
 FROM gd_esquema.Maestra m JOIN TODO_X2_LUCAS.Rubros r ON (m.Publicacion_Rubro_Descripcion = r.Descripcion_Rubro)
