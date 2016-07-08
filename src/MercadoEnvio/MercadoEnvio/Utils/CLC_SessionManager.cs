@@ -16,7 +16,8 @@ namespace MercadoEnvio.Utils
         private static Usuario _usuario;
         public static Usuario currentUser { get { if (_usuario == null) throw new NoSessionIsOpenException(); else  return _usuario; } set { _usuario = value; } }
         public static string connectionString = System.Configuration.ConfigurationManager.ConnectionStrings["GD1C2016"].ConnectionString;      
-        
+        // rol seleccionado 
+
         public static int getDNI(){
             
             var cliente = new ClientesRepository().getClienteByUserId(currentUser.Cod_Usuario);
@@ -68,8 +69,10 @@ namespace MercadoEnvio.Utils
             
         }
 
+        // Modificar parametro de ingreso para que se guarda el rol seleccionado
         public static void setCurrentUser(Usuario u) {
             currentUser = u;
+            // rol seeleccionado = ingreso de rol seleccionado
         }
 
         public static void closeSession()
