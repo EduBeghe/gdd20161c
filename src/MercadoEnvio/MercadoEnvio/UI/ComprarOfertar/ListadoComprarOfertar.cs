@@ -62,5 +62,10 @@ namespace MercadoEnvio.ComprarOfertar
             
         }
 
+        private void linkLabel4_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+
+        }
+
     }
 }

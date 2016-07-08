@@ -41,6 +41,10 @@
             this.rubroTextBox2 = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.rubroTextBox1 = new System.Windows.Forms.TextBox();
+            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
+            this.linkLabel2 = new System.Windows.Forms.LinkLabel();
+            this.linkLabel3 = new System.Windows.Forms.LinkLabel();
+            this.linkLabel4 = new System.Windows.Forms.LinkLabel();
             ((System.ComponentModel.ISupportInitialize)(this.publicacionesGrid)).BeginInit();
             this.SuspendLayout();
             // 
@@ -57,7 +61,7 @@
             // publicacionesGrid
             // 
             this.publicacionesGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.publicacionesGrid.Location = new System.Drawing.Point(29, 231);
+            this.publicacionesGrid.Location = new System.Drawing.Point(29, 245);
             this.publicacionesGrid.Name = "publicacionesGrid";
             this.publicacionesGrid.ReadOnly = true;
             this.publicacionesGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
@@ -67,7 +71,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(40, 483);
+            this.button1.Location = new System.Drawing.Point(29, 202);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(108, 23);
             this.button1.TabIndex = 2;
@@ -77,7 +81,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(294, 483);
+            this.button2.Location = new System.Drawing.Point(304, 202);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(111, 23);
             this.button2.TabIndex = 3;
@@ -159,11 +163,56 @@
             this.rubroTextBox1.Size = new System.Drawing.Size(279, 20);
             this.rubroTextBox1.TabIndex = 12;
             // 
+            // linkLabel1
+            // 
+            this.linkLabel1.AutoSize = true;
+            this.linkLabel1.Location = new System.Drawing.Point(179, 492);
+            this.linkLabel1.Name = "linkLabel1";
+            this.linkLabel1.Size = new System.Drawing.Size(19, 13);
+            this.linkLabel1.TabIndex = 13;
+            this.linkLabel1.TabStop = true;
+            this.linkLabel1.Text = "<<";
+            // 
+            // linkLabel2
+            // 
+            this.linkLabel2.AutoSize = true;
+            this.linkLabel2.Location = new System.Drawing.Point(204, 492);
+            this.linkLabel2.Name = "linkLabel2";
+            this.linkLabel2.Size = new System.Drawing.Size(13, 13);
+            this.linkLabel2.TabIndex = 14;
+            this.linkLabel2.TabStop = true;
+            this.linkLabel2.Text = "<";
+            // 
+            // linkLabel3
+            // 
+            this.linkLabel3.AutoSize = true;
+            this.linkLabel3.Location = new System.Drawing.Point(237, 492);
+            this.linkLabel3.Name = "linkLabel3";
+            this.linkLabel3.Size = new System.Drawing.Size(13, 13);
+            this.linkLabel3.TabIndex = 15;
+            this.linkLabel3.TabStop = true;
+            this.linkLabel3.Text = ">";
+            // 
+            // linkLabel4
+            // 
+            this.linkLabel4.AutoSize = true;
+            this.linkLabel4.Location = new System.Drawing.Point(256, 492);
+            this.linkLabel4.Name = "linkLabel4";
+            this.linkLabel4.Size = new System.Drawing.Size(19, 13);
+            this.linkLabel4.TabIndex = 16;
+            this.linkLabel4.TabStop = true;
+            this.linkLabel4.Text = ">>";
+            this.linkLabel4.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel4_LinkClicked);
+            // 
             // ListadoComprarOfertar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(448, 518);
+            this.Controls.Add(this.linkLabel4);
+            this.Controls.Add(this.linkLabel3);
+            this.Controls.Add(this.linkLabel2);
+            this.Controls.Add(this.linkLabel1);
             this.Controls.Add(this.rubroTextBox1);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.rubroTextBox2);
@@ -216,5 +265,9 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn codEstadoPublicacionDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewCheckBoxColumn permisoPreguntasDataGridViewCheckBoxColumn;
         private System.Windows.Forms.DataGridViewCheckBoxColumn entregasDataGridViewCheckBoxColumn;
+        private System.Windows.Forms.LinkLabel linkLabel1;
+        private System.Windows.Forms.LinkLabel linkLabel2;
+        private System.Windows.Forms.LinkLabel linkLabel3;
+        private System.Windows.Forms.LinkLabel linkLabel4;
     }
 }
