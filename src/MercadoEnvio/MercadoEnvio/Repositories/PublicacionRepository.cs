@@ -43,6 +43,11 @@ namespace MercadoEnvio.Repositories
             );
         }
 
+        public List<Publicaciones> filtrarPublicacionesPaginado( string rubro, string descripcion, int pagina )
+        {
+            return parsePublicaciones( DBAdapter.retrieveDataTable( "Filtrar_Publicaciones_Paginado", rubro, descripcion, pagina ) );
+        }
+
         public void modificarPublicacion(
             int Cod_Publicacion,
             string Descripcion_Publicacion,
@@ -127,7 +132,6 @@ namespace MercadoEnvio.Repositories
                 dr["Entregas"]== null ? false : (Boolean)dr["Entregas"]
             );
         }
-
         
     }
 }
