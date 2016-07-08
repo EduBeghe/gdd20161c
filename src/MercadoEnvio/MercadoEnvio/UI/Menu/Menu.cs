@@ -104,9 +104,24 @@ namespace MercadoEnvio.UI.Menu
                 {
                     button5.Show();
                 }
-                if (usuario.rol.Nombre == "Empresa")
+                if (CLC_SessionManager.esEmpresa())
                 {
                     button12.Hide();
+                    button8.Hide();
+                    button4.Hide();
+                    button2.Hide();
+                }
+                if (CLC_SessionManager.esCliente())
+                {
+                    button8.Hide();
+                    button4.Hide();
+                    button2.Hide();
+                }
+                if (CLC_SessionManager.esAdministrador())
+                {
+                    button11.Hide();
+                    button12.Hide();
+                    button14.Hide();
                 }
             }
         }
@@ -185,6 +200,11 @@ namespace MercadoEnvio.UI.Menu
         private void button3_Click_1(object sender, EventArgs e)
         {
             new Generar_Publicación.ListadoPublicaciones().ShowDialog();
+        }
+
+        private void button16_Click(object sender, EventArgs e)
+        {
+            new CambiarPassword().ShowDialog();
         }
     }
 }
