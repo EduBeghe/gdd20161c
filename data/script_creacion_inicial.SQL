@@ -1552,11 +1552,15 @@ GO
 CREATE PROCEDURE TODO_X2_LUCAS.Cantidad_Publicaciones_Filtradas(@rubro nvarchar(255),@descripcion nvarchar(255))
 AS
 BEGIN
-	SELECT COUNT(*) 
+	DECLARE @cantidad int;
+
+	SELECT @cantidad = COUNT(*) 
 	FROM TODO_X2_LUCAS.Publicaciones p join TODO_X2_LUCAS.Rubros r ON (p.Cod_Rubro = r.Cod_Rubro)
 										join TODO_X2_LUCAS.Tipos_Publicaciones t on (t.Cod_Tipos_Publicaciones=p.Cod_Tipos_Publicacion)
 	WHERE (R.Descripcion_Rubro LIKE '%' + @rubro + '%') AND 
 			(Descripcion_Publicacion LIKE '%' + @descripcion + '%' )
+
+	RETURN @cantidad;
 END
 GO
 
@@ -1578,6 +1582,8 @@ BEGIN
 	WHERE (I.Descripcion_Rubro LIKE '%' + @rubro + '%') AND 
 			(Descripcion_Publicacion LIKE '%' + @descripcion + '%' ) AND
 			(i.RowNumber BETWEEN (@pagina * 10) - 9 AND (@pagina * 10))
+			
+
 END
 GO
 
@@ -1842,7 +1848,6 @@ BEGIN
 END
 GO
 
-
 /* ------------ PROCEDIMIENTO PARA LA CONSULTA DE LAS FACTURAS DE UN VENDEDOR ------------ */
 
 CREATE PROCEDURE TODO_X2_LUCAS.Consulta_Facturas(@dni numeric(18),@cuit nvarchar(50),
@@ -1864,7 +1869,6 @@ BEGIN
 			
 END
 GO
-
 
 /* ------------ PROCEDIMIENTO PARA FILTRAR UN ROL POR NOMBRE ------------ */
 CREATE PROCEDURE TODO_X2_LUCAS.Filtrar_Rol(@nombre nvarchar(255))
