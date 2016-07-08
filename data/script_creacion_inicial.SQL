@@ -1561,7 +1561,7 @@ BEGIN
 										join TODO_X2_LUCAS.Tipos_Publicaciones t on (t.Cod_Tipos_Publicaciones=p.Cod_Tipos_Publicacion)
 	WHERE (R.Descripcion_Rubro LIKE '%' + @rubro + '%') AND 
 			(Descripcion_Publicacion LIKE '%' + @descripcion + '%' ) AND
-			P.Cod_Usuario_Responsable = @usuario
+			P.Cod_Usuario_Responsable != @usuario
 
 	RETURN @cantidad;
 END
@@ -1584,7 +1584,7 @@ BEGIN
 			,Permiso_Preguntas,Entregas,Descripcion_Rubro,ROW_NUMBER() OVER (ORDER BY Cod_Publicacion) AS 'RowNumber'  
 			FROM TODO_X2_LUCAS.Publicaciones p join TODO_X2_LUCAS.Rubros r ON (p.Cod_Rubro = r.Cod_Rubro)
 										join TODO_X2_LUCAS.Tipos_Publicaciones t on (t.Cod_Tipos_Publicaciones=p.Cod_Tipos_Publicacion)) AS I
-	WHERE I.Cod_Usuario_Responsable = @usuario AND
+	WHERE I.Cod_Usuario_Responsable != @usuario AND
 			(I.Descripcion_Rubro LIKE '%' + @rubro + '%') AND 
 			(Descripcion_Publicacion LIKE '%' + @descripcion + '%' ) AND
 			(i.RowNumber BETWEEN (@pagina * 10) - 9 AND (@pagina * 10))
@@ -1592,7 +1592,6 @@ BEGIN
 
 END
 GO
-
 /* ------------ PROCEDIMIENTO PARA FILTRAR PUBLICACIONES ------------ */
 CREATE PROCEDURE TODO_X2_LUCAS.Filtrar_Publicaciones(@rubro1 nvarchar(255),@rubro2 nvarchar(255),@rubro3 nvarchar(255),
 														@descripcion nvarchar(255),@dni numeric(18),@cuit nvarchar(50))
@@ -1727,7 +1726,30 @@ BEGIN
 	DECLARE @usuario int;
 	SET @usuario = TODO_X2_LUCAS.ObtenerUsuario(@dni,null);
 
-	SELECT DISTINCT pC.Descripcion_Publicacion AS 'Publicacion Comprada/Ofertada', c.Compra_Fecha as 'Fecha de la Compra/Oferta', c.Compra_Cantidad as 'Cantidad Comprada/Ofertada'
+	SELECT DISTINCT pC.Descripcion_Publicacion AS 'Publicacion Comprada/Ofertada', c.Compra_Fecha as 'Fecha de la Compra/Oferta', 
+				c.Compra_Cantidad as 'Cantidad Comprada/Ofertada'
+	FROM TODO_X2_LUCAS.Usuarios U JOIN TODO_X2_LUCAS.Compras C ON (C.Cod_Usuario=U.Cod_Usuario)
+									JOIN TODO_X2_LUCAS.Publicaciones PC ON (C.Cod_Publicacion=PC.Cod_Publicacion)
+	WHERE U.Cod_Usuario = @usuario
+	UNION
+	SELECT DISTINCT PO.Descripcion_Publicacion, Oferta_Fecha,Oferta_Monto
+
+	FROM TODO_X2_LUCAS.Usuarios U JOIN TODO_X2_LUCAS.Ofertas O ON (O.Cod_Usuario=U.Cod_Usuario)
+									JOIN TODO_X2_LUCAS.Publicaciones PO ON (O.Cod_Publicacion=PO.Cod_Publicacion)
+	WHERE U.Cod_Usuario = @usuario
+
+END
+GO
+/* ------------ PROCEDIMIENTO PARA OBTENER UN HISTORIAL DE COMPRAS Y OFERTAS DE UN CLIENTE - VERSION PAGIANDO ------------ */
+CREATE PROCEDURE TODO_X2_LUCAS.Historial_Cliente_Compras_Y_Ofertas_Paginado(@dni numeric(18),@pagina int)
+AS
+BEGIN
+	DECLARE @usuario int;
+	SET @usuario = TODO_X2_LUCAS.ObtenerUsuario(@dni,null);
+
+	SELECT DISTINCT pC.Descripcion_Publicacion AS 'Publicacion Comprada/Ofertada', c.Compra_Fecha as 'Fecha de la Compra/Oferta', 
+				c.Compra_Cantidad as 'Cantidad Comprada/Ofertada'
+	into #temporal
 	FROM TODO_X2_LUCAS.Usuarios U JOIN TODO_X2_LUCAS.Compras C ON (C.Cod_Usuario=U.Cod_Usuario)
 									JOIN TODO_X2_LUCAS.Publicaciones PC ON (C.Cod_Publicacion=PC.Cod_Publicacion)
 	WHERE U.Cod_Usuario = @usuario
@@ -1736,8 +1758,17 @@ BEGIN
 	FROM TODO_X2_LUCAS.Usuarios U JOIN TODO_X2_LUCAS.Ofertas O ON (O.Cod_Usuario=U.Cod_Usuario)
 									JOIN TODO_X2_LUCAS.Publicaciones PO ON (O.Cod_Publicacion=PO.Cod_Publicacion)
 	WHERE U.Cod_Usuario = @usuario
+
+	SELECT t.[Cantidad Comprada/Ofertada],t.[Fecha de la Compra/Oferta],t.[Publicacion Comprada/Ofertada]
+	FROM (SELECT *,ROW_NUMBER() OVER (ORDER BY U.Cod_Usuario) as 'RowNumber'
+			FROM #temporal )as t
+	WHERE (T.RowNumber BETWEEN (@pagina * 10) - 9 AND @pagina * 10)
+
+
+
 END
 GO
+
 /* ------------ PROCEDIMIENTO PARA OBTENER UN HISTORIAL DE CALIFICACIONES DE UN CLIENTE ------------ */
 CREATE PROCEDURE TODO_X2_LUCAS.Historial_Cliente_Calficaciones(@dni numeric(18))	
 AS
