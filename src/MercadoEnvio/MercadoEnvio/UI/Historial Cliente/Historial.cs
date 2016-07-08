@@ -13,6 +13,10 @@ namespace MercadoEnvio.Historial_Cliente
 {
     public partial class Form1 : Form
     {
+
+        int pagesCounter;
+        int pagesMax;
+
         public Form1()
         {
             InitializeComponent();
@@ -25,6 +29,7 @@ namespace MercadoEnvio.Historial_Cliente
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)

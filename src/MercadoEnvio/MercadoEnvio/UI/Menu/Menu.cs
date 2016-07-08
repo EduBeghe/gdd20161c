@@ -103,7 +103,11 @@ namespace MercadoEnvio.UI.Menu
                 if(funcionalidad.Cod_Funcionalidad.Equals(18))
                 {
                     button5.Show();
-                } 
+                }
+                if (usuario.rol.Nombre == "Empresa")
+                {
+                    button12.Hide();
+                }
             }
         }
 
