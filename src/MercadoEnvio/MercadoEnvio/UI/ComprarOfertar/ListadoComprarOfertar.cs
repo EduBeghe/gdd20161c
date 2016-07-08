@@ -17,6 +17,9 @@ namespace MercadoEnvio.ComprarOfertar
 {
     public partial class ListadoComprarOfertar : Form
     {
+        int pagesCounter;
+        int pagesMax;
+
         public ListadoComprarOfertar()
         {
             InitializeComponent();
@@ -29,7 +32,10 @@ namespace MercadoEnvio.ComprarOfertar
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            this.publicacionesGrid.DataSource = DBAdapter.retrieveDataTable("Filtrar_Publicaciones", rubroTextBox1.Text, rubroTextBox2.Text, rubroTextBox3.Text, descTextBox.Text, CLC_SessionManager.getDNI(), CLC_SessionManager.getCUIT());
+            this.pagesCounter = 1;
+            var resultsAmount = new PublicacionRepository().getCantidadPaginas(rubroTextBox1.Text, descTextBox.Text, CLC_SessionManager.getDNI(), CLC_SessionManager.getCUIT());
+            this.pagesMax = (resultsAmount / 10) + 1;
+            this.publicacionesGrid.DataSource = new PublicacionRepository().filtrarPublicacionesPaginado(rubroTextBox1.Text, descTextBox.Text, 1, CLC_SessionManager.getDNI(), CLC_SessionManager.getCUIT());
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -54,6 +60,9 @@ namespace MercadoEnvio.ComprarOfertar
 
         private void button3_Click(object sender, EventArgs e)
         {
+            this.pagesCounter = 1;
+            var resultsAmount = new PublicacionRepository().getCantidadPaginas(rubroTextBox1.Text, descTextBox.Text, CLC_SessionManager.getDNI(), CLC_SessionManager.getCUIT());
+            this.pagesMax = (resultsAmount / 10) + 1;
             this.publicacionesGrid.DataSource = DBAdapter.retrieveDataTable("Filtrar_Publicaciones", rubroTextBox1.Text, rubroTextBox2.Text, rubroTextBox3.Text, descTextBox.Text, CLC_SessionManager.getDNI(), CLC_SessionManager.getCUIT());
         }
 
@@ -64,7 +73,40 @@ namespace MercadoEnvio.ComprarOfertar
 
         private void linkLabel4_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
+            this.pagesCounter = this.pagesMax;
+            this.publicacionesGrid.DataSource = new PublicacionRepository().filtrarPublicacionesPaginado(rubroTextBox1.Text, descTextBox.Text, this.pagesMax, CLC_SessionManager.getDNI(), CLC_SessionManager.getCUIT());
+        }
 
+        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            this.pagesCounter = 1;
+            this.publicacionesGrid.DataSource = new PublicacionRepository().filtrarPublicacionesPaginado(rubroTextBox1.Text, descTextBox.Text, 1, CLC_SessionManager.getDNI(), CLC_SessionManager.getCUIT());
+        }
+
+        private void linkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            if (pagesCounter > 1)
+            {
+                pagesCounter--;
+                this.publicacionesGrid.DataSource = new PublicacionRepository().filtrarPublicacionesPaginado(rubroTextBox1.Text, descTextBox.Text, pagesCounter, CLC_SessionManager.getDNI(), CLC_SessionManager.getCUIT());
+            }
+            else 
+            {
+                MessageBox.Show("Esta en la primera pagina, no hay pagina anterior.");
+            }
+        }
+
+        private void linkLabel3_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            if (pagesCounter < this.pagesMax)
+            {
+                pagesCounter++;
+                this.publicacionesGrid.DataSource = new PublicacionRepository().filtrarPublicacionesPaginado(rubroTextBox1.Text, descTextBox.Text, pagesCounter, CLC_SessionManager.getDNI(), CLC_SessionManager.getCUIT());
+            }
+            else
+            {
+                MessageBox.Show("Esta en la ultima pagina, no hay mas paginas.");
+            }
         }
 
     }

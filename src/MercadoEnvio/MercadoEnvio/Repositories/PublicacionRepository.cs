@@ -43,9 +43,10 @@ namespace MercadoEnvio.Repositories
             );
         }
 
-        public List<Publicaciones> filtrarPublicacionesPaginado( string rubro, string descripcion, int pagina )
+        public DataTable filtrarPublicacionesPaginado( string rubro, string descripcion, int pagina, int dni, string cuit )
         {
-            return parsePublicaciones( DBAdapter.retrieveDataTable( "Filtrar_Publicaciones_Paginado", rubro, descripcion, pagina ) );
+           var retorno = DBAdapter.retrieveDataTable( "Filtrar_Publicaciones_Paginado", rubro, descripcion, pagina, dni, cuit );
+           return retorno;
         }
 
         public void modificarPublicacion(
@@ -110,6 +111,11 @@ namespace MercadoEnvio.Repositories
         public List<Publicaciones> parsePublicaciones(DataTable dataTable)
         {
             return dataTable.AsEnumerable().Select(dr => parse(dr)).ToList();
+        }
+
+        public int getCantidadPaginas(string rubro, string descripcion, int dni, string cuit)
+        {
+            return DBAdapter.executeProcedureWithReturnValue("Cantidad_Publicaciones_Filtradas",rubro, descripcion, dni, cuit);
         }
 
         public Publicaciones parse(DataRow dr)
