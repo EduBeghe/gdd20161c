@@ -1549,26 +1549,31 @@ END
 GO
 
 /* ------------ PROCEDIMIENTO PARA FILTRAR PUBLICACIONES - TOTAL FILTRADO ------------ */
-CREATE PROCEDURE TODO_X2_LUCAS.Cantidad_Publicaciones_Filtradas(@rubro nvarchar(255),@descripcion nvarchar(255))
+CREATE PROCEDURE TODO_X2_LUCAS.Cantidad_Publicaciones_Filtradas(@rubro nvarchar(255),@descripcion nvarchar(255),@dni numeric(18),@cuit nvarchar(50))
 AS
 BEGIN
-	DECLARE @cantidad int;
+	DECLARE @cantidad int,@usuario int; 
+	
+	SET @usuario = TODO_X2_LUCAS.ObtenerUsuario(@dni,@cuit);
 
 	SELECT @cantidad = COUNT(*) 
 	FROM TODO_X2_LUCAS.Publicaciones p join TODO_X2_LUCAS.Rubros r ON (p.Cod_Rubro = r.Cod_Rubro)
 										join TODO_X2_LUCAS.Tipos_Publicaciones t on (t.Cod_Tipos_Publicaciones=p.Cod_Tipos_Publicacion)
 	WHERE (R.Descripcion_Rubro LIKE '%' + @rubro + '%') AND 
-			(Descripcion_Publicacion LIKE '%' + @descripcion + '%' )
+			(Descripcion_Publicacion LIKE '%' + @descripcion + '%' ) AND
+			P.Cod_Usuario_Responsable = @usuario
 
 	RETURN @cantidad;
 END
 GO
 
 /* ------------ PROCEDIMIENTO PARA FILTRAR PUBLICACIONES -- VERSION PAGINADA ------------ */
-CREATE PROCEDURE TODO_X2_LUCAS.Filtrar_Publicaciones_Paginado(@rubro nvarchar(255),@descripcion nvarchar(255),@pagina int)
+CREATE PROCEDURE TODO_X2_LUCAS.Filtrar_Publicaciones_Paginado(@rubro nvarchar(255),@descripcion nvarchar(255),@pagina int,@dni numeric(18),@cuit nvarchar(50))
 AS
 BEGIN
-	
+	DECLARE	@usuario int; 
+	SET @usuario = TODO_X2_LUCAS.ObtenerUsuario(@dni,@cuit);
+
 	SELECT i.Cod_Publicacion,i.Cod_Publicacion_Anterior,i.Descripcion_Publicacion,
 			i.Stock_Publicacion,i.Fecha_Publicacion,i.Fecha_Vencimiento_Publicacion,i.Precio_Publicacion,
 			I.Descripcion_Tipo,i.Cod_Rubro,i.Cod_Visibilidad,i.Costo_Publicacion,i.Cod_Usuario_Responsable,i.Cod_Estado_Publicacion
@@ -1579,7 +1584,8 @@ BEGIN
 			,Permiso_Preguntas,Entregas,Descripcion_Rubro,ROW_NUMBER() OVER (ORDER BY Cod_Publicacion) AS 'RowNumber'  
 			FROM TODO_X2_LUCAS.Publicaciones p join TODO_X2_LUCAS.Rubros r ON (p.Cod_Rubro = r.Cod_Rubro)
 										join TODO_X2_LUCAS.Tipos_Publicaciones t on (t.Cod_Tipos_Publicaciones=p.Cod_Tipos_Publicacion)) AS I
-	WHERE (I.Descripcion_Rubro LIKE '%' + @rubro + '%') AND 
+	WHERE I.Cod_Usuario_Responsable = @usuario AND
+			(I.Descripcion_Rubro LIKE '%' + @rubro + '%') AND 
 			(Descripcion_Publicacion LIKE '%' + @descripcion + '%' ) AND
 			(i.RowNumber BETWEEN (@pagina * 10) - 9 AND (@pagina * 10))
 			
@@ -1838,15 +1844,14 @@ BEGIN
 			B.Total_Factura,B.Vendedor_Correspondiente
 	FROM (SELECT F.Cod_Factura,F.Cod_Forma_De_Pago,F.Cod_Publicacion,F.Fecha_Factura,F.Nro_Factura,
 				F.Total_Factura,F.Vendedor_Correspondiente,ROW_NUMBER() OVER (ORDER BY F.Cod_Factura) as 'RowNumber' 
-			FROM TODO_X2_LUCAS.Facturas F JOIN TODO_X2_LUCAS.Items_Facturas I ON (F.Cod_Factura = I.Cod_Factura)
-									JOIN TODO_X2_LUCAS.Formas_De_Pago FO ON (FO.Cod_Formas_De_Pago=F.Cod_Forma_De_Pago)
-									JOIN TODO_X2_LUCAS.Publicaciones P ON (F.Cod_Publicacion = P.Cod_Publicacion)) AS B
+			FROM TODO_X2_LUCAS.Facturas F ) AS B
 	WHERE B.Vendedor_Correspondiente = @usuario AND
 			((B.Fecha_Factura BETWEEN (@fechaInicio) AND @fechaFinal) OR (@fechaInicio = '' AND @fechaFinal = '')) AND
-			(B.Total_Factura BETWEEN (@precioInicio) AND @precioFinal OR (@precioInicio = 0 AND @precioFinal = 0)) AND
+			(B.Total_Factura BETWEEN (@precioInicio) AND @precioFinal OR (@precioInicio = 0 AND @precioFinal = 0)) and
 			(B.RowNumber BETWEEN ((@pagina * 10) - 9) AND (@pagina * 10))
 END
 GO
+
 
 /* ------------ PROCEDIMIENTO PARA LA CONSULTA DE LAS FACTURAS DE UN VENDEDOR ------------ */
 
