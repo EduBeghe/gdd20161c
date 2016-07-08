@@ -31,6 +31,23 @@ namespace MercadoEnvio.Utils
             
         }
 
+        public static bool esCliente()
+        {
+            return currentUser.rol.Nombre.Equals("Cliente");
+        }
+
+        public static bool esEmpresa()
+        {
+            return currentUser.rol.Nombre.Equals("Empresa");
+        }
+
+        public static bool esAdministrador()
+        {
+            return ( currentUser.rol.Nombre.Equals("Administrador") ||
+                currentUser.rol.Nombre.Equals("Administrador General"));
+        }
+
+
         public static DateTime getFecha()
         {
             var fecha = System.Configuration.ConfigurationManager.AppSettings["fechaSistema"];
