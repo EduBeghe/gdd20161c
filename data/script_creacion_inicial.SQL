@@ -42,6 +42,8 @@ IF OBJECT_ID('TODO_X2_LUCAS.Rubros') IS NOT NULL
 DROP TABLE TODO_X2_LUCAS.Rubros;
 IF OBJECT_ID('TODO_X2_LUCAS.Tipos_Publicaciones') IS NOT NULL
 DROP TABLE TODO_X2_LUCAS.Tipos_Publicaciones;
+IF OBJECT_ID('TODO_X2_LUCAS.Roles_Por_Usuario') IS NOT NULL
+DROP TABLE TODO_X2_LUCAS.Roles_Por_Usuario;
 IF OBJECT_ID('TODO_X2_LUCAS.Usuarios') IS NOT NULL
 DROP TABLE TODO_X2_LUCAS.Usuarios;
 IF OBJECT_ID('TODO_X2_LUCAS.Visibilidades_Publicaciones') IS NOT NULL
@@ -299,10 +301,15 @@ CREATE TABLE TODO_X2_LUCAS.Usuarios (
 	Cod_Usuario int PRIMARY KEY CLUSTERED IDENTITY,
 	Nombre_Usuario nvarchar(255) NOT NULL,
 	Contrasenia nvarchar(255) NOT NULL,
-	Cod_Rol int REFERENCES TODO_X2_LUCAS.Roles (Cod_Rol),
 	Intentos_Login int NOT NULL DEFAULT 0,
 	Reputacion int DEFAULT 0 ,
 	Estado_Usuario bit NOT NULL
+)
+;
+--CREACION TABLA ROLES POR USUARIO--
+CREATE TABLE TODO_X2_LUCAS.Roles_Por_Usuario (
+	Cod_Usuario int REFERENCES TODO_X2_LUCAS.Usuarios(Cod_Usuario),
+	Cod_Rol int REFERENCES TODO_X2_LUCAS.Roles (Cod_Rol)
 )
 ; 
 -- CREACION TABLA AUDITORIA LOGIN --
@@ -1092,6 +1099,9 @@ BEGIN
 		UPDATE TODO_X2_LUCAS.Roles
 		SET Estado_Rol = 0
 		WHERE Nombre=@rol
+
+		DELETE FROM TODO_X2_LUCAS.Roles_Por_Usuario
+		WHERE Cod_Rol = (SELECT Cod_Rol FROM TODO_X2_LUCAS.Roles WHERE Nombre=@rol)
 	END
 	ELSE
 	BEGIN
@@ -1187,11 +1197,16 @@ AS
 BEGIN
 	IF NOT EXISTS (SELECT 1 FROM TODO_X2_LUCAS.Usuarios WHERE Nombre_Usuario = @username)
 	BEGIN
-		DECLARE @cod_rol int;
+		DECLARE @cod_rol int,@codUsuario int;
 		SET @cod_rol = TODO_X2_LUCAS.ObtenerRol(@rol);
 
-		INSERT INTO TODO_X2_LUCAS.Usuarios(Nombre_Usuario,Contrasenia,Cod_Rol,Estado_Usuario)
-		VALUES (@username,@password,@cod_rol,1)
+		INSERT INTO TODO_X2_LUCAS.Usuarios(Nombre_Usuario,Contrasenia,Estado_Usuario)
+		VALUES (@username,@password,1)
+
+		SET @codUsuario = (SELECT DISTINCT @@IDENTITY FROM TODO_X2_LUCAS.Usuarios);
+
+		INSERT INTO TODO_X2_LUCAS.Roles_Por_Usuario(Cod_Usuario,Cod_Rol)
+		VALUES (@codUsuario,@cod_rol)
 	END
 	ELSE
 	BEGIN
@@ -1912,8 +1927,8 @@ BEGIN
 
 	SELECT * 
 	FROM TODO_X2_LUCAS.Roles
-	WHERE Nombre LIKE '%' + @nombre + '%'
-
+	WHERE Nombre LIKE '%' + @nombre + '%' AND 
+			(Cod_Rol NOT IN (1,2,3,4)) 
 END
 GO
 
@@ -2028,10 +2043,13 @@ BEGIN
 		SET @codDom = TODO_X2_LUCAS.Obtener_Cod_Domicilio(@calle,@nroCalle,@piso,@depto);
 		SET @nombreUsuario = @apellido + CONVERT(nvarchar(255),@dni);
 	
-		INSERT INTO TODO_X2_LUCAS.Usuarios(Nombre_Usuario,Contrasenia,Cod_Rol,Estado_Usuario)
-		VALUES(@nombreUsuario,@contraseña,@codRol,1)
-		
+		INSERT INTO TODO_X2_LUCAS.Usuarios(Nombre_Usuario,Contrasenia,Estado_Usuario)
+		VALUES(@nombreUsuario,@contraseña,1)
+				
 		DECLARE @codUsuario int = (SELECT DISTINCT @@IDENTITY FROM TODO_X2_LUCAS.Usuarios);
+
+		INSERT INTO TODO_X2_LUCAS.Roles_Por_Usuario(Cod_Usuario,Cod_Rol)
+		VALUES (@codUsuario,@codRol)
 			
 		INSERT INTO TODO_X2_LUCAS.Detalles_Clientes(Cod_Usuario,Nombre,Apellido,DNI,Mail,Telefono,Cod_Domicilio,Cod_Postal,Fecha_Nacimiento,Fecha_Creacion,Estado_Cliente)
 		VALUES(@codUsuario,@nombre,@apellido,@dni,@mail,00000000,@codDom,@codPostal,@fechaNac,GETDATE(),1)
@@ -2071,11 +2089,13 @@ BEGIN
 		SET @codDom = TODO_X2_LUCAS.Obtener_Cod_Domicilio(@calle,@nroCalle,@piso,@depto);
 		SET @nombreUsuario = CONVERT(nvarchar(255),@cuit);
 	
-		INSERT INTO TODO_X2_LUCAS.Usuarios(Nombre_Usuario,Contrasenia,Cod_Rol,Estado_Usuario)
-		VALUES(@nombreUsuario,@contraseña,@codRol,1)
+		INSERT INTO TODO_X2_LUCAS.Usuarios(Nombre_Usuario,Contrasenia,Estado_Usuario)
+		VALUES(@nombreUsuario,@contraseña,1)
 		
 		DECLARE @codUsuario int = (SELECT DISTINCT @@IDENTITY FROM TODO_X2_LUCAS.Usuarios);
 			
+		INSERT INTO TODO_X2_LUCAS.Roles_Por_Usuario(Cod_Usuario,Cod_Rol)
+		VALUES (@codUsuario,@codRol)
 		INSERT INTO TODO_X2_LUCAS.Detalles_Empresas(Cod_Usuario,Razon_Social,Mail,Cod_Domicilio,
 													Cod_Postal,CUIT,Estado_Empresa,Telefono,Rubro,Ciudad,Nombre_De_Contacto)
 		VALUES(@codUsuario,@razonSocial,@mail,@codDom,@codPostal,@cuit,1,00000000,' ',' ',' ')
@@ -2351,8 +2371,10 @@ WHERE f.Nro_Factura IS NOT NULL
 -- MIGRACION TABLA USUARIOS--
 exec TODO_X2_LUCAS.Migrar_Reputacion_Usuarios
 
-INSERT INTO TODO_X2_LUCAS.Usuarios(Cod_Rol,Contrasenia,Estado_Usuario,Nombre_Usuario)
-VALUES (4,'e6b87050bfcb8143fcb8db0170a4dc9ed00d904ddd3e2a4ad1b1e8dc0fdc9be7',1,'admin')
+INSERT INTO TODO_X2_LUCAS.Usuarios(Contrasenia,Estado_Usuario,Nombre_Usuario)
+VALUES ('e6b87050bfcb8143fcb8db0170a4dc9ed00d904ddd3e2a4ad1b1e8dc0fdc9be7',1,'admin')
+INSERT INTO TODO_X2_LUCAS.Roles_Por_Usuario(Cod_Usuario,Cod_Rol)
+VALUES((SELECT DISTINCT @@IDENTITY FROM TODO_X2_LUCAS.Usuarios),4)
 
 GO
 
