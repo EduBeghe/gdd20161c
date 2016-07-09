@@ -168,6 +168,8 @@ IF OBJECT_ID('TODO_X2_LUCAS.Alta_Publicacion') IS NOT NULL
 DROP PROCEDURE TODO_X2_LUCAS.Alta_Publicacion;
 IF OBJECT_ID('TODO_X2_LUCAS.Baja_Visibilidad') IS NOT NULL
 DROP PROCEDURE TODO_X2_LUCAS.Baja_Visibilidad;
+IF OBJECT_ID('TODO_X2_LUCAS.Roles_De_Usuario') IS NOT NULL
+DROP PROCEDURE TODO_X2_LUCAS.Roles_De_Usuario;
 IF OBJECT_ID('TODO_X2_LUCAS.Modificacion_Visibilidad') IS NOT NULL
 DROP PROCEDURE TODO_X2_LUCAS.Modificacion_Visibilidad;
 IF OBJECT_ID('TODO_X2_LUCAS.Alta_Visibilidad') IS NOT NULL
@@ -1126,7 +1128,15 @@ BEGIN
 	VALUES(@cantidadEstrellas, @cantidadEstrellas * 10,@descripcion)
 END
 GO
-
+-- PROCEDIMIENTO PARA AGREGAR ALGUN TIPO DE CALIFICACION PARA LAS PUBLICACIONES --
+CREATE PROCEDURE TODO_X2_LUCAS.Roles_De_Usuario(@codUsuario int)
+AS
+BEGIN
+	SELECT R.Cod_Rol,R.Nombre,R.Estado_Rol 
+	FROM TODO_X2_LUCAS.Roles_Por_Usuario RU JOIN TODO_X2_LUCAS.Roles R ON(RU.Cod_Rol=R.Cod_Rol)
+	WHERE Cod_Usuario = @codUsuario
+END
+GO
 /* ------------------------------------ PROCEDIMIENTO DE LOGIN  ------------------------------------ */
 /* ------------ ACTUALIZA INTENTOS DE LOGIN	------------ */
 CREATE PROCEDURE TODO_X2_LUCAS.ActualizarIntentos(@username nvarchar(255),@Cantidad int ) 
