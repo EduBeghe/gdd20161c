@@ -206,6 +206,8 @@ IF OBJECT_ID('TODO_X2_LUCAS.Filtrar_Usuarios_Cliente') IS NOT NULL
 DROP PROCEDURE TODO_X2_LUCAS.Filtrar_Usuarios_Cliente;
 IF OBJECT_ID('TODO_X2_LUCAS.Filtrar_Publicaciones_Paginado') IS NOT NULL
 DROP PROCEDURE TODO_X2_LUCAS.Filtrar_Publicaciones_Paginado;
+IF OBJECT_ID('TODO_X2_LUCAS.Historial_Cliente_Compras_Y_Ofertas_Paginado') IS NOT NULL
+DROP PROCEDURE TODO_X2_LUCAS.Historial_Cliente_Compras_Y_Ofertas_Paginado;
 IF OBJECT_ID('TODO_X2_LUCAS.Filtrar_Rol') IS NOT NULL
 DROP PROCEDURE TODO_X2_LUCAS.Filtrar_Rol;
 IF OBJECT_ID('TODO_X2_LUCAS.Filtrar_Visibilidad') IS NOT NULL
@@ -1745,26 +1747,24 @@ CREATE PROCEDURE TODO_X2_LUCAS.Historial_Cliente_Compras_Y_Ofertas_Paginado(@dni
 AS
 BEGIN
 	DECLARE @usuario int;
-	SET @usuario = TODO_X2_LUCAS.ObtenerUsuario(@dni,null);
+	SET @usuario = TODO_X2_LUCAS.ObtenerUsuario(@dni,'');
 
 	SELECT DISTINCT pC.Descripcion_Publicacion AS 'Publicacion Comprada/Ofertada', c.Compra_Fecha as 'Fecha de la Compra/Oferta', 
-				c.Compra_Cantidad as 'Cantidad Comprada/Ofertada'
+				c.Compra_Cantidad as 'Cantidad Comprada/Ofertada',U.Cod_Usuario
 	into #temporal
 	FROM TODO_X2_LUCAS.Usuarios U JOIN TODO_X2_LUCAS.Compras C ON (C.Cod_Usuario=U.Cod_Usuario)
 									JOIN TODO_X2_LUCAS.Publicaciones PC ON (C.Cod_Publicacion=PC.Cod_Publicacion)
 	WHERE U.Cod_Usuario = @usuario
 	UNION
-	SELECT DISTINCT PO.Descripcion_Publicacion, Oferta_Fecha,Oferta_Monto
-	FROM TODO_X2_LUCAS.Usuarios U JOIN TODO_X2_LUCAS.Ofertas O ON (O.Cod_Usuario=U.Cod_Usuario)
-									JOIN TODO_X2_LUCAS.Publicaciones PO ON (O.Cod_Publicacion=PO.Cod_Publicacion)
-	WHERE U.Cod_Usuario = @usuario
+	SELECT DISTINCT PO2.Descripcion_Publicacion, Oferta_Fecha,Oferta_Monto,U2.Cod_Usuario
+	FROM TODO_X2_LUCAS.Usuarios U2 JOIN TODO_X2_LUCAS.Ofertas O2 ON (O2.Cod_Usuario=U2.Cod_Usuario)
+									JOIN TODO_X2_LUCAS.Publicaciones PO2 ON (O2.Cod_Publicacion=PO2.Cod_Publicacion)
+	WHERE U2.Cod_Usuario = @usuario
 
 	SELECT t.[Cantidad Comprada/Ofertada],t.[Fecha de la Compra/Oferta],t.[Publicacion Comprada/Ofertada]
-	FROM (SELECT *,ROW_NUMBER() OVER (ORDER BY U.Cod_Usuario) as 'RowNumber'
+	FROM (SELECT *,ROW_NUMBER() OVER (ORDER BY #temporal.Cod_Usuario) as 'RowNumber'
 			FROM #temporal )as t
 	WHERE (T.RowNumber BETWEEN (@pagina * 10) - 9 AND @pagina * 10)
-
-
 
 END
 GO
@@ -1869,20 +1869,19 @@ CREATE PROCEDURE TODO_X2_LUCAS.Consulta_Facturas_Paginado(@dni numeric(18),@cuit
 AS
 BEGIN
 	DECLARE @usuario int;
-	SELECT @usuario = TODO_X2_LUCAS.ObtenerUsuario(@dni,@cuit)
+	SET @usuario = TODO_X2_LUCAS.ObtenerUsuario(@dni,@cuit);
 
 	SELECT B.Cod_Factura,B.Cod_Forma_De_Pago,B.Cod_Publicacion,B.Fecha_Factura,B.Nro_Factura,
-			B.Total_Factura,B.Vendedor_Correspondiente
+			B.Total_Factura,B.Vendedor_Correspondiente,b.RowNumber
 	FROM (SELECT F.Cod_Factura,F.Cod_Forma_De_Pago,F.Cod_Publicacion,F.Fecha_Factura,F.Nro_Factura,
-				F.Total_Factura,F.Vendedor_Correspondiente,ROW_NUMBER() OVER (ORDER BY F.Cod_Factura) as 'RowNumber' 
-			FROM TODO_X2_LUCAS.Facturas F ) AS B
-	WHERE B.Vendedor_Correspondiente = @usuario AND
-			((B.Fecha_Factura BETWEEN (@fechaInicio) AND @fechaFinal) OR (@fechaInicio = '' AND @fechaFinal = '')) AND
-			(B.Total_Factura BETWEEN (@precioInicio) AND @precioFinal OR (@precioInicio = 0 AND @precioFinal = 0)) and
-			(B.RowNumber BETWEEN ((@pagina * 10) - 9) AND (@pagina * 10))
+				F.Total_Factura,F.Vendedor_Correspondiente,ROW_NUMBER() OVER (ORDER BY F.Cod_Factura) AS 'RowNumber' 
+			FROM TODO_X2_LUCAS.Facturas F 
+			WHERE F.Vendedor_Correspondiente = @usuario AND
+			(F.Fecha_Factura BETWEEN (@fechaInicio) AND @fechaFinal OR (@fechaInicio = '' AND @fechaFinal = '')) AND
+			(F.Total_Factura BETWEEN (@precioInicio) AND @precioFinal OR (@precioInicio = 0 AND @precioFinal = 0)) ) AS B
+	WHERE (b.RowNumber BETWEEN (@pagina * 10) - 9 AND (@pagina * 10))
 END
 GO
-
 
 /* ------------ PROCEDIMIENTO PARA LA CONSULTA DE LAS FACTURAS DE UN VENDEDOR ------------ */
 
