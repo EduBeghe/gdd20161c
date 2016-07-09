@@ -34,18 +34,21 @@ namespace MercadoEnvio.Utils
 
         public static bool esCliente()
         {
-            return currentUser.rol.Nombre.Equals("Cliente");
+            Rol rol = currentUser.roles.Find(x => (x.Nombre == "Cliente"));
+            return (rol != null);
         }
 
         public static bool esEmpresa()
         {
-            return currentUser.rol.Nombre.Equals("Empresa");
+            Rol rol = currentUser.roles.Find(x => (x.Nombre == "Empresa"));
+            return (rol != null);
         }
 
         public static bool esAdministrador()
         {
-            return ( currentUser.rol.Nombre.Equals("Administrador") ||
-                currentUser.rol.Nombre.Equals("Administrador General"));
+            Rol rol1 = currentUser.roles.Find(x => (x.Nombre == "Administrador"));
+            Rol rol2 = currentUser.roles.Find(x => (x.Nombre == "Administrador General"));
+            return (rol1 != null || rol2 != null );
         }
 
 

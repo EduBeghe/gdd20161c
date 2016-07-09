@@ -30,7 +30,12 @@ namespace MercadoEnvio.UI.ABM_Usuario
             emailTextBox.Text = "";
 
             var usuario = CLC_SessionManager.currentUser;
-            var funcionalidades = usuario.rol.funcionalidad;
+            List<Funcionalidades> funcionalidades = new List<Funcionalidades>();
+            foreach( Rol rol in usuario.roles )
+            {
+                funcionalidades.AddRange( rol.funcionalidad );
+            }
+             
             button2.Hide();
             button3.Hide();
             foreach (Funcionalidades funcionalidad in funcionalidades)

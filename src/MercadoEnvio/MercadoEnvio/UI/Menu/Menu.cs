@@ -56,7 +56,11 @@ namespace MercadoEnvio.UI.Menu
         private void FunctionsMenu_Load(object sender, EventArgs e)
         {
             var usuario = CLC_SessionManager.currentUser;
-            var funcionalidades = usuario.rol.funcionalidad;
+            List<Funcionalidades> funcionalidades = new List<Funcionalidades>();
+            foreach( Rol rol in usuario.roles )
+            {
+                funcionalidades.AddRange( rol.funcionalidad );
+            }
             button1.Hide();
             button9.Hide();
             button2.Hide();

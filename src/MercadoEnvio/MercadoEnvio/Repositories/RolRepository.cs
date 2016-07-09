@@ -87,9 +87,12 @@ namespace MercadoEnvio.Repositories {
         }
 
 
-    internal List<Rol> getRolesForUser(int userCode)
+    
+
+    internal List<Rol> getRolesDeUsuario(int p)
     {
-        return parseRoles(DBAdapter.retrieveDataTable("Get_User_Roles", userCode));  
+        // Agregar nombre de sp
+        return parseRoles(DBAdapter.retrieveDataTable("Roles_De_Usuario", p));
     }
   }
 }

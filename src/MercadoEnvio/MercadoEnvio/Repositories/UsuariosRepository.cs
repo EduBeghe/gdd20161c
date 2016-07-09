@@ -76,7 +76,7 @@ namespace MercadoEnvio.Repositories
 
                dr["contrasenia"] as string,
 
-               new RolesRepository().getRol(Convert.ToInt32(dr["Cod_Rol"])),
+               new RolesRepository().getRolesDeUsuario(Convert.ToInt32(dr["Cod_Usuario"])),
 
                Convert.ToInt32(dr["Intentos_Login"]),
 
