@@ -22,7 +22,16 @@ namespace MercadoEnvio.UI.Menu
 
         private void button1_Click(object sender, EventArgs e)
         {
-            var resultado = new UsuariosRepository().cambiarPassword(passwordTextBox.Text);
+            var passEncriptada = new Encription().encryptToSHA256(passwordTextBox.Text);
+            var resultado = new UsuariosRepository().cambiarPassword(passEncriptada);
+            if(resultado==0)
+            {
+                MessageBox.Show("Password cambiada exitosamente.");
+            } 
+            else
+            {
+                MessageBox.Show("Hubo un problema y la password no se cambio.");
+            }
             this.Close();
         }
     }
