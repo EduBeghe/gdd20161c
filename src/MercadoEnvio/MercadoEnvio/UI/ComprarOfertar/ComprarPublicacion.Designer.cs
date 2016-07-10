@@ -31,17 +31,17 @@
             this.components = new System.ComponentModel.Container();
             this.cantidadTextBox = new System.Windows.Forms.TextBox();
             this.FormaDePagoComboBox = new System.Windows.Forms.ComboBox();
+            this.formasDePagoBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.gD1C2016DataSet17 = new MercadoEnvio.GD1C2016DataSet17();
             this.formasDePagoBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
-            this.gD1C2016DataSet17 = new MercadoEnvio.GD1C2016DataSet17();
-            this.formasDePagoBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.formas_De_PagoTableAdapter = new MercadoEnvio.GD1C2016DataSet17TableAdapters.Formas_De_PagoTableAdapter();
-            ((System.ComponentModel.ISupportInitialize)(this.formasDePagoBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gD1C2016DataSet17)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.formasDePagoBindingSource1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gD1C2016DataSet17)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.formasDePagoBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // cantidadTextBox
@@ -65,6 +65,16 @@
             this.FormaDePagoComboBox.TabIndex = 1;
             this.FormaDePagoComboBox.ValueMember = "Descripcion_Forma";
             // 
+            // formasDePagoBindingSource1
+            // 
+            this.formasDePagoBindingSource1.DataMember = "Formas_De_Pago";
+            this.formasDePagoBindingSource1.DataSource = this.gD1C2016DataSet17;
+            // 
+            // gD1C2016DataSet17
+            // 
+            this.gD1C2016DataSet17.DataSetName = "GD1C2016DataSet17";
+            this.gD1C2016DataSet17.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
             // formasDePagoBindingSource
             // 
             this.formasDePagoBindingSource.DataMember = "Formas_De_Pago";
@@ -79,6 +89,7 @@
             this.label1.Size = new System.Drawing.Size(152, 16);
             this.label1.TabIndex = 2;
             this.label1.Text = "Comprar Publicacion";
+            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // label2
             // 
@@ -111,16 +122,6 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // gD1C2016DataSet17
-            // 
-            this.gD1C2016DataSet17.DataSetName = "GD1C2016DataSet17";
-            this.gD1C2016DataSet17.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // formasDePagoBindingSource1
-            // 
-            this.formasDePagoBindingSource1.DataMember = "Formas_De_Pago";
-            this.formasDePagoBindingSource1.DataSource = this.gD1C2016DataSet17;
-            // 
             // formas_De_PagoTableAdapter
             // 
             this.formas_De_PagoTableAdapter.ClearBeforeFill = true;
@@ -140,9 +141,9 @@
             this.Name = "ComprarPublicacion";
             this.Text = "ComprarPublicacion";
             this.Load += new System.EventHandler(this.ComprarPublicacion_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.formasDePagoBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gD1C2016DataSet17)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.formasDePagoBindingSource1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gD1C2016DataSet17)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.formasDePagoBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

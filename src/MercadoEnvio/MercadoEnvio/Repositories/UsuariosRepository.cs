@@ -65,6 +65,13 @@ namespace MercadoEnvio.Repositories
             DBAdapter.executeProcedure("ActualizarIntentos", userName, cantidad);
         }
 
+        public int cambiarPassword(string nuevaPass)
+        {
+            var usuario = CLC_SessionManager.currentUser;
+            var retorno = DBAdapter.executeProcedureWithReturnValue("Modificar_Usuario", usuario.Nombre_Usuario, usuario.password, nuevaPass);
+            return retorno;
+        }
+
 
         private Usuario parse(DataRow dr)
         {

@@ -66,5 +66,10 @@ namespace MercadoEnvio.UI.ComprarOfertar
         {
             MercadoEnvio.Utils.Validacion.validateNumberTextBox(sender, e);
         }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

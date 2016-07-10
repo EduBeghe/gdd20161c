@@ -7,6 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using MercadoEnvio.Domain;
+using MercadoEnvio.Utils;
+using MercadoEnvio.Repositories;
 
 namespace MercadoEnvio.UI.Menu
 {
@@ -19,6 +22,7 @@ namespace MercadoEnvio.UI.Menu
 
         private void button1_Click(object sender, EventArgs e)
         {
+            var resultado = new UsuariosRepository().cambiarPassword(passwordTextBox.Text);
             this.Close();
         }
     }
