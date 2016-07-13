@@ -42,6 +42,8 @@ IF OBJECT_ID('TODO_X2_LUCAS.Rubros') IS NOT NULL
 DROP TABLE TODO_X2_LUCAS.Rubros;
 IF OBJECT_ID('TODO_X2_LUCAS.Tipos_Publicaciones') IS NOT NULL
 DROP TABLE TODO_X2_LUCAS.Tipos_Publicaciones;
+IF OBJECT_ID('TODO_X2_LUCAS.Roles_Por_Usuario') IS NOT NULL
+DROP TABLE TODO_X2_LUCAS.Roles_Por_Usuario;
 IF OBJECT_ID('TODO_X2_LUCAS.Usuarios') IS NOT NULL
 DROP TABLE TODO_X2_LUCAS.Usuarios;
 IF OBJECT_ID('TODO_X2_LUCAS.Visibilidades_Publicaciones') IS NOT NULL
@@ -166,6 +168,8 @@ IF OBJECT_ID('TODO_X2_LUCAS.Alta_Publicacion') IS NOT NULL
 DROP PROCEDURE TODO_X2_LUCAS.Alta_Publicacion;
 IF OBJECT_ID('TODO_X2_LUCAS.Baja_Visibilidad') IS NOT NULL
 DROP PROCEDURE TODO_X2_LUCAS.Baja_Visibilidad;
+IF OBJECT_ID('TODO_X2_LUCAS.Roles_De_Usuario') IS NOT NULL
+DROP PROCEDURE TODO_X2_LUCAS.Roles_De_Usuario;
 IF OBJECT_ID('TODO_X2_LUCAS.Modificacion_Visibilidad') IS NOT NULL
 DROP PROCEDURE TODO_X2_LUCAS.Modificacion_Visibilidad;
 IF OBJECT_ID('TODO_X2_LUCAS.Alta_Visibilidad') IS NOT NULL
@@ -206,6 +210,8 @@ IF OBJECT_ID('TODO_X2_LUCAS.Filtrar_Usuarios_Cliente') IS NOT NULL
 DROP PROCEDURE TODO_X2_LUCAS.Filtrar_Usuarios_Cliente;
 IF OBJECT_ID('TODO_X2_LUCAS.Filtrar_Publicaciones_Paginado') IS NOT NULL
 DROP PROCEDURE TODO_X2_LUCAS.Filtrar_Publicaciones_Paginado;
+IF OBJECT_ID('TODO_X2_LUCAS.Historial_Cliente_Compras_Y_Ofertas_Paginado') IS NOT NULL
+DROP PROCEDURE TODO_X2_LUCAS.Historial_Cliente_Compras_Y_Ofertas_Paginado;
 IF OBJECT_ID('TODO_X2_LUCAS.Filtrar_Rol') IS NOT NULL
 DROP PROCEDURE TODO_X2_LUCAS.Filtrar_Rol;
 IF OBJECT_ID('TODO_X2_LUCAS.Filtrar_Visibilidad') IS NOT NULL
@@ -297,10 +303,15 @@ CREATE TABLE TODO_X2_LUCAS.Usuarios (
 	Cod_Usuario int PRIMARY KEY CLUSTERED IDENTITY,
 	Nombre_Usuario nvarchar(255) NOT NULL,
 	Contrasenia nvarchar(255) NOT NULL,
-	Cod_Rol int REFERENCES TODO_X2_LUCAS.Roles (Cod_Rol),
 	Intentos_Login int NOT NULL DEFAULT 0,
 	Reputacion int DEFAULT 0 ,
 	Estado_Usuario bit NOT NULL
+)
+;
+--CREACION TABLA ROLES POR USUARIO--
+CREATE TABLE TODO_X2_LUCAS.Roles_Por_Usuario (
+	Cod_Usuario int REFERENCES TODO_X2_LUCAS.Usuarios(Cod_Usuario),
+	Cod_Rol int REFERENCES TODO_X2_LUCAS.Roles (Cod_Rol)
 )
 ; 
 -- CREACION TABLA AUDITORIA LOGIN --
@@ -1090,6 +1101,9 @@ BEGIN
 		UPDATE TODO_X2_LUCAS.Roles
 		SET Estado_Rol = 0
 		WHERE Nombre=@rol
+
+		DELETE FROM TODO_X2_LUCAS.Roles_Por_Usuario
+		WHERE Cod_Rol = (SELECT Cod_Rol FROM TODO_X2_LUCAS.Roles WHERE Nombre=@rol)
 	END
 	ELSE
 	BEGIN
@@ -1114,7 +1128,15 @@ BEGIN
 	VALUES(@cantidadEstrellas, @cantidadEstrellas * 10,@descripcion)
 END
 GO
-
+-- PROCEDIMIENTO PARA AGREGAR ALGUN TIPO DE CALIFICACION PARA LAS PUBLICACIONES --
+CREATE PROCEDURE TODO_X2_LUCAS.Roles_De_Usuario(@codUsuario int)
+AS
+BEGIN
+	SELECT R.Cod_Rol,R.Nombre,R.Estado_Rol 
+	FROM TODO_X2_LUCAS.Roles_Por_Usuario RU JOIN TODO_X2_LUCAS.Roles R ON(RU.Cod_Rol=R.Cod_Rol)
+	WHERE Cod_Usuario = @codUsuario
+END
+GO
 /* ------------------------------------ PROCEDIMIENTO DE LOGIN  ------------------------------------ */
 /* ------------ ACTUALIZA INTENTOS DE LOGIN	------------ */
 CREATE PROCEDURE TODO_X2_LUCAS.ActualizarIntentos(@username nvarchar(255),@Cantidad int ) 
@@ -1185,11 +1207,16 @@ AS
 BEGIN
 	IF NOT EXISTS (SELECT 1 FROM TODO_X2_LUCAS.Usuarios WHERE Nombre_Usuario = @username)
 	BEGIN
-		DECLARE @cod_rol int;
+		DECLARE @cod_rol int,@codUsuario int;
 		SET @cod_rol = TODO_X2_LUCAS.ObtenerRol(@rol);
 
-		INSERT INTO TODO_X2_LUCAS.Usuarios(Nombre_Usuario,Contrasenia,Cod_Rol,Estado_Usuario)
-		VALUES (@username,@password,@cod_rol,1)
+		INSERT INTO TODO_X2_LUCAS.Usuarios(Nombre_Usuario,Contrasenia,Estado_Usuario)
+		VALUES (@username,@password,1)
+
+		SET @codUsuario = (SELECT DISTINCT @@IDENTITY FROM TODO_X2_LUCAS.Usuarios);
+
+		INSERT INTO TODO_X2_LUCAS.Roles_Por_Usuario(Cod_Usuario,Cod_Rol)
+		VALUES (@codUsuario,@cod_rol)
 	END
 	ELSE
 	BEGIN
@@ -1549,29 +1576,47 @@ END
 GO
 
 /* ------------ PROCEDIMIENTO PARA FILTRAR PUBLICACIONES - TOTAL FILTRADO ------------ */
-CREATE PROCEDURE TODO_X2_LUCAS.Cantidad_Publicaciones_Filtradas(@rubro nvarchar(255),@descripcion nvarchar(255))
+CREATE PROCEDURE TODO_X2_LUCAS.Cantidad_Publicaciones_Filtradas(@rubro nvarchar(255),@descripcion nvarchar(255),@dni numeric(18),@cuit nvarchar(50))
 AS
 BEGIN
-	SELECT COUNT(*) 
-	FROM TODO_X2_LUCAS.Publicaciones
-	WHERE (Cod_Rubro = TODO_X2_LUCAS.Obtener_Rubro(@rubro) OR @rubro IS NULL) AND
-			(Descripcion_Publicacion LIKE '%' + @descripcion + '%' OR @descripcion IS NULL) 
-	GROUP BY Cod_Publicacion
+	DECLARE @cantidad int,@usuario int; 
+	
+	SET @usuario = TODO_X2_LUCAS.ObtenerUsuario(@dni,@cuit);
+
+	SELECT @cantidad = COUNT(*) 
+	FROM TODO_X2_LUCAS.Publicaciones p join TODO_X2_LUCAS.Rubros r ON (p.Cod_Rubro = r.Cod_Rubro)
+										join TODO_X2_LUCAS.Tipos_Publicaciones t on (t.Cod_Tipos_Publicaciones=p.Cod_Tipos_Publicacion)
+	WHERE (R.Descripcion_Rubro LIKE '%' + @rubro + '%') AND 
+			(Descripcion_Publicacion LIKE '%' + @descripcion + '%' ) AND
+			P.Cod_Usuario_Responsable != @usuario
+
+	RETURN @cantidad;
 END
 GO
+
 /* ------------ PROCEDIMIENTO PARA FILTRAR PUBLICACIONES -- VERSION PAGINADA ------------ */
-CREATE PROCEDURE TODO_X2_LUCAS.Filtrar_Publicaciones_Paginado(@rubro nvarchar(255),@descripcion nvarchar(255),@pagina int)
+CREATE PROCEDURE TODO_X2_LUCAS.Filtrar_Publicaciones_Paginado(@rubro nvarchar(255),@descripcion nvarchar(255),@pagina int,@dni numeric(18),@cuit nvarchar(50))
 AS
 BEGIN
+	DECLARE	@usuario int; 
+	SET @usuario = TODO_X2_LUCAS.ObtenerUsuario(@dni,@cuit);
+
 	SELECT i.Cod_Publicacion,i.Cod_Publicacion_Anterior,i.Descripcion_Publicacion,
 			i.Stock_Publicacion,i.Fecha_Publicacion,i.Fecha_Vencimiento_Publicacion,i.Precio_Publicacion,
-			i.Cod_Tipos_Publicacion,i.Cod_Rubro,i.Cod_Visibilidad,i.Costo_Publicacion,i.Cod_Usuario_Responsable,i.Cod_Estado_Publicacion
+			I.Descripcion_Tipo,i.Cod_Rubro,i.Cod_Visibilidad,i.Costo_Publicacion,i.Cod_Usuario_Responsable,i.Cod_Estado_Publicacion
 			,i.Permiso_Preguntas,i.Entregas
-	FROM (SELECT *,ROW_NUMBER() OVER (ORDER BY Cod_Publicacion) AS 'RowNumber'  
-			FROM TODO_X2_LUCAS.Publicaciones ) AS I
-	WHERE (Cod_Rubro = TODO_X2_LUCAS.Obtener_Rubro(@rubro) OR @rubro IS NULL) AND
-			(Descripcion_Publicacion LIKE '%' + @descripcion + '%' OR @descripcion IS NULL) AND
+	FROM (SELECT Cod_Publicacion,Cod_Publicacion_Anterior,Descripcion_Publicacion,
+			Stock_Publicacion,Fecha_Publicacion,Fecha_Vencimiento_Publicacion,Precio_Publicacion,
+			T.Descripcion_Tipo,p.Cod_Rubro,Cod_Visibilidad,Costo_Publicacion,Cod_Usuario_Responsable,Cod_Estado_Publicacion
+			,Permiso_Preguntas,Entregas,Descripcion_Rubro,ROW_NUMBER() OVER (ORDER BY Cod_Publicacion) AS 'RowNumber'  
+			FROM TODO_X2_LUCAS.Publicaciones p join TODO_X2_LUCAS.Rubros r ON (p.Cod_Rubro = r.Cod_Rubro)
+										join TODO_X2_LUCAS.Tipos_Publicaciones t on (t.Cod_Tipos_Publicaciones=p.Cod_Tipos_Publicacion)) AS I
+	WHERE I.Cod_Usuario_Responsable != @usuario AND
+			(I.Descripcion_Rubro LIKE '%' + @rubro + '%') AND 
+			(Descripcion_Publicacion LIKE '%' + @descripcion + '%' ) AND
 			(i.RowNumber BETWEEN (@pagina * 10) - 9 AND (@pagina * 10))
+			
+
 END
 GO
 /* ------------ PROCEDIMIENTO PARA FILTRAR PUBLICACIONES ------------ */
@@ -1708,17 +1753,47 @@ BEGIN
 	DECLARE @usuario int;
 	SET @usuario = TODO_X2_LUCAS.ObtenerUsuario(@dni,null);
 
-	SELECT DISTINCT pC.Descripcion_Publicacion AS 'Publicacion Comprada/Ofertada', c.Compra_Fecha as 'Fecha de la Compra/Oferta', c.Compra_Cantidad as 'Cantidad Comprada/Ofertada'
+	SELECT DISTINCT pC.Descripcion_Publicacion AS 'Publicacion Comprada/Ofertada', c.Compra_Fecha as 'Fecha de la Compra/Oferta', 
+				c.Compra_Cantidad as 'Cantidad Comprada/Ofertada'
 	FROM TODO_X2_LUCAS.Usuarios U JOIN TODO_X2_LUCAS.Compras C ON (C.Cod_Usuario=U.Cod_Usuario)
 									JOIN TODO_X2_LUCAS.Publicaciones PC ON (C.Cod_Publicacion=PC.Cod_Publicacion)
 	WHERE U.Cod_Usuario = @usuario
 	UNION
 	SELECT DISTINCT PO.Descripcion_Publicacion, Oferta_Fecha,Oferta_Monto
+
 	FROM TODO_X2_LUCAS.Usuarios U JOIN TODO_X2_LUCAS.Ofertas O ON (O.Cod_Usuario=U.Cod_Usuario)
 									JOIN TODO_X2_LUCAS.Publicaciones PO ON (O.Cod_Publicacion=PO.Cod_Publicacion)
 	WHERE U.Cod_Usuario = @usuario
+
 END
 GO
+/* ------------ PROCEDIMIENTO PARA OBTENER UN HISTORIAL DE COMPRAS Y OFERTAS DE UN CLIENTE - VERSION PAGIANDO ------------ */
+CREATE PROCEDURE TODO_X2_LUCAS.Historial_Cliente_Compras_Y_Ofertas_Paginado(@dni numeric(18),@pagina int)
+AS
+BEGIN
+	DECLARE @usuario int;
+	SET @usuario = TODO_X2_LUCAS.ObtenerUsuario(@dni,'');
+
+	SELECT DISTINCT pC.Descripcion_Publicacion AS 'Publicacion Comprada/Ofertada', c.Compra_Fecha as 'Fecha de la Compra/Oferta', 
+				c.Compra_Cantidad as 'Cantidad Comprada/Ofertada',U.Cod_Usuario
+	into #temporal
+	FROM TODO_X2_LUCAS.Usuarios U JOIN TODO_X2_LUCAS.Compras C ON (C.Cod_Usuario=U.Cod_Usuario)
+									JOIN TODO_X2_LUCAS.Publicaciones PC ON (C.Cod_Publicacion=PC.Cod_Publicacion)
+	WHERE U.Cod_Usuario = @usuario
+	UNION
+	SELECT DISTINCT PO2.Descripcion_Publicacion, Oferta_Fecha,Oferta_Monto,U2.Cod_Usuario
+	FROM TODO_X2_LUCAS.Usuarios U2 JOIN TODO_X2_LUCAS.Ofertas O2 ON (O2.Cod_Usuario=U2.Cod_Usuario)
+									JOIN TODO_X2_LUCAS.Publicaciones PO2 ON (O2.Cod_Publicacion=PO2.Cod_Publicacion)
+	WHERE U2.Cod_Usuario = @usuario
+
+	SELECT t.[Cantidad Comprada/Ofertada],t.[Fecha de la Compra/Oferta],t.[Publicacion Comprada/Ofertada]
+	FROM (SELECT *,ROW_NUMBER() OVER (ORDER BY #temporal.Cod_Usuario) as 'RowNumber'
+			FROM #temporal )as t
+	WHERE (T.RowNumber BETWEEN (@pagina * 10) - 9 AND @pagina * 10)
+
+END
+GO
+
 /* ------------ PROCEDIMIENTO PARA OBTENER UN HISTORIAL DE CALIFICACIONES DE UN CLIENTE ------------ */
 CREATE PROCEDURE TODO_X2_LUCAS.Historial_Cliente_Calficaciones(@dni numeric(18))	
 AS
@@ -1807,9 +1882,8 @@ BEGIN
 									JOIN TODO_X2_LUCAS.Formas_De_Pago FO ON (FO.Cod_Formas_De_Pago=F.Cod_Forma_De_Pago)
 									JOIN TODO_X2_LUCAS.Publicaciones P ON (F.Cod_Publicacion = P.Cod_Publicacion)
 	WHERE F.Vendedor_Correspondiente = @usuario AND
-			((F.Fecha_Factura BETWEEN (@fechaInicio) AND @fechaFinal) OR (@fechaInicio IS NULL AND @fechaFinal IS NULL)) AND
-			(F.Total_Factura BETWEEN (@precioInicio) AND @precioFinal OR (@precioInicio IS NULL AND @precioFinal IS NULL)) 
-	GROUP BY F.Cod_Factura
+			((F.Fecha_Factura BETWEEN (@fechaInicio) AND @fechaFinal) OR (@fechaInicio = '' AND @fechaFinal = '')) AND
+			(F.Total_Factura BETWEEN (@precioInicio) AND @precioFinal OR (@precioInicio = 0 AND @precioFinal = 0)) 
 END
 GO
 
@@ -1820,21 +1894,20 @@ CREATE PROCEDURE TODO_X2_LUCAS.Consulta_Facturas_Paginado(@dni numeric(18),@cuit
 AS
 BEGIN
 	DECLARE @usuario int;
-	SELECT @usuario = TODO_X2_LUCAS.ObtenerUsuario(@dni,@cuit)
+	SET @usuario = TODO_X2_LUCAS.ObtenerUsuario(@dni,@cuit);
 
 	SELECT B.Cod_Factura,B.Cod_Forma_De_Pago,B.Cod_Publicacion,B.Fecha_Factura,B.Nro_Factura,
-			B.Total_Factura,B.Vendedor_Correspondiente
+			B.Total_Factura,B.Vendedor_Correspondiente,b.RowNumber
 	FROM (SELECT F.Cod_Factura,F.Cod_Forma_De_Pago,F.Cod_Publicacion,F.Fecha_Factura,F.Nro_Factura,
-				F.Total_Factura,F.Vendedor_Correspondiente,ROW_NUMBER() OVER (ORDER BY F.Cod_Factura) as 'RowNumber' 
-			FROM TODO_X2_LUCAS.Facturas F JOIN TODO_X2_LUCAS.Items_Facturas I ON (F.Cod_Factura = I.Cod_Factura)
-									JOIN TODO_X2_LUCAS.Formas_De_Pago FO ON (FO.Cod_Formas_De_Pago=F.Cod_Forma_De_Pago)
-									JOIN TODO_X2_LUCAS.Publicaciones P ON (F.Cod_Publicacion = P.Cod_Publicacion)) AS B
-	WHERE B.Vendedor_Correspondiente = @usuario AND
-			((B.Fecha_Factura BETWEEN (@fechaInicio) AND @fechaFinal) OR (@fechaInicio IS NULL AND @fechaFinal IS NULL)) AND
-			(B.Total_Factura BETWEEN (@precioInicio) AND @precioFinal OR (@precioInicio IS NULL AND @precioFinal IS NULL)) AND
-			(B.RowNumber BETWEEN ((@pagina * 10) - 9) AND (@pagina * 10))
+				F.Total_Factura,F.Vendedor_Correspondiente,ROW_NUMBER() OVER (ORDER BY F.Cod_Factura) AS 'RowNumber' 
+			FROM TODO_X2_LUCAS.Facturas F 
+			WHERE F.Vendedor_Correspondiente = @usuario AND
+			(F.Fecha_Factura BETWEEN (@fechaInicio) AND @fechaFinal OR (@fechaInicio = '' AND @fechaFinal = '')) AND
+			(F.Total_Factura BETWEEN (@precioInicio) AND @precioFinal OR (@precioInicio = 0 AND @precioFinal = 0)) ) AS B
+	WHERE (b.RowNumber BETWEEN (@pagina * 10) - 9 AND (@pagina * 10))
 END
 GO
+
 /* ------------ PROCEDIMIENTO PARA LA CONSULTA DE LAS FACTURAS DE UN VENDEDOR ------------ */
 
 CREATE PROCEDURE TODO_X2_LUCAS.Consulta_Facturas(@dni numeric(18),@cuit nvarchar(50),
@@ -1857,7 +1930,6 @@ BEGIN
 END
 GO
 
-
 /* ------------ PROCEDIMIENTO PARA FILTRAR UN ROL POR NOMBRE ------------ */
 CREATE PROCEDURE TODO_X2_LUCAS.Filtrar_Rol(@nombre nvarchar(255))
 AS
@@ -1865,8 +1937,8 @@ BEGIN
 
 	SELECT * 
 	FROM TODO_X2_LUCAS.Roles
-	WHERE Nombre LIKE '%' + @nombre + '%'
-
+	WHERE Nombre LIKE '%' + @nombre + '%' AND 
+			(Cod_Rol NOT IN (1,2,3,4)) 
 END
 GO
 
@@ -1981,10 +2053,13 @@ BEGIN
 		SET @codDom = TODO_X2_LUCAS.Obtener_Cod_Domicilio(@calle,@nroCalle,@piso,@depto);
 		SET @nombreUsuario = @apellido + CONVERT(nvarchar(255),@dni);
 	
-		INSERT INTO TODO_X2_LUCAS.Usuarios(Nombre_Usuario,Contrasenia,Cod_Rol,Estado_Usuario)
-		VALUES(@nombreUsuario,@contraseña,@codRol,1)
-		
+		INSERT INTO TODO_X2_LUCAS.Usuarios(Nombre_Usuario,Contrasenia,Estado_Usuario)
+		VALUES(@nombreUsuario,@contraseña,1)
+				
 		DECLARE @codUsuario int = (SELECT DISTINCT @@IDENTITY FROM TODO_X2_LUCAS.Usuarios);
+
+		INSERT INTO TODO_X2_LUCAS.Roles_Por_Usuario(Cod_Usuario,Cod_Rol)
+		VALUES (@codUsuario,@codRol)
 			
 		INSERT INTO TODO_X2_LUCAS.Detalles_Clientes(Cod_Usuario,Nombre,Apellido,DNI,Mail,Telefono,Cod_Domicilio,Cod_Postal,Fecha_Nacimiento,Fecha_Creacion,Estado_Cliente)
 		VALUES(@codUsuario,@nombre,@apellido,@dni,@mail,00000000,@codDom,@codPostal,@fechaNac,GETDATE(),1)
@@ -2024,11 +2099,13 @@ BEGIN
 		SET @codDom = TODO_X2_LUCAS.Obtener_Cod_Domicilio(@calle,@nroCalle,@piso,@depto);
 		SET @nombreUsuario = CONVERT(nvarchar(255),@cuit);
 	
-		INSERT INTO TODO_X2_LUCAS.Usuarios(Nombre_Usuario,Contrasenia,Cod_Rol,Estado_Usuario)
-		VALUES(@nombreUsuario,@contraseña,@codRol,1)
+		INSERT INTO TODO_X2_LUCAS.Usuarios(Nombre_Usuario,Contrasenia,Estado_Usuario)
+		VALUES(@nombreUsuario,@contraseña,1)
 		
 		DECLARE @codUsuario int = (SELECT DISTINCT @@IDENTITY FROM TODO_X2_LUCAS.Usuarios);
 			
+		INSERT INTO TODO_X2_LUCAS.Roles_Por_Usuario(Cod_Usuario,Cod_Rol)
+		VALUES (@codUsuario,@codRol)
 		INSERT INTO TODO_X2_LUCAS.Detalles_Empresas(Cod_Usuario,Razon_Social,Mail,Cod_Domicilio,
 													Cod_Postal,CUIT,Estado_Empresa,Telefono,Rubro,Ciudad,Nombre_De_Contacto)
 		VALUES(@codUsuario,@razonSocial,@mail,@codDom,@codPostal,@cuit,1,00000000,' ',' ',' ')
@@ -2304,8 +2381,10 @@ WHERE f.Nro_Factura IS NOT NULL
 -- MIGRACION TABLA USUARIOS--
 exec TODO_X2_LUCAS.Migrar_Reputacion_Usuarios
 
-INSERT INTO TODO_X2_LUCAS.Usuarios(Cod_Rol,Contrasenia,Estado_Usuario,Nombre_Usuario)
-VALUES (4,'e6b87050bfcb8143fcb8db0170a4dc9ed00d904ddd3e2a4ad1b1e8dc0fdc9be7',1,'admin')
+INSERT INTO TODO_X2_LUCAS.Usuarios(Contrasenia,Estado_Usuario,Nombre_Usuario)
+VALUES ('e6b87050bfcb8143fcb8db0170a4dc9ed00d904ddd3e2a4ad1b1e8dc0fdc9be7',1,'admin')
+INSERT INTO TODO_X2_LUCAS.Roles_Por_Usuario(Cod_Usuario,Cod_Rol)
+VALUES((SELECT DISTINCT @@IDENTITY FROM TODO_X2_LUCAS.Usuarios),4)
 
 GO
 
