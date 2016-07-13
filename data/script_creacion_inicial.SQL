@@ -1572,11 +1572,12 @@ END
 GO
 
 /* ------------ PROCEDIMIENTO PARA FILTRAR PUBLICACIONES -- VERSION PAGINADA ------------ */
-CREATE PROCEDURE TODO_X2_LUCAS.Filtrar_Publicaciones_Paginado(@rubro nvarchar(255),@descripcion nvarchar(255),@pagina int,@dni numeric(18),@cuit nvarchar(50))
+CREATE PROCEDURE TODO_X2_LUCAS.Filtrar_Publicaciones_Paginado(@rubro nvarchar(255),@descripcion nvarchar(255),@pagina int,@dni numeric(18),@cuit nvarchar(50),@estado nvarchar(255))
 AS
 BEGIN
-	DECLARE	@usuario int; 
+	DECLARE	@usuario int,@fechaConfig datetime; 
 	SET @usuario = TODO_X2_LUCAS.ObtenerUsuario(@dni,@cuit);
+	SET @fechaConfig = (select Fecha_Config from TODO_X2_LUCAS.Fecha);
 
 	SELECT i.Cod_Publicacion,i.Cod_Publicacion_Anterior,i.Descripcion_Publicacion,
 			i.Stock_Publicacion,i.Fecha_Publicacion,i.Fecha_Vencimiento_Publicacion,i.Precio_Publicacion,
@@ -1587,15 +1588,18 @@ BEGIN
 			T.Descripcion_Tipo,p.Cod_Rubro,Cod_Visibilidad,Costo_Publicacion,Cod_Usuario_Responsable,Cod_Estado_Publicacion
 			,Permiso_Preguntas,Entregas,Descripcion_Rubro,ROW_NUMBER() OVER (ORDER BY Cod_Publicacion) AS 'RowNumber'  
 			FROM TODO_X2_LUCAS.Publicaciones p join TODO_X2_LUCAS.Rubros r ON (p.Cod_Rubro = r.Cod_Rubro)
-										join TODO_X2_LUCAS.Tipos_Publicaciones t on (t.Cod_Tipos_Publicaciones=p.Cod_Tipos_Publicacion)) AS I
-	WHERE I.Cod_Usuario_Responsable != @usuario AND
-			(I.Descripcion_Rubro LIKE '%' + @rubro + '%') AND 
-			(Descripcion_Publicacion LIKE '%' + @descripcion + '%' ) AND
-			(i.RowNumber BETWEEN (@pagina * 10) - 9 AND (@pagina * 10))
+										join TODO_X2_LUCAS.Tipos_Publicaciones t on (t.Cod_Tipos_Publicaciones=p.Cod_Tipos_Publicacion)
+			WHERE p.Cod_Usuario_Responsable != @usuario AND
+			(R.Descripcion_Rubro LIKE '%' + @rubro + '%') AND 
+			(Descripcion_Publicacion LIKE '%' + @descripcion + '%' AND
+			P.Cod_Estado_Publicacion = TODO_X2_LUCAS.Obtener_Estado(@estado) AND
+			@fechaConfig	< = p.Fecha_Vencimiento_Publicacion ) ) AS I
+	WHERE 	(i.RowNumber BETWEEN (@pagina * 10) - 9 AND (@pagina * 10))
 			
 
 END
 GO
+
 /* ------------ PROCEDIMIENTO PARA FILTRAR PUBLICACIONES ------------ */
 CREATE PROCEDURE TODO_X2_LUCAS.Filtrar_Publicaciones(@rubro1 nvarchar(255),@rubro2 nvarchar(255),@rubro3 nvarchar(255),
 														@descripcion nvarchar(255),@dni numeric(18),@cuit nvarchar(50))
@@ -2324,27 +2328,39 @@ SELECT DISTINCT Calificacion_Codigo,Calificacion_Cant_Estrellas,Calificacion_Des
 FROM gd_esquema.Maestra	
 WHERE (Calificacion_Codigo IS NOT NULL) AND ( 5 < Calificacion_Cant_Estrellas )
 
---MIGRACION TABLA COMPRAS Y CALIFICACIONES -- 145 680
-INSERT INTO TODO_X2_LUCAS.Compras(Cod_Publicacion,Cod_Usuario,Compra_Cantidad,Compra_Fecha,Descripcion,Cod_Calificacion)
-SELECT temporal.Cod_Publicacion,temporal.usuario,temporal.Compra_Cantidad,temporal.Compra_Fecha,temporal.Calificacion_Descripcion,
-				CODIGO = CASE WHEN Calificacion_Codigo IS NULL THEN 99
-							WHEN Calificacion_Codigo IS NOT NULL THEN TODO_X2_LUCAS.Obtener_Calificacion(Calificacion_Cant_Estrellas)
-							END
-FROM (SELECT DISTINCT P.Cod_Publicacion,TODO_X2_LUCAS.ObtenerUsuario(Cli_Dni,NULL) as 'usuario',Compra_Cantidad,Compra_Fecha,Calificacion_Descripcion,Calificacion_Codigo,Calificacion_Cant_Estrellas
-		FROM gd_esquema.Maestra M JOIN TODO_X2_LUCAS.Publicaciones P ON (M.Publicacion_Cod = P.Cod_Publicacion_Anterior)
-		WHERE (Compra_Fecha IS NOT NULL)  
-		EXCEPT
-		SELECT DISTINCT P.Cod_Publicacion,TODO_X2_LUCAS.ObtenerUsuario(Cli_Dni,NULL),Compra_Cantidad,Compra_Fecha,Calificacion_Descripcion,Calificacion_Codigo,Calificacion_Cant_Estrellas
-		FROM gd_esquema.Maestra M JOIN TODO_X2_LUCAS.Publicaciones P ON (M.Publicacion_Cod = P.Cod_Publicacion_Anterior)
-		WHERE (Compra_Fecha IS NOT NULL) AND (5 < Calificacion_Cant_Estrellas ) ) as temporal
-WHERE Compra_Fecha IS NOT NULL
-
 --MIGRACION TABLA OFERTAS--
 INSERT INTO TODO_X2_LUCAS.Ofertas(Oferta_Fecha,Oferta_Monto,Cod_Publicacion,Cod_Usuario)
 SELECT DISTINCT Oferta_Fecha,Oferta_Monto,P.Cod_Publicacion,TODO_X2_LUCAS.ObtenerUsuario(Cli_Dni,NULL)
 FROM gd_esquema.Maestra M JOIN TODO_X2_LUCAS.Publicaciones P ON (M.Publicacion_Cod=P.Cod_Publicacion_Anterior)
 WHERE Oferta_Fecha IS NOT NULL AND Oferta_Monto IS NOT NULL
 go
+
+--MIGRACION TABLA COMPRAS Y CALIFICACIONES -- 
+INSERT INTO TODO_X2_LUCAS.Compras(Cod_Publicacion,Cod_Usuario,Compra_Cantidad,Compra_Fecha,Descripcion,Cod_Calificacion)
+
+SELECT P.Cod_Publicacion,
+				TODO_X2_LUCAS.ObtenerUsuario(M.Cli_Dni,''),
+				Compra_Cantidad,
+				Compra_Fecha,
+				Calificacion_Descripcion,
+				CASE WHEN Calificacion_Cant_Estrellas = 1 THEN 1
+					 ELSE TODO_X2_LUCAS.Obtener_Calificacion(CAST(m.Calificacion_Cant_Estrellas/2 as int)) END
+FROM gd_esquema.Maestra M JOIN TODO_X2_LUCAS.Publicaciones P ON(M.Publicacion_Cod=P.Cod_Publicacion_Anterior)
+WHERE Compra_Fecha IS NOT NULL
+	AND Calificacion_Codigo IS NOT NULL
+	AND Publicacion_Tipo = 'Compra Inmediata'
+UNION ALL 
+SELECT P.Cod_Publicacion,
+				(SELECT TOP 1 Cod_Usuario FROM TODO_X2_LUCAS.Ofertas WHERE Cod_Publicacion=P.Cod_Publicacion ORDER BY Oferta_Monto DESC),
+				Compra_Cantidad,
+				Compra_Fecha,
+				Calificacion_Descripcion,
+				CASE WHEN Calificacion_Cant_Estrellas = 1 THEN 1
+					 ELSE TODO_X2_LUCAS.Obtener_Calificacion(CAST(m.Calificacion_Cant_Estrellas/2 as int)) END
+FROM gd_esquema.Maestra M JOIN TODO_X2_LUCAS.Publicaciones P ON(M.Publicacion_Cod=P.Cod_Publicacion_Anterior)
+WHERE Compra_Fecha IS NOT NULL
+	AND Calificacion_Codigo IS NOT NULL
+	AND Publicacion_Tipo = 'Subasta' 
 
 --MIGRACION TABLA FACTURAS -- (58726)
 INSERT INTO TODO_X2_LUCAS.Facturas(Nro_Factura,Fecha_Factura,Total_Factura,Vendedor_Correspondiente,Cod_Forma_De_Pago,Cod_Publicacion)
