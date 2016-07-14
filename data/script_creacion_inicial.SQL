@@ -1378,8 +1378,8 @@ BEGIN
 		EXEC @codDomicilio = TODO_X2_LUCAS.Alta_Domicilio @calle,@nro_Calle,@piso,@depto,@localidad;
 
 		INSERT INTO TODO_X2_LUCAS.Detalles_Empresas(Ciudad,Cod_Domicilio,Cod_Postal,Cod_Usuario,CUIT,Estado_Empresa,
-													Mail,Razon_Social,Rubro,Nombre_De_Contacto)
-		VALUES (@ciudad,@codDomicilio,@cod_Postal,@codUsuario,@CUIT,@estado_Empresa,@mail,@razon_Social,@rubro,@nombreDeContacto)
+													Mail,Razon_Social,Rubro,Nombre_De_Contacto,Telefono)
+		VALUES (@ciudad,@codDomicilio,@cod_Postal,@codUsuario,@CUIT,@estado_Empresa,@mail,@razon_Social,@rubro,@nombreDeContacto,@telefono)
 		
 	END
 	ELSE
