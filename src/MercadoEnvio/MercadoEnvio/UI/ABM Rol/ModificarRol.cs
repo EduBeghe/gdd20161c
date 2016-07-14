@@ -39,12 +39,26 @@ namespace MercadoEnvio.UI.ABM_Rol
             {
                 new RolesRepository().modificarEstado(rol, estadoCheckBox.Checked);
             }
+            var listaAgregar = new List<Funcionalidades>();
+            var listaEliminar = new List<Funcionalidades>();
             foreach (Object item in FuncionalidadesListBox.Items)
             {
-                if (FuncionalidadesListBox.CheckedItems.Contains(item)
-                    && !rol.funcionalidad.Exists(x => x.Descripcion_Funcionalidad == item.ToString())) { new RolesRepository().agregarRelacionRolFuncionabilidad(rol.Nombre, (Funcionalidades)item); }
-                if (!FuncionalidadesListBox.CheckedItems.Contains(item) &&
-                    rol.funcionalidad.Exists(x => x.Descripcion_Funcionalidad == item.ToString())) { new RolesRepository().quitarFuncionabilidad(rol.Cod_Rol, (Funcionalidades)item); }
+                if (rol.funcionalidad.Exists(x => x.Cod_Funcionalidad == ((Funcionalidades)item).Cod_Funcionalidad) && !FuncionalidadesListBox.CheckedItems.Contains(item))
+                {
+                    listaEliminar.Add((Funcionalidades)item);
+                }
+                if (!rol.funcionalidad.Exists(x => x.Cod_Funcionalidad == ((Funcionalidades)item).Cod_Funcionalidad) && FuncionalidadesListBox.CheckedItems.Contains(item))
+                {
+                    listaAgregar.Add((Funcionalidades)item);
+                }
+            }
+            foreach (Funcionalidades item in listaAgregar)
+            {
+                new RolesRepository().agregarRelacionRolFuncionabilidad(rol.Nombre, item);
+            }
+            foreach (Funcionalidades item in listaEliminar)
+            {
+                new RolesRepository().quitarFuncionabilidad(rol.Cod_Rol, item);
             }
             MessageBox.Show("Rol modificado con exito");
             this.Close();
