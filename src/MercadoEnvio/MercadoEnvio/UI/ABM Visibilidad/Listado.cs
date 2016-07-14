@@ -31,11 +31,7 @@ namespace MercadoEnvio.UI.ABM_Visibilidad
             // TODO: This line of code loads data into the 'gD1C2016DataSet1.Visibilidades_Publicaciones' table. You can move, or remove it, as needed.
             this.visibilidades_PublicacionesTableAdapter.Fill(this.gD1C2016DataSet1.Visibilidades_Publicaciones);
             var usuario = CLC_SessionManager.currentUser;
-            List<Funcionalidades> funcionalidades = new List<Funcionalidades>();
-            foreach (Rol rol in usuario.roles)
-            {
-                funcionalidades.AddRange(rol.funcionalidad);
-            }
+            var funcionalidades = usuario.rol.funcionalidad;
             button2.Hide();
             button3.Hide();
             foreach (Funcionalidades funcionalidad in funcionalidades)

@@ -61,17 +61,17 @@
             // publicacionesGrid
             // 
             this.publicacionesGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.publicacionesGrid.Location = new System.Drawing.Point(29, 245);
+            this.publicacionesGrid.Location = new System.Drawing.Point(31, 241);
             this.publicacionesGrid.Name = "publicacionesGrid";
             this.publicacionesGrid.ReadOnly = true;
             this.publicacionesGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.publicacionesGrid.Size = new System.Drawing.Size(405, 228);
+            this.publicacionesGrid.Size = new System.Drawing.Size(415, 228);
             this.publicacionesGrid.TabIndex = 1;
             this.publicacionesGrid.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.publicacionesGrid_CellContentClick);
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(29, 202);
+            this.button1.Location = new System.Drawing.Point(40, 202);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(108, 23);
             this.button1.TabIndex = 2;
@@ -81,7 +81,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(304, 202);
+            this.button2.Location = new System.Drawing.Point(323, 202);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(111, 23);
             this.button2.TabIndex = 3;
@@ -91,7 +91,7 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(168, 202);
+            this.button3.Location = new System.Drawing.Point(186, 202);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(107, 23);
             this.button3.TabIndex = 4;
@@ -166,7 +166,7 @@
             // linkLabel1
             // 
             this.linkLabel1.AutoSize = true;
-            this.linkLabel1.Location = new System.Drawing.Point(179, 492);
+            this.linkLabel1.Location = new System.Drawing.Point(183, 489);
             this.linkLabel1.Name = "linkLabel1";
             this.linkLabel1.Size = new System.Drawing.Size(19, 13);
             this.linkLabel1.TabIndex = 13;
@@ -177,7 +177,7 @@
             // linkLabel2
             // 
             this.linkLabel2.AutoSize = true;
-            this.linkLabel2.Location = new System.Drawing.Point(204, 492);
+            this.linkLabel2.Location = new System.Drawing.Point(208, 489);
             this.linkLabel2.Name = "linkLabel2";
             this.linkLabel2.Size = new System.Drawing.Size(13, 13);
             this.linkLabel2.TabIndex = 14;
@@ -188,7 +188,7 @@
             // linkLabel3
             // 
             this.linkLabel3.AutoSize = true;
-            this.linkLabel3.Location = new System.Drawing.Point(237, 492);
+            this.linkLabel3.Location = new System.Drawing.Point(240, 489);
             this.linkLabel3.Name = "linkLabel3";
             this.linkLabel3.Size = new System.Drawing.Size(13, 13);
             this.linkLabel3.TabIndex = 15;
@@ -199,7 +199,7 @@
             // linkLabel4
             // 
             this.linkLabel4.AutoSize = true;
-            this.linkLabel4.Location = new System.Drawing.Point(256, 492);
+            this.linkLabel4.Location = new System.Drawing.Point(259, 489);
             this.linkLabel4.Name = "linkLabel4";
             this.linkLabel4.Size = new System.Drawing.Size(19, 13);
             this.linkLabel4.TabIndex = 16;
@@ -211,7 +211,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(448, 518);
+            this.ClientSize = new System.Drawing.Size(468, 518);
             this.Controls.Add(this.linkLabel4);
             this.Controls.Add(this.linkLabel3);
             this.Controls.Add(this.linkLabel2);

@@ -56,11 +56,7 @@ namespace MercadoEnvio.UI.Menu
         private void FunctionsMenu_Load(object sender, EventArgs e)
         {
             var usuario = CLC_SessionManager.currentUser;
-            List<Funcionalidades> funcionalidades = new List<Funcionalidades>();
-            foreach( Rol rol in usuario.roles )
-            {
-                funcionalidades.AddRange( rol.funcionalidad );
-            }
+            var funcionalidades = usuario.rol.funcionalidad;
             button1.Hide();
             button9.Hide();
             button2.Hide();
@@ -107,26 +103,7 @@ namespace MercadoEnvio.UI.Menu
                 if(funcionalidad.Cod_Funcionalidad.Equals(18))
                 {
                     button5.Show();
-                }
-                if (CLC_SessionManager.esEmpresa())
-                {
-                    button12.Hide();
-                    button8.Hide();
-                    button4.Hide();
-                    button2.Hide();
-                }
-                if (CLC_SessionManager.esCliente())
-                {
-                    button8.Hide();
-                    button4.Hide();
-                    button2.Hide();
-                }
-                if (CLC_SessionManager.esAdministrador())
-                {
-                    button11.Hide();
-                    button12.Hide();
-                    button14.Hide();
-                }
+                } 
             }
         }
 
@@ -204,11 +181,6 @@ namespace MercadoEnvio.UI.Menu
         private void button3_Click_1(object sender, EventArgs e)
         {
             new Generar_Publicación.ListadoPublicaciones().ShowDialog();
-        }
-
-        private void button16_Click(object sender, EventArgs e)
-        {
-            new CambiarPassword().ShowDialog();
         }
     }
 }

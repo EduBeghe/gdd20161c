@@ -1,64 +1,63 @@
-C:\Users\mujic\git\gdd20161c\src\MercadoEnvio\MercadoEnvio\bin\Debug\MercadoEnvio.exe.config
-C:\Users\Mujics\Documents\GitHub\gdd20161c\src\MercadoEnvio\MercadoEnvio\bin\Debug\MercadoEnvio.exe.config
-C:\Users\mujic\git\gdd20161c\src\MercadoEnvio\MercadoEnvio\obj\Debug\MercadoEnvio.csprojResolveAssemblyReference.cache
-C:\Users\mujic\git\gdd20161c\src\MercadoEnvio\MercadoEnvio\obj\Debug\MercadoEnvio.BienvenidaWindow.resources
-C:\Users\mujic\git\gdd20161c\src\MercadoEnvio\MercadoEnvio\obj\Debug\MercadoEnvio.Properties.Resources.resources
-C:\Users\mujic\git\gdd20161c\src\MercadoEnvio\MercadoEnvio\obj\Debug\MercadoEnvio.ABM_Rol.AltaRol.resources
-C:\Users\mujic\git\gdd20161c\src\MercadoEnvio\MercadoEnvio\obj\Debug\MercadoEnvio.UI.ABM_Rol.Listado.resources
-C:\Users\mujic\git\gdd20161c\src\MercadoEnvio\MercadoEnvio\obj\Debug\MercadoEnvio.UI.ABM_Rol.ModificarRol.resources
-C:\Users\mujic\git\gdd20161c\src\MercadoEnvio\MercadoEnvio\obj\Debug\MercadoEnvio.UI.ABM_Usuario.AltaCliente.resources
-C:\Users\mujic\git\gdd20161c\src\MercadoEnvio\MercadoEnvio\obj\Debug\MercadoEnvio.UI.ABM_Usuario.AltaEmpresa.resources
-C:\Users\mujic\git\gdd20161c\src\MercadoEnvio\MercadoEnvio\obj\Debug\MercadoEnvio.ABM_Usuario.AltaUsuario.resources
-C:\Users\mujic\git\gdd20161c\src\MercadoEnvio\MercadoEnvio\obj\Debug\MercadoEnvio.UI.ABM_Usuario.BuscadorClientes.resources
-C:\Users\mujic\git\gdd20161c\src\MercadoEnvio\MercadoEnvio\obj\Debug\MercadoEnvio.UI.ABM_Usuario.BuscadorEmpresas.resources
-C:\Users\mujic\git\gdd20161c\src\MercadoEnvio\MercadoEnvio\obj\Debug\MercadoEnvio.UI.ABM_Visibilidad.AltaVisibilidad.resources
-C:\Users\mujic\git\gdd20161c\src\MercadoEnvio\MercadoEnvio\obj\Debug\MercadoEnvio.UI.ABM_Visibilidad.ListadoVisibilidad.resources
-C:\Users\mujic\git\gdd20161c\src\MercadoEnvio\MercadoEnvio\obj\Debug\MercadoEnvio.Calificar.CalificarVendedor.resources
-C:\Users\mujic\git\gdd20161c\src\MercadoEnvio\MercadoEnvio\obj\Debug\MercadoEnvio.ComprarOfertar.ListadoComprarOfertar.resources
-C:\Users\mujic\git\gdd20161c\src\MercadoEnvio\MercadoEnvio\obj\Debug\MercadoEnvio.UI.ComprarOfertar.ComprarPublicacion.resources
-C:\Users\mujic\git\gdd20161c\src\MercadoEnvio\MercadoEnvio\obj\Debug\MercadoEnvio.UI.ComprarOfertar.OfertarPublicacion.resources
-C:\Users\mujic\git\gdd20161c\src\MercadoEnvio\MercadoEnvio\obj\Debug\MercadoEnvio.Facturas.ConsultaFacturas.resources
-C:\Users\mujic\git\gdd20161c\src\MercadoEnvio\MercadoEnvio\obj\Debug\MercadoEnvio.UI.Generar_Publicación.ListadoPublicaciones.resources
-C:\Users\mujic\git\gdd20161c\src\MercadoEnvio\MercadoEnvio\obj\Debug\MercadoEnvio.Historial_Cliente.Form1.resources
-C:\Users\mujic\git\gdd20161c\src\MercadoEnvio\MercadoEnvio\obj\Debug\MercadoEnvio.UI.Listado_Estadistico.ListadoEstadistico.resources
-C:\Users\mujic\git\gdd20161c\src\MercadoEnvio\MercadoEnvio\obj\Debug\MercadoEnvio.UI.Login.LoginScreen.resources
-C:\Users\mujic\git\gdd20161c\src\MercadoEnvio\MercadoEnvio\obj\Debug\MercadoEnvio.UI.Login.SeleccionRol.resources
-C:\Users\mujic\git\gdd20161c\src\MercadoEnvio\MercadoEnvio\obj\Debug\MercadoEnvio.UI.Menu.FunctionsMenu.resources
-C:\Users\mujic\git\gdd20161c\src\MercadoEnvio\MercadoEnvio\obj\Debug\MercadoEnvio.csproj.GenerateResource.Cache
-C:\Users\mujic\git\gdd20161c\src\MercadoEnvio\MercadoEnvio\obj\Debug\MercadoEnvio.exe
-C:\Users\mujic\git\gdd20161c\src\MercadoEnvio\MercadoEnvio\obj\Debug\MercadoEnvio.pdb
-C:\Users\mujic\git\gdd20161c\src\MercadoEnvio\MercadoEnvio\bin\Debug\MercadoEnvio.exe
-C:\Users\mujic\git\gdd20161c\src\MercadoEnvio\MercadoEnvio\bin\Debug\MercadoEnvio.pdb
-C:\Users\mujic\git\gdd20161c\src\MercadoEnvio\MercadoEnvio\obj\Debug\MercadoEnvio.UI.Generar_Publicación.GenerarPublicaciones.resources
 E:\Edu\Facu\UTN\Gestion de Datos\TP GDD\1 C 2016\gdd20161c\src\MercadoEnvio\MercadoEnvio\bin\Debug\MercadoEnvio.exe.config
-E:\Edu\Facu\UTN\Gestion de Datos\TP GDD\1 C 2016\gdd20161c\src\MercadoEnvio\MercadoEnvio\bin\Debug\MercadoEnvio.exe
-E:\Edu\Facu\UTN\Gestion de Datos\TP GDD\1 C 2016\gdd20161c\src\MercadoEnvio\MercadoEnvio\bin\Debug\MercadoEnvio.pdb
 E:\Edu\Facu\UTN\Gestion de Datos\TP GDD\1 C 2016\gdd20161c\src\MercadoEnvio\MercadoEnvio\obj\Debug\MercadoEnvio.csprojResolveAssemblyReference.cache
 E:\Edu\Facu\UTN\Gestion de Datos\TP GDD\1 C 2016\gdd20161c\src\MercadoEnvio\MercadoEnvio\obj\Debug\MercadoEnvio.BienvenidaWindow.resources
 E:\Edu\Facu\UTN\Gestion de Datos\TP GDD\1 C 2016\gdd20161c\src\MercadoEnvio\MercadoEnvio\obj\Debug\MercadoEnvio.Properties.Resources.resources
 E:\Edu\Facu\UTN\Gestion de Datos\TP GDD\1 C 2016\gdd20161c\src\MercadoEnvio\MercadoEnvio\obj\Debug\MercadoEnvio.ABM_Rol.AltaRol.resources
 E:\Edu\Facu\UTN\Gestion de Datos\TP GDD\1 C 2016\gdd20161c\src\MercadoEnvio\MercadoEnvio\obj\Debug\MercadoEnvio.UI.ABM_Rol.Listado.resources
-E:\Edu\Facu\UTN\Gestion de Datos\TP GDD\1 C 2016\gdd20161c\src\MercadoEnvio\MercadoEnvio\obj\Debug\MercadoEnvio.UI.ABM_Rol.ModificarRol.resources
 E:\Edu\Facu\UTN\Gestion de Datos\TP GDD\1 C 2016\gdd20161c\src\MercadoEnvio\MercadoEnvio\obj\Debug\MercadoEnvio.UI.ABM_Usuario.AltaCliente.resources
 E:\Edu\Facu\UTN\Gestion de Datos\TP GDD\1 C 2016\gdd20161c\src\MercadoEnvio\MercadoEnvio\obj\Debug\MercadoEnvio.UI.ABM_Usuario.AltaEmpresa.resources
 E:\Edu\Facu\UTN\Gestion de Datos\TP GDD\1 C 2016\gdd20161c\src\MercadoEnvio\MercadoEnvio\obj\Debug\MercadoEnvio.ABM_Usuario.AltaUsuario.resources
-E:\Edu\Facu\UTN\Gestion de Datos\TP GDD\1 C 2016\gdd20161c\src\MercadoEnvio\MercadoEnvio\obj\Debug\MercadoEnvio.UI.ABM_Usuario.BuscadorClientes.resources
-E:\Edu\Facu\UTN\Gestion de Datos\TP GDD\1 C 2016\gdd20161c\src\MercadoEnvio\MercadoEnvio\obj\Debug\MercadoEnvio.UI.ABM_Usuario.BuscadorEmpresas.resources
 E:\Edu\Facu\UTN\Gestion de Datos\TP GDD\1 C 2016\gdd20161c\src\MercadoEnvio\MercadoEnvio\obj\Debug\MercadoEnvio.UI.ABM_Visibilidad.AltaVisibilidad.resources
-E:\Edu\Facu\UTN\Gestion de Datos\TP GDD\1 C 2016\gdd20161c\src\MercadoEnvio\MercadoEnvio\obj\Debug\MercadoEnvio.UI.ABM_Visibilidad.ListadoVisibilidad.resources
-E:\Edu\Facu\UTN\Gestion de Datos\TP GDD\1 C 2016\gdd20161c\src\MercadoEnvio\MercadoEnvio\obj\Debug\MercadoEnvio.Calificar.CalificarVendedor.resources
-E:\Edu\Facu\UTN\Gestion de Datos\TP GDD\1 C 2016\gdd20161c\src\MercadoEnvio\MercadoEnvio\obj\Debug\MercadoEnvio.ComprarOfertar.ListadoComprarOfertar.resources
-E:\Edu\Facu\UTN\Gestion de Datos\TP GDD\1 C 2016\gdd20161c\src\MercadoEnvio\MercadoEnvio\obj\Debug\MercadoEnvio.UI.ComprarOfertar.ComprarPublicacion.resources
-E:\Edu\Facu\UTN\Gestion de Datos\TP GDD\1 C 2016\gdd20161c\src\MercadoEnvio\MercadoEnvio\obj\Debug\MercadoEnvio.UI.ComprarOfertar.OfertarPublicacion.resources
-E:\Edu\Facu\UTN\Gestion de Datos\TP GDD\1 C 2016\gdd20161c\src\MercadoEnvio\MercadoEnvio\obj\Debug\MercadoEnvio.Facturas.ConsultaFacturas.resources
-E:\Edu\Facu\UTN\Gestion de Datos\TP GDD\1 C 2016\gdd20161c\src\MercadoEnvio\MercadoEnvio\obj\Debug\MercadoEnvio.UI.Generar_Publicación.GenerarPublicaciones.resources
-E:\Edu\Facu\UTN\Gestion de Datos\TP GDD\1 C 2016\gdd20161c\src\MercadoEnvio\MercadoEnvio\obj\Debug\MercadoEnvio.UI.Generar_Publicación.ListadoPublicaciones.resources
 E:\Edu\Facu\UTN\Gestion de Datos\TP GDD\1 C 2016\gdd20161c\src\MercadoEnvio\MercadoEnvio\obj\Debug\MercadoEnvio.Historial_Cliente.Form1.resources
-E:\Edu\Facu\UTN\Gestion de Datos\TP GDD\1 C 2016\gdd20161c\src\MercadoEnvio\MercadoEnvio\obj\Debug\MercadoEnvio.UI.Listado_Estadistico.ListadoEstadistico.resources
 E:\Edu\Facu\UTN\Gestion de Datos\TP GDD\1 C 2016\gdd20161c\src\MercadoEnvio\MercadoEnvio\obj\Debug\MercadoEnvio.UI.Login.LoginScreen.resources
 E:\Edu\Facu\UTN\Gestion de Datos\TP GDD\1 C 2016\gdd20161c\src\MercadoEnvio\MercadoEnvio\obj\Debug\MercadoEnvio.UI.Login.SeleccionRol.resources
 E:\Edu\Facu\UTN\Gestion de Datos\TP GDD\1 C 2016\gdd20161c\src\MercadoEnvio\MercadoEnvio\obj\Debug\MercadoEnvio.UI.Menu.FunctionsMenu.resources
 E:\Edu\Facu\UTN\Gestion de Datos\TP GDD\1 C 2016\gdd20161c\src\MercadoEnvio\MercadoEnvio\obj\Debug\MercadoEnvio.csproj.GenerateResource.Cache
+C:\Users\Mujics\Documents\GitHub\gdd20161c\src\MercadoEnvio\MercadoEnvio\bin\Debug\MercadoEnvio.exe.config
+E:\Edu\Facu\UTN\Gestion de Datos\TP GDD\1 C 2016\gdd20161c\src\MercadoEnvio\MercadoEnvio\bin\Debug\MercadoEnvio.exe
+E:\Edu\Facu\UTN\Gestion de Datos\TP GDD\1 C 2016\gdd20161c\src\MercadoEnvio\MercadoEnvio\bin\Debug\MercadoEnvio.pdb
+E:\Edu\Facu\UTN\Gestion de Datos\TP GDD\1 C 2016\gdd20161c\src\MercadoEnvio\MercadoEnvio\obj\Debug\MercadoEnvio.UI.ABM_Rol.ModificarRol.resources
+E:\Edu\Facu\UTN\Gestion de Datos\TP GDD\1 C 2016\gdd20161c\src\MercadoEnvio\MercadoEnvio\obj\Debug\MercadoEnvio.UI.ABM_Usuario.BuscadorClientes.resources
+E:\Edu\Facu\UTN\Gestion de Datos\TP GDD\1 C 2016\gdd20161c\src\MercadoEnvio\MercadoEnvio\obj\Debug\MercadoEnvio.UI.ABM_Usuario.BuscadorEmpresas.resources
+E:\Edu\Facu\UTN\Gestion de Datos\TP GDD\1 C 2016\gdd20161c\src\MercadoEnvio\MercadoEnvio\obj\Debug\MercadoEnvio.UI.ABM_Visibilidad.ListadoVisibilidad.resources
+E:\Edu\Facu\UTN\Gestion de Datos\TP GDD\1 C 2016\gdd20161c\src\MercadoEnvio\MercadoEnvio\obj\Debug\MercadoEnvio.Calificar.CalificarVendedor.resources
+E:\Edu\Facu\UTN\Gestion de Datos\TP GDD\1 C 2016\gdd20161c\src\MercadoEnvio\MercadoEnvio\obj\Debug\MercadoEnvio.UI.ComprarOfertar.ComprarPublicacion.resources
+E:\Edu\Facu\UTN\Gestion de Datos\TP GDD\1 C 2016\gdd20161c\src\MercadoEnvio\MercadoEnvio\obj\Debug\MercadoEnvio.UI.ComprarOfertar.OfertarPublicacion.resources
+E:\Edu\Facu\UTN\Gestion de Datos\TP GDD\1 C 2016\gdd20161c\src\MercadoEnvio\MercadoEnvio\obj\Debug\MercadoEnvio.UI.Listado_Estadistico.ListadoEstadistico.resources
 E:\Edu\Facu\UTN\Gestion de Datos\TP GDD\1 C 2016\gdd20161c\src\MercadoEnvio\MercadoEnvio\obj\Debug\MercadoEnvio.exe
 E:\Edu\Facu\UTN\Gestion de Datos\TP GDD\1 C 2016\gdd20161c\src\MercadoEnvio\MercadoEnvio\obj\Debug\MercadoEnvio.pdb
-E:\Edu\Facu\UTN\Gestion de Datos\TP GDD\1 C 2016\gdd20161c\src\MercadoEnvio\MercadoEnvio\obj\Debug\MercadoEnvio.UI.Menu.CambiarPassword.resources
+E:\Edu\Facu\UTN\Gestion de Datos\TP GDD\1 C 2016\gdd20161c\src\MercadoEnvio\MercadoEnvio\obj\Debug\MercadoEnvio.Facturas.ConsultaFacturas.resources
+E:\Edu\Facu\UTN\Gestion de Datos\TP GDD\1 C 2016\gdd20161c\src\MercadoEnvio\MercadoEnvio\obj\Debug\MercadoEnvio.ComprarOfertar.ListadoComprarOfertar.resources
+E:\Edu\Facu\UTN\Gestion de Datos\TP GDD\1 C 2016\gdd20161c\src\MercadoEnvio\MercadoEnvio\obj\Debug\MercadoEnvio.UI.Generar_Publicación.GenerarPublicaciones.resources
+E:\Edu\Facu\UTN\Gestion de Datos\TP GDD\1 C 2016\gdd20161c\src\MercadoEnvio\MercadoEnvio\obj\Debug\MercadoEnvio.UI.Generar_Publicación.ListadoPublicaciones.resources
+C:\Users\Elver\Desktop\MercadoEnvio\MercadoEnvio\bin\Debug\MercadoEnvio.exe.config
+C:\Users\Elver\Desktop\MercadoEnvio\MercadoEnvio\bin\Debug\MercadoEnvio.exe
+C:\Users\Elver\Desktop\MercadoEnvio\MercadoEnvio\bin\Debug\MercadoEnvio.pdb
+C:\Users\Elver\Desktop\MercadoEnvio\MercadoEnvio\obj\Debug\MercadoEnvio.csprojResolveAssemblyReference.cache
+C:\Users\Elver\Desktop\MercadoEnvio\MercadoEnvio\obj\Debug\MercadoEnvio.BienvenidaWindow.resources
+C:\Users\Elver\Desktop\MercadoEnvio\MercadoEnvio\obj\Debug\MercadoEnvio.Properties.Resources.resources
+C:\Users\Elver\Desktop\MercadoEnvio\MercadoEnvio\obj\Debug\MercadoEnvio.ABM_Rol.AltaRol.resources
+C:\Users\Elver\Desktop\MercadoEnvio\MercadoEnvio\obj\Debug\MercadoEnvio.UI.ABM_Rol.Listado.resources
+C:\Users\Elver\Desktop\MercadoEnvio\MercadoEnvio\obj\Debug\MercadoEnvio.UI.ABM_Rol.ModificarRol.resources
+C:\Users\Elver\Desktop\MercadoEnvio\MercadoEnvio\obj\Debug\MercadoEnvio.UI.ABM_Usuario.AltaCliente.resources
+C:\Users\Elver\Desktop\MercadoEnvio\MercadoEnvio\obj\Debug\MercadoEnvio.UI.ABM_Usuario.AltaEmpresa.resources
+C:\Users\Elver\Desktop\MercadoEnvio\MercadoEnvio\obj\Debug\MercadoEnvio.ABM_Usuario.AltaUsuario.resources
+C:\Users\Elver\Desktop\MercadoEnvio\MercadoEnvio\obj\Debug\MercadoEnvio.UI.ABM_Usuario.BuscadorClientes.resources
+C:\Users\Elver\Desktop\MercadoEnvio\MercadoEnvio\obj\Debug\MercadoEnvio.UI.ABM_Usuario.BuscadorEmpresas.resources
+C:\Users\Elver\Desktop\MercadoEnvio\MercadoEnvio\obj\Debug\MercadoEnvio.UI.ABM_Visibilidad.AltaVisibilidad.resources
+C:\Users\Elver\Desktop\MercadoEnvio\MercadoEnvio\obj\Debug\MercadoEnvio.UI.ABM_Visibilidad.ListadoVisibilidad.resources
+C:\Users\Elver\Desktop\MercadoEnvio\MercadoEnvio\obj\Debug\MercadoEnvio.Calificar.CalificarVendedor.resources
+C:\Users\Elver\Desktop\MercadoEnvio\MercadoEnvio\obj\Debug\MercadoEnvio.ComprarOfertar.ListadoComprarOfertar.resources
+C:\Users\Elver\Desktop\MercadoEnvio\MercadoEnvio\obj\Debug\MercadoEnvio.UI.ComprarOfertar.ComprarPublicacion.resources
+C:\Users\Elver\Desktop\MercadoEnvio\MercadoEnvio\obj\Debug\MercadoEnvio.UI.ComprarOfertar.OfertarPublicacion.resources
+C:\Users\Elver\Desktop\MercadoEnvio\MercadoEnvio\obj\Debug\MercadoEnvio.Facturas.ConsultaFacturas.resources
+C:\Users\Elver\Desktop\MercadoEnvio\MercadoEnvio\obj\Debug\MercadoEnvio.UI.Generar_Publicación.GenerarPublicaciones.resources
+C:\Users\Elver\Desktop\MercadoEnvio\MercadoEnvio\obj\Debug\MercadoEnvio.UI.Generar_Publicación.ListadoPublicaciones.resources
+C:\Users\Elver\Desktop\MercadoEnvio\MercadoEnvio\obj\Debug\MercadoEnvio.Historial_Cliente.Form1.resources
+C:\Users\Elver\Desktop\MercadoEnvio\MercadoEnvio\obj\Debug\MercadoEnvio.UI.Listado_Estadistico.ListadoEstadistico.resources
+C:\Users\Elver\Desktop\MercadoEnvio\MercadoEnvio\obj\Debug\MercadoEnvio.UI.Login.LoginScreen.resources
+C:\Users\Elver\Desktop\MercadoEnvio\MercadoEnvio\obj\Debug\MercadoEnvio.UI.Login.SeleccionRol.resources
+C:\Users\Elver\Desktop\MercadoEnvio\MercadoEnvio\obj\Debug\MercadoEnvio.UI.Menu.FunctionsMenu.resources
+C:\Users\Elver\Desktop\MercadoEnvio\MercadoEnvio\obj\Debug\MercadoEnvio.csproj.GenerateResource.Cache
+C:\Users\Elver\Desktop\MercadoEnvio\MercadoEnvio\obj\Debug\MercadoEnvio.exe
+C:\Users\Elver\Desktop\MercadoEnvio\MercadoEnvio\obj\Debug\MercadoEnvio.pdb

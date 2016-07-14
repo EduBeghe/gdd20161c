@@ -16,8 +16,7 @@ namespace MercadoEnvio.Utils
         private static Usuario _usuario;
         public static Usuario currentUser { get { if (_usuario == null) throw new NoSessionIsOpenException(); else  return _usuario; } set { _usuario = value; } }
         public static string connectionString = System.Configuration.ConfigurationManager.ConnectionStrings["GD1C2016"].ConnectionString;      
-        // rol seleccionado 
-
+        
         public static int getDNI(){
             
             var cliente = new ClientesRepository().getClienteByUserId(currentUser.Cod_Usuario);
@@ -31,26 +30,6 @@ namespace MercadoEnvio.Utils
             }
             
         }
-
-        public static bool esCliente()
-        {
-            Rol rol = currentUser.roles.Find(x => (x.Nombre == "Cliente"));
-            return (rol != null);
-        }
-
-        public static bool esEmpresa()
-        {
-            Rol rol = currentUser.roles.Find(x => (x.Nombre == "Empresa"));
-            return (rol != null);
-        }
-
-        public static bool esAdministrador()
-        {
-            Rol rol1 = currentUser.roles.Find(x => (x.Nombre == "Administrador"));
-            Rol rol2 = currentUser.roles.Find(x => (x.Nombre == "Administrador General"));
-            return (rol1 != null || rol2 != null );
-        }
-
 
         public static DateTime getFecha()
         {
@@ -72,10 +51,8 @@ namespace MercadoEnvio.Utils
             
         }
 
-        // Modificar parametro de ingreso para que se guarda el rol seleccionado
         public static void setCurrentUser(Usuario u) {
             currentUser = u;
-            // rol seeleccionado = ingreso de rol seleccionado
         }
 
         public static void closeSession()

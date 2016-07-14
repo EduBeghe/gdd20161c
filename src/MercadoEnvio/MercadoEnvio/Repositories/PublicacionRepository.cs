@@ -43,12 +43,6 @@ namespace MercadoEnvio.Repositories
             );
         }
 
-        public DataTable filtrarPublicacionesPaginado( string rubro, string descripcion, int pagina, int dni, string cuit )
-        {
-           var retorno = DBAdapter.retrieveDataTable( "Filtrar_Publicaciones_Paginado", rubro, descripcion, pagina, dni, cuit );
-           return retorno;
-        }
-
         public void modificarPublicacion(
             int Cod_Publicacion,
             string Descripcion_Publicacion,
@@ -113,9 +107,10 @@ namespace MercadoEnvio.Repositories
             return dataTable.AsEnumerable().Select(dr => parse(dr)).ToList();
         }
 
-        public int getCantidadPaginas(string rubro, string descripcion, int dni, string cuit)
+        public DataTable filtrarPublicacionesPaginado(string rubro, string descripcion, int pagina, int dni, string cuit)
         {
-            return DBAdapter.executeProcedureWithReturnValue("Cantidad_Publicaciones_Filtradas",rubro, descripcion, dni, cuit);
+            var retorno = DBAdapter.retrieveDataTable("Filtrar_Publicaciones_Paginado", rubro, descripcion, pagina, dni, cuit, "Activa");
+            return retorno;
         }
 
         public Publicaciones parse(DataRow dr)
@@ -138,6 +133,7 @@ namespace MercadoEnvio.Repositories
                 dr["Entregas"]== null ? false : (Boolean)dr["Entregas"]
             );
         }
+
         
     }
 }

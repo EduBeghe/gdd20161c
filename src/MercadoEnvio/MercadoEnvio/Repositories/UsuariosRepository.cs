@@ -65,13 +65,6 @@ namespace MercadoEnvio.Repositories
             DBAdapter.executeProcedure("ActualizarIntentos", userName, cantidad);
         }
 
-        public int cambiarPassword(string nuevaPass)
-        {
-            var usuario = CLC_SessionManager.currentUser;
-            var retorno = DBAdapter.executeProcedureWithReturnValue("Modificar_Usuario", usuario.Nombre_Usuario, usuario.password, nuevaPass);
-            return retorno;
-        }
-
 
         private Usuario parse(DataRow dr)
         {
@@ -83,7 +76,7 @@ namespace MercadoEnvio.Repositories
 
                dr["contrasenia"] as string,
 
-               new RolesRepository().getRolesDeUsuario(Convert.ToInt32(dr["Cod_Usuario"])),
+               new RolesRepository().getRol(Convert.ToInt32(dr["Cod_Rol"])),
 
                Convert.ToInt32(dr["Intentos_Login"]),
 
