@@ -1592,13 +1592,14 @@ BEGIN
 			WHERE p.Cod_Usuario_Responsable != @usuario AND
 			(R.Descripcion_Rubro LIKE '%' + @rubro + '%') AND 
 			(Descripcion_Publicacion LIKE '%' + @descripcion + '%' AND
-			P.Cod_Estado_Publicacion = TODO_X2_LUCAS.Obtener_Estado(@estado) AND
+			(P.Cod_Estado_Publicacion = TODO_X2_LUCAS.Obtener_Estado(@estado) OR @estado = '')AND
 			@fechaConfig	< = p.Fecha_Vencimiento_Publicacion ) ) AS I
 	WHERE 	(i.RowNumber BETWEEN (@pagina * 10) - 9 AND (@pagina * 10))
 			
 
 END
 GO
+exec TODO_X2_LUCAS.Filtrar_Publicaciones_Paginado '','',1,52342120,'','Activa'
 
 /* ------------ PROCEDIMIENTO PARA FILTRAR PUBLICACIONES ------------ */
 CREATE PROCEDURE TODO_X2_LUCAS.Filtrar_Publicaciones(@rubro1 nvarchar(255),@rubro2 nvarchar(255),@rubro3 nvarchar(255),
