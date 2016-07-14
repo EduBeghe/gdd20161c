@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.label1 = new System.Windows.Forms.Label();
             this.publicacionesGrid = new System.Windows.Forms.DataGridView();
             this.button1 = new System.Windows.Forms.Button();
@@ -35,17 +36,20 @@
             this.button3 = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.descTextBox = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.rubroTextBox3 = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.rubroTextBox2 = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.rubroTextBox1 = new System.Windows.Forms.TextBox();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.linkLabel2 = new System.Windows.Forms.LinkLabel();
             this.linkLabel3 = new System.Windows.Forms.LinkLabel();
             this.linkLabel4 = new System.Windows.Forms.LinkLabel();
+            this.label3 = new System.Windows.Forms.Label();
+            this.estadoComboBox = new System.Windows.Forms.ComboBox();
+            this.gD1C2016DataSet18 = new MercadoEnvio.GD1C2016DataSet18();
+            this.estadosPublicacionesBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.estados_PublicacionesTableAdapter = new MercadoEnvio.GD1C2016DataSet18TableAdapters.Estados_PublicacionesTableAdapter();
             ((System.ComponentModel.ISupportInitialize)(this.publicacionesGrid)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gD1C2016DataSet18)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.estadosPublicacionesBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -102,7 +106,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(37, 165);
+            this.label2.Location = new System.Drawing.Point(37, 105);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(63, 13);
             this.label2.TabIndex = 5;
@@ -110,42 +114,10 @@
             // 
             // descTextBox
             // 
-            this.descTextBox.Location = new System.Drawing.Point(155, 162);
+            this.descTextBox.Location = new System.Drawing.Point(153, 105);
             this.descTextBox.Name = "descTextBox";
             this.descTextBox.Size = new System.Drawing.Size(281, 20);
             this.descTextBox.TabIndex = 6;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(37, 133);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(36, 13);
-            this.label3.TabIndex = 7;
-            this.label3.Text = "Rubro";
-            // 
-            // rubroTextBox3
-            // 
-            this.rubroTextBox3.Location = new System.Drawing.Point(155, 130);
-            this.rubroTextBox3.Name = "rubroTextBox3";
-            this.rubroTextBox3.Size = new System.Drawing.Size(280, 20);
-            this.rubroTextBox3.TabIndex = 8;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(37, 99);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(36, 13);
-            this.label4.TabIndex = 9;
-            this.label4.Text = "Rubro";
-            // 
-            // rubroTextBox2
-            // 
-            this.rubroTextBox2.Location = new System.Drawing.Point(155, 94);
-            this.rubroTextBox2.Name = "rubroTextBox2";
-            this.rubroTextBox2.Size = new System.Drawing.Size(280, 20);
-            this.rubroTextBox2.TabIndex = 10;
             // 
             // label5
             // 
@@ -207,21 +179,53 @@
             this.linkLabel4.Text = ">>";
             this.linkLabel4.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel4_LinkClicked);
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(37, 150);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(40, 13);
+            this.label3.TabIndex = 17;
+            this.label3.Text = "Estado";
+            // 
+            // estadoComboBox
+            // 
+            this.estadoComboBox.DataSource = this.estadosPublicacionesBindingSource;
+            this.estadoComboBox.DisplayMember = "Descripcion_Estado";
+            this.estadoComboBox.FormattingEnabled = true;
+            this.estadoComboBox.Location = new System.Drawing.Point(155, 147);
+            this.estadoComboBox.Name = "estadoComboBox";
+            this.estadoComboBox.Size = new System.Drawing.Size(279, 21);
+            this.estadoComboBox.TabIndex = 18;
+            this.estadoComboBox.ValueMember = "Descripcion_Estado";
+            // 
+            // gD1C2016DataSet18
+            // 
+            this.gD1C2016DataSet18.DataSetName = "GD1C2016DataSet18";
+            this.gD1C2016DataSet18.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // estadosPublicacionesBindingSource
+            // 
+            this.estadosPublicacionesBindingSource.DataMember = "Estados_Publicaciones";
+            this.estadosPublicacionesBindingSource.DataSource = this.gD1C2016DataSet18;
+            // 
+            // estados_PublicacionesTableAdapter
+            // 
+            this.estados_PublicacionesTableAdapter.ClearBeforeFill = true;
+            // 
             // ListadoComprarOfertar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(468, 518);
+            this.Controls.Add(this.estadoComboBox);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.linkLabel4);
             this.Controls.Add(this.linkLabel3);
             this.Controls.Add(this.linkLabel2);
             this.Controls.Add(this.linkLabel1);
             this.Controls.Add(this.rubroTextBox1);
             this.Controls.Add(this.label5);
-            this.Controls.Add(this.rubroTextBox2);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.rubroTextBox3);
-            this.Controls.Add(this.label3);
             this.Controls.Add(this.descTextBox);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.button3);
@@ -233,6 +237,8 @@
             this.Text = "Comprar y Ofertar";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.publicacionesGrid)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gD1C2016DataSet18)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.estadosPublicacionesBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -247,10 +253,6 @@
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox descTextBox;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox rubroTextBox3;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox rubroTextBox2;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox rubroTextBox1;
         private System.Windows.Forms.DataGridViewTextBoxColumn codPublicacionDataGridViewTextBoxColumn;
@@ -272,5 +274,10 @@
         private System.Windows.Forms.LinkLabel linkLabel2;
         private System.Windows.Forms.LinkLabel linkLabel3;
         private System.Windows.Forms.LinkLabel linkLabel4;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.ComboBox estadoComboBox;
+        private GD1C2016DataSet18 gD1C2016DataSet18;
+        private System.Windows.Forms.BindingSource estadosPublicacionesBindingSource;
+        private GD1C2016DataSet18TableAdapters.Estados_PublicacionesTableAdapter estados_PublicacionesTableAdapter;
     }
 }

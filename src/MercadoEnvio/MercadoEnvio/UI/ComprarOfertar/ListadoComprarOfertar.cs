@@ -33,7 +33,19 @@ namespace MercadoEnvio.ComprarOfertar
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            this.publicacionesGrid.DataSource = new PublicacionRepository().filtrarPublicacionesPaginado(rubroTextBox1.Text, descTextBox.Text, 1, CLC_SessionManager.getDNI(), CLC_SessionManager.getCUIT());
+            // TODO: esta línea de código carga datos en la tabla 'gD1C2016DataSet18.Estados_Publicaciones' Puede moverla o quitarla según sea necesario.
+            this.pagesCounter = 1;
+            var resultsAmount = new PublicacionRepository().getCantidadPaginas(rubroTextBox1.Text, descTextBox.Text, CLC_SessionManager.getDNI(), CLC_SessionManager.getCUIT());
+            if(resultsAmount % 10 > 0)
+            {
+                this.pagesMax = (resultsAmount / 10) + 1;
+            }
+            else
+            {
+                this.pagesMax = (resultsAmount / 10);
+            }
+            this.estados_PublicacionesTableAdapter.Fill(this.gD1C2016DataSet18.Estados_Publicaciones);
+            this.publicacionesGrid.DataSource = new PublicacionRepository().filtrarPublicacionesPaginado(rubroTextBox1.Text, descTextBox.Text, 1, CLC_SessionManager.getDNI(), CLC_SessionManager.getCUIT(), Convert.ToString(estadoComboBox.SelectedValue));
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -58,7 +70,7 @@ namespace MercadoEnvio.ComprarOfertar
 
         private void button3_Click(object sender, EventArgs e)
         {
-            this.publicacionesGrid.DataSource = new PublicacionRepository().filtrarPublicacionesPaginado(rubroTextBox1.Text, descTextBox.Text, 1, CLC_SessionManager.getDNI(), CLC_SessionManager.getCUIT());
+            this.publicacionesGrid.DataSource = new PublicacionRepository().filtrarPublicacionesPaginado(rubroTextBox1.Text, descTextBox.Text, 1, CLC_SessionManager.getDNI(), CLC_SessionManager.getCUIT(), Convert.ToString(estadoComboBox.SelectedValue));
         }
 
         private void publicacionesGrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -69,13 +81,13 @@ namespace MercadoEnvio.ComprarOfertar
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             this.pagesCounter = 1;
-            this.publicacionesGrid.DataSource = new PublicacionRepository().filtrarPublicacionesPaginado(rubroTextBox1.Text, descTextBox.Text, 1, CLC_SessionManager.getDNI(), CLC_SessionManager.getCUIT());
+            this.publicacionesGrid.DataSource = new PublicacionRepository().filtrarPublicacionesPaginado(rubroTextBox1.Text, descTextBox.Text, 1, CLC_SessionManager.getDNI(), CLC_SessionManager.getCUIT(), Convert.ToString(estadoComboBox.SelectedValue));
         }
 
         private void linkLabel4_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             this.pagesCounter = this.pagesMax;
-            this.publicacionesGrid.DataSource = new PublicacionRepository().filtrarPublicacionesPaginado(rubroTextBox1.Text, descTextBox.Text, this.pagesMax, CLC_SessionManager.getDNI(), CLC_SessionManager.getCUIT());
+            this.publicacionesGrid.DataSource = new PublicacionRepository().filtrarPublicacionesPaginado(rubroTextBox1.Text, descTextBox.Text, this.pagesMax, CLC_SessionManager.getDNI(), CLC_SessionManager.getCUIT(), Convert.ToString(estadoComboBox.SelectedValue));
         }
 
         private void linkLabel3_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -83,7 +95,7 @@ namespace MercadoEnvio.ComprarOfertar
             if (pagesCounter < this.pagesMax)
             {
                 pagesCounter++;
-                this.publicacionesGrid.DataSource = new PublicacionRepository().filtrarPublicacionesPaginado(rubroTextBox1.Text, descTextBox.Text, pagesCounter, CLC_SessionManager.getDNI(), CLC_SessionManager.getCUIT());
+                this.publicacionesGrid.DataSource = new PublicacionRepository().filtrarPublicacionesPaginado(rubroTextBox1.Text, descTextBox.Text, pagesCounter, CLC_SessionManager.getDNI(), CLC_SessionManager.getCUIT(), Convert.ToString(estadoComboBox.SelectedValue));
             }
             else
             {
@@ -96,7 +108,7 @@ namespace MercadoEnvio.ComprarOfertar
             if (pagesCounter > 1)
             {
                 pagesCounter--;
-                this.publicacionesGrid.DataSource = new PublicacionRepository().filtrarPublicacionesPaginado(rubroTextBox1.Text, descTextBox.Text, pagesCounter, CLC_SessionManager.getDNI(), CLC_SessionManager.getCUIT());
+                this.publicacionesGrid.DataSource = new PublicacionRepository().filtrarPublicacionesPaginado(rubroTextBox1.Text, descTextBox.Text, pagesCounter, CLC_SessionManager.getDNI(), CLC_SessionManager.getCUIT(), Convert.ToString(estadoComboBox.SelectedValue));
             }
             else
             {
