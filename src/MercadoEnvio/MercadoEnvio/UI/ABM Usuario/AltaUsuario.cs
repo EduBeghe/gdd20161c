@@ -35,7 +35,7 @@ namespace MercadoEnvio.ABM_Usuario
         {
             if (Validacion.validarInputs(this.Controls))
             {
-                var rolName = (string)rolComboBox.SelectedValue;
+                var rolName = (string)rolComboBox.SelectedItem;
                 var retornoAlta = new UsuariosRepository().altaUsuario(usernameTextBox.Text, passwordTextBox.Text, rolName);
                 if (retornoAlta == 0)
                 {
@@ -59,8 +59,7 @@ namespace MercadoEnvio.ABM_Usuario
         private void AltaUsuario_Load(object sender, EventArgs e)
         {
             // TODO: esta línea de código carga datos en la tabla 'gD1C2016DataSet5.Roles' Puede moverla o quitarla según sea necesario.
-            this.rolesTableAdapter.Fill(this.gD1C2016DataSet5.Roles);
-
+            this.rolComboBox.SelectedIndex = 0;
         }
 
         private void textBox2_TextChanged(object sender, EventArgs e)

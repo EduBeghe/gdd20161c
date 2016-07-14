@@ -54,6 +54,7 @@ namespace MercadoEnvio.Repositories
                 CUIT,
                 rubro,
                 Estado_Empresa,
+                CLC_SessionManager.currentUser.Nombre_Usuario,
                 nombreContacto
                 );
             return retorno;

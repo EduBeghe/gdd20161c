@@ -182,6 +182,11 @@ namespace MercadoEnvio.UI.Menu
         {
             new Generar_Publicación.ListadoPublicaciones().ShowDialog();
         }
+
+        private void groupBox5_Enter(object sender, EventArgs e)
+        {
+
+        }
     }
 }
  
