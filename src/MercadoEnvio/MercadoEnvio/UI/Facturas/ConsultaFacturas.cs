@@ -58,6 +58,7 @@ namespace MercadoEnvio.Facturas
                 {
                     this.pagesMax = (resultCount / 10);
                 }
+                this.pagesCounter = 1;
             }
         }
 

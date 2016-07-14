@@ -60,6 +60,7 @@ namespace MercadoEnvio.ComprarOfertar
 
         private void button3_Click(object sender, EventArgs e)
         {
+            this.pagesCounter = 1;
             var estado = (string)estadoComboBox.SelectedValue;
             var resultsAmount = new PublicacionRepository().getCantidadResultados(rubroTextBox1.Text, descTextBox.Text, CLC_SessionManager.getDNI(), CLC_SessionManager.getCUIT(), estado);
             if (resultsAmount % 10 > 0)

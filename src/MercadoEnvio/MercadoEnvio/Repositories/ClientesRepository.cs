@@ -85,6 +85,17 @@ namespace MercadoEnvio.Repositories
             return retorno;
         }
 
+        public DataTable filtrarClientesPaginado(int dni, int pagina)
+        {
+            var retorno = DBAdapter.retrieveDataTable("Historial_Cliente_Compras_Y_Ofertas_Paginado", dni, pagina);
+            return retorno;
+        }
+
+        public int getCantidadResultados(int dni)
+        {
+            return DBAdapter.executeProcedureWithReturnValue("Cantidad_Historial_Cliente_Compras_Y_Ofertas", dni);
+        }
+
         public DetallesClientes parse(DataRow dr)
         {
             return new DetallesClientes(
