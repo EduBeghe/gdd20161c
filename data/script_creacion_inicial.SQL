@@ -1553,19 +1553,22 @@ END
 GO
 
 /* ------------ PROCEDIMIENTO PARA FILTRAR PUBLICACIONES - TOTAL FILTRADO ------------ */
-CREATE PROCEDURE TODO_X2_LUCAS.Cantidad_Publicaciones_Filtradas(@rubro nvarchar(255),@descripcion nvarchar(255),@dni numeric(18),@cuit nvarchar(50))
+CREATE PROCEDURE TODO_X2_LUCAS.Cantidad_Publicaciones_Filtradas(@rubro nvarchar(255),@descripcion nvarchar(255),@dni numeric(18),@cuit nvarchar(50),@estado nvarchar(255))
 AS
 BEGIN
-	DECLARE @cantidad int,@usuario int; 
+	DECLARE @cantidad int,@usuario int,@fechaConfig datetime; 
 	
 	SET @usuario = TODO_X2_LUCAS.ObtenerUsuario(@dni,@cuit);
+	SET @fechaConfig = (SELECT Fecha_Config FROM TODO_X2_LUCAS.Fecha)
 
 	SELECT @cantidad = COUNT(*) 
 	FROM TODO_X2_LUCAS.Publicaciones p join TODO_X2_LUCAS.Rubros r ON (p.Cod_Rubro = r.Cod_Rubro)
 										join TODO_X2_LUCAS.Tipos_Publicaciones t on (t.Cod_Tipos_Publicaciones=p.Cod_Tipos_Publicacion)
-	WHERE (R.Descripcion_Rubro LIKE '%' + @rubro + '%') AND 
-			(Descripcion_Publicacion LIKE '%' + @descripcion + '%' ) AND
-			P.Cod_Usuario_Responsable != @usuario
+	WHERE p.Cod_Usuario_Responsable != @usuario AND
+			(R.Descripcion_Rubro LIKE '%' + @rubro + '%') AND 
+			(Descripcion_Publicacion LIKE '%' + @descripcion + '%' AND
+			(P.Cod_Estado_Publicacion = TODO_X2_LUCAS.Obtener_Estado(@estado) OR @estado = '')AND
+			@fechaConfig	< = p.Fecha_Vencimiento_Publicacion )
 
 	RETURN @cantidad;
 END
