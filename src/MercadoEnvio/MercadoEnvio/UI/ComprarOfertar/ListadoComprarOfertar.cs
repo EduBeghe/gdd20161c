@@ -36,17 +36,6 @@ namespace MercadoEnvio.ComprarOfertar
             // TODO: esta línea de código carga datos en la tabla 'gD1C2016DataSet18.Estados_Publicaciones' Puede moverla o quitarla según sea necesario.
             this.pagesCounter = 1;
             this.estados_PublicacionesTableAdapter.Fill(this.gD1C2016DataSet18.Estados_Publicaciones);
-            var estado = (string)estadoComboBox.SelectedValue;
-            var resultsAmount = new PublicacionRepository().getCantidadPaginas(rubroTextBox1.Text, descTextBox.Text, CLC_SessionManager.getDNI(), CLC_SessionManager.getCUIT(), estado);
-            if(resultsAmount % 10 > 0)
-            {
-                this.pagesMax = (resultsAmount / 10) + 1;
-            }
-            else
-            {
-                this.pagesMax = (resultsAmount / 10);
-            }
-            this.publicacionesGrid.DataSource = new PublicacionRepository().filtrarPublicacionesPaginado(rubroTextBox1.Text, descTextBox.Text, 1, CLC_SessionManager.getDNI(), CLC_SessionManager.getCUIT(), estado);
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -72,7 +61,7 @@ namespace MercadoEnvio.ComprarOfertar
         private void button3_Click(object sender, EventArgs e)
         {
             var estado = (string)estadoComboBox.SelectedValue;
-            var resultsAmount = new PublicacionRepository().getCantidadPaginas(rubroTextBox1.Text, descTextBox.Text, CLC_SessionManager.getDNI(), CLC_SessionManager.getCUIT(), estado);
+            var resultsAmount = new PublicacionRepository().getCantidadResultados(rubroTextBox1.Text, descTextBox.Text, CLC_SessionManager.getDNI(), CLC_SessionManager.getCUIT(), estado);
             if (resultsAmount % 10 > 0)
             {
                 this.pagesMax = (resultsAmount / 10) + 1;

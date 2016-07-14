@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Data;
 using System.Threading.Tasks;
 using MercadoEnvio.Domain;
 using MercadoEnvio.Utils;
@@ -53,6 +54,17 @@ namespace MercadoEnvio.Repositories
                    );
             }
 
+        }
+
+        public DataTable filtrarConsultasPaginado(int dni, string cuit, DateTime fechaInicio, DateTime fechaFinal, int precioInicio, int precioFinal, int pagina)
+        {
+            var retorno = DBAdapter.retrieveDataTable("Consulta_Facturas_Paginado", dni, cuit, fechaInicio, fechaFinal, precioInicio, precioFinal, pagina);
+            return retorno;
+        }
+
+        public int getCantidadResultados(int dni, string cuit, DateTime fechaInicio, DateTime fechaFinal, int precioInicio, int precioFinal)
+        {
+            return DBAdapter.executeProcedureWithReturnValue("Cantidad_Facturas_Consultadas",dni, cuit, fechaInicio, fechaFinal, precioInicio, precioFinal);
         }
     }
 }

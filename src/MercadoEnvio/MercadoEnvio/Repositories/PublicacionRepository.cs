@@ -113,7 +113,7 @@ namespace MercadoEnvio.Repositories
             return retorno;
         }
 
-        public int getCantidadPaginas(string rubro, string descripcion, int dni, string cuit, string estado)
+        public int getCantidadResultados(string rubro, string descripcion, int dni, string cuit, string estado)
         {
             return DBAdapter.executeProcedureWithReturnValue("Cantidad_Publicaciones_Filtradas", rubro, descripcion, dni, cuit, estado);
         }
