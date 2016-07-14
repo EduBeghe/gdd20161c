@@ -1599,8 +1599,6 @@ BEGIN
 
 END
 GO
-exec TODO_X2_LUCAS.Filtrar_Publicaciones_Paginado '','',1,52342120,'','Activa'
-
 /* ------------ PROCEDIMIENTO PARA FILTRAR PUBLICACIONES ------------ */
 CREATE PROCEDURE TODO_X2_LUCAS.Filtrar_Publicaciones(@rubro1 nvarchar(255),@rubro2 nvarchar(255),@rubro3 nvarchar(255),
 														@descripcion nvarchar(255),@dni numeric(18),@cuit nvarchar(50))
