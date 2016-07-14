@@ -35,7 +35,7 @@ namespace MercadoEnvio.ComprarOfertar
         {
             // TODO: esta línea de código carga datos en la tabla 'gD1C2016DataSet18.Estados_Publicaciones' Puede moverla o quitarla según sea necesario.
             this.pagesCounter = 1;
-            var resultsAmount = new PublicacionRepository().getCantidadPaginas(rubroTextBox1.Text, descTextBox.Text, CLC_SessionManager.getDNI(), CLC_SessionManager.getCUIT());
+            var resultsAmount = new PublicacionRepository().getCantidadPaginas(rubroTextBox1.Text, descTextBox.Text, CLC_SessionManager.getDNI(), CLC_SessionManager.getCUIT() , Convert.ToString(estadoComboBox.SelectedValue));
             if(resultsAmount % 10 > 0)
             {
                 this.pagesMax = (resultsAmount / 10) + 1;
