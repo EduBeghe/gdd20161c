@@ -1369,7 +1369,7 @@ CREATE PROCEDURE TODO_X2_LUCAS.Alta_Empresa(@razon_Social nvarchar(255),@mail nv
 											@nombreDeContacto nvarchar(255))
 AS
 BEGIN
-	IF NOT EXISTS (SELECT * FROM TODO_X2_LUCAS.Detalles_Empresas WHERE CUIT = @CUIT OR Razon_Social = @razon_Social)
+	IF NOT EXISTS (SELECT * FROM TODO_X2_LUCAS.Detalles_Empresas WHERE CUIT = @CUIT)
 	BEGIN
 		DECLARE @codDomicilio int,@codUsuario int,@codRubro int;
 		SET @codUsuario = (SELECT Cod_Usuario FROM TODO_X2_LUCAS.Usuarios WHERE Nombre_Usuario = @username);
@@ -1418,7 +1418,7 @@ BEGIN
 	IF NOT EXISTS(SELECT * FROM TODO_X2_LUCAS.Visibilidades_Publicaciones WHERE Descripcion_Visibilidad = @descripcion)
 	BEGIN
 		INSERT INTO TODO_X2_LUCAS.Visibilidades_Publicaciones(Descripcion_Visibilidad,Porcentaje,Precio_Visibilidad,Comision_Entregas)
-		VALUES (@descripcion,@precio,@porcentaje,@entregas)
+		VALUES (@descripcion,@porcentaje,@precio,@entregas)
 	END
 	ELSE
 	BEGIN
@@ -2497,7 +2497,7 @@ BEGIN
 
 	WHILE @@FETCH_STATUS = 0
 	BEGIN
-		IF (@fechaConfig < (SELECT Fecha_Vencimiento_Publicacion FROM TODO_X2_LUCAS.Publicaciones WHERE Cod_Publicacion = @codPublicacion AND Cod_Tipos_Publicacion = 2))
+		IF ( (SELECT Fecha_Vencimiento_Publicacion FROM TODO_X2_LUCAS.Publicaciones WHERE Cod_Publicacion = @codPublicacion AND Cod_Tipos_Publicacion = 2) < @fechaConfig)
 		BEGIN
 			DECLARE @codUsuario int, @cantidad numeric(18),@fecha datetime;
 			SELECT @codUsuario = Cod_Usuario FROM TODO_X2_LUCAS.Ofertas WHERE Cod_Publicacion=@codPublicacion ORDER BY Cod_Oferta DESC
@@ -2534,5 +2534,4 @@ BEGIN
 	END
 END
 GO
-
 

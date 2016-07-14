@@ -42,8 +42,17 @@ namespace MercadoEnvio.ComprarOfertar
         {
             if (publicacionesGrid.SelectedRows != null && publicacionesGrid.SelectedRows.Count != 0)
             {
-                var dataRowView = (DataRowView)publicacionesGrid.SelectedRows[0].DataBoundItem;
-                new ComprarPublicacion().ShowDialog(dataRowView.Row);
+                if ((string)estadoComboBox.SelectedValue == "Activa"){
+                     
+                     var dataRowView = (DataRowView)publicacionesGrid.SelectedRows[0].DataBoundItem;
+                     if (dataRowView.Equals("Compra Inmediata"))
+                     {
+                         new ComprarPublicacion().ShowDialog(dataRowView.Row);
+                     }
+                     else { MessageBox.Show("No puede comprar una publicacion de tipo oferta, debe ofertarla"); }
+                }else {
+                    MessageBox.Show("No puede comprar una publicacion que no este activa");
+                }
             }
             else MessageBox.Show("Debe seleccionar una publicacion para poder comprar");
         }
@@ -52,8 +61,18 @@ namespace MercadoEnvio.ComprarOfertar
         {
             if (publicacionesGrid.SelectedRows.Count != 0)
             {
-                var dataRowView = (DataRowView)publicacionesGrid.SelectedRows[0].DataBoundItem;
-                new OfertarPublicacion().ShowDialog( dataRowView.Row );
+                if ((string)estadoComboBox.SelectedValue == "Activa")
+                {
+                    var dataRowView = (DataRowView)publicacionesGrid.SelectedRows[0].DataBoundItem;
+                    if (dataRowView.Equals("Subasta"))
+                    {
+                        new OfertarPublicacion().ShowDialog(dataRowView.Row);
+                    }
+                    else { MessageBox.Show("No puede ofertar una publicacion del tipo compra inmediata, debe comprarla"); }
+                }
+                else {
+                    MessageBox.Show("No puede comprar una publicacion que no este activa");
+                }
             }
             else MessageBox.Show("Debe seleccionar una publicacion para poder ofertar");
         }

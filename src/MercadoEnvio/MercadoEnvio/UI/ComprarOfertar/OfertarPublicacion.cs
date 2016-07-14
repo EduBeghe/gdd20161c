@@ -37,11 +37,11 @@ namespace MercadoEnvio.UI.ComprarOfertar
                 MessageBox.Show("La oferta ha sido realizada con exito.");
                 this.Close();
             }
-            else if (retorno == -1)
+            else if (retorno == -2)
             {
                 MessageBox.Show("La oferta es menor al precio inicial de la subasta.");
             }
-            else if (retorno == -2)
+            else if (retorno == -1)
             {
                 MessageBox.Show("Tiene que calificar las compras que no califico aun.");
             }

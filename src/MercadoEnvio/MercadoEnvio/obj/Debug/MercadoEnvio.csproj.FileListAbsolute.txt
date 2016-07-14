@@ -61,3 +61,34 @@ C:\Users\Elver\Desktop\MercadoEnvio\MercadoEnvio\obj\Debug\MercadoEnvio.UI.Menu.
 C:\Users\Elver\Desktop\MercadoEnvio\MercadoEnvio\obj\Debug\MercadoEnvio.csproj.GenerateResource.Cache
 C:\Users\Elver\Desktop\MercadoEnvio\MercadoEnvio\obj\Debug\MercadoEnvio.exe
 C:\Users\Elver\Desktop\MercadoEnvio\MercadoEnvio\obj\Debug\MercadoEnvio.pdb
+C:\Users\Notebook Exo\Documents\LUCAS - UTN\Gestion De Datos\Repo2\gdd20161c\src\MercadoEnvio\MercadoEnvio\bin\Debug\MercadoEnvio.exe.config
+C:\Users\Notebook Exo\Documents\LUCAS - UTN\Gestion De Datos\Repo2\gdd20161c\src\MercadoEnvio\MercadoEnvio\obj\Debug\MercadoEnvio.exe
+C:\Users\Notebook Exo\Documents\LUCAS - UTN\Gestion De Datos\Repo2\gdd20161c\src\MercadoEnvio\MercadoEnvio\obj\Debug\MercadoEnvio.pdb
+C:\Users\Notebook Exo\Documents\LUCAS - UTN\Gestion De Datos\Repo2\gdd20161c\src\MercadoEnvio\MercadoEnvio\bin\Debug\MercadoEnvio.exe
+C:\Users\Notebook Exo\Documents\LUCAS - UTN\Gestion De Datos\Repo2\gdd20161c\src\MercadoEnvio\MercadoEnvio\bin\Debug\MercadoEnvio.pdb
+C:\Users\Notebook Exo\Documents\LUCAS - UTN\Gestion De Datos\Repo2\gdd20161c\src\MercadoEnvio\MercadoEnvio\obj\Debug\MercadoEnvio.csprojResolveAssemblyReference.cache
+C:\Users\Notebook Exo\Documents\LUCAS - UTN\Gestion De Datos\Repo2\gdd20161c\src\MercadoEnvio\MercadoEnvio\obj\Debug\MercadoEnvio.BienvenidaWindow.resources
+C:\Users\Notebook Exo\Documents\LUCAS - UTN\Gestion De Datos\Repo2\gdd20161c\src\MercadoEnvio\MercadoEnvio\obj\Debug\MercadoEnvio.Properties.Resources.resources
+C:\Users\Notebook Exo\Documents\LUCAS - UTN\Gestion De Datos\Repo2\gdd20161c\src\MercadoEnvio\MercadoEnvio\obj\Debug\MercadoEnvio.ABM_Rol.AltaRol.resources
+C:\Users\Notebook Exo\Documents\LUCAS - UTN\Gestion De Datos\Repo2\gdd20161c\src\MercadoEnvio\MercadoEnvio\obj\Debug\MercadoEnvio.UI.ABM_Rol.Listado.resources
+C:\Users\Notebook Exo\Documents\LUCAS - UTN\Gestion De Datos\Repo2\gdd20161c\src\MercadoEnvio\MercadoEnvio\obj\Debug\MercadoEnvio.UI.ABM_Rol.ModificarRol.resources
+C:\Users\Notebook Exo\Documents\LUCAS - UTN\Gestion De Datos\Repo2\gdd20161c\src\MercadoEnvio\MercadoEnvio\obj\Debug\MercadoEnvio.UI.ABM_Usuario.AltaCliente.resources
+C:\Users\Notebook Exo\Documents\LUCAS - UTN\Gestion De Datos\Repo2\gdd20161c\src\MercadoEnvio\MercadoEnvio\obj\Debug\MercadoEnvio.UI.ABM_Usuario.AltaEmpresa.resources
+C:\Users\Notebook Exo\Documents\LUCAS - UTN\Gestion De Datos\Repo2\gdd20161c\src\MercadoEnvio\MercadoEnvio\obj\Debug\MercadoEnvio.ABM_Usuario.AltaUsuario.resources
+C:\Users\Notebook Exo\Documents\LUCAS - UTN\Gestion De Datos\Repo2\gdd20161c\src\MercadoEnvio\MercadoEnvio\obj\Debug\MercadoEnvio.UI.ABM_Usuario.BuscadorClientes.resources
+C:\Users\Notebook Exo\Documents\LUCAS - UTN\Gestion De Datos\Repo2\gdd20161c\src\MercadoEnvio\MercadoEnvio\obj\Debug\MercadoEnvio.UI.ABM_Usuario.BuscadorEmpresas.resources
+C:\Users\Notebook Exo\Documents\LUCAS - UTN\Gestion De Datos\Repo2\gdd20161c\src\MercadoEnvio\MercadoEnvio\obj\Debug\MercadoEnvio.UI.ABM_Visibilidad.AltaVisibilidad.resources
+C:\Users\Notebook Exo\Documents\LUCAS - UTN\Gestion De Datos\Repo2\gdd20161c\src\MercadoEnvio\MercadoEnvio\obj\Debug\MercadoEnvio.UI.ABM_Visibilidad.ListadoVisibilidad.resources
+C:\Users\Notebook Exo\Documents\LUCAS - UTN\Gestion De Datos\Repo2\gdd20161c\src\MercadoEnvio\MercadoEnvio\obj\Debug\MercadoEnvio.Calificar.CalificarVendedor.resources
+C:\Users\Notebook Exo\Documents\LUCAS - UTN\Gestion De Datos\Repo2\gdd20161c\src\MercadoEnvio\MercadoEnvio\obj\Debug\MercadoEnvio.ComprarOfertar.ListadoComprarOfertar.resources
+C:\Users\Notebook Exo\Documents\LUCAS - UTN\Gestion De Datos\Repo2\gdd20161c\src\MercadoEnvio\MercadoEnvio\obj\Debug\MercadoEnvio.UI.ComprarOfertar.ComprarPublicacion.resources
+C:\Users\Notebook Exo\Documents\LUCAS - UTN\Gestion De Datos\Repo2\gdd20161c\src\MercadoEnvio\MercadoEnvio\obj\Debug\MercadoEnvio.UI.ComprarOfertar.OfertarPublicacion.resources
+C:\Users\Notebook Exo\Documents\LUCAS - UTN\Gestion De Datos\Repo2\gdd20161c\src\MercadoEnvio\MercadoEnvio\obj\Debug\MercadoEnvio.Facturas.ConsultaFacturas.resources
+C:\Users\Notebook Exo\Documents\LUCAS - UTN\Gestion De Datos\Repo2\gdd20161c\src\MercadoEnvio\MercadoEnvio\obj\Debug\MercadoEnvio.UI.Generar_Publicación.GenerarPublicaciones.resources
+C:\Users\Notebook Exo\Documents\LUCAS - UTN\Gestion De Datos\Repo2\gdd20161c\src\MercadoEnvio\MercadoEnvio\obj\Debug\MercadoEnvio.UI.Generar_Publicación.ListadoPublicaciones.resources
+C:\Users\Notebook Exo\Documents\LUCAS - UTN\Gestion De Datos\Repo2\gdd20161c\src\MercadoEnvio\MercadoEnvio\obj\Debug\MercadoEnvio.Historial_Cliente.Form1.resources
+C:\Users\Notebook Exo\Documents\LUCAS - UTN\Gestion De Datos\Repo2\gdd20161c\src\MercadoEnvio\MercadoEnvio\obj\Debug\MercadoEnvio.UI.Listado_Estadistico.ListadoEstadistico.resources
+C:\Users\Notebook Exo\Documents\LUCAS - UTN\Gestion De Datos\Repo2\gdd20161c\src\MercadoEnvio\MercadoEnvio\obj\Debug\MercadoEnvio.UI.Login.LoginScreen.resources
+C:\Users\Notebook Exo\Documents\LUCAS - UTN\Gestion De Datos\Repo2\gdd20161c\src\MercadoEnvio\MercadoEnvio\obj\Debug\MercadoEnvio.UI.Login.SeleccionRol.resources
+C:\Users\Notebook Exo\Documents\LUCAS - UTN\Gestion De Datos\Repo2\gdd20161c\src\MercadoEnvio\MercadoEnvio\obj\Debug\MercadoEnvio.UI.Menu.FunctionsMenu.resources
+C:\Users\Notebook Exo\Documents\LUCAS - UTN\Gestion De Datos\Repo2\gdd20161c\src\MercadoEnvio\MercadoEnvio\obj\Debug\MercadoEnvio.csproj.GenerateResource.Cache
